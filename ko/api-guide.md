@@ -66,7 +66,7 @@ X-Auth-Token: {tokenId}
 | Created At | Body | String  | 이미지 생성 시간. yyyy-mm-ddTHH:MM:ssZ의 형태. 예) 2017-05-16T02:17:50.166563 |
 | Disk Format | Body | String | 이미지의 디스크 형식. <br />"ami", "ari", "aki", "vhd", "vhdx", "vmdk", "raw", "qcow2", "vdi", "ploop", "iso" |
 | Image ID | Body | String | 이미지 식별자 |
-| Is Public | Body | Boolean | 공유 이미지 여부 |
+| Is Public | Body | Boolean | 퍼블릭 이미지 여부 |
 | Min Disk | Body | Integer | 이 이미지로 만들 수 있는 인스턴스의 최소 디스크 크기 (GB) |
 | Min RAM | Body | Integer | 이 이미지로 만들 수 있는 인스턴스의 최소 RAN 크기 (MB) |
 | Image Name | Body | String | 이미지 이름 |
