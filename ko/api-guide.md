@@ -2,6 +2,8 @@
 
 이미지 API에서는 이미지의 목록을 조회하는 API만 제공합니다. 이미지 생성 API는 [Compute > Instance > API 가이드](ko/Compute/Instance/ko/api-guide/)의 **인스턴스 추가 기능** 부분을 참조합니다.
 
+이미지 API를 사용하려면 토큰 발급과 같은 사전 준비가 필요합니다. [API 사용 준비](/ko/Infrastructure%20Common/ko/api-common/)를 참조합니다.
+
 ### 이미지 상태
 이미지는 다음의 상태 값을 갖습니다.
 
@@ -65,7 +67,7 @@ X-Auth-Token: {tokenId}
 |--|--|--|--|
 | Created At | Body | String  | 이미지 생성 시간. yyyy-mm-ddTHH:MM:ssZ의 형태. 예) 2017-05-16T02:17:50.166563 |
 | Disk Format | Body | String | 이미지의 디스크 형식. <br />"ami", "ari", "aki", "vhd", "vhdx", "vmdk", "raw", "qcow2", "vdi", "ploop", "iso" |
-| Image ID | Body | String | 이미지 식별자 |
+| Image ID | Body | String | 이미지 ID |
 | Is Public | Body | Boolean | 퍼블릭 이미지 여부 |
 | Min Disk | Body | Integer | 이 이미지로 만들 수 있는 인스턴스의 최소 디스크 크기 (GB) |
 | Min RAM | Body | Integer | 이 이미지로 만들 수 있는 인스턴스의 최소 RAN 크기 (MB) |
