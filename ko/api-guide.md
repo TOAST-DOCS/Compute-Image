@@ -2,7 +2,7 @@
 
 이미지 API에서는 이미지의 목록을 조회하는 API만 제공합니다. 이미지 생성 API는 [Compute > Instance > API 가이드](ko/Compute/Instance/ko/api-guide/)의 **인스턴스 추가 기능** 부분을 참조합니다.
 
-이미지 API를 사용하려면 토큰 발급과 같은 사전 준비가 필요합니다. [API 사용 준비](/ko/Infrastructure%20Common/ko/api-common/)를 참조합니다.
+이미지 API를 사용하려면 토큰 발급과 같은 사전 준비가 필요합니다. [API 사용 준비 가이드](/Infrastructure%20Common/ko/api-guide/)를 참조합니다.
 
 ### 이미지 상태
 이미지는 다음의 상태 값을 갖습니다.
