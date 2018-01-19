@@ -1,13 +1,13 @@
 ## Compute > Image > API 가이드
 
-이미지 API에서는 이미지의 목록을 조회하는 API만 제공합니다. 이미지 생성 API는 [Instance API 가이드](ko/Compute/Instance/ko/api-guide/)의 **인스턴스 추가 기능** 부분을 참조합니다.
+이미지 API에서는 이미지의 목록을 조회하는 API만 제공합니다. 이미지 생성 API는 [인스턴스 추가 기능 API](/Compute/Instance/ko/api-guide/#_15)를 참조합니다.
 
 ## 사전 준비
 
 이미지 API를 사용하려면 앱키와 토큰이 필요합니다. [API Endpoint URL](/Compute/Instance/ko/api-guide/#api-endpoint-url)과 [토큰 API](/Compute/Instance/ko/api-guide/#api)를 이용하여 앱키와 토큰을 준비합니다. 앱키는 API Endpoint URL에 토큰은 Request Body에 포함하여 사용합니다.
 
 
-### 이미지 상태
+## 이미지 상태
 이미지는 다음의 상태 값을 갖습니다.
 
 | 상태 | 설명 |
@@ -20,7 +20,7 @@
 | pending_delete | deleted 상태와 유사, 이미지가 회복 불가능한 상태 |
 | deactivated | 이미지 데이터가 사용 불가한 상태 |
 
-### 이미지 목록 조회
+## 이미지 목록 조회
 
 이미지의 목록 및 상세 정보를 조회합니다.
 
