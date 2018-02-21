@@ -1,1 +1,1 @@
-## Compute > Image > Error Code
+## Compute > Image > 오류 코드
