@@ -1,4 +1,4 @@
-## Compute > Image > API Guide
+## Compute > Image > API 가이드
 
 이미지 API에서는 이미지의 목록을 조회하는 API만 제공합니다. 이미지 생성 API는 [인스턴스 추가 기능 API](/Compute/Instance/ko/api-guide/#_15)를 참조합니다.
 
@@ -58,7 +58,7 @@ X-Auth-Token: {tokenId}
             "isPublic": "{Is Public}",
             "minDisk": "{Min Disk}",
             "minRam": "{Min RAM}",
-            "name": "Image Name",
+            "name": "{Image Name}",
             "properties": {
             	"{Prop Key}" : "{Prop Value}"
             },

@@ -58,7 +58,7 @@ X-Auth-Token: {tokenId}
             "isPublic": "{Is Public}",
             "minDisk": "{Min Disk}",
             "minRam": "{Min RAM}",
-            "name": "Image Name",
+            "name": "{Image Name}",
             "properties": {
             	"{Prop Key}" : "{Prop Value}"
             },
