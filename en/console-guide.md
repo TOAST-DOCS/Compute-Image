@@ -1,58 +1,58 @@
 ## Compute > Image > Console Guide
 
-## 이미지 생성
+## Create Images
 
-이미지는 인스턴스의 기본 디스크에서 만들어집니다. 이미지를 생성할 종료 상태의 인스턴스를 선택합니다. 종료 상태의 인스턴스가 없으면 이미지를 생성할 수 없습니다. 
+An image is created at a default disk of an instance. Select a closed instance to create an image. Without it, images cannot be created. 
 
-윈도우 인스턴스의 이미지를 생성하려면 Sysprep을 이용하여 이미지 생성 준비를 한 다음 인스턴스를 종료해야 합니다. 자세한 sysprep 사용 방법은 [윈도우 Sysprep 가이드](#sysprep)를 참조합니다.
+To create an image of a Widows instance, prepare an image creation by using Sysprep and close the next instance. For more details of sysprep, refer to [Guide to Windows Sysprep](#sysprep).  
 
-리눅스 인스턴스는 인스턴스 내에서 종료하거나 TOAST 콘솔에서 종료하여 이미지를 생성합니다
+Close a Linux instance within an instance or in the TOAST console and create an image. 
 
-## 이미지 수정
+## Modify Images
 
-이미지의 이름을 수정합니다.
+Modify an image name.
 
-**Protected** 속성을 체크하고 이미지를 업데이트 하면 실수로 이미지를 삭제하는 것을 방지할 수 있습니다. Protected 속성이 켜져 있는 이미지를 삭제하려면, 이미지 수정에서 **Protected** 속성을 체크해제하고 이미지를 업데이트해야 합니다.
+Check **Protected** and update images, in order to prevent images from deleted by mistake. To delete an image where Protected is enabled, uncheck **Protected** in Modify Image and update an image.
 
-## 다른 프로젝트에 공유
+## Share with Other Projects
 
-이미지를 공유할 프로젝트를 선택하고 공유합니다.
+Select a project to share images with and share.
 
 
-## 윈도우 Sysprep 가이드
+## Guide to Windows Sysprep
 
-윈도우 이미지를 생성하려면 하드웨어와 사용자에 종속된 정보를 제거하여 인스턴스 생성에 사용할 수 있도록 이미지 초기화 작업이 필요합니다. 이 과정은 Microsoft사에서 윈도우 OS를 배포하기 위해 제공하는 시스템 준비 유틸리티인 Sysprep을 사용하여 진행할 수 있습니다.
+To create a Windows image, an image must return to default, by deleting information included to the hardware and user, and be made available for creating an instance. The process can be executed with Sysprep, which is a system preparation utility provided by Microsoft to distribute Windows OS.
 
-먼저 윈도우 인스턴스에 접속하여 명령 프롬프트를 관리자 권한으로 실행합니다.
-![[그림 1 명령 프롬프트 실행]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/001_170524_800px.PNG)
+First, access a Windows instance and execute an Order Prompt at the manager's authority.
+![[Figure 1 Execute Order Prompt 명령 프롬프트 실행]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/001_170524_800px.PNG)
 
-명령 프롬프트 창이 뜨면, 아래 명령을 실행합니다.
+When the order prompt window pops, execute the following order: 
 
 	cd C:\Program Files\Cloudbase Solutions\Cloudbase-Init\conf
 	C:\Windows\System32\Sysprep\sysprep.exe /generalize /oobe /shutdown /unattend:Unattend.xml
 
-![[그림 2 Sysprep 실행]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/002_170524_800px.PNG)
+![[Figure 2. Execute Sysprep]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/002_170524_800px.PNG)
 
-Sysprep이 실행이 완료되면 윈도우 인스턴스는 자동으로 종료됩니다. TOAST 콘솔에서 윈도우 인스턴스의 종료를 확인되면, [이미지 생성](./console-guide/#_1) 기능으로 사용자 윈도우 이미지를 생성할 수 있습니다.
+When Sysprep is completed, Windows instance is automatically closed. When Windows instance is confirmed closed, user's Windows image can be created by using [Create Images](./console-guide/#_1). 
 
-### Sysprep 옵션 상세 정보
+### Option Details of Sysprep
 
 
 `\generalize`
 
-윈도우에 등록된 고유 시스템 정보를 제거합니다. 이 단계에서 SID(Security ID)가 다시 설정되고, 시스템 복원 지점이 모두 지워지며, 이벤트 로그가 삭제됩니다. 이 단계를 거친 후 재부팅을 하면 `Windows 구성 단계`를 시도하게 됩니다.
-> [참고]
-이 단계에서 SID 및 사용자 정보와 고유 정보를 삭제하여, 기존 프로그램의 동작에 영향을 줄 수 있습니다.
+Remove the original system information registered in Windows. In this phase, Security ID (SID) is reset, while all system restoration points, as well as event logs are removed. After that, it is rebooted and the `Windows Configuration Phase` will be tried.   
+> [Note]
+In this phase, deleting SID and user information may affect operations of existing programs.  
 
 
 `\oobe`
-윈도우를 재부팅하여 시작 모드로 진입 후 사용자가 미리 지정한 설정을 적용합니다. 이 때 적용할 수 있는 설정으로는 대표적으로 국가별 설정, 네트워크 위치, 언어 설정, 시간대 등이 있습니다.
+Reboot Windows and enter with a start mode, then apply pre-defined user settings, such as setting by nation, network location, language, and time zone. 
 
 `\shutdown`
-윈도우를 종료합니다.
+Shut down Windows. 
 
 `\unattend`
-윈도우를 재설치한 뒤, 앞서 단계에서 기록한 사용자 설정을 복구합니다. 이 단계에서 윈도우 사용자 정보를 등록하고, 드라이버 및 제품 업데이트 및 추가 소프트웨어 설치가 이뤄집니다. 또한 응답파일을 통해 기본적으로 제공하는 설정외에 사용자가 원하는 설정을 지정할 수 있습니다.
+Reinstall Windows, and restore the user settings as recorded in the previous phase. Here, Windows user information is registered, and drivers and products are updated, while additional software can be installed. Further user configuration is also available, adding to default settings provided by response files.     
 
-> [참고]
-TOAST에서 제공하는 윈도우 이미지의 응답파일은 C:\Program Files\Cloud Solutions\Cloudbase-Init\conf\Unattend.xml 에 있습니다. 필요한 설정은 모두 준비되었기 때문에 특별한 용도를 제외하면 수정이 필요하지 않습니다.
+> [Note]
+Response files for Windows images that TOAST provides are located at C:\Program Files\Cloud Solutions\Cloudbase-Init\conf\Unattend.xml. As settings are all ready as required, no modification is necessary, except for special purposes.  
