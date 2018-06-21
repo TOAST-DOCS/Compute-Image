@@ -1,27 +1,27 @@
 ## Compute > Image > API 가이드
 
-이미지 API에서는 이미지의 목록을 조회하는 API만 제공합니다. 이미지 생성 API는 [인스턴스 추가 기능 API](/Compute/Instance/ko/api-guide/#_15)를 참조합니다.
+이미지 API에서는 이미지의 목록을 조회하는 API만 제공합니다. 이미지 생성 API는 [인스턴스 추가 기능 API](/Compute/Instance/ko/api-guide/#_15)를 참고합니다.
 
 ## 사전 준비
 
-이미지 API를 사용하려면 앱키와 토큰이 필요합니다. [API Endpoint URL](/Compute/Instance/ko/api-guide/#api-endpoint-url)과 [토큰 API](/Compute/Instance/ko/api-guide/#api)를 이용하여 앱키와 토큰을 준비합니다. 앱키는 API Endpoint URL에 토큰은 Request Body에 포함하여 사용합니다.
+이미지 API를 사용하려면 앱키(Appkey)와 토큰이 필요합니다. [API Endpoint URL](/Compute/Instance/ko/api-guide/#api-endpoint-url)과 [토큰 API](/Compute/Instance/ko/api-guide/#api)를 이용하여 앱키와 토큰을 준비합니다. 앱키는 API Endpoint URL에, 토큰은 Request Body에 포함하여 사용합니다.
 
 예를 들어, 이미지 목록 조회는 다음 URL로 요청해야 합니다.
 
 	GET https://api-compute.cloud.toast.com/compute/v1.0/appkeys/{appkey}/images
 
 ## 이미지 상태
-이미지는 다음의 상태 값을 갖습니다.
+이미지는 다음의 상탯값을 갖습니다.
 
 | 상태 | 설명 |
 | -- | -- |
-| queued | 이미지 ID는 발급되었으나 아직 이미지 데이터가 업로드 되지 못한 상태 |
+| queued | 이미지 ID는 발급되었으나 아직 이미지 데이터가 업로드되지 못한 상태 |
 | saving | 이미지 데이터를 저장 중인 상태 |
-| active | 이미지 사용 가능 상태 |
-| killed | 이미지 데이터 업로드 중 에러 발생 |
-| deleted | 이미지에 대한 정보는 남아있으나 더 이상 가용하지 않은 상태 |
-| pending_delete | deleted 상태와 유사, 이미지가 회복 불가능한 상태 |
-| deactivated | 이미지 데이터가 사용 불가한 상태 |
+| active | 이미지를 사용할 수 있는 상태 |
+| killed | 이미지 데이터 업로드 중 오류가 발생한 상태 |
+| deleted | 이미지에 대한 정보는 남아있으나 더 이상 가용할 수 없는 상태 |
+| pending_delete | deleted 상태와 유사, 이미지를 회복할 수 없는 상태 |
+| deactivated | 이미지 데이터를 사용할 수 없는 상태 |
 
 ## 이미지 API
 
@@ -40,7 +40,7 @@ X-Auth-Token: {tokenId}
 | tokenId | Header | String | - | 토큰 ID |
 
 #### Request Body
-이 API는 request body를 필요로 하지 않습니다.
+이 API는 Request Body가 필요 없습니다.
 
 #### Response Body
 ```json
@@ -77,12 +77,11 @@ X-Auth-Token: {tokenId}
 | Disk Format | Body | String | 이미지의 디스크 형식. <br />"ami", "ari", "aki", "vhd", "vhdx", "vmdk", "raw", "qcow2", "vdi", "ploop", "iso" |
 | Image ID | Body | String | 이미지 ID |
 | Is Public | Body | Boolean | 퍼블릭 이미지 여부 |
-| Min Disk | Body | Integer | 이 이미지로 만들 수 있는 인스턴스의 최소 디스크 크기 (GB) |
-| Min RAM | Body | Integer | 이 이미지로 만들 수 있는 인스턴스의 최소 RAM 크기 (MB) |
+| Min Disk | Body | Integer | 이 이미지로 만들 수 있는 인스턴스의 최소 디스크 크기(GB) |
+| Min RAM | Body | Integer | 이 이미지로 만들 수 있는 인스턴스의 최소 RAM 크기(MB) |
 | Image Name | Body | String | 이미지 이름 |
 | Prop Key / Prop Value | Body | String | 이미지의 추가적인 속성 |
 | Protected | Body | Boolean | 삭제 보호 설정 여부 |
-| Image Size | Body | Integer | 이미지 데이터의 크기 (byte) |
+| Image Size | Body | Integer | 이미지 데이터의 크기(byte) |
 | Image Status | Body | String | 이미지의 상태 |
-| Updated At | Body | String | 이미지가 업데이트 된 시간. yyyy-mm-ddTHH:MM:ssZ의 형태. 예) 2017-05-16T02:17:50.166563 |
-
+| Updated At | Body | String | 이미지가 업데이트된 시간. yyyy-mm-ddTHH:MM:ssZ의 형태. 예) 2017-05-16T02:17:50.166563 |
