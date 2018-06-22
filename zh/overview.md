@@ -38,7 +38,7 @@ TOAST提供公共镜像。这些镜像安装了操作系统，可以实现虚拟
 
 自定义镜像多用于服务扩展。当您需要扩展服务时，若使用公共镜像创建实例，再去安装服务可能需要消耗较长时间。但，如果您事先将服务所需的镜像作成自定义镜像，可以免去每次重复的繁琐设置，快速创建实例。同时，对于服务负荷激增情况也可以较快作出反应。
 
-自定义镜像可以通过Image服务和Compute服务中的**添加功能**，轻松创建。详细方法请参考[镜像控制台使用指南](/Compute/Image/ko/console-guide/)或[实例控制台使用指南](/Compute/Instance/ko/console-guide/)。
+自定义镜像可以通过Image服务和Compute服务中的**添加功能**，轻松创建。详细方法请参考[镜像控制台使用指南](/Compute/Image/zh/console-guide/)或[实例控制台使用指南](/Compute/Instance/zh/console-guide/)。
 
 ### 共享镜像
 

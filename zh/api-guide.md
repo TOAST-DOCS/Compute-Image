@@ -1,10 +1,10 @@
 ## 计算 > 镜像 > API指南
 
-API只提供镜像列表查询API。有关镜像创建API，请参考[实例新增功能API](/Compute/Instance/ko/api-guide/#_15)。
+API只提供镜像列表查询API。有关镜像创建API，请参考[实例新增功能API](/Compute/Instance/zh/api-guide/#_15)。
 
 ## 事前准备
 
-如果要使用API需要设置Appkey和令牌。使用[API Endpoint URL](/Compute/Instance/ko/api-guide/#api-endpoint-url)和[令牌API](/Compute/Instance/ko/api-guide/#api)准备Appkey和令牌。使用时将Appkey包含在API Endpoint URL中，令牌包含在Request Body中。
+如果要使用API需要设置Appkey和令牌。使用[API Endpoint URL](/Compute/Instance/zh/api-guide/#api-endpoint-url)和[令牌API](/Compute/Instance/zh/api-guide/#api)准备Appkey和令牌。使用时将Appkey包含在API Endpoint URL中，令牌包含在Request Body中。
 
 例如，查询镜像列表应向以下URL请求。
 

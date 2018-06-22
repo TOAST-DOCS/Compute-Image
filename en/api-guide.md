@@ -1,10 +1,10 @@
 ## Compute > Image > API Guide
 
-Image API provides List Images API only. For Create Image API, refer to [Add Instance API](/Compute/Instance/ko/api-guide/#_15).  
+Image API provides List Images API only. For Create Image API, refer to [Add Instance API](/Compute/Instance/en/api-guide/#_15).  
 
 ## Prerequisites
 
-Using an image API requires an appkey and a token. Get an appkey and a token by using [API Endpoint URL](/Compute/Instance/ko/api-guide/#api-endpoint-url) and [Token API](/Compute/Instance/ko/api-guide/#api): include the appkey to Endpoint URL and the token to the Request Body. 
+Using an image API requires an appkey and a token. Get an appkey and a token by using [API Endpoint URL](/Compute/Instance/en/api-guide/#api-endpoint-url) and [Token API](/Compute/Instance/en/api-guide/#api): include the appkey to Endpoint URL and the token to the Request Body. 
 
 For example, List Images must be requested to the following URL:
 
