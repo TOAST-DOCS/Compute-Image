@@ -1,49 +1,49 @@
 ## Compute > Image > Overview
 
-이미지는 운영체제와 애플리케이션을 담고 있는 가상 디스크이며 인스턴스의 기본 디스크로 사용됩니다. 인스턴스의 기본 디스크는 이미지를 기반으로 생성되며 사용자의 설정에 따라 디스크 크기가 조절됩니다. 단, 이미지의 크기 이상으로만 기본 디스크 크기를 조절할 수 있습니다.
+An image, as a virtual disk, contains an operating system and application, and is used as a default disk of an instance. A default disk of an instance is created upon images and the size can be adjusted as the user configures. However, the default disk size cannot be smaller than the size of an image.
 
-TOAST는 다양한 운영체제와 애플리케이션이 설치된 이미지들을 기본 제공합니다. 기본 제공하는 이미지들은 
+TOAST provides images installed upon various operating systems and applications. Such images are: 
 
-- 가상 하드웨어에서 최적으로 실행되도록 설정되어 있습니다.
-- 기본 보안 점검을 완료한 상태로 제공되므로 보안 위협으로부터 안전하게 쓸 수 있습니다.
+- Configured for optimal execution under virtual hardware; 
+- Safe from security threats as they are provided after basic security check is done. 
 
-사용자의 상황에 맞게 기본 제공되는 이미지를 수정하여 사용할 수도 있습니다.
+User can modify default images to fit his needs. 
 
-이미지들은 크게 3가지 타입으로 구분됩니다.
+Images are classified into three types in general: 
 
-* 퍼블릭 이미지
-* 사용자 이미지
-* 공유 이미지
+* Public Images
+* User Images
+* Shared Images
 
-### 퍼블릭 이미지
+### Public Images
 
-TOAST에서 제공하는 이미지입니다. 이 이미지들에는 가상 하드웨어를 최적으로 이용하도록 운영체제가 설치되어 있습니다. 또한 고객의 서비스와 애플리케이션에서 안심하고 사용할 수 있도록 기본적인 보안 설정이 되어 있습니다.
+Provided by TOAST, public images are installed with operating systems to make the best use of virtual hardware. Security setting is also provided by default for safe use in customer services and applications. 
 
-TOAST는 현재 다음 운영체제를 지원하고 있습니다.
+TOAST currently supports the following operating systems: 
 
-| 운영체제 | 버전 |
+| OS | Version |
 |------- | ---- |
 | CentOS | 6.5<br>7.1|
 | Debian | 8.2.0 |
 | Ubuntu | 14.04 |
-| 윈도우 | 2012R2 standard |
+| Windows | 2012R2 standard |
 
-일부 이미지들에는 응용프로그램을 설치해 두었기 때문에 더욱 빠르게 서비스를 구축할 수 있습니다. 현재는 CentOS 운영체제에 MySQL 데이터베이스를 설치한 이미지가 제공되고 있습니다.
+Some images even have application programs to enable faster service implementation. Currently available images are based on CentOS, with MySQL database installed.   
 
-앞으로 사용자 요구에 따라 다양한 응용프로그램이 선구축된 이미지들이 제공될 예정입니다.
+In the near future, more application programs will be available as user demands. 
 
-### 사용자 이미지
+### User Images
 
-퍼블릭 이미지를 토대로 사용자가 수정한 이미지입니다. 사용하는 서비스나 애플리케이션에 맞게 새로운 애플리케이션을 설치하거나, 각종 운영체제 설정을 변경할 수 있습니다.
+User images are modified images by user based upon public images. New application may be installed to suit for services or applications that are in use, or OS setting can be modified. 
 
-사용자 이미지는 서비스 증설에 유용하게 쓰입니다. 서비스를 증설하기 위해 퍼블릭 이미지로 새로운 인스턴스를 생성하고 서비스를 설치하려면 많은 시간이 걸립니다. 매번 이런 번거로운 설치 작업을 반복하지 않고, 서비스에 사용할 이미지를 미리 사용자 이미지로 만들어서 인스턴스 생성에 사용한다면 서비스 부하 급증에 더욱 빠르게 대처할 수 있습니다.
+User images are useful for service scale-ups. To scale out services with public images, it takes a lot of time to create new instances and install services. However, with user images, once created in advance, speedier response to load hikes is available, without having to repeat the burden of installations.   
 
-사용자 이미지는 Image 서비스 또는 Compute 서비스의 **추가 기능**을 이용하여 쉽게 생성할 수 있습니다. 자세한 이미지 생성 방법은 [이미지 콘솔 사용 가이드](/Compute/Image/ko/console-guide/)나 [인스턴스 콘솔 사용 가이드](/Compute/Instance/ko/console-guide/)를 참조하세요.
+User images can be easily created by using **Additional Functions** of Image Service or Compute Service.  For more details, refer to [Guide to Use Image Console](/Compute/Image/en/console-guide/) or [User Guide to Instance Console](/Compute/Instance/en/console-guide/).
 
-### 공유 이미지
+### Shared Images
 
-사용자 이미지를 다른 프로젝트와 공유하도록 설정할 수 있습니다. 단, 공유 이미지는 동일한 소유자의 프로젝트들 간에만 사용할 수 있습니다. 
+User images can be shared with other projects by setting. Nevertheless, shared images are available between projects of a same owner only. 
 
-### 과금
+### Pricing
 
-이미지는 생성한 순간 부터 생성한 디스크 크기 만큼 과금됩니다.
+An image is charged by the size of a created disk from the moment it is created.  

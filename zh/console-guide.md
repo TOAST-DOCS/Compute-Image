@@ -1,58 +1,59 @@
-## Compute > Image > Console Guide
+## 计算 > 镜像 > 控制台使用指南
 
-## 이미지 생성
+## 创建镜像
 
-이미지는 인스턴스의 기본 디스크에서 만들어집니다. 이미지를 생성할 종료 상태의 인스턴스를 선택합니다. 종료 상태의 인스턴스가 없으면 이미지를 생성할 수 없습니다. 
+镜像是在实例系统盘中创建。为确保数据一致性，必须选择处于关闭状态的实例创建镜像。如果没有关闭状态下的实例，则无法创建镜像。
 
-윈도우 인스턴스의 이미지를 생성하려면 Sysprep을 이용하여 이미지 생성 준비를 한 다음 인스턴스를 종료해야 합니다. 자세한 sysprep 사용 방법은 [윈도우 Sysprep 가이드](#sysprep)를 참조합니다.
+如果要创建Windows实例镜像，必须使用Sysprep为创建镜像做好准备，然后关闭实例。更多sysprep使用方法请参考[Windows Sysprep指南](#sysprep)。
 
-리눅스 인스턴스는 인스턴스 내에서 종료하거나 TOAST 콘솔에서 종료하여 이미지를 생성합니다
+如果要创建Linux实例镜像，则必须关闭实例或从TOAST控制台退出后创建。 
 
-## 이미지 수정
+## 编辑镜像
 
-이미지의 이름을 수정합니다.
+更改镜像名称。
 
-**Protected** 속성을 체크하고 이미지를 업데이트 하면 실수로 이미지를 삭제하는 것을 방지할 수 있습니다. Protected 속성이 켜져 있는 이미지를 삭제하려면, 이미지 수정에서 **Protected** 속성을 체크해제하고 이미지를 업데이트해야 합니다.
+选择**Protected**属性并更新镜像可防止镜像被意外删除。如果要删除Protected 属性开启状态下的镜像，需要在镜像编辑页面中取消已选中的**Protected**属性，然后更新镜像。
 
-## 다른 프로젝트에 공유
+## 共享至其它项目
 
-이미지를 공유할 프로젝트를 선택하고 공유합니다.
+选择要共享的项目，共享镜像。
 
 
-## 윈도우 Sysprep 가이드
+## Windows Sysprep指南
 
-윈도우 이미지를 생성하려면 하드웨어와 사용자에 종속된 정보를 제거하여 인스턴스 생성에 사용할 수 있도록 이미지 초기화 작업이 필요합니다. 이 과정은 Microsoft사에서 윈도우 OS를 배포하기 위해 제공하는 시스템 준비 유틸리티인 Sysprep을 사용하여 진행할 수 있습니다.
+如果要创建Windows镜像，需要先删除硬件信息和用户所属信息对镜像进行初始化，才可将其用于实例创建。上述过程可借助Sysprep完成，Sysprep是由Microsoft提供，用于部署Windows操作系统的系统准备工具。
 
-먼저 윈도우 인스턴스에 접속하여 명령 프롬프트를 관리자 권한으로 실행합니다.
-![[그림 1 명령 프롬프트 실행]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/001_170524_800px.PNG)
+首先，连接到您的Windows实例，进入**App**，右键单击**命令提示符**，选择**以管理员身份运行**。
+![[图1 命令提示符 
+运行]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/001_170524_800px.PNG)
 
-명령 프롬프트 창이 뜨면, 아래 명령을 실행합니다.
+在弹出的命令提示符窗口运行以下命令：
 
 	cd C:\Program Files\Cloudbase Solutions\Cloudbase-Init\conf
 	C:\Windows\System32\Sysprep\sysprep.exe /generalize /oobe /shutdown /unattend:Unattend.xml
 
-![[그림 2 Sysprep 실행]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/002_170524_800px.PNG)
+![[图2 Sysprep 运行]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/002_170524_800px.PNG)
 
-Sysprep이 실행이 완료되면 윈도우 인스턴스는 자동으로 종료됩니다. TOAST 콘솔에서 윈도우 인스턴스의 종료를 확인되면, [이미지 생성](./console-guide/#_1) 기능으로 사용자 윈도우 이미지를 생성할 수 있습니다.
+当Sysprep运行时，Windows实例会自动关闭。在TOAST控制台确认Windows实例确实关闭后，便可以使用[创建镜像](./console-guide/#_1)功能创建自定义Windows镜像。
 
-### Sysprep 옵션 상세 정보
+### Sysprep选项详情
 
 
 `\generalize`
 
-윈도우에 등록된 고유 시스템 정보를 제거합니다. 이 단계에서 SID(Security ID)가 다시 설정되고, 시스템 복원 지점이 모두 지워지며, 이벤트 로그가 삭제됩니다. 이 단계를 거친 후 재부팅을 하면 `Windows 구성 단계`를 시도하게 됩니다.
-> [참고]
-이 단계에서 SID 및 사용자 정보와 고유 정보를 삭제하여, 기존 프로그램의 동작에 영향을 줄 수 있습니다.
+删除在Windows中注册的固有系统信息。在此过程，会重置SID(Security ID)，并清除所有系统还原点和删除事件日志。当完成上述步骤后重启程序，将会显示`Windows配置步骤`。
+> [参考]
+在此阶段，您可以通过删除SID及用户信息和唯一信息，影响现有程序的执行。
 
 
 `\oobe`
-윈도우를 재부팅하여 시작 모드로 진입 후 사용자가 미리 지정한 설정을 적용합니다. 이 때 적용할 수 있는 설정으로는 대표적으로 국가별 설정, 네트워크 위치, 언어 설정, 시간대 등이 있습니다.
+重启Windows进入启动模式后可以应用用户事先指定的设置。这些设置包括国家/地区设置、网络位置、语言和时区等。
 
 `\shutdown`
-윈도우를 종료합니다.
+关闭Windows。
 
 `\unattend`
-윈도우를 재설치한 뒤, 앞서 단계에서 기록한 사용자 설정을 복구합니다. 이 단계에서 윈도우 사용자 정보를 등록하고, 드라이버 및 제품 업데이트 및 추가 소프트웨어 설치가 이뤄집니다. 또한 응답파일을 통해 기본적으로 제공하는 설정외에 사용자가 원하는 설정을 지정할 수 있습니다.
+重新安装Windows之后，复原上一步骤中的用户设置。在此过程中，注册Windows用户信息，安装驱动程序、更新产品以及安装其它软件。除默认设置以外，用户可以在应答文件中进行自定义设置。
 
-> [참고]
-TOAST에서 제공하는 윈도우 이미지의 응답파일은 C:\Program Files\Cloud Solutions\Cloudbase-Init\conf\Unattend.xml 에 있습니다. 필요한 설정은 모두 준비되었기 때문에 특별한 용도를 제외하면 수정이 필요하지 않습니다.
+> [参考]
+TOAST提供的Windows镜像应答文件位于C:\Program Files\Cloud Solutions\Cloudbase-Init\conf\Unattend.xml中。所有必要的设置都已准备就绪，除特殊用途外，无需用户进行修改。
