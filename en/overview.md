@@ -19,14 +19,7 @@ Images are classified into three types in general:
 
 Provided by TOAST, public images are installed with operating systems to make the best use of virtual hardware. Security setting is also provided by default for safe use in customer services and applications. 
 
-TOAST currently supports the following operating systems: 
-
-| OS | Version |
-|------- | ---- |
-| CentOS | 6.5<br>7.1|
-| Debian | 8.2.0 |
-| Ubuntu | 14.04 |
-| Windows | 2012R2 standard |
+TOAST currently supports CentOS, Debian, Ubuntu, and Windows. For more information about the versions we support, refer to [TOAST Service](https://toast.com/service/compute/instance).
 
 Some images even have application programs to enable faster service implementation. Currently available images are based on CentOS, with MySQL database installed.   
 

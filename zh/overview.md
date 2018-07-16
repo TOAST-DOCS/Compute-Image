@@ -25,8 +25,8 @@ TOAST提供公共镜像。这些镜像安装了操作系统，可以实现虚拟
 |------- | ---- |
 | CentOS | 6.5<br>7.1|
 | Debian | 8.2.0 |
-| Ubuntu | 14.04 |
-| window | 2012R2 standard |
+| Ubuntu | 14.04<br>16.04 |
+| window | 2008R2 standard<br>2012R2 standard |
 
 部分镜像安装了应用程序，可帮助用户快速有效地构建服务。目前，CentOS操作系统中提供的镜像已安装MySQL数据库。
 
