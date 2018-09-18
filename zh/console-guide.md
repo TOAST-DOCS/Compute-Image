@@ -4,9 +4,9 @@
 
 镜像是在实例系统盘中创建。为确保数据一致性，必须选择处于关闭状态的实例创建镜像。如果没有关闭状态下的实例，则无法创建镜像。
 
-如果要创建Windows实例镜像，必须使用Sysprep为创建镜像做好准备，然后关闭实例。更多sysprep使用方法请参考[Windows Sysprep指南](#sysprep)。
+如果要创建Windows实例镜像，必须使用Sysprep为创建镜像做好准备，然后关闭实例。更多sysprep使用方法请参考[Windows Sysprep指南](#windows-sysprep)。
 
-如果要创建Linux实例镜像，则必须关闭实例或从TOAST控制台退出后创建。 
+如果要创建Linux实例镜像，则必须关闭实例或从TOAST控制台退出后创建。
 
 ## 编辑镜像
 
@@ -24,7 +24,7 @@
 如果要创建Windows镜像，需要先删除硬件信息和用户所属信息对镜像进行初始化，才可将其用于实例创建。上述过程可借助Sysprep完成，Sysprep是由Microsoft提供，用于部署Windows操作系统的系统准备工具。
 
 首先，连接到您的Windows实例，进入**App**，右键单击**命令提示符**，选择**以管理员身份运行**。
-![[图1 命令提示符 
+![[图1 命令提示符
 运行]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/001_170524_800px.PNG)
 
 在弹出的命令提示符窗口运行以下命令：
