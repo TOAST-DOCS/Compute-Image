@@ -1,35 +1,35 @@
-## Compute > Image > API 가이드
+## Compute > Image > APIガイド
 
-이미지 API에서는 이미지의 목록을 조회하는 API만 제공합니다. 이미지 생성 API는 [인스턴스 추가 기능 API](/Compute/Instance/jp/api-guide/#_15)를 참조합니다.
+イメージAPIではイメージのリストを照会するAPIのみ提供します。イメージ作成APIは[インスタンス追加機能API](/Compute/Instance/ja/api-guide/#_15)を参照してください。
 
-## 사전 준비
+## 事前準備
 
-이미지 API를 사용하려면 앱키와 토큰이 필요합니다. [API Endpoint URL](/Compute/Instance/jp/api-guide/#api-endpoint-url)과 [토큰 API](/Compute/Instance/jp/api-guide/#api)를 이용하여 앱키와 토큰을 준비합니다. 앱키는 API Endpoint URL에 토큰은 Request Body에 포함하여 사용합니다.
+イメージAPIを使用するにはアプリケーションキー(Appkey)とトークンが必要です。 [API Endpoint URL](/Compute/Instance/ja/api-guide/#api-endpoint-url)と[トークンAPI](/Compute/Instance/ja/api-guide/#api)を利用してアプリケーションキーとトークンを準備します。アプリケーションキーはAPI Endpoint URLに、トークンはRequest Bodyに含めて使用します。
 
-예를 들어, 이미지 목록 조회는 다음 URL로 요청해야 합니다.
+例えば、イメージリスト照会は次のURLでリクエストする必要があります。
 
 	GET https://api-compute.cloud.toast.com/compute/v1.0/appkeys/{appkey}/images
 
-## 이미지 상태
-이미지는 다음의 상태 값을 갖습니다.
+## イメージ状態
+イメージは次の状態値を持ちます。
 
-| 상태 | 설명 |
+| 状態 | 説明 |
 | -- | -- |
-| queued | 이미지 ID는 발급되었으나 아직 이미지 데이터가 업로드 되지 못한 상태 |
-| saving | 이미지 데이터를 저장 중인 상태 |
-| active | 이미지 사용 가능 상태 |
-| killed | 이미지 데이터 업로드 중 에러 발생 |
-| deleted | 이미지에 대한 정보는 남아있으나 더 이상 가용하지 않은 상태 |
-| pending_delete | deleted 상태와 유사, 이미지가 회복 불가능한 상태 |
-| deactivated | 이미지 데이터가 사용 불가한 상태 |
+| queued | イメージIDは発行されているが、まだイメージデータがアップロードされていない状態 |
+| saving | イメージデータを保存中の状態 |
+| active | イメージを使用できる状態 |
+| killed | イメージデータアップロード中にエラーが発生した状態 |
+| deleted | イメージの情報は残っているが、これ以上可用できない状態 |
+| pending_delete | deleted状態と類似、イメージを回復できない状態 |
+| deactivated | イメージデータを使用できない状態 |
 
-## 이미지 API
+## イメージAPI
 
-### 이미지 목록 조회
+### イメージリスト照会
 
-이미지의 목록 및 상세 정보를 조회합니다.
+イメージのリスト、詳細情報を照会します。
 
-#### Method, URL
+#### Method、 URL
 ```
 GET /v1.0/appkeys/{appkey}/images
 X-Auth-Token: {tokenId}
@@ -37,34 +37,34 @@ X-Auth-Token: {tokenId}
 
 |  Name | In | Type | Optional | Description |
 |--|--|--|--|--|
-| tokenId | Header | String | - | 토큰 ID |
+| tokenId | Header | String | - | トークンID |
 
 #### Request Body
-이 API는 request body를 필요로 하지 않습니다.
+このAPIはRequest Bodyが必要ありません。
 
 #### Response Body
 ```json
 {
     "header": {
-        "isSuccessful": true,
-        "resultCode": 0,
+        "isSuccessful": true、
+        "resultCode": 0、
         "resultMessage": "SUCCESS"
-    },
+    }、
     "images": [
         {
-            "createdAt": "{Created At}",
-            "diskFormat": "{Disk Format}",
-            "id": "{Image ID}",
-            "isPublic": "{Is Public}",
-            "minDisk": "{Min Disk}",
-            "minRam": "{Min RAM}",
-            "name": "{Image Name}",
+            "createdAt": "{Created At}"、
+            "diskFormat": "{Disk Format}"、
+            "id": "{Image ID}"、
+            "isPublic": "{Is Public}"、
+            "minDisk": "{Min Disk}"、
+            "minRam": "{Min RAM}"、
+            "name": "{Image Name}"、
             "properties": {
             	"{Prop Key}" : "{Prop Value}"
-            },
-            "protected": "{Protected}",
-            "size": "{Image Size}",
-            "status": "{Image Status}",
+            }、
+            "protected": "{Protected}"、
+            "size": "{Image Size}"、
+            "status": "{Image Status}"、
             "updatedAt": "{Updated At}"
         }
     ]
@@ -73,16 +73,16 @@ X-Auth-Token: {tokenId}
 
 |  Name | In | Type | Description |
 |--|--|--|--|
-| Created At | Body | String  | 이미지 생성 시간. yyyy-mm-ddTHH:MM:ssZ의 형태. 예) 2017-05-16T02:17:50.166563 |
-| Disk Format | Body | String | 이미지의 디스크 형식. <br />"ami", "ari", "aki", "vhd", "vhdx", "vmdk", "raw", "qcow2", "vdi", "ploop", "iso" |
-| Image ID | Body | String | 이미지 ID |
-| Is Public | Body | Boolean | 퍼블릭 이미지 여부 |
-| Min Disk | Body | Integer | 이 이미지로 만들 수 있는 인스턴스의 최소 디스크 크기 (GB) |
-| Min RAM | Body | Integer | 이 이미지로 만들 수 있는 인스턴스의 최소 RAM 크기 (MB) |
-| Image Name | Body | String | 이미지 이름 |
-| Prop Key / Prop Value | Body | String | 이미지의 추가적인 속성 |
-| Protected | Body | Boolean | 삭제 보호 설정 여부 |
-| Image Size | Body | Integer | 이미지 데이터의 크기 (byte) |
-| Image Status | Body | String | 이미지의 상태 |
-| Updated At | Body | String | 이미지가 업데이트 된 시간. yyyy-mm-ddTHH:MM:ssZ의 형태. 예) 2017-05-16T02:17:50.166563 |
+| Created At | Body | String  | イメージ生成時間。 yyyy-mm-ddTHH:MM:ssZの形式。例) 2017-05-16T02:17:50.166563 |
+| Disk Format | Body | String | イメージのディスク形式。 <br />"ami"、 "ari"、 "aki"、 "vhd"、 "vhdx"、 "vmdk"、 "raw"、 "qcow2"、 "vdi"、 "ploop"、 "iso" |
+| Image ID | Body | String | イメージID |
+| Is Public | Body | Boolean | パブリックイメージ可否 |
+| Min Disk | Body | Integer | このイメージで生成できるインスタンスの最小ディスクサイズ (GB) |
+| Min RAM | Body | Integer | このイメージで生成できるインスタンスの最小RAMサイズ(MB) |
+| Image Name | Body | String | イメージ名前 |
+| Prop Key / Prop Value | Body | String | イメージの追加的な属性 |
+| Protected | Body | Boolean | 削除保護設定の可否 |
+| Image Size | Body | Integer | イメージデータのサイズ(byte) |
+| Image Status | Body | String | イメージの状態 |
+| Updated At | Body | String | イメージがアップデートされた時間。 yyyy-mm-ddTHH:MM:ssZの形式。例) 2017-05-16T02:17:50.166563 |
 
