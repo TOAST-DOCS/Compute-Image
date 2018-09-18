@@ -2,11 +2,11 @@
 
 ## Create Images
 
-An image is created at a default disk of an instance. Select a closed instance to create an image. Without it, images cannot be created. 
+An image is created at a default disk of an instance. Select a closed instance to create an image. Without it, images cannot be created.
 
-To create an image of a Widows instance, prepare an image creation by using Sysprep and close the next instance. For more details of sysprep, refer to [Guide to Windows Sysprep](#sysprep).  
+To create an image of a Widows instance, prepare an image creation by using Sysprep and close the next instance. For more details of sysprep, refer to [Guide to Windows Sysprep](#windows-sysprep).  
 
-Close a Linux instance within an instance or in the TOAST console and create an image. 
+Close a Linux instance within an instance or in the TOAST console and create an image.
 
 ## Modify Images
 
@@ -26,14 +26,14 @@ To create a Windows image, an image must return to default, by deleting informat
 First, access a Windows instance and execute an Order Prompt at the manager's authority.
 ![[Figure 1 Execute Order Prompt 명령 프롬프트 실행]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/001_170524_800px.PNG)
 
-When the order prompt window pops, execute the following order: 
+When the order prompt window pops, execute the following order:
 
 	cd C:\Program Files\Cloudbase Solutions\Cloudbase-Init\conf
 	C:\Windows\System32\Sysprep\sysprep.exe /generalize /oobe /shutdown /unattend:Unattend.xml
 
 ![[Figure 2. Execute Sysprep]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/002_170524_800px.PNG)
 
-When Sysprep is completed, Windows instance is automatically closed. When Windows instance is confirmed closed, user's Windows image can be created by using [Create Images](./console-guide/#_1). 
+When Sysprep is completed, Windows instance is automatically closed. When Windows instance is confirmed closed, user's Windows image can be created by using [Create Images](./console-guide/#_1).
 
 ### Option Details of Sysprep
 
@@ -46,10 +46,10 @@ In this phase, deleting SID and user information may affect operations of existi
 
 
 `\oobe`
-Reboot Windows and enter with a start mode, then apply pre-defined user settings, such as setting by nation, network location, language, and time zone. 
+Reboot Windows and enter with a start mode, then apply pre-defined user settings, such as setting by nation, network location, language, and time zone.
 
 `\shutdown`
-Shut down Windows. 
+Shut down Windows.
 
 `\unattend`
 Reinstall Windows, and restore the user settings as recorded in the previous phase. Here, Windows user information is registered, and drivers and products are updated, while additional software can be installed. Further user configuration is also available, adding to default settings provided by response files.     
