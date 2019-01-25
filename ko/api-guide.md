@@ -39,7 +39,7 @@ X-Auth-Token: {tokenId}
 |--|--|--|--|--|
 | tokenId | Header | String | - | 토큰 ID |
 | limit | Query | Integer | O | 조회할 이미지 갯수 |
-| markerId | Query | UUID | O | 조회 시 기준이 되는 이미지 ID<br>이미지 목록은 생성 일자 순으로 정렬됩니다.<br>limit과 maker를 지정하는 경우 marker로 지정된 이미지부터 limit 갯수만큼 조회합니다 | 
+| markerId | Query | UUID | O | 조회 시 기준이 되는 이미지 ID<br>이미지 목록은 생성 일자 순으로 정렬됩니다.<br>limit과 maker를 지정하는 경우 marker로 지정된 이미지부터 limit 갯수만큼 조회합니다 |
 
 #### Request Body
 이 API는 Request Body가 필요 없습니다.
@@ -94,7 +94,7 @@ X-Auth-Token: {tokenId}
 
 #### Method, URL
 ```
-GET /v1.0/appkeys/{appkey}/images?id={imageId}
+DELETE /v1.0/appkeys/{appkey}/images?id={imageId}
 X-Auth-Token: {tokenId}
 ```
 
