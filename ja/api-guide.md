@@ -46,25 +46,25 @@ X-Auth-Token: {tokenId}
 ```json
 {
     "header": {
-        "isSuccessful": true、
-        "resultCode": 0、
+        "isSuccessful": true,
+        "resultCode": 0,
         "resultMessage": "SUCCESS"
-    }、
+    },
     "images": [
         {
-            "createdAt": "{Created At}"、
-            "diskFormat": "{Disk Format}"、
-            "id": "{Image ID}"、
-            "isPublic": "{Is Public}"、
-            "minDisk": "{Min Disk}"、
-            "minRam": "{Min RAM}"、
-            "name": "{Image Name}"、
+            "createdAt": "{Created At}",
+            "diskFormat": "{Disk Format}",
+            "id": "{Image ID}",
+            "isPublic": "{Is Public}",
+            "minDisk": "{Min Disk}",
+            "minRam": "{Min RAM}",
+            "name": "{Image Name}",
             "properties": {
             	"{Prop Key}" : "{Prop Value}"
-            }、
-            "protected": "{Protected}"、
-            "size": "{Image Size}"、
-            "status": "{Image Status}"、
+            },
+            "protected": "{Protected}",
+            "size": "{Image Size}",
+            "status": "{Image Status}",
             "updatedAt": "{Updated At}"
         }
     ]
