@@ -31,7 +31,7 @@ API只提供镜像列表查询API。有关镜像创建API，请参考[实例新�
 
 #### Method, URL
 ```
-GET /v1.0/appkeys/{appkey}/images
+GET /v1.0/appkeys/{appkey}/images?limit={limit}&marker={markerId}
 X-Auth-Token: {tokenId}
 ```
 
