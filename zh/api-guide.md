@@ -38,6 +38,9 @@ X-Auth-Token: {tokenId}
 |  Name | In | Type | Optional | Description |
 |--|--|--|--|--|
 | tokenId | Header | String | - | 令牌ID |
+| limit | Query | Integer | O | 要查询的镜像个数 |
+| markerId | Query | UUID | O | 查询时作为标准的镜像ID<br>镜像列表按照创建日期排序。<br>若指定limit及maker，则从指定为marker的镜像开始按照limit个数查询> |
+
 
 #### Request Body
 此API不需要Request Body。
@@ -85,3 +88,32 @@ X-Auth-Token: {tokenId}
 | Image Size | Body | Integer | 镜像数据的大小(byte) |
 | Image Status | Body | String | 镜像状态 |
 | Updated At | Body | String | 镜像上传时间。 yyyy-mm-ddTHH:MM:ssZ格式。 例如) 2017-05-16T02:17:50.166563 |
+
+### 删除镜像
+
+删除指定的镜像。但仅可删除用户创建的镜像。
+
+#### Method, URL
+```
+DELETE /v1.0/appkeys/{appkey}/images?id={imageId}
+X-Auth-Token:{tokenId}
+```
+
+|  Name | In | Type | Optional | Description |
+|--|--|--|--|--|
+| imageId | Query | UUID | - | 镜像ID |
+| tokenId | Header | String | - | 令牌ID |
+
+#### Request Body
+该API不需要Request Body。
+
+#### Response Body
+```json
+{
+    "header": {
+        "isSuccessful": true,
+        "resultCode": 0,
+        "resultMessage": "SUCCESS"
+    }
+}
+```
