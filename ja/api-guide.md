@@ -31,13 +31,15 @@
 
 #### Method、 URL
 ```
-GET /v1.0/appkeys/{appkey}/images
+GET /v1.0/appkeys/{appkey}/images?limit={limit}&marker={markerId}
 X-Auth-Token: {tokenId}
 ```
 
 |  Name | In | Type | Optional | Description |
 |--|--|--|--|--|
 | tokenId | Header | String | - | トークンID |
+| limit | Query | Integer | O | 照会するイメージの数 |
+| markerId | Query | UUID | O | 照会時に基準になるイメージID<br>イメージリストは作成日時順にソートされます。<br>limitとmakerを指定する場合、markerで指定されたイメージからlimitの数を照会します。 |
 
 #### Request Body
 このAPIはRequest Bodyが必要ありません。
@@ -86,3 +88,31 @@ X-Auth-Token: {tokenId}
 | Image Status | Body | String | イメージの状態 |
 | Updated At | Body | String | イメージがアップデートされた時間。 yyyy-mm-ddTHH:MM:ssZの形式。例) 2017-05-16T02:17:50.166563 |
 
+### イメージの削除
+
+指定したイメージを削除します。ただし、ユーザーが作成したイメージのみ削除できます。
+
+#### Method, URL
+```
+DELETE /v1.0/appkeys/{appkey}/images?id={imageId}
+X-Auth-Token: {tokenId}
+```
+
+|  Name | In | Type | Optional | Description |
+|--|--|--|--|--|
+| imageId | Query | UUID | - | イメージID |
+| tokenId | Header | String | - | トークンID |
+
+#### Request Body
+このAPIはRequest Bodyが不要です。
+
+#### Response Body
+```json
+{
+    "header": {
+        "isSuccessful": true,
+        "resultCode": 0,
+        "resultMessage": "SUCCESS"
+    }
+}
+```
