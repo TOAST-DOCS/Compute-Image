@@ -6,7 +6,7 @@
 
 Windows 인스턴스의 이미지를 생성하려면 Sysprep을 이용하여 이미지 생성을 준비한 다음 인스턴스를 종료 하는것을 권장합니다. 자세한 sysprep 사용 방법은 [Windows Sysprep 가이드](#windows-sysprep)를 참고합니다.
 
-실행 중인 Windows 인스턴스를 이미지로 생성할 경우 2019.05.28 배포 버전 이전의 이미지로 만든 Windows 인스턴스라면 정확한 동작을 위해 선행 작업이 필요합니다. 인스턴스를 생성한 이미지의 Windows 버전은 **인스턴스 상세정보**의 **이미지 이름**을 통해 확인할 수 있습니다. 자세한 내용은 [실행 중인 Windows 인스턴스 이미지 생성 가이드]를 참고합니다.
+실행 중인 Windows 인스턴스를 이미지로 생성할 경우 2019.05.28 배포 버전 이전의 이미지로 만든 Windows 인스턴스라면 정확한 동작을 위해 선행 작업이 필요합니다. 인스턴스를 생성한 이미지의 Windows 버전은 **인스턴스 상세정보**의 **이미지 이름**을 통해 확인할 수 있습니다. 자세한 내용은 [실행 중인 Windows 인스턴스 이미지 생성 가이드](#windows)를 참고합니다.
 
 ## 이미지 수정
 
@@ -70,25 +70,25 @@ Task Scheduler 우측 Actions 탭의 **Create Task...**를 클릭합니다.
 ![[그림 4 Create Task 시작]](http://static.toastoven.net/prod_infrastructure/compute/windows/002_190604.png)
 
 Create Task 팝업의 **General 탭**에서 Name에 적절한 이름을 넣고 **Security options**의 **Run with highest privileges**를 체크한 뒤 **Change User or Group...**를 클릭합니다.
-[그림 5 User 변경 및 우선순위 설정]
+[그림 5 User 변경 및 우선순위 설정](http://static.toastoven.net/prod_infrastructure/compute/windows/003_190604.png)
 
 Enter the object name to select 하단의 텍스트 박스에 **SYSTEM**을 입력 후 OK를 클릭합니다.
-![[그림 6 SYSTEM 유저 설정]](http://static.toastoven.net/prod_infrastructure/compute/windows/003_190604.png)
+![[그림 6 SYSTEM 유저 설정]](http://static.toastoven.net/prod_infrastructure/compute/windows/004_190604.png)
 
 Create Task 팝업의 **Triggers** 탭으로 이동하여 New 버튼을 클릭하여 새로운 Trigger를 생성합니다.
-![[그림 7 Trigger 설정 1]](http://static.toastoven.net/prod_infrastructure/compute/windows/004_190604.png)
+![[그림 7 Trigger 설정 1]](http://static.toastoven.net/prod_infrastructure/compute/windows/005_190604.png)
 
 Begin the task의 트리거를 **At startup**으로 선택 후 OK를 클릭하여 Trigger 생성을 완료합니다.
-![[그림 8 Trigger 설정 2]](http://static.toastoven.net/prod_infrastructure/compute/windows/005_190604.png)
+![[그림 8 Trigger 설정 2]](http://static.toastoven.net/prod_infrastructure/compute/windows/006_190604.png)
 
 Create Task 팝업의 **Actions 탭**으로 이동하여 New 버튼을 클릭하여 새로운 Action을 생성합니다.
-![[그림 9 Action 설정 1]](http://static.toastoven.net/prod_infrastructure/compute/windows/006_190604.png)
+![[그림 9 Action 설정 1]](http://static.toastoven.net/prod_infrastructure/compute/windows/007_190604.png)
 
 **Action 생성 팝업**에서 아래의 값을 입력합니다.
 
 	Program/script: C:\Windows\System32\ipconfig.exe
 	Add arguments(optional): /renew
 
-![[그림 10 Action 설정 2]](http://static.toastoven.net/prod_infrastructure/compute/windows/007_190604.png)
+![[그림 10 Action 설정 2]](http://static.toastoven.net/prod_infrastructure/compute/windows/008_190604.png)
 
 OK를 클릭하여 New Action 팝업 및 Create Task 팝업을 닫으며 스케줄러 등록을 완료합니다.
