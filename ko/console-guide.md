@@ -63,14 +63,14 @@ TOAST에서 제공하는 Windows 이미지의 응답 파일은 C:\Program Files\
 실행 중인 Windows 인스턴스로 이미지를 생성할 때 원본 인스턴스의 이미지 버전이 2019.05.28 이전이라면 아래의 선행 작업이 필요합니다.
 만약 2019.05.28 배포 버전 이후의 Windows 이미지라면 아래의 과정은 불필요합니다.
 
-시작 버튼 -> Task Scheduler를 실행합니다.
+Windows 인스턴스에 접속한 후 **앱**에서 Task Scheduler를 실행합니다.
 ![[그림 3 Task Scheudler 실행]](http://static.toastoven.net/prod_infrastructure/compute/windows/001_190604.png)
 
 Task Scheduler 우측 Actions 탭의 **Create Task...**를 클릭합니다.
 ![[그림 4 Create Task 시작]](http://static.toastoven.net/prod_infrastructure/compute/windows/002_190604.png)
 
 Create Task 팝업의 **General 탭**에서 Name에 적절한 이름을 넣고 **Security options**의 **Run with highest privileges**를 체크한 뒤 **Change User or Group...**를 클릭합니다.
-[그림 5 User 변경 및 우선순위 설정](http://static.toastoven.net/prod_infrastructure/compute/windows/003_190604.png)
+![[그림 5 User 변경 및 우선순위 설정]](http://static.toastoven.net/prod_infrastructure/compute/windows/003_190604.png)
 
 Enter the object name to select 하단의 텍스트 박스에 **SYSTEM**을 입력 후 OK를 클릭합니다.
 ![[그림 6 SYSTEM 유저 설정]](http://static.toastoven.net/prod_infrastructure/compute/windows/004_190604.png)
