@@ -86,8 +86,10 @@ TOAST에서 제공하는 Windows 이미지의 응답 파일은 C:\Program Files\
 
 8. **Action 생성** 창에서 아래의 값을 입력합니다.
 
+```
 	Program/script: C:\Windows\System32\ipconfig.exe
 	Add arguments(optional): /renew
+```
 
 ![[그림 10 Action 설정 2]](http://static.toastoven.net/prod_infrastructure/compute/windows/008_190604.png)
 
