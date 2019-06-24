@@ -31,13 +31,15 @@ List images with details.
 
 #### Method, URL
 ```
-GET /v1.0/appkeys/{appkey}/images
+GET /v1.0/appkeys/{appkey}/images?limit={limit}&marker={markerId}
 X-Auth-Token: {tokenId}
 ```
 
 |  Name | In | Type | Optional | Description |
 |--|--|--|--|--|
 | tokenId | Header | String | - | Token ID |
+| limit | Query | Integer | O | number of images to query |
+| markerId | Query | UUID | O | Image ID as query criteria <br>List of images are aligned in the order of creation date. <br>If limit and marker are specified, query by the number of limits, from the image specified as marker. |
 
 #### Request Body
 This API does not require a request body. 
@@ -85,3 +87,33 @@ This API does not require a request body.
 | Image Size | Body | Integer | Size of image data  (byte) |
 | Image Status | Body | String | Status of an image |
 | Updated At | Body | String | Time when an image is updated: in the format of yyyy-mm-ddTHH:MM:ssZ. e.g) 2017-05-16T02:17:50.166563 |
+
+### Delete Images
+
+Delete specified images. However, only user-created images can be deleted.
+
+#### Method, URL
+```
+DELETE /v1.0/appkeys/{appkey}/images?id={imageId}
+X-Auth-Token: {tokenId}
+```
+
+|  Name | In | Type | Optional | Description |
+|--|--|--|--|--|
+| imageId | Query | UUID | - | Image ID |
+| tokenId | Header | String | - | Token ID |
+
+#### Request Body
+This API does not require a request body.
+
+#### Response Body
+```json
+{
+    "header": {
+        "isSuccessful": true,
+        "resultCode": 0,
+        "resultMessage": "SUCCESS"
+    }
+}
+```
+
