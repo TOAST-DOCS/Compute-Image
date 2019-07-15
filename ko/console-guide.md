@@ -28,6 +28,7 @@ Windows 이미지를 생성하려면 하드웨어와 사용자에 종속된 정�
 
 명령 프롬프트 창이 뜨면, 아래 명령을 실행합니다.
 
+	sc config cloudbase-init start= demand
 	cd C:\Program Files\Cloudbase Solutions\Cloudbase-Init\conf
 	C:\Windows\System32\Sysprep\sysprep.exe /generalize /oobe /shutdown /unattend:Unattend.xml
 
