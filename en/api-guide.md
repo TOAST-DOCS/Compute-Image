@@ -1,5 +1,7 @@
 ## Compute > Image > API Guide
 
+API is currently available only in the Korea region.
+
 Image API provides List Images API only. For Create Image API, refer to [Add Instance API](/Compute/Instance/en/api-guide/#_15).  
 
 ## Prerequisites
