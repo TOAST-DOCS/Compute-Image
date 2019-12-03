@@ -2,7 +2,7 @@
 
 APIは現在、韓国リージョンでのみ使用できます。
 
-イメージAPIではイメージのリストを照会するAPIのみ提供します。イメージ作成APIは[インスタンス追加機能API](/Compute/Instance/ja/api-guide/#_15)を参照してください。
+イメージAPIではイメージのリストを照会するAPIのみ提供します。イメージ作成APIは[インスタンス追加機能API](/Compute/Instance/ja/api-guide/#api_4)を参照してください。
 
 ## 事前準備
 

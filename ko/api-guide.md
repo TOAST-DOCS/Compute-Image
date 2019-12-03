@@ -2,7 +2,7 @@
 
 API는 현재 한국 리전에서만 사용할 수 있습니다.
 
-이미지 API에서는 이미지의 목록을 조회하는 API만 제공합니다. 이미지 생성 API는 [인스턴스 추가 기능 API](/Compute/Instance/ko/api-guide/#_15)를 참고합니다.
+이미지 API에서는 이미지의 목록을 조회하는 API만 제공합니다. 이미지 생성 API는 [인스턴스 추가 기능 API](/Compute/Instance/ko/api-guide/#api_4)를 참고합니다.
 
 ## 사전 준비
 

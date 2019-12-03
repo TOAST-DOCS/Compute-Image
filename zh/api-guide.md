@@ -2,7 +2,7 @@
 
 API目前仅限韩国地区使用。
 
-API只提供镜像列表查询API。有关镜像创建API，请参考[实例新增功能API](/Compute/Instance/zh/api-guide/#_15)。
+API只提供镜像列表查询API。有关镜像创建API，请参考[实例新增功能API](/Compute/Instance/zh/api-guide/#api_4)。
 
 ## 事前准备
 
