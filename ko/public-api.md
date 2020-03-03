@@ -1,7 +1,7 @@
+# Image API
+
 ## API 버전
-
 ### 버전 목록 보기
-
 TOAST 기본 인프라 서비스 Image API에서 지원하는 버전 목록을 확인할 수 있습니다.
 
 ```
@@ -12,7 +12,7 @@ GET /
 이 API는 요청 본문을 요구하지 않습니다.
 
 #### 응답
-<details><summary>펼쳐 보기</summary>
+<details><summary>예시</summary>
 <p>
 
 ```json
@@ -75,10 +75,10 @@ GET /
 </p>
 </details>
 
+---
+
 ## 이미지
-
 ### 이미지 목록 조회
-
 사용가능한 공용 또는 개인 이미지 목록을 반환합니다.
 
 ```
@@ -87,7 +87,6 @@ X-Auth-Token: {tokenId}
 ```
 
 #### 요청
-
 이 API는 요청 본문을 요구하지 않습니다.
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -133,66 +132,50 @@ X-Auth-Token: {tokenId}
 | $.first | Body | URI | 이미지 목록의 첫 번째 페이지에 해당하는 경로 |
 | $.next| Body | URI | 이미지 목록의 다음 페이지에 해당하는 경로 |
 
-#### 예제
-<details><summary>펼쳐 보기</summary>
+<details><summary>예시</summary>
 <p>
 
 ```json
 {
-    "images": [
-        {
-            "status": "active",
-            "name": "cirros-0.3.2-x86_64-disk",
-            "tags": [],
-            "container_format": "bare",
-            "created_at": "2014-11-07T17:07:06Z",
-            "disk_format": "qcow2",
-            "updated_at": "2014-11-07T17:19:09Z",
-            "visibility": "public",
-            "self": "/v2/images/1bea47ed-f6a9-463b-b423-14b9cca9ad27",
-            "min_disk": 0,
-            "protected": false,
-            "id": "1bea47ed-f6a9-463b-b423-14b9cca9ad27",
-            "file": "/v2/images/1bea47ed-f6a9-463b-b423-14b9cca9ad27/file",
-            "checksum": "64d7c1cd2b6f60c92c14662941cb7913",
-            "owner": "5ef70662f8b34079a6eddb8da9d75fe8",
-            "size": 13167616,
-            "min_ram": 0,
-            "schema": "/v2/schemas/image",
-            "virtual_size": "None"
-        },
-        {
-            "status": "active",
-            "name": "F17-x86_64-cfntools",
-            "tags": [],
-            "container_format": "bare",
-            "created_at": "2014-10-30T08:23:39Z",
-            "disk_format": "qcow2",
-            "updated_at": "2014-11-03T16:40:10Z",
-            "visibility": "public",
-            "self": "/v2/images/781b3762-9469-4cec-b58d-3349e5de4e9c",
-            "min_disk": 0,
-            "protected": false,
-            "id": "781b3762-9469-4cec-b58d-3349e5de4e9c",
-            "file": "/v2/images/781b3762-9469-4cec-b58d-3349e5de4e9c/file",
-            "checksum": "afab0f79bac770d61d24b4d0560b5f70",
-            "owner": "5ef70662f8b34079a6eddb8da9d75fe8",
-            "size": 476704768,
-            "min_ram": 0,
-            "schema": "/v2/schemas/image",
-            "virtual_size": "None"
-        }
-    ],
-    "schema": "/v2/schemas/images",
-    "first": "/v2/images"
+  "images": [
+    {
+      "container_format": "bare",
+      "min_ram": 0,
+      "updated_at": "2018-12-11T01:01:35Z",
+      "login_username": "centos",
+      "file": "/v2/images/1c868787-6207-4ff2-a1e7-ae1331d6829b/file",
+      "owner": "c289b99209ca4e189095cdecebbd092d",
+      "id": "1c868787-6207-4ff2-a1e7-ae1331d6829b",
+      "size": 1778843648,
+      "os_distro": "CentOS",
+      "self": "/v2/images/1c868787-6207-4ff2-a1e7-ae1331d6829b",
+      "disk_format": "qcow2",
+      "os_version": "6.10",
+      "schema": "/v2/schemas/image",
+      "status": "active",
+      "description": "CentOS 6.10 (2018.10.23)",
+      "tags": [],
+      "visibility": "public",
+      "os_architecture": "amd64",
+      "min_disk": 20,
+      "virtual_size": null,
+      "name": "CentOS 6.10 (2018.10.23)",
+      "hypervisor_type": "qemu",
+      "created_at": "2018-10-23T02:17:43Z",
+      "protected": true,
+      "checksum": "f803c5c15bcf9a75935980a900a04584",
+      "os_type": "linux"
+    }
+  ]
 }
 ```
 
 </p>
 </details>
 
-### 이미지 상세 조회
+---
 
+### 이미지 상세 조회
 지정한 이미지에 대한 상세 정보만을 조회합니다.
 
 ```
@@ -201,7 +184,6 @@ X-Auth-Token: {tokenId}
 ```
 
 #### 요청
-
 이 API는 요청 본문을 요구하지 않습니다.
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -235,39 +217,46 @@ X-Auth-Token: {tokenId}
 | images.file | Body | String | 이미지 파일 경로 |
 | images.schema | Body | URI| 이미지 스키마 경로 |
 
-#### 예시
-<details><summary>펼쳐 보기</summary>
+<details><summary>예시</summary>
 <p>
 
 ```json
 {
-    "status": "active",
-    "name": "cirros-0.3.2-x86_64-disk",
-    "tags": [],
-    "container_format": "bare",
-    "created_at": "2014-05-05T17:15:10Z",
-    "disk_format": "qcow2",
-    "updated_at": "2014-05-05T17:15:11Z",
-    "visibility": "public",
-    "self": "/v2/images/1bea47ed-f6a9-463b-b423-14b9cca9ad27",
-    "min_disk": 0,
-    "protected": false,
-    "id": "1bea47ed-f6a9-463b-b423-14b9cca9ad27",
-    "file": "/v2/images/1bea47ed-f6a9-463b-b423-14b9cca9ad27/file",
-    "checksum": "64d7c1cd2b6f60c92c14662941cb7913",
-    "owner": "5ef70662f8b34079a6eddb8da9d75fe8",
-    "size": 13167616,
-    "min_ram": 0,
-    "schema": "/v2/schemas/image",
-    "virtual_size": "None"
+  "container_format": "bare",
+  "min_ram": 0,
+  "updated_at": "2018-12-11T01:01:35Z",
+  "login_username": "centos",
+  "file": "/v2/images/1c868787-6207-4ff2-a1e7-ae1331d6829b/file",
+  "owner": "c289b99209ca4e189095cdecebbd092d",
+  "id": "1c868787-6207-4ff2-a1e7-ae1331d6829b",
+  "size": 1778843648,
+  "os_distro": "CentOS",
+  "self": "/v2/images/1c868787-6207-4ff2-a1e7-ae1331d6829b",
+  "disk_format": "qcow2",
+  "os_version": "6.10",
+  "schema": "/v2/schemas/image",
+  "status": "active",
+  "description": "CentOS 6.10 (2018.10.23)",
+  "tags": [],
+  "visibility": "public",
+  "os_architecture": "amd64",
+  "min_disk": 20,
+  "virtual_size": null,
+  "name": "CentOS 6.10 (2018.10.23)",
+  "hypervisor_type": "qemu",
+  "created_at": "2018-10-23T02:17:43Z",
+  "protected": true,
+  "checksum": "f803c5c15bcf9a75935980a900a04584",
+  "os_type": "linux"
 }
 ```
 
 </p>
 </details>
 
-### 이미지 삭제
+---
 
+### 이미지 삭제
 ```
 DELETE /v2/images/{imageId}
 X-Auth-Token: {tokenId}
@@ -276,23 +265,20 @@ X-Auth-Token: {tokenId}
 #### 요청
 이 API는 요청 본문을 요구하지 않습니다.
 
-
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 |---|---|---|---|---|
 | tokenId | Header | String | O | 토큰 ID |
 | imageId | URI | String | O | 조회할 이미지 ID |
 
-
 #### 응답
-
 이 API는 응답 본문을 반환하지 않습니다.
 
 > 오직 `private` 이미지만 삭제할 수 있습니다.
 
+---
+
 ## 이미지 태그
-
 ### 태그 추가하기
-
 지정한 이미지에 태그를 추가합니다.
 
 ```
@@ -301,7 +287,6 @@ X-Auth-Token: {tokenId}
 ```
 
 #### 요청
-
 이 API는 요청 본문을 요구하지 않습니다.
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -311,11 +296,11 @@ X-Auth-Token: {tokenId}
 | tag | URI | String | O | 추가할 태그 이름<br>영문 기준 최대 255자 |
 
 #### 응답
-
 이 API는 응답 본문을 반환하지 않습니다.
 
-### 태그 제거하기
+---
 
+### 태그 제거하기
 지정한 이미지에서 태그를 제거합니다.
 
 ```
@@ -324,7 +309,6 @@ X-Auth-Token: {tokenId}
 ```
 
 #### 요청
-
 이 API는 요청 본문을 요구하지 않습니다.
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -334,11 +318,11 @@ X-Auth-Token: {tokenId}
 | tag | URI | String | O | 제거할 태그 이름 |
 
 #### 응답
-
 이 API는 응답 본문을 반환하지 않습니다.
 
-## 이미지 공유
+---
 
+## 이미지 공유
 TOAST 기본 인프라 서비스의 이미지 API는 자신의 이미지를 다른 테넌트에게 공유할 수 있는 기능을 제공합니다. 이미지 공유를 위해서는 공유할 이미지에 공유할 테넌트를 **member** 로 등록하면 됩니다. 그리고 **member** 로 등록된 테턴트에서 공유받은 이미지에 대해서 승인하면, 자신의 이미지처럼 조회 및 사용하는 것이 가능해집니다.
 
 > 오직 `visibility` 속성이 `private`인 이미지만 공유할 수 있습니다.
@@ -346,7 +330,6 @@ TOAST 기본 인프라 서비스의 이미지 API는 자신의 이미지를 다�
 > 반드시 공유하려는 이미지를 소유한 테넌트에서 **member** 를 추가해야 합니다.
 
 ### Member 추가
-
 새로운 테넌트를 지정한 이미지의 **member** 로 등록합니다.
 
 ```
@@ -362,8 +345,7 @@ X-Auth-Token: {tokenId}
 | imageId | URI | UUID | O | 공유할 이미지 ID |
 | member | Body | String | O | 공유받을 테넌트 ID |
 
-#### 예시
-<details><summary>펼쳐 보기</summary>
+<details><summary>예시</summary>
 <p>
 
 ```
@@ -379,14 +361,13 @@ X-Auth-Token: {tokenId}
 
 | 이름 | 종류 | 형식 | 설명 |
 |---|---|---|---|
-| $.created_at | Body | Datetime | **Member** 생성 시각<br>yyyy-mm-ddTHH:MM:SSZ 형식 |
-| $.image_id | Body | UUID | 공유한 이미지 ID |
-| $.member_id | Body | String | 이미지를 공유받은 테넌트 ID |
-| $.schema | Body | URI | 이미지 **Member**에 대한 스키마 경로 |
-| $.status | Body | Enum | 이미지 **Member** 상태<br>`pending`, `accepted` 중 하나 |
+| created_at | Body | Datetime | **Member** 생성 시각<br>yyyy-mm-ddTHH:MM:SSZ 형식 |
+| image_id | Body | UUID | 공유한 이미지 ID |
+| member_id | Body | String | 이미지를 공유받은 테넌트 ID |
+| schema | Body | URI | 이미지 **Member**에 대한 스키마 경로 |
+| status | Body | Enum | 이미지 **Member** 상태<br>`pending`, `accepted` 중 하나 |
 
-#### 예시
-<details><summary>펼쳐 보기</summary>
+<details><summary>예시</summary>
 <p>
 
 ```json
@@ -403,8 +384,9 @@ X-Auth-Token: {tokenId}
 </p>
 </details>
 
-### Member 목록 보기
+---
 
+### Member 목록 보기
 지정한 이미지를 공유 받은 테넌트 목록을 조회합니다.
 반드시 지정한 이미지의 소유주 또는 **member** 로 등록된 테넌트에 속한 토큰으로 요청해야 합니다.
 
@@ -433,8 +415,7 @@ X-Auth-Token: {tokenId}
 | members.status | Body | Enum | 이미지 **member** 상태 `pending`, `accepted` 중 하나 |
 | schema | Body | URI | 이미지 **member** 목록에 대한 스키마 경로 |
 
-#### 예시
-<details><summary>펼쳐 보기</summary>
+<details><summary>예시</summary>
 <p>
 
 ```json
@@ -464,9 +445,11 @@ X-Auth-Token: {tokenId}
 </p>
 </details>
 
-### Member 상세 보기
+---
 
-지정한 이미지의 특정 **member** 에 대한 상세 정보만을 반환합니다. 반드시 지정한 이미지의 소유주 또는 **member** 로 등록된 테넌트에 속한 토큰으로 요청해야 합니다.
+### Member 상세 보기
+지정한 이미지의 특정 **member** 에 대한 상세 정보만을 반환합니다.
+반드시 지정한 이미지의 소유주 또는 **member** 로 등록된 테넌트에 속한 토큰으로 요청해야 합니다.
 
 ```
 GET /v2/images/{imageId}/members/{memberId}
@@ -474,7 +457,6 @@ X-Auth-Token: {tokenId}
 ```
 
 #### 요청
-
 이 API는 요청 본문을 요구하지 않습니다.
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -493,8 +475,7 @@ X-Auth-Token: {tokenId}
 | schema | Body | URI | 이미지 **Member**에 대한 스키마 경로 |
 | status | Body | Enum | 이미지 **Member** 상태 `pending`, `accepted` 중 하나 |
 
-#### 예시
-<details><summary>펼쳐 보기</summary>
+<details><summary>예시</summary>
 <p>
 
 ```json
@@ -510,6 +491,8 @@ X-Auth-Token: {tokenId}
 
 </p>
 </details>
+
+---
 
 ### Member 상태 변경
 
@@ -529,8 +512,7 @@ X-Auth-Token: {tokenId}
 | imageId | URI | UUID | O | 이미지 ID |
 | status  | Body | Enum | O | `accpeted`, `pending`, `rejected` 중 하나 |
 
-#### 예시
-<details><summary>펼쳐 보기</summary>
+<details><summary>예시</summary>
 <p>
 
 ```json
@@ -553,8 +535,7 @@ X-Auth-Token: {tokenId}
 | status | Body | Enum | 이미지 **member** 상태 <br> `accpeted`,`pending`,`rejected` 중 하나 |
 | updated_at | Body | Datetime | 이미지 **member** 상태 수정 시각<br>yyyy-mm-ddTHH:MM:SSZ 형식 |
 
-#### 예시
-<details><summary>펼쳐 보기</summary>
+<details><summary>예시</summary>
 <p>
 
 json
@@ -571,6 +552,8 @@ json
 
 </p>
 </details>
+
+---
 
 ### Member 삭제
 
@@ -592,5 +575,4 @@ X-Auth-Token: {tokenId}
 | memberId | URI | String | O | **Member** ID |
 
 #### 응답
-
 이 API는 응답 본문을 반환하지 않습니다.
