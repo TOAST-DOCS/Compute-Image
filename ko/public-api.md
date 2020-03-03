@@ -1,4 +1,4 @@
-# Image API
+## Compute > Image > Public API 가이드
 
 ## API 버전
 ### 버전 목록 보기
@@ -17,58 +17,78 @@ GET /
 
 ```json
 {
-    "versions": [
+  "versions": [
+    {
+      "status": "CURRENT",
+      "id": "v2.6",
+      "links": [
         {
-            "status": "CURRENT",
-            "id": "v2.2",
-            "links": [
-                {
-                    "href": "http://23.253.228.211:9292/v2/",
-                    "rel": "self"
-                }
-            ]
-        },
-        {
-            "status": "SUPPORTED",
-            "id": "v2.1",
-            "links": [
-                {
-                    "href": "http://23.253.228.211:9292/v2/",
-                    "rel": "self"
-                }
-            ]
-        },
-        {
-            "status": "SUPPORTED",
-            "id": "v2.0",
-            "links": [
-                {
-                    "href": "http://23.253.228.211:9292/v2/",
-                    "rel": "self"
-                }
-            ]
-        },
-        {
-            "status": "SUPPORTED",
-            "id": "v1.1",
-            "links": [
-                {
-                    "href": "http://23.253.228.211:9292/v1/",
-                    "rel": "self"
-                }
-            ]
-        },
-        {
-            "status": "SUPPORTED",
-            "id": "v1.0",
-            "links": [
-                {
-                    "href": "http://23.253.228.211:9292/v1/",
-                    "rel": "self"
-                }
-            ]
+          "href": "https://kr1-api-image.cloud.toast.com/v2/",
+          "rel": "self"
         }
-    ]
+      ]
+    },
+    {
+      "status": "SUPPORTED",
+      "id": "v2.5",
+      "links": [
+        {
+          "href": "https://kr1-api-image.cloud.toast.com/v2/",
+          "rel": "self"
+        }
+      ]
+    },
+    {
+      "status": "SUPPORTED",
+      "id": "v2.4",
+      "links": [
+        {
+          "href": "https://kr1-api-image.cloud.toast.com/v2/",
+          "rel": "self"
+        }
+      ]
+    },
+    {
+      "status": "SUPPORTED",
+      "id": "v2.3",
+      "links": [
+        {
+          "href": "https://kr1-api-image.cloud.toast.com/v2/",
+          "rel": "self"
+        }
+      ]
+    },
+    {
+      "status": "SUPPORTED",
+      "id": "v2.2",
+      "links": [
+        {
+          "href": "https://kr1-api-image.cloud.toast.com/v2/",
+          "rel": "self"
+        }
+      ]
+    },
+    {
+      "status": "SUPPORTED",
+      "id": "v2.1",
+      "links": [
+        {
+          "href": "https://kr1-api-image.cloud.toast.com/v2/",
+          "rel": "self"
+        }
+      ]
+    },
+    {
+      "status": "SUPPORTED",
+      "id": "v2.0",
+      "links": [
+        {
+          "href": "https://kr1-api-image.cloud.toast.com/v2/",
+          "rel": "self"
+        }
+      ]
+    }
+  ]
 }
 ```
 
@@ -188,8 +208,8 @@ X-Auth-Token: {tokenId}
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 |---|---|---|---|---|
+| imageId | URL | UUID | O | 조회할 이미지 ID |
 | tokenId | Header | String | O | 토큰 ID|
-| imageId | URI | UUID | O | 조회할 이미지 ID |
 
 #### 응답
 
@@ -267,8 +287,8 @@ X-Auth-Token: {tokenId}
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 |---|---|---|---|---|
+| imageId | URL | String | O | 조회할 이미지 ID |
 | tokenId | Header | String | O | 토큰 ID |
-| imageId | URI | String | O | 조회할 이미지 ID |
 
 #### 응답
 이 API는 응답 본문을 반환하지 않습니다.
@@ -291,9 +311,9 @@ X-Auth-Token: {tokenId}
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 |---|---|---|---|---|
+| imageId | URL | UUID | O | 태그를 추가할 이미지 ID |
+| tag | URL | String | O | 추가할 태그 이름<br>영문 기준 최대 255자 |
 | tokenId | Header | String | O | 토큰 ID |
-| imageId | URI | UUID | O | 태그를 추가할 이미지 ID |
-| tag | URI | String | O | 추가할 태그 이름<br>영문 기준 최대 255자 |
 
 #### 응답
 이 API는 응답 본문을 반환하지 않습니다.
@@ -313,9 +333,9 @@ X-Auth-Token: {tokenId}
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 |---|---|---|---|---|
+| imageId | URL | UUID | O | 태그를 제거할 이미지 ID |
+| tag | URL | String | O | 제거할 태그 이름 |
 | tokenId | Header | String | O | 토큰 ID |
-| imageId | URI | UUID | O | 태그를 제거할 이미지 ID |
-| tag | URI | String | O | 제거할 태그 이름 |
 
 #### 응답
 이 API는 응답 본문을 반환하지 않습니다.
@@ -341,8 +361,8 @@ X-Auth-Token: {tokenId}
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 |---|---|---|---|---|
+| imageId | URL | UUID | O | 공유할 이미지 ID |
 | tokenId | Header | String | O | 토큰 ID |
-| imageId | URI | UUID | O | 공유할 이미지 ID |
 | member | Body | String | O | 공유받을 테넌트 ID |
 
 <details><summary>예시</summary>
@@ -400,8 +420,8 @@ X-Auth-Token: {tokenId}
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 |---|---|---|---|---|
+| imageId | URL | UUID | O | 이미지 ID |
 | tokenId | Header | String | O | 토큰 ID |
-| imageId | URI | UUID | O | 이미지 ID |
 
 #### 응답
 
@@ -461,9 +481,9 @@ X-Auth-Token: {tokenId}
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 |---|---|---|---|---|
+| imageId | URL | UUID | O | 이미지 ID |
+| memberId | URL | String | O | **Member** ID |
 | tokenId | Header | String | O | 토큰 ID |
-| imageId | URI | UUID | O | 이미지 ID |
-| memberId | URI | String | O | **Member** ID |
 
 #### 응답
 
@@ -508,8 +528,8 @@ X-Auth-Token: {tokenId}
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 |---|---|---|---|---|
+| imageId | URL | UUID | O | 이미지 ID |
 | tokenId | Header | String | O | 토큰 ID |
-| imageId | URI | UUID | O | 이미지 ID |
 | status  | Body | Enum | O | `accpeted`, `pending`, `rejected` 중 하나 |
 
 <details><summary>예시</summary>
@@ -570,9 +590,9 @@ X-Auth-Token: {tokenId}
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 |---|---|---|---|---|
+| imageId | URL | UUID | O | 이미지 ID |
+| memberId | URL | String | O | **Member** ID |
 | tokenId | Header | String | O | 토큰 ID |
-| imageId | URI | UUID | O | 이미지 ID |
-| memberId | URI | String | O | **Member** ID |
 
 #### 응답
 이 API는 응답 본문을 반환하지 않습니다.
