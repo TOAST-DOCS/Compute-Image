@@ -125,12 +125,12 @@ X-Auth-Token: {tokenId}
 | images.virtual_size | Body | Integer | 이미지의 가상 크기 |
 | images.size | Body | Integer | 이미지의 실제 크기<br>바이트 단위 |
 | images.properties | Body | Object | 이미지의 속성 객체<br>이미지 별 사용자 지정 속성을 키-값 쌍 형태로 기술 |
-| $.images.self | Body | URI | 이미지의 경로 |
-| $.images.file | Body | String | 이미지 파일 경로 |
-| $.images.schema | Body | URI | 이미지 스키마 경로 |
-| $.schema | Body | URI | 이미지 목록 스키마 경로 |
-| $.first | Body | URI | 이미지 목록의 첫 번째 페이지에 해당하는 경로 |
-| $.next| Body | URI | 이미지 목록의 다음 페이지에 해당하는 경로 |
+| images.self | Body | URI | 이미지의 경로 |
+| images.file | Body | String | 이미지 파일 경로 |
+| images.schema | Body | URI | 이미지 스키마 경로 |
+| schema | Body | URI | 이미지 목록 스키마 경로 |
+| first | Body | URI | 이미지 목록의 첫 번째 페이지에 해당하는 경로 |
+| next| Body | URI | 이미지 목록의 다음 페이지에 해당하는 경로 |
 
 <details><summary>예시</summary>
 <p>
