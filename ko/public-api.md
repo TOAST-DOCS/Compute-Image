@@ -2,9 +2,9 @@
 
 API를 사용하려면 API 엔드포인트와 토큰 등이 필요합니다. [API 사용 준비](/Compute/Compute/ko/identity-api/)를 참고하여 API 사용에 필요한 정보를 준비합니다.
 
-이미지 API는 `image` 서비스 엔드포인트를 이용합니다. 정확한 엔드포인트는 토큰 발급 응답의 `serviceCatalog`를 참조합니다.
+이미지 API는 `image` 타입 엔드포인트를 이용합니다. 정확한 엔드포인트는 토큰 발급 응답의 `serviceCatalog`를 참조합니다.
 
-| 서비스 | 리전 | 엔드포인트 |
+| 타입 | 리전 | 엔드포인트 |
 |---|---|---|
 | image | 한국(판교) 리전<br>한국(평촌) 리전<br>일본 리전 | https://kr1-api-image.infrastructure.cloud.toast.com<br>https://kr2-api-image.infrastructure.cloud.toast.com<br>https://jp1-api-image.infrastructure.cloud.toast.com |
 
