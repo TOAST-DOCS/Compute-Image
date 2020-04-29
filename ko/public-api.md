@@ -8,6 +8,8 @@ API를 사용하려면 API 엔드포인트와 토큰 등이 필요합니다. [AP
 |---|---|---|
 | image | 한국(판교) 리전<br>한국(평촌) 리전<br>일본 리전 | https://kr1-api-image.infrastructure.cloud.toast.com<br>https://kr2-api-image.infrastructure.cloud.toast.com<br>https://jp1-api-image.infrastructure.cloud.toast.com |
 
+API 응답에 가이드에 명시되지 않은 필드가 노출될 수 있습니다. 이런 필드는 TOAST 내부 용도로 사용되며 사전 공지없이 변경될 수 있으므로 사용하지 않습니다.
+
 ## 이미지
 ### 이미지 목록 조회
 
@@ -98,8 +100,8 @@ X-Auth-Token: {tokenId}
     }
   ],
   "schema": "/v2/schemas/images",
-  "first": "/v2/images?tag=_CLOUD_TYPE_NORMAL",
-  "next": "/v2/images?marker=057f9a69-4e4c-4025-8a69-fa248cd9db94&tag=_CLOUD_TYPE_NORMAL"
+  "first": "/v2/images",
+  "next": "/v2/images?marker=057f9a69-4e4c-4025-8a69-fa248cd9db94"
 }
 ```
 
@@ -234,7 +236,7 @@ X-Auth-Token: {tokenId}
 ---
 
 ### 태그 제거하기
-지정한 이미지에서 태그를 제거합니다. 이미지를 생성하면 기본적으로 추가되어 있는 `_AVAILABLE_` 태그를 삭제하면 콘솔에서 해당 이미지가 조회되지 않습니다.
+지정한 이미지에서 태그를 제거합니다.
 
 
 ```
