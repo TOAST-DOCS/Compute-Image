@@ -28,8 +28,8 @@ X-Auth-Token: {tokenId}
 | visibility | Query | Enum | - | 조회할 이미지의 보여주기 속성<br>`public`, `private`, `shared` 중 하나의 값만 선택 가능<br>생략하면 모든 종류의 이미지 목록을 반환 |
 | owner | Query | String  | - | 조회할 이미지가 속한 테넌트 ID |
 | status | Query | Enum    | - | 조회할 이미지의 상태<br>`queued`: 이미지 컨버팅 중<br>`saving`: 이미지 업로드 중<br>`active`: 정상<br>`killed`: 시스템에 의해 이미지 삭제<br>`deleted`: 삭제된 이미지<br>`pending_delete`: 이미지 삭제 대기 중 |
-| size_min | Query | Integer | - | 조회할 이미지의 최소 크기 (바이트 단위) |
-| size_max | Query | Integer | - | 조회할 이미지의 최대 크기 (바이트 단위) |
+| size_min | Query | Integer | - | 조회할 이미지의 최소 크기 (Byte) |
+| size_max | Query | Integer | - | 조회할 이미지의 최대 크기 (Byte) |
 | sort_key | Query | String | - | 이미지 목록을 정렬할 때 사용할 속성<br>이미지의 모든 속성을 지정 가능. 기본 값은 `created_at` |
 | sort_dir | Query | Enum | - | 이미지 목록 정렬 방향<br>`asc` (오름차순), `desc` (내림차순) 중 하나의 값만 선택 가능. 기본 값은 내림차순 |
 
@@ -45,15 +45,15 @@ X-Auth-Token: {tokenId}
 | images.created_at | Body | Datetime | 생성 시각 |
 | images.disk_format | Body | String | 이미지 디스크 포맷 |
 | images.updated_at | Body | Datetime | 수정 시각 |
-| images.min_disk | Body | Integer | 이미지 최소 디스크 요구량<br>`min_disk` 값보다 큰 볼륨에서만 사용할 수 있음. |
+| images.min_disk | Body | Integer | 이미지 최소 디스크 요구량 (GB)<br>`min_disk` 값보다 큰 볼륨에서만 사용할 수 있음. |
 | images.protected | Body | Boolean | 이미지 보호 여부<br>`protected=true`인 경우 수정 및 삭제가 불가 |
 | images.id | Body | UUID | 이미지 ID |
-| images.min_ram | Body | Integer | 이미지 최소 메모리 요구량<br>`min_disk` 값보다 큰 인스턴스에서만 사용할 수 있음 |
+| images.min_ram | Body | Integer | 이미지 최소 메모리 요구량 (MB)<br>`min_disk` 값보다 큰 인스턴스에서만 사용할 수 있음 |
 | images.checksum | Body | String | 이미지 내용 해쉬 값<br>내부적으로 이미지 유효성 검증을 위해 사용 |
 | images.owner | Body | String | 이미지가 속한 테넌트 ID |
 | images.visibility | Body | Enum | 이미지 가시성<br>`public`, `private`, `shared` 중 하나 |
 | images.virtual_size | Body | Integer | 이미지 가상 크기 |
-| images.size | Body | Integer | 이미지 실제 크기 (바이트 단위) |
+| images.size | Body | Integer | 이미지 실제 크기 (Byte) |
 | images.properties | Body | Object | 이미지 속성 객체<br>이미지 별 사용자 지정 속성을 키-값 쌍 형태로 기술 |
 | images.self | Body | URI | 이미지 경로 |
 | images.file | Body | String | 이미지 파일 경로 |
@@ -96,7 +96,10 @@ X-Auth-Token: {tokenId}
       "checksum": "f803c5c15bcf9a75935980a900a04584",
       "os_type": "linux"
     }
-  ]
+  ],
+  "schema": "/v2/schemas/images",
+  "first": "/v2/images?tag=_CLOUD_TYPE_NORMAL",
+  "next": "/v2/images?marker=057f9a69-4e4c-4025-8a69-fa248cd9db94&tag=_CLOUD_TYPE_NORMAL"
 }
 ```
 
@@ -124,27 +127,26 @@ X-Auth-Token: {tokenId}
 
 | 이름 | 종류 | 형식 | 설명 |
 |---|---|---|---|
-| image | Body | Object | 이미지 객체 |
-| images.status | Body | String | 이미지 상태 |
-| images.name | Body | String | 이미지 이름 |
-| images.tag | Body | String | 이미지 태그<br>`_AVAILABLE_` 태그를 삭제하면 콘솔에서는 조회되지 않으므로, 태그를 삭제하지 않도록 주의. |
-| images.container_format | Body | String | 이미지 컨테이너 포맷 |
-| images.created_at | Body | Datetime | 생성 시각 |
-| images.disk_format | Body | String | 이미지 디스크 포맷 |
-| images.updated_at | Body | Datetime | 수정 시각 |
-| images.min_disk | Body | Integer | 이미지 최소 디스크 요구량<br>`min_disk` 값보다 큰 볼륨에서만 사용할 수 있음 |
-| images.protected | Body | boolean | 이미지 보호 여부<br>`protected=true`인 경우 수정 및 삭제가 불가 |
-| images.id | Body | UUID | 이미지 ID |
-| images.min_ram | Body | Integer | 이미지 최소 메모리 요구량<br>`min_disk` 값보다 큰 인스턴스에서만 사용할 수 있음 |
-| images.checksum | Body | String | 이미지 내용의 해쉬 값<br>내부적으로 이미지 유효성 검증을 위해 사용 |
-| images.owner | Body | String | 이미지가 속한 테넌트 ID |
-| images.visibility | Body | Enum | 이미지 가시성<br>`public`, `private`, `shared` 중 하나 |
-| images.virtual_size | Body | Integer | 이미지 가상 크기 |
-| images.size | Body | Integer | 이미지 실제 크기 (바이트 단위) |
-| images.properties | Body | Object | 이미지 속성 객체<br>이미지 별 사용자 지정 속성을 키-값 쌍 형태로 기술 |
-| images.self | Body | URI | 이미지 경로 |
-| images.file | Body | String | 이미지 파일 경로 |
-| images.schema | Body | URI| 이미지 스키마 경로 |
+| image.status | Body | String | 이미지 상태 |
+| image.name | Body | String | 이미지 이름 |
+| image.tag | Body | String | 이미지 태그<br>`_AVAILABLE_` 태그를 삭제하면 콘솔에서는 조회되지 않으므로, 태그를 삭제하지 않도록 주의. |
+| image.container_format | Body | String | 이미지 컨테이너 포맷 |
+| image.created_at | Body | Datetime | 생성 시각 |
+| image.disk_format | Body | String | 이미지 디스크 포맷 |
+| image.updated_at | Body | Datetime | 수정 시각 |
+| image.min_disk | Body | Integer | 이미지 최소 디스크 요구량 (GB)<br>`min_disk` 값보다 큰 볼륨에서만 사용할 수 있음 |
+| image.protected | Body | boolean | 이미지 보호 여부<br>`protected=true`인 경우 수정 및 삭제가 불가 |
+| image.id | Body | UUID | 이미지 ID |
+| image.min_ram | Body | Integer | 이미지 최소 메모리 요구량 (MB)<br>`min_disk` 값보다 큰 인스턴스에서만 사용할 수 있음 |
+| image.checksum | Body | String | 이미지 내용의 해쉬 값<br>내부적으로 이미지 유효성 검증을 위해 사용 |
+| image.owner | Body | String | 이미지가 속한 테넌트 ID |
+| image.visibility | Body | Enum | 이미지 가시성<br>`public`, `private`, `shared` 중 하나 |
+| image.virtual_size | Body | Integer | 이미지 가상 크기 |
+| image.size | Body | Integer | 이미지 실제 크기 (Byte) |
+| image.properties | Body | Object | 이미지 속성 객체<br>이미지 별 사용자 지정 속성을 키-값 쌍 형태로 기술 |
+| image.self | Body | URI | 이미지 경로 |
+| image.file | Body | String | 이미지 파일 경로 |
+| image.schema | Body | URI| 이미지 스키마 경로 |
 
 <details><summary>예시</summary>
 <p>
@@ -511,8 +513,8 @@ X-Auth-Token: {tokenId}
 <details><summary>예시</summary>
 <p>
 
-json
-```
+
+```json
 {
     "created_at": "2013-09-20T19:22:19Z",
     "image_id": "a96be11e-8536-4910-92cb-de50aa19dfe6",
