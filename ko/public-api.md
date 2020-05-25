@@ -14,39 +14,39 @@ X-Auth-Token: {tokenId}
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 |---|---|---|---|---|
 | tokenId | Header | String | O | 토큰 ID |
-| limit | Query | Integer | - | 반환할 이미지의 갯수. (기본 값은 1000) |
-| marker | Query | UUID | - | 조회할 이미지 목록의 첫 번째 이미지 ID<br>정렬 방식에 따라 `marker`로 지정된 이미지부터 `limit` 만큼의 이미지 목록을 조회 |
+| limit | Query | Integer | - | 반환할 이미지 개수(기본값은 1000) |
+| marker | Query | UUID | - | 조회할 이미지 목록의 첫 번째 이미지 ID<br>정렬 방식에 따라 `marker`로 지정된 이미지부터 `limit`만큼의 이미지 목록을 조회 |
 | name | Query | String | - | 조회할 이미지 이름 |
-| visibility | Query | Enum | - | 조회할 이미지의 보여주기 속성<br>`public`, `private`, `shared` 중 하나의 값만 선택 가능<br>생략하면 모든 종류의 이미지 목록을 반환 |
+| visibility | Query | Enum | - | 조회할 이미지의 보여 주기 속성<br>`public`, `private`, `shared` 중 하나의 값만 선택 가능<br>생략하면 모든 종류의 이미지 목록 반환 |
 | owner | Query | String  | - | 조회할 이미지가 속한 테넌트 ID |
-| status | Query | Enum    | - | 조회할 이미지의 상태<br>`queued`: 이미지 컨버팅 중<br>`saving`: 이미지 업로드 중<br>`active`: 정상<br>`killed`: 시스템에 의해 이미지 삭제<br>`deleted`: 삭제된 이미지<br>`pending_delete`: 이미지 삭제 대기 중 |
-| size_min | Query | Integer | - | 조회할 이미지의 최소 크기 (Byte) |
-| size_max | Query | Integer | - | 조회할 이미지의 최대 크기 (Byte) |
-| sort_key | Query | String | - | 이미지 목록을 정렬할 때 사용할 속성<br>이미지의 모든 속성을 지정 가능. 기본 값은 `created_at` |
-| sort_dir | Query | Enum | - | 이미지 목록 정렬 방향<br>`asc` (오름차순), `desc` (내림차순) 중 하나의 값만 선택 가능. 기본 값은 내림차순 |
+| status | Query | Enum    | - | 조회할 이미지 상태<br>`queued`: 이미지 변환 중<br>`saving`: 이미지 업로드 중<br>`active`: 정상<br>`killed`: 시스템에서 이미지 삭제<br>`deleted`: 삭제된 이미지<br>`pending_delete`: 이미지 삭제 대기 중 |
+| size_min | Query | Integer | - | 조회할 이미지의 최소 크기(바이트) |
+| size_max | Query | Integer | - | 조회할 이미지의 최대 크기(바이트) |
+| sort_key | Query | String | - | 이미지 목록을 정렬할 때 사용할 속성<br>이미지의 모든 속성을 지정 가능, 기본값은 `created_at` |
+| sort_dir | Query | Enum | - | 이미지 목록 정렬 방향<br>`asc`(오름차순), `desc`(내림차순) 중 하나의 값만 선택 가능, 기본값은 내림차순 |
 
 #### 응답
 
 | 이름 | 종류 | 형식 | 설명 |
 |---|---|---|---|
 | images | Body | Array | 이미지 목록 객체 |
-| images.status | Body | String | 이미지 상태<br>`queued`, `saving`, `active`, `killed`, `deleted`, `pending_delete` 중 하나. |
+| images.status | Body | String | 이미지 상태<br>`queued`, `saving`, `active`, `killed`, `deleted`, `pending_delete` 중 하나 |
 | images.name | Body | String | 이미지 이름 |
-| images.tag | Body | String | 이미지 태그<br>`_AVAILABLE_` 태그를 삭제하면 콘솔에서는 조회되지 않으므로, 태그를 삭제하지 않도록 주의. |
+| images.tag | Body | String | 이미지 태그<br>`_AVAILABLE_` 태그를 삭제하면 콘솔에서는 조회되지 않으므로, 태그를 삭제하지 않도록 주의 |
 | images.container_format | Body | String | 이미지 컨테이너 포맷 |
 | images.created_at | Body | Datetime | 생성 시각 |
 | images.disk_format | Body | String | 이미지 디스크 포맷 |
 | images.updated_at | Body | Datetime | 수정 시각 |
-| images.min_disk | Body | Integer | 이미지 최소 디스크 요구량 (GB)<br>`min_disk` 값보다 큰 볼륨에서만 사용할 수 있음. |
-| images.protected | Body | Boolean | 이미지 보호 여부<br>`protected=true`인 경우 수정 및 삭제가 불가 |
+| images.min_disk | Body | Integer | 이미지 최소 디스크 요구량(GB)<br>`min_disk`값보다 큰 볼륨에서만 사용할 수 있음 |
+| images.protected | Body | Boolean | 이미지 보호 여부<br>`protected=true`인 경우 수정 및 삭제 불가 |
 | images.id | Body | UUID | 이미지 ID |
-| images.min_ram | Body | Integer | 이미지 최소 메모리 요구량 (MB)<br>`min_disk` 값보다 큰 인스턴스에서만 사용할 수 있음 |
-| images.checksum | Body | String | 이미지 내용 해쉬 값<br>내부적으로 이미지 유효성 검증을 위해 사용 |
+| images.min_ram | Body | Integer | 이미지 최소 메모리 요구량(MB)<br>`min_disk`값보다 큰 인스턴스에서만 사용할 수 있음 |
+| images.checksum | Body | String | 이미지 내용 해시값<br>내부적으로 이미지 유효성 검증을 위해 사용 |
 | images.owner | Body | String | 이미지가 속한 테넌트 ID |
 | images.visibility | Body | Enum | 이미지 가시성<br>`public`, `private`, `shared` 중 하나 |
 | images.virtual_size | Body | Integer | 이미지 가상 크기 |
-| images.size | Body | Integer | 이미지 실제 크기 (Byte) |
-| images.properties | Body | Object | 이미지 속성 객체<br>이미지 별 사용자 지정 속성을 키-값 쌍 형태로 기술 |
+| images.size | Body | Integer | 이미지 실제 크기(바이트) |
+| images.properties | Body | Object | 이미지 속성 객체<br>이미지별 사용자 지정 속성을 키-값 쌍 형태로 기술 |
 | images.self | Body | URI | 이미지 경로 |
 | images.file | Body | String | 이미지 파일 경로 |
 | images.schema | Body | URI | 이미지 스키마 경로 |
@@ -121,21 +121,21 @@ X-Auth-Token: {tokenId}
 |---|---|---|---|
 | image.status | Body | String | 이미지 상태 |
 | image.name | Body | String | 이미지 이름 |
-| image.tag | Body | String | 이미지 태그<br>`_AVAILABLE_` 태그를 삭제하면 콘솔에서는 조회되지 않으므로, 태그를 삭제하지 않도록 주의. |
+| image.tag | Body | String | 이미지 태그<br>`_AVAILABLE_` 태그를 삭제하면 콘솔에서는 조회되지 않으므로, 태그를 삭제하지 않도록 주의 |
 | image.container_format | Body | String | 이미지 컨테이너 포맷 |
 | image.created_at | Body | Datetime | 생성 시각 |
 | image.disk_format | Body | String | 이미지 디스크 포맷 |
 | image.updated_at | Body | Datetime | 수정 시각 |
-| image.min_disk | Body | Integer | 이미지 최소 디스크 요구량 (GB)<br>`min_disk` 값보다 큰 볼륨에서만 사용할 수 있음 |
+| image.min_disk | Body | Integer | 이미지 최소 디스크 요구량(GB)<br>`min_disk`값보다 큰 볼륨에서만 사용할 수 있음 |
 | image.protected | Body | boolean | 이미지 보호 여부<br>`protected=true`인 경우 수정 및 삭제가 불가 |
 | image.id | Body | UUID | 이미지 ID |
-| image.min_ram | Body | Integer | 이미지 최소 메모리 요구량 (MB)<br>`min_disk` 값보다 큰 인스턴스에서만 사용할 수 있음 |
-| image.checksum | Body | String | 이미지 내용의 해쉬 값<br>내부적으로 이미지 유효성 검증을 위해 사용 |
+| image.min_ram | Body | Integer | 이미지 최소 메모리 요구량(MB)<br>`min_disk`값보다 큰 인스턴스에서만 사용할 수 있음 |
+| image.checksum | Body | String | 이미지 내용의 해시값<br>내부적으로 이미지 유효성 검증을 위해 사용 |
 | image.owner | Body | String | 이미지가 속한 테넌트 ID |
 | image.visibility | Body | Enum | 이미지 가시성<br>`public`, `private`, `shared` 중 하나 |
 | image.virtual_size | Body | Integer | 이미지 가상 크기 |
-| image.size | Body | Integer | 이미지 실제 크기 (Byte) |
-| image.properties | Body | Object | 이미지 속성 객체<br>이미지 별 사용자 지정 속성을 키-값 쌍 형태로 기술 |
+| image.size | Body | Integer | 이미지 실제 크기(바이트) |
+| image.properties | Body | Object | 이미지 속성 객체<br>이미지별 사용자 지정 속성을 키-값 쌍 형태로 기술 |
 | image.self | Body | URI | 이미지 경로 |
 | image.file | Body | String | 이미지 파일 경로 |
 | image.schema | Body | URI| 이미지 스키마 경로 |
@@ -199,7 +199,6 @@ X-Auth-Token: {tokenId}
 #### 응답
 이 API는 응답 본문을 반환하지 않습니다.
 
-
 ---
 
 ## 이미지 태그
@@ -217,7 +216,7 @@ X-Auth-Token: {tokenId}
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 |---|---|---|---|---|
 | imageId | URL | UUID | O | 태그를 추가할 이미지 ID |
-| tag | URL | String | O | 추가할 태그 이름 (영문 기준 최대 255자) |
+| tag | URL | String | O | 추가할 태그 이름(영문 기준 최대 255자) |
 | tokenId | Header | String | O | 토큰 ID |
 
 #### 응답
@@ -250,12 +249,12 @@ X-Auth-Token: {tokenId}
 
 ## 이미지 공유
 
-이미지 공유를 통해 자신의 테넌트에 소속된 이미지를 다른 테넌트에 공유할 수 있습니다. 다음 두 단계를 거쳐 이미지를 공유합니다.
+이미지 공유를 통해 자신의 테넌트에 소속된 이미지를 다른 테넌트에 공유할 수 있습니다. 이미지 공유 방법은 다음과 같습니다.
 
-1. 이미지 가시성을 `shared`로 변경
-2. 공유받을 테넌트를 이미지의 맴버로 등록
+1. 이미지 가시성을 `shared`로 변경합니다.
+2. 공유받을 테넌트를 이미지의 맴버로 등록합니다.
 
-공유한 이미지는 공유 받은 테넌트에서 바로 사용 가능하지만 이미지 목록 조회에서는 표시되지 않습니다. **공유 받은 테넌트**에서 맴버 상태를 `active`로 변경하면 공유 받은 이미지가 조회됩니다.
+공유한 이미지는 공유받은 테넌트에서 바로 사용할 수 있지만 이미지 목록 조회에서는 표시되지 않습니다. **공유받은 테넌트**에서 맴버 상태를 `active`로 변경하면 공유받은 이미지가 조회됩니다.
 
 ### 가시성 변경
 
@@ -273,7 +272,7 @@ Content-Type: application/openstack-images-v2.1-json-patch
 | tokenId | Header | String | O | 토큰 ID |
 | op | Body | String | O | `replace`로 지정 |
 | path | Body | String | O | `/visibility`로 지정 |
-| value | Body | String | O | 변경할 가시성 값. `private` 또는 `shared`. |
+| value | Body | String | O | 변경할 가시성값, `private` 또는 `shared` |
 
 <details><summary>예시</summary>
 <p>
@@ -355,7 +354,7 @@ X-Auth-Token: {tokenId}
 ---
 
 ### 맴버 목록 보기
-지정한 이미지를 공유 받은 테넌트 목록을 조회합니다. 반드시 해당 이미지가 소속된 테넌트나 공유 받은 테넌트의 토큰으로 요청합니다.
+지정한 이미지를 공유받은 테넌트 목록을 조회합니다. 반드시 해당 이미지가 소속된 테넌트나 공유받은 테넌트의 토큰으로 요청합니다.
 
 ```
 GET /v2/images/{imageId}/members
@@ -379,7 +378,7 @@ X-Auth-Token: {tokenId}
 | members.image_id | Body | UUID | 공유한 이미지 ID |
 | members.member_id | Body | String | 이미지를 공유받은 테넌트 ID |
 | members.schema | Body | URI | 이미지 맴버 스키마 경로 |
-| members.status | Body | Enum | 이미지 맴버 상태. `pending`, `accepted` 중 하나. |
+| members.status | Body | Enum | 이미지 맴버 상태<br/>`pending`, `accepted` 중 하나 |
 | schema | Body | URI | 이미지 맴버 목록에 대한 스키마 경로 |
 
 <details><summary>예시</summary>
@@ -416,7 +415,7 @@ X-Auth-Token: {tokenId}
 
 ### 맴버 상세 보기
 
-지정한 이미지의 특정 맴버에 대한 상세 정보를 반환합니다. 반드시 해당 이미지가 소속된 테넌트나 공유 받은 테넌트의 토큰으로 요청합니다.
+지정한 이미지의 특정 맴버에 대한 상세 정보를 반환합니다. 반드시 해당 이미지가 소속된 테넌트나 공유받은 테넌트의 토큰으로 요청합니다.
 
 ```
 GET /v2/images/{imageId}/members/{memberId}
@@ -440,7 +439,7 @@ X-Auth-Token: {tokenId}
 | image_id | Body | UUID | 공유한 이미지 ID |
 | member_id | Body | String | 이미지를 공유받은 테넌트 ID |
 | schema | Body | URI | 이미지 맴버 스키마 경로 |
-| status | Body | Enum | 이미지 맴버 상태. `pending`, `accepted` 중 하나 |
+| status | Body | Enum | 이미지 맴버 상태<br/>`pending`, `accepted` 중 하나 |
 
 <details><summary>예시</summary>
 <p>
@@ -463,7 +462,7 @@ X-Auth-Token: {tokenId}
 
 ### 맴버 상태 변경
 
-공유받은 테넌트에서 공유 받은 이미지를 승인합니다. 이미지 공유를 승인하면 이미지 목록 조회에서도 해당 이미지가 조회됩니다. 반드시 공유 받은 테넌트의 토큰으로 요청합니다.
+공유받은 테넌트에서 공유받은 이미지를 승인합니다. 이미지 공유를 승인하면 이미지 목록 조회에서도 해당 이미지가 조회됩니다. 반드시 공유받은 테넌트의 토큰으로 요청합니다.
 
 ```
 PUT /v2/images/{imageId}/members/{memberId}
@@ -499,7 +498,7 @@ X-Auth-Token: {tokenId}
 | image_id | Body | UUID | 공유한 이미지 ID |
 | member_id | Body | String | 이미지를 공유받은 테넌트 ID |
 | schema | Body | URI | 이미지 맴버 스키마 경로 |
-| status | Body | Enum | 이미지 맴버 상태<br>`accpeted`,`pending`,`rejected` 중 하나. |
+| status | Body | Enum | 이미지 맴버 상태<br>`accpeted`,`pending`,`rejected` 중 하나 |
 | updated_at | Body | Datetime | 맴버 상태 수정 시각<br>`YYYY-MM-DDThh:mm:ssZ` 형식 |
 
 <details><summary>예시</summary>
@@ -524,7 +523,7 @@ X-Auth-Token: {tokenId}
 
 ### 맴버 삭제
 
-지정한 이미지의 맴버를 제거합니다. 공유를 취소할 때 사용합니다. 반드시 지정한 이미지의 소속된 테넌트의 토큰으로 요청해야 합니다.
+지정한 이미지의 맴버를 삭제합니다. 공유를 취소할 때 사용합니다. 반드시 지정한 이미지의 소속된 테넌트의 토큰으로 요청해야 합니다.
 
 ```
 DELETE /v2/images/{imageId}/members/{memberId}
