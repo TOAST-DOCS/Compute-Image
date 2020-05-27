@@ -1,70 +1,60 @@
-## Compute > Image > API v2 가이드
+﻿## Compute > Image > Public APIガイド
 
-API를 사용하려면 API 엔드포인트와 토큰 등이 필요합니다. [API 사용 준비](/Compute/Compute/ko/identity-api/)를 참고하여 API 사용에 필요한 정보를 준비합니다.
-
-이미지 API는 `image` 타입 엔드포인트를 이용합니다. 정확한 엔드포인트는 토큰 발급 응답의 `serviceCatalog`를 참조합니다.
-
-| 타입 | 리전 | 엔드포인트 |
-|---|---|---|
-| image | 한국(판교) 리전<br>일본 리전 | https://kr1-api-image.infrastructure.cloud.toast.com<br>https://jp1-api-image.infrastructure.cloud.toast.com |
-
-API 응답에 가이드에 명시되지 않은 필드가 노출될 수 있습니다. 이런 필드는 TOAST 내부 용도로 사용되며 사전 공지없이 변경될 수 있으므로 사용하지 않습니다.
-
-## 이미지
-### 이미지 목록 조회
+## イメージ
+### イメージリスト照会
 
 ```
 GET /v2/images
 X-Auth-Token: {tokenId}
 ```
 
-#### 요청
-이 API는 요청 본문을 요구하지 않습니다.
+#### リクエスト
+このAPIはリクエスト本文を要求しません。
 
-| 이름 | 종류 | 형식 | 필수 | 설명 |
+| 名前 | 種類 | 形式 | 必須 | 説明 |
 |---|---|---|---|---|
-| tokenId | Header | String | O | 토큰 ID |
-| limit | Query | Integer | - | 반환할 이미지 개수(기본값은 1000) |
-| marker | Query | UUID | - | 조회할 이미지 목록의 첫 번째 이미지 ID<br>정렬 방식에 따라 `marker`로 지정된 이미지부터 `limit`만큼의 이미지 목록을 조회 |
-| name | Query | String | - | 조회할 이미지 이름 |
-| visibility | Query | Enum | - | 조회할 이미지의 보여 주기 속성<br>`public`, `private`, `shared` 중 하나의 값만 선택 가능<br>생략하면 모든 종류의 이미지 목록 반환 |
-| owner | Query | String  | - | 조회할 이미지가 속한 테넌트 ID |
-| status | Query | Enum    | - | 조회할 이미지 상태<br>`queued`: 이미지 변환 중<br>`saving`: 이미지 업로드 중<br>`active`: 정상<br>`killed`: 시스템에서 이미지 삭제<br>`deleted`: 삭제된 이미지<br>`pending_delete`: 이미지 삭제 대기 중 |
-| size_min | Query | Integer | - | 조회할 이미지의 최소 크기(바이트) |
-| size_max | Query | Integer | - | 조회할 이미지의 최대 크기(바이트) |
-| sort_key | Query | String | - | 이미지 목록을 정렬할 때 사용할 속성<br>이미지의 모든 속성을 지정 가능, 기본값은 `created_at` |
-| sort_dir | Query | Enum | - | 이미지 목록 정렬 방향<br>`asc`(오름차순), `desc`(내림차순) 중 하나의 값만 선택 가능, 기본값은 내림차순 |
+| tokenId | Header | String | O | トークンID |
+| limit | Query | Integer | - | 返すイメージの個数。(基本値は1000) |
+| marker | Query | UUID | - | 照会するイメージリストの最初のイメージID<br>ソート方式に従って`marker`に指定されたイメージから`limit`分のイメージリストを照会 |
+| name | Query | String | - | 照会するイメージ名 |
+| visibility | Query | Enum | - | 照会するイメージの表示プロパティ<br>`public`, `private`、`shared`の中から1つの値のみ選択可能<br>省略するとすべての種類のイメージリストを返す |
+| owner | Query | String  | - | 照会するイメージが属しているテナントID |
+| status | Query | Enum    | - | 照会するイメージの状態<br>`queued`：イメージをコンバーティング中<br>`saving`：イメージをアップロード中<br>`active`：正常<br>`killed`：システムによってイメージ削除<br>`deleted`：削除されたイメージ<br>`pending_delete`：イメージ削除待機中 |
+| size_min | Query | Integer | - | 照会するイメージの最小サイズ(Byte) |
+| size_max | Query | Integer | - | 照会するイメージの最大サイズ(Byte) |
+| sort_key | Query | String | - | イメージリストをソートする時に使用するプロパティ<br>イメージのすべてのプロパティを指定可能。基本値は`created_at` |
+| sort_dir | Query | Enum | - | イメージリストのソート方向<br>`asc` (昇順)、`desc` (降順)のうち、1つの値のみ選択可能。基本値は降順 |
 
-#### 응답
+#### レスポンス
 
-| 이름 | 종류 | 형식 | 설명 |
+| 名前 | 種類 | 形式 | 説明 |
 |---|---|---|---|
-| images | Body | Array | 이미지 목록 객체 |
-| images.status | Body | String | 이미지 상태<br>`queued`, `saving`, `active`, `killed`, `deleted`, `pending_delete` 중 하나 |
-| images.name | Body | String | 이미지 이름 |
-| images.tag | Body | String | 이미지 태그<br>`_AVAILABLE_` 태그를 삭제하면 콘솔에서는 조회되지 않으므로, 태그를 삭제하지 않도록 주의 |
-| images.container_format | Body | String | 이미지 컨테이너 포맷 |
-| images.created_at | Body | Datetime | 생성 시각 |
-| images.disk_format | Body | String | 이미지 디스크 포맷 |
-| images.updated_at | Body | Datetime | 수정 시각 |
-| images.min_disk | Body | Integer | 이미지 최소 디스크 요구량(GB)<br>`min_disk`값보다 큰 볼륨에서만 사용할 수 있음 |
-| images.protected | Body | Boolean | 이미지 보호 여부<br>`protected=true`인 경우 수정 및 삭제 불가 |
-| images.id | Body | UUID | 이미지 ID |
-| images.min_ram | Body | Integer | 이미지 최소 메모리 요구량(MB)<br>`min_disk`값보다 큰 인스턴스에서만 사용할 수 있음 |
-| images.checksum | Body | String | 이미지 내용 해시값<br>내부적으로 이미지 유효성 검증을 위해 사용 |
-| images.owner | Body | String | 이미지가 속한 테넌트 ID |
-| images.visibility | Body | Enum | 이미지 가시성<br>`public`, `private`, `shared` 중 하나 |
-| images.virtual_size | Body | Integer | 이미지 가상 크기 |
-| images.size | Body | Integer | 이미지 실제 크기(바이트) |
-| images.properties | Body | Object | 이미지 속성 객체<br>이미지별 사용자 지정 속성을 키-값 쌍 형태로 기술 |
-| images.self | Body | URI | 이미지 경로 |
-| images.file | Body | String | 이미지 파일 경로 |
-| images.schema | Body | URI | 이미지 스키마 경로 |
-| schema | Body | URI | 이미지 목록 스키마 경로 |
-| first | Body | URI | 이미지 목록의 첫 번째 페이지에 해당하는 경로 |
-| next| Body | URI | 이미지 목록의 다음 페이지에 해당하는 경로 |
+| images | Body | Array | イメージリストオブジェクト |
+| images.status | Body | String | イメージの状態<br>`queued`、`saving`、`active`、`killed`、`deleted`、`pending_delete`のいずれか1つ。 |
+| images.name | Body | String | イメージの名前 |
+| images.tag | Body | String | イメージタグ<br>`_AVAILABLE_`タグを削除すると、コンソールでは照会できないため、タグを削除しないでください。 |
+| images.container_format | Body | String | イメージコンテナフォーマット |
+| images.created_at | Body | Datetime | 作成時刻 |
+| images.disk_format | Body | String | イメージディスクフォーマット |
+| images.updated_at | Body | Datetime | 修正時刻 |
+| images.min_disk | Body | Integer | イメージの最小ディスク要求量(GB)<br>`min_disk`の値より大きいボリュームでのみ使用できる。 |
+| images.protected | Body | Boolean | イメージの保護有無<br>`protected=true`の場合、修正および削除不可 |
+| images.id | Body | UUID | イメージID |
+| images.min_ram | Body | Integer | イメージ最小メモリ要求量(MB)<br>`min_disk`の値より大きいインスタンスでのみ使用できる |
+| images.checksum | Body | String | イメージ内容ハッシュ値<br>内部的にイメージの有効性を検証するために使用 |
+| images.owner | Body | String | イメージが属しているテナントID |
+| images.visibility | Body | Enum | イメージの可視性<br>`public`、`private`、`shared`のいずれか1つ。 |
+| images.virtual_size | Body | Integer | イメージの仮想サイズ |
+| images.size | Body | Integer | イメージの実際のサイズ(Byte) |
+| images.properties | Body | Object | イメージプロパティオブジェクト<br>イメージごとにユーザー指定プロパティをキーと値のペアで記述 |
+| images.self | Body | URI | イメージのパス |
+| images.file | Body | String | イメージファイルのパス |
+| images.schema | Body | URI | イメージスキーマのパス |
+| schema | Body | URI | イメージリストスキーマのパス |
+| first | Body | URI | イメージリストの最初のページに該当するパス |
+| next| Body | URI | イメージリストの次のページに該当するパス |
 
-<details><summary>예시</summary>
+<details><summary>例</summary>
 <p>
 
 ```json
@@ -100,8 +90,8 @@ X-Auth-Token: {tokenId}
     }
   ],
   "schema": "/v2/schemas/images",
-  "first": "/v2/images",
-  "next": "/v2/images?marker=057f9a69-4e4c-4025-8a69-fa248cd9db94"
+  "first": "/v2/images?tag=_CLOUD_TYPE_NORMAL",
+  "next": "/v2/images?marker=057f9a69-4e4c-4025-8a69-fa248cd9db94&tag=_CLOUD_TYPE_NORMAL"
 }
 ```
 
@@ -110,47 +100,47 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### 이미지 보기
+### イメージ表示
 
 ```
 GET /v2/images/{imageId}
 X-Auth-Token: {tokenId}
 ```
 
-#### 요청
-이 API는 요청 본문을 요구하지 않습니다.
+#### リクエスト
+このAPIはリクエスト本文を要求しません。
 
-| 이름 | 종류 | 형식 | 필수 | 설명 |
+| 名前 | 種類 | 形式 | 必須 | 説明 |
 |---|---|---|---|---|
-| imageId | URL | UUID | O | 조회할 이미지 ID |
-| tokenId | Header | String | O | 토큰 ID|
+| imageId | URL | UUID | O | 照会するイメージID |
+| tokenId | Header | String | O | トークンID|
 
-#### 응답
+#### レスポンス
 
-| 이름 | 종류 | 형식 | 설명 |
+| 名前 | 種類 | 形式 | 説明 |
 |---|---|---|---|
-| image.status | Body | String | 이미지 상태 |
-| image.name | Body | String | 이미지 이름 |
-| image.tag | Body | String | 이미지 태그<br>`_AVAILABLE_` 태그를 삭제하면 콘솔에서는 조회되지 않으므로, 태그를 삭제하지 않도록 주의 |
-| image.container_format | Body | String | 이미지 컨테이너 포맷 |
-| image.created_at | Body | Datetime | 생성 시각 |
-| image.disk_format | Body | String | 이미지 디스크 포맷 |
-| image.updated_at | Body | Datetime | 수정 시각 |
-| image.min_disk | Body | Integer | 이미지 최소 디스크 요구량(GB)<br>`min_disk`값보다 큰 볼륨에서만 사용할 수 있음 |
-| image.protected | Body | boolean | 이미지 보호 여부<br>`protected=true`인 경우 수정 및 삭제가 불가 |
-| image.id | Body | UUID | 이미지 ID |
-| image.min_ram | Body | Integer | 이미지 최소 메모리 요구량(MB)<br>`min_disk`값보다 큰 인스턴스에서만 사용할 수 있음 |
-| image.checksum | Body | String | 이미지 내용의 해시값<br>내부적으로 이미지 유효성 검증을 위해 사용 |
-| image.owner | Body | String | 이미지가 속한 테넌트 ID |
-| image.visibility | Body | Enum | 이미지 가시성<br>`public`, `private`, `shared` 중 하나 |
-| image.virtual_size | Body | Integer | 이미지 가상 크기 |
-| image.size | Body | Integer | 이미지 실제 크기(바이트) |
-| image.properties | Body | Object | 이미지 속성 객체<br>이미지별 사용자 지정 속성을 키-값 쌍 형태로 기술 |
-| image.self | Body | URI | 이미지 경로 |
-| image.file | Body | String | 이미지 파일 경로 |
-| image.schema | Body | URI| 이미지 스키마 경로 |
+| image.status | Body | String | イメージの状態 |
+| image.name | Body | String | イメージの名前 |
+| image.tag | Body | String | イメージタグ<br>`_AVAILABLE_`タグを削除すると、コンソールでは照会されないため、タグを削除しないでください。 |
+| image.container_format | Body | String | イメージコンテナフォーマット |
+| image.created_at | Body | Datetime | 作成時刻 |
+| image.disk_format | Body | String | イメージディスクフォーマット |
+| image.updated_at | Body | Datetime | 修正時刻 |
+| image.min_disk | Body | Integer | イメージ最小ディスク要求量(GB)<br>`min_disk`の値より大きいボリュームでのみ使用できる |
+| image.protected | Body | boolean | イメージ保護有無<br>`protected=true`の場合、修正および削除不可 |
+| image.id | Body | UUID | イメージID |
+| image.min_ram | Body | Integer | イメージ最小メモリ要求量(MB)<br>`min_disk`の値より大きいインスタンスでのみ使用できる |
+| image.checksum | Body | String | イメージ内容のハッシュ値<br>内部的にイメージの有効性を検証するために使用 |
+| image.owner | Body | String | イメージが属しているテナントID |
+| image.visibility | Body | Enum | イメージの可視性<br>`public`、`private`、`shared`のいずれか1つ。 |
+| image.virtual_size | Body | Integer | イメージの仮想サイズ |
+| image.size | Body | Integer | イメージの実際のサイズ(Byte) |
+| image.properties | Body | Object | イメージプロパティオブジェクト<br>イメージごとにユーザー指定プロパティをキーと値のペアで記述 |
+| image.self | Body | URI | イメージのパス |
+| image.file | Body | String | イメージファイルのパス |
+| image.schema | Body | URI | イメージスキーマのパス |
 
-<details><summary>예시</summary>
+<details><summary>例</summary>
 <p>
 
 ```json
@@ -189,53 +179,54 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### 이미지 삭제
+### イメージ削除
 
-가시성이 `public`인 이미지는 삭제할 수 없습니다.
+可視性が`public`のイメージは削除できません。
 
 ```
 DELETE /v2/images/{imageId}
 X-Auth-Token: {tokenId}
 ```
 
-#### 요청
-이 API는 요청 본문을 요구하지 않습니다.
+#### リクエスト
+このAPIはリクエスト本文を要求しません。
 
-| 이름 | 종류 | 형식 | 필수 | 설명 |
+| 名前 | 種類 | 形式 | 必須 | 説明 |
 |---|---|---|---|---|
-| imageId | URL | String | O | 삭제할 이미지 ID |
-| tokenId | Header | String | O | 토큰 ID |
+| imageId | URL | String | O | 削除するイメージID |
+| tokenId | Header | String | O | トークンID |
 
-#### 응답
-이 API는 응답 본문을 반환하지 않습니다.
+#### レスポンス
+このAPIはレスポンス本文を返しません。
+
 
 ---
 
-## 이미지 태그
-### 태그 추가하기
-지정한 이미지에 태그를 추가합니다.
+## イメージタグ
+### タグを追加する
+指定したイメージにタグを追加します。
 
 ```
 PUT /v2/images/{imageId}/tags/{tag}
 X-Auth-Token: {tokenId}
 ```
 
-#### 요청
-이 API는 요청 본문을 요구하지 않습니다.
+#### リクエスト
+このAPIはリクエスト本文を要求しません。
 
-| 이름 | 종류 | 형식 | 필수 | 설명 |
+| 名前 | 種類 | 形式 | 必須 | 説明 |
 |---|---|---|---|---|
-| imageId | URL | UUID | O | 태그를 추가할 이미지 ID |
-| tag | URL | String | O | 추가할 태그 이름 (영문 기준 최대 255자)<br><font color='red'>**(주의) `_`로 시작하는 태그는 사용할 수 없습니다**</font> |
-| tokenId | Header | String | O | 토큰 ID |
+| imageId | URL | UUID | O | タグを追加するイメージID |
+| tag | URL | String | O | 追加するタグ名(英字基準最大255文字) |
+| tokenId | Header | String | O | トークンID |
 
-#### 응답
-이 API는 응답 본문을 반환하지 않습니다.
+#### レスポンス
+このAPIはレスポンス本文を返しません。
 
 ---
 
-### 태그 제거하기
-지정한 이미지에서 태그를 제거합니다.
+### タグを削除する
+指定したイメージからタグを削除します。イメージを作成した時にデフォルトで追加されている`_AVAILABLE_`タグを削除するとコンソールで該当イメージが照会されません。
 
 
 ```
@@ -243,30 +234,30 @@ DELETE /v2/images/{imageId}/tags/{tag}
 X-Auth-Token: {tokenId}
 ```
 
-#### 요청
-이 API는 요청 본문을 요구하지 않습니다.
+#### リクエスト
+このAPIはリクエスト本文を要求しません。
 
-| 이름 | 종류 | 형식 | 필수 | 설명 |
+| 名前 | 種類 | 形式 | 必須 | 説明 |
 |---|---|---|---|---|
-| imageId | URL | UUID | O | 태그를 제거할 이미지 ID |
-| tag | URL | String | O | 제거할 태그 이름 |
-| tokenId | Header | String | O | 토큰 ID |
+| imageId | URL | UUID | O | タグを削除するイメージID |
+| tag | URL | String | O | 削除するタグ名 |
+| tokenId | Header | String | O | トークンID |
 
-#### 응답
-이 API는 응답 본문을 반환하지 않습니다.
+#### レスポンス
+このAPIはレスポンス本文を返しません。
 
 ---
 
-## 이미지 공유
+## イメージ共有
 
-이미지 공유를 통해 자신의 테넌트에 소속된 이미지를 다른 테넌트에 공유할 수 있습니다. 이미지 공유 방법은 다음과 같습니다.
+イメージ共有を通して、自分のテナントに属しているイメージを他のテナントに共有できます。次の2段階によりイメージを共有します。
 
-1. 이미지 가시성을 `shared`로 변경합니다.
-2. 공유받을 테넌트를 이미지의 맴버로 등록합니다.
+1. イメージの可視性を`shared`に変更
+2. 共有を受けるテナントをイメージのメンバーに登録
 
-공유한 이미지는 공유받은 테넌트에서 바로 사용할 수 있지만 이미지 목록 조회에서는 표시되지 않습니다. **공유받은 테넌트**에서 맴버 상태를 `active`로 변경하면 공유받은 이미지가 조회됩니다.
+共有したイメージは共有されたテナントですぐに使用できますが、イメージリスト照会では表示されません。**共有されたテナント**でメンバーの状態を`active`に変更すると、共有されたイメージが照会されます。
 
-### 가시성 변경
+### 可視性の変更
 
 ```
 PATCH /v2/images/{imageId}
@@ -274,17 +265,17 @@ X-Auth-Token: {tokenId}
 Content-Type: application/openstack-images-v2.1-json-patch
 ```
 
-#### 요청
+#### リクエスト
 
-| 이름 | 종류 | 형식 | 필수 | 설명 |
+| 名前 | 種類 | 形式 | 必須 | 説明 |
 |---|---|---|---|---|
-| imageId | URL | UUID | O | 공유할 이미지 ID |
-| tokenId | Header | String | O | 토큰 ID |
-| op | Body | String | O | `replace`로 지정 |
-| path | Body | String | O | `/visibility`로 지정 |
-| value | Body | String | O | 변경할 가시성값, `private` 또는 `shared` |
+| imageId | URL | UUID | O | 共有するイメージID |
+| tokenId | Header | String | O | トークンID |
+| op | Body | String | O | `replace`に指定 |
+| path | Body | String | O | `/visibility`に指定 |
+| value | Body | String | O | 変更する可視性の値。 `private`または`shared`。 |
 
-<details><summary>예시</summary>
+<details><summary>例</summary>
 <p>
 
 ```json
@@ -300,31 +291,29 @@ Content-Type: application/openstack-images-v2.1-json-patch
 </p>
 </details>
 
-#### 응답
+#### レスポンス
 
-이미지 보기와 동일한 응답을 반환합니다.
+イメージ表示と同じレスポンスを返します。
 
 ---
 
-### 맴버 추가
-공유받을 테넌트를 지정한 이미지의 맴버로 등록합니다.
+### メンバー追加
+共有を受けるテナントを、指定したイメージのメンバーに登録します。
 
 ```
 POST /v2/images/{imageId}/members
 X-Auth-Token: {tokenId}
 ```
 
-> 한 이미지의 멤버 최대 갯수는 127개로 제한됩니다.
+#### リクエスト
 
-#### 요청
-
-| 이름 | 종류 | 형식 | 필수 | 설명 |
+| 名前 | 種類 | 形式 | 必須 | 説明 |
 |---|---|---|---|---|
-| imageId | URL | UUID | O | 공유할 이미지 ID |
-| tokenId | Header | String | O | 토큰 ID |
-| member | Body | String | O | 공유받을 테넌트 ID |
+| imageId | URL | UUID | O | 共有するイメージID |
+| tokenId | Header | String | O | トークンID |
+| member | Body | String | O | 共有を受けるテナントID |
 
-<details><summary>예시</summary>
+<details><summary>例</summary>
 <p>
 
 ```
@@ -336,17 +325,17 @@ X-Auth-Token: {tokenId}
 </p>
 </details>
 
-#### 응답
+#### レスポンス
 
-| 이름 | 종류 | 형식 | 설명 |
+| 名前 | 種類 | 形式 | 説明 |
 |---|---|---|---|
-| created_at | Body | Datetime | 맴버 생성 시각<br>`YYYY-MM-DDThh:mm:ssZ` 형식 |
-| image_id | Body | UUID | 공유한 이미지 ID |
-| member_id | Body | String | 이미지를 공유받은 테넌트 ID |
-| schema | Body | URI | 이미지 맴버에 대한 스키마 경로 |
-| status | Body | Enum | 이미지 맴버 상태<br>`pending`, `accepted` 중 하나 |
+| created_at | Body | Datetime | メンバー作成日時<br>`YYYY-MM-DDThh:mm:ssZ`の形式 |
+| image_id | Body | UUID | 共有したイメージID |
+| member_id | Body | String | イメージを共有されたテナントID |
+| schema | Body | URI | イメージメンバーのスキーマパス |
+| status | Body | Enum | イメージメンバーの状態<br>`pending`、`accepted`のいずれか |
 
-<details><summary>예시</summary>
+<details><summary>例</summary>
 <p>
 
 ```json
@@ -365,35 +354,35 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### 맴버 목록 보기
-지정한 이미지를 공유받은 테넌트 목록을 조회합니다. 반드시 해당 이미지가 소속된 테넌트나 공유받은 테넌트의 토큰으로 요청합니다.
+### メンバーリスト表示
+指定したイメージを共有されたテナントリストを照会します。必ず該当イメージが属しているテナントや共有されたテナントのトークンでリクエストします。
 
 ```
 GET /v2/images/{imageId}/members
 X-Auth-Token: {tokenId}
 ```
 
-#### 요청
-이 API는 요청 본문을 요구하지 않습니다.
+#### リクエスト
+このAPIはリクエスト本文を要求しません。
 
-| 이름 | 종류 | 형식 | 필수 | 설명 |
+| 名前 | 種類 | 形式 | 必須 | 説明 |
 |---|---|---|---|---|
-| imageId | URL | UUID | O | 이미지 ID |
-| tokenId | Header | String | O | 토큰 ID |
+| imageId | URL | UUID | O | イメージID |
+| tokenId | Header | String | O | トークンID |
 
-#### 응답
+#### レスポンス
 
-| 이름 | 종류 | 형식 | 설명 |
+| 名前 | 種類 | 形式 | 説明 |
 |---|---|---|---|
-| members | Body | Object | 맴버 객체 목록 |
-| members.created_at | Body | Datetime | 맴버 생성 시각 `YYYY-MM-DDThh:mm:ssZ` 형식       |
-| members.image_id | Body | UUID | 공유한 이미지 ID |
-| members.member_id | Body | String | 이미지를 공유받은 테넌트 ID |
-| members.schema | Body | URI | 이미지 맴버 스키마 경로 |
-| members.status | Body | Enum | 이미지 맴버 상태<br/>`pending`, `accepted` 중 하나 |
-| schema | Body | URI | 이미지 맴버 목록에 대한 스키마 경로 |
+| members | Body | Object | メンバーオブジェクトリスト |
+| members.created_at | Body | Datetime | メンバー作成日時`YYYY-MM-DDThh:mm:ssZ`の形式  |
+| members.image_id | Body | UUID | 共有したイメージID |
+| members.member_id | Body | String | イメージを共有されたテナントID |
+| members.schema | Body | URI | イメージメンバースキーマのパス |
+| members.status | Body | Enum | イメージメンバーの状態。 `pending`、`accepted`のいずれか。 |
+| schema | Body | URI | イメージメンバーリストのスキーマパス |
 
-<details><summary>예시</summary>
+<details><summary>例</summary>
 <p>
 
 ```json
@@ -425,35 +414,35 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### 맴버 상세 보기
+### メンバー詳細表示
 
-지정한 이미지의 특정 맴버에 대한 상세 정보를 반환합니다. 반드시 해당 이미지가 소속된 테넌트나 공유받은 테넌트의 토큰으로 요청합니다.
+指定したイメージの特定メンバーについての詳細情報を返します。必ず該当イメージが属しているテナントや、共有を受けたテナントのトークンでリクエストします。
 
 ```
 GET /v2/images/{imageId}/members/{memberId}
 X-Auth-Token: {tokenId}
 ```
 
-#### 요청
-이 API는 요청 본문을 요구하지 않습니다.
+#### リクエスト
+このAPIはリクエスト本文を要求しません。
 
-| 이름 | 종류 | 형식 | 필수 | 설명 |
+| 名前 | 種類 | 形式 | 必須 | 説明 |
 |---|---|---|---|---|
-| imageId | URL | UUID | O | 이미지 ID |
-| memberId | URL | String | O | 맴버 ID |
-| tokenId | Header | String | O | 토큰 ID |
+| imageId | URL | UUID | O | イメージID |
+| memberId | URL | String | O | メンバーID |
+| tokenId | Header | String | O | トークンID |
 
-#### 응답
+#### レスポンス
 
-| 이름 | 종류 | 형식 | 설명 |
+| 名前 | 種類 | 形式 | 説明 |
 |---|---|---|---|
-| created_at | Body | Datetime | 맴버 생성 시각 `YYYY-MM-DDThh:mm:ssZ` 형식 |
-| image_id | Body | UUID | 공유한 이미지 ID |
-| member_id | Body | String | 이미지를 공유받은 테넌트 ID |
-| schema | Body | URI | 이미지 맴버 스키마 경로 |
-| status | Body | Enum | 이미지 맴버 상태<br/>`pending`, `accepted` 중 하나 |
+| created_at | Body | Datetime | メンバー作成日時`YYYY-MM-DDThh:mm:ssZ`の形式 |
+| image_id | Body | UUID | 共有したイメージID |
+| member_id | Body | String | イメージを共有されたテナントID |
+| schema | Body | URI | イメージメンバースキーマのパス |
+| status | Body | Enum | イメージメンバーの状態。 `pending`、`accepted`のいずれか。 |
 
-<details><summary>예시</summary>
+<details><summary>例</summary>
 <p>
 
 ```json
@@ -472,25 +461,25 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### 맴버 상태 변경
+### メンバーの状態変更
 
-공유받은 테넌트에서 공유받은 이미지를 승인합니다. 이미지 공유를 승인하면 이미지 목록 조회에서도 해당 이미지가 조회됩니다. 반드시 공유받은 테넌트의 토큰으로 요청합니다.
+共有を受けたテナントで、共有されたイメージを承認します。イメージの共有を承認すると、イメージリスト照会でも該当イメージが照会されます。必ず共有を受けたテナントのトークンでリクエストします。
 
 ```
 PUT /v2/images/{imageId}/members/{memberId}
 X-Auth-Token: {tokenId}
 ```
 
-#### 요청
+#### リクエスト
 
-| 이름 | 종류 | 형식 | 필수 | 설명 |
+| 名前 | 種類 | 形式 | 必須 | 説明 |
 |---|---|---|---|---|
-| imageId | URL | UUID | O | 이미지 ID |
-| memberId | URL | String | O | 맴버 ID |
-| tokenId | Header | String | O | 토큰 ID |
-| status  | Body | Enum | O | `accepted`, `pending`, `rejected` 중 하나 |
+| imageId | URL | UUID | O | イメージID |
+| memberId | URL | String | O | メンバーID |
+| tokenId | Header | String | O | トークンID |
+| status  | Body | Enum | O | `accepted`, `pending`、`rejected`のいずれか。 |
 
-<details><summary>예시</summary>
+<details><summary>例</summary>
 <p>
 
 ```json
@@ -502,18 +491,18 @@ X-Auth-Token: {tokenId}
 </p>
 </details>
 
-#### 응답
+#### レスポンス
 
-| 이름 | 종류 | 유형 | 설명 |
+| 名前 | 種類 | タイプ | 説明 |
 |---|---|---|---|
-| created_at | Body | Datetime | 맴버 생성 시각<br>`YYYY-MM-DDThh:mm:ssZ` 형식 |
-| image_id | Body | UUID | 공유한 이미지 ID |
-| member_id | Body | String | 이미지를 공유받은 테넌트 ID |
-| schema | Body | URI | 이미지 맴버 스키마 경로 |
-| status | Body | Enum | 이미지 맴버 상태<br>`accpeted`,`pending`,`rejected` 중 하나 |
-| updated_at | Body | Datetime | 맴버 상태 수정 시각<br>`YYYY-MM-DDThh:mm:ssZ` 형식 |
+| created_at | Body | Datetime | メンバー作成日時<br>`YYYY-MM-DDThh:mm:ssZ`形式 |
+| image_id | Body | UUID | 共有したイメージID |
+| member_id | Body | String | イメージの共有を受けたテナントID |
+| schema | Body | URI | イメージメンバースキーマのパス |
+| status | Body | Enum | イメージメンバーの状態<br>`accpeted`、`pending`、`rejected`のうち、いずれか1つ。 |
+| updated_at | Body | Datetime | メンバー状態の修正日時<br>`YYYY-MM-DDThh:mm:ssZ`形式 |
 
-<details><summary>예시</summary>
+<details><summary>例</summary>
 <p>
 
 
@@ -533,23 +522,23 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### 맴버 삭제
+### メンバーの削除
 
-지정한 이미지의 맴버를 삭제합니다. 공유를 취소할 때 사용합니다. 반드시 지정한 이미지의 소속된 테넌트의 토큰으로 요청해야 합니다.
+指定したイメージのメンバーを削除します。共有をキャンセルする時に使用します。必ず指定したイメージが属しているテナントのトークンでリクエストする必要があります。
 
 ```
 DELETE /v2/images/{imageId}/members/{memberId}
 X-Auth-Token: {tokenId}
 ```
 
-#### 요청
-이 API는 요청 본문을 요구하지 않습니다.
+#### リクエスト
+このAPIはリクエスト本文を要求しません。
 
-| 이름 | 종류 | 형식 | 필수 | 설명 |
+| 名前 | 種類 | 形式 | 必須 | 説明 |
 |---|---|---|---|---|
-| imageId | URL | UUID | O | 이미지 ID |
-| memberId | URL | String | O | 맴버 ID |
-| tokenId | Header | String | O | 토큰 ID |
+| imageId | URL | UUID | O | イメージID |
+| memberId | URL | String | O | メンバーID |
+| tokenId | Header | String | O | トークンID |
 
-#### 응답
-이 API는 응답 본문을 반환하지 않습니다.
+#### レスポンス
+このAPIはレスポンス本文を返しません。
