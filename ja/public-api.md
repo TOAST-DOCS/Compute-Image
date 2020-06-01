@@ -1,4 +1,4 @@
-﻿## Compute > Image > Public APIガイド
+## Compute > Image > Public APIガイド
 
 ## イメージ
 ### イメージリスト照会
