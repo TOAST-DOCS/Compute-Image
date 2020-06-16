@@ -1,4 +1,14 @@
-## Compute > Image > Public API 가이드
+## Compute > Image > API v2 가이드
+
+API를 사용하려면 API 엔드포인트와 토큰 등이 필요합니다. [API 사용 준비](/Compute/Compute/ko/identity-api/)를 참고하여 API 사용에 필요한 정보를 준비합니다.
+
+이미지 API는 `image` 타입 엔드포인트를 이용합니다. 정확한 엔드포인트는 토큰 발급 응답의 `serviceCatalog`를 참조합니다.
+
+| 타입 | 리전 | 엔드포인트 |
+|---|---|---|
+| image | 한국(판교) 리전<br>일본 리전 | https://kr1-api-image.infrastructure.cloud.toast.com<br>https://jp1-api-image.infrastructure.cloud.toast.com |
+
+API 응답에 가이드에 명시되지 않은 필드가 나타날 수 있습니다. 이런 필드는 TOAST 내부 용도로 사용되며 사전 공지 없이 변경될 수 있으므로 사용하지 않습니다.
 
 ## 이미지
 ### 이미지 목록 조회
@@ -90,8 +100,8 @@ X-Auth-Token: {tokenId}
     }
   ],
   "schema": "/v2/schemas/images",
-  "first": "/v2/images?tag=_CLOUD_TYPE_NORMAL",
-  "next": "/v2/images?marker=057f9a69-4e4c-4025-8a69-fa248cd9db94&tag=_CLOUD_TYPE_NORMAL"
+  "first": "/v2/images",
+  "next": "/v2/images?marker=057f9a69-4e4c-4025-8a69-fa248cd9db94"
 }
 ```
 
@@ -216,7 +226,7 @@ X-Auth-Token: {tokenId}
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 |---|---|---|---|---|
 | imageId | URL | UUID | O | 태그를 추가할 이미지 ID |
-| tag | URL | String | O | 추가할 태그 이름(영문 기준 최대 255자) |
+| tag | URL | String | O | 추가할 태그 이름(영문 기준 최대 255자)<br><font color='red'>**(주의) `_`로 시작하는 태그는 사용할 수 없습니다**</font> |
 | tokenId | Header | String | O | 토큰 ID |
 
 #### 응답
@@ -225,7 +235,7 @@ X-Auth-Token: {tokenId}
 ---
 
 ### 태그 제거하기
-지정한 이미지에서 태그를 제거합니다. 이미지를 생성하면 기본적으로 추가되어 있는 `_AVAILABLE_` 태그를 삭제하면 콘솔에서 해당 이미지가 조회되지 않습니다.
+지정한 이미지에서 태그를 제거합니다.
 
 
 ```
@@ -303,6 +313,8 @@ Content-Type: application/openstack-images-v2.1-json-patch
 POST /v2/images/{imageId}/members
 X-Auth-Token: {tokenId}
 ```
+
+> 한 이미지의 멤버 최대 개수는 127개로 제한됩니다.
 
 #### 요청
 
