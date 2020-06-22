@@ -1,4 +1,14 @@
-## Compute > Image > Public APIガイド
+## Compute > Image > API v2ガイド
+
+APIを使用するには、APIエンドポイントとトークンなどが必要です。 [API使用準備](/Compute/Compute/ko/identity-api/)を参照してAPIを使用するために必要な情報を準備します。
+
+イメージAPIは、`image`タイプエンドポイントを利用します。正確なエンドポイントはトークン発行レスポンスの`serviceCatalog`を参照します。
+
+| タイプ | リージョン | エンドポイント |
+|---|---|---|
+| image | 韓国(パンギョ)リージョン<br>日本リージョン | https://kr1-api-image.infrastructure.cloud.toast.com<br>https://jp1-api-image.infrastructure.cloud.toast.com |
+
+APIレスポンスにガイドに明示されていないフィールドが表示される場合があります。それらのフィールドは、TOAST内部用途で使用され、事前に告知せずに変更する場合があるため使用しないでください。
 
 ## イメージ
 ### イメージリスト照会
@@ -90,8 +100,8 @@ X-Auth-Token: {tokenId}
     }
   ],
   "schema": "/v2/schemas/images",
-  "first": "/v2/images?tag=_CLOUD_TYPE_NORMAL",
-  "next": "/v2/images?marker=057f9a69-4e4c-4025-8a69-fa248cd9db94&tag=_CLOUD_TYPE_NORMAL"
+  "first": "/v2/images",
+  "next": "/v2/images?marker=057f9a69-4e4c-4025-8a69-fa248cd9db94"
 }
 ```
 
@@ -217,7 +227,7 @@ X-Auth-Token: {tokenId}
 | 名前 | 種類 | 形式 | 必須 | 説明 |
 |---|---|---|---|---|
 | imageId | URL | UUID | O | タグを追加するイメージID |
-| tag | URL | String | O | 追加するタグ名(英字基準最大255文字) |
+| tag | URL | String | O | 追加するタグ名(英字基準最大255文字)<br><font color='red'>**(注意) `_`で始まるタグは使用できません。**</font> |
 | tokenId | Header | String | O | トークンID |
 
 #### レスポンス
@@ -226,7 +236,7 @@ X-Auth-Token: {tokenId}
 ---
 
 ### タグを削除する
-指定したイメージからタグを削除します。イメージを作成した時にデフォルトで追加されている`_AVAILABLE_`タグを削除するとコンソールで該当イメージが照会されません。
+指定したイメージからタグを削除します。
 
 
 ```
@@ -305,6 +315,8 @@ POST /v2/images/{imageId}/members
 X-Auth-Token: {tokenId}
 ```
 
+> 1つのイメージの最大メンバー数は127に制限されます。
+
 #### リクエスト
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
@@ -375,7 +387,7 @@ X-Auth-Token: {tokenId}
 | 名前 | 種類 | 形式 | 説明 |
 |---|---|---|---|
 | members | Body | Object | メンバーオブジェクトリスト |
-| members.created_at | Body | Datetime | メンバー作成日時`YYYY-MM-DDThh:mm:ssZ`の形式  |
+| members.created_at | Body | Datetime | メンバー作成日時`YYYY-MM-DDThh:mm:ssZ`の形式 |
 | members.image_id | Body | UUID | 共有したイメージID |
 | members.member_id | Body | String | イメージを共有されたテナントID |
 | members.schema | Body | URI | イメージメンバースキーマのパス |
