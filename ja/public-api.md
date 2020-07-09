@@ -24,7 +24,7 @@ X-Auth-Token: {tokenId}
 | 名前 | 種類 | 形式 | 必須 | 説明 |
 |---|---|---|---|---|
 | tokenId | Header | String | O | トークンID |
-| limit | Query | Integer | - | 返すイメージの個数。(基本値は1000) |
+| limit | Query | Integer | - | 返すイメージの個数。(基本値は20) |
 | marker | Query | UUID | - | 照会するイメージリストの最初のイメージID<br>ソート方式に従って`marker`に指定されたイメージから`limit`分のイメージリストを照会 |
 | name | Query | String | - | 照会するイメージ名 |
 | visibility | Query | Enum | - | 照会するイメージの表示プロパティ<br>`public`, `private`、`shared`の中から1つの値のみ選択可能<br>省略するとすべての種類のイメージリストを返す |
