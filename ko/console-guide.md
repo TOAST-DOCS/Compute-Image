@@ -29,18 +29,18 @@ Windows 이미지를 생성하려면 하드웨어와 사용자에 종속된 정�
 
 ### 원본 인스턴스의 이미지 버전이 2020. 08. 18.이후 인 경우.
 Windows 인스턴스에 접속한 후 **Powershell**을 관리자 권한으로 실행합니다.
-![[그림 1 Powershell 실행]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep1.PNG)
+![[그림 1 Powershell 실행]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep1.png)
 
 Powershell 창이 뜨면, 아래 명령을 실행합니다.
 
     ToastSysprep
 
-![[그림 2 ToastSysprep 실행]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep2.PNG)
+![[그림 2 ToastSysprep 실행]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep2.png)
 > [참고]
 ToastSysprep은 TOAST에서 제공하는 Sysprep을 간편하게 사용할 수 있는 명령어 입니다.
 
 **Y** 키를 눌러 작업을 진행 합니다.
-![[그림 3 ToastSysprep 진행]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep3.PNG)
+![[그림 3 ToastSysprep 진행]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep3.png)
 
 Sysprep이 실행되면 Windows 인스턴스는 자동으로 종료됩니다. TOAST 콘솔에서 Windows 인스턴스의 종료를 확인하고, [이미지 생성](./console-guide/#_1) 기능으로 사용자 Windows 이미지를 생성합니다.
 
