@@ -27,6 +27,25 @@ Windows 인스턴스의 이미지를 생성하려면 Sysprep을 이용하여 이
 
 Windows 이미지를 생성하려면 하드웨어와 사용자에 종속된 정보를 제거하여 인스턴스 생성에 사용할 수 있도록 이미지 초기화 작업이 필요합니다. 이미지 초기화는 Microsoft에서 Windows OS를 배포하기 위해 제공하는 시스템 준비 유틸리티인 Sysprep에서 실행할 수 있습니다.
 
+### 원본 인스턴스의 이미지 버전이 2020. 08. 18.이후 인 경우.
+Windows 인스턴스에 접속한 후 **Powershell**을 관리자 권한으로 실행합니다.
+![[그림 1 Powershell 실행]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep1.PNG)
+
+Powershell 창이 뜨면, 아래 명령을 실행합니다.
+
+    ToastSysprep
+
+![[그림 2 ToastSysprep 실행]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep2.PNG)
+> [참고]
+ToastSysprep은 TOAST에서 제공하는 Sysprep을 간편하게 사용할 수 있는 명령어 입니다.
+
+**Y** 키를 눌러 작업을 진행 합니다.
+![[그림 3 ToastSysprep 진행]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep3.PNG)
+
+Sysprep이 실행되면 Windows 인스턴스는 자동으로 종료됩니다. TOAST 콘솔에서 Windows 인스턴스의 종료를 확인하고, [이미지 생성](./console-guide/#_1) 기능으로 사용자 Windows 이미지를 생성합니다.
+
+### 원본 인스턴스의 이미지 버전이 2020. 08. 18.이전 인 경우.
+
 먼저 Windows 인스턴스에 접속한 후 **앱**에서 **명령 프롬프트**를 마우스 오른쪽 버튼으로 클릭하고 **관리자 권한으로 실행**을 클릭합니다.
 ![[그림 1 명령 프롬프트 실행]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/001_170524_800px.PNG)
 
