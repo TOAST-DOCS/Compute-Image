@@ -1,9 +1,5 @@
 ## Compute > Image > 콘솔 사용 가이드
 
-## 동영상 가이드
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/lZK8NDDHSuE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 ## 이미지 생성
 
 이미지는 인스턴스의 기본 디스크에서 만들 수 있습니다. u2 타입의 인스턴스를 제외한 t2, m2, c2, r2, x1 타입의 인스턴스는 실행 중에 이미지 생성을 지원하지만, 데이터 정합성을 보장하지 않습니다. u2 타입의 인스턴스는 종료 상태의 인스턴스만 이미지 생성이 가능합니다.
