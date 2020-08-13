@@ -6,7 +6,7 @@
 
 ## 이미지 생성
 
-이미지는 인스턴스의 기본 디스크에서 만들 수 있습니다. u2 타입의 인스턴스를 제외한 t2, m2, c2, r2, x1 타입의 인스턴스는 실행 중에 이미지 생성을 지원하지만, 데이터 정합성을 보장하지 않습니다. u2 타입의 인스턴스는 종료 상태의 인스턴스만 이미지 생성이 가능합니다.
+이미지는 인스턴스의 기본 디스크에서 만들 수 있습니다. u2 타입의 인스턴스를 제외한 t2, m2, c2, r2, x1 타입의 인스턴스에서는 실행 중에도 이미지를 생성할 수 있지만, 데이터 정합성은 보장하지 않습니다. u2 타입 인스턴스에서는 종료 상태일 때만 이미지를 생성할 수 있습니다.
 
 Windows 인스턴스의 이미지를 생성하려면 Sysprep을 이용하여 이미지 생성을 준비한 다음 인스턴스를 종료하는 것을 권장합니다. 자세한 sysprep 사용 방법은 [Windows Sysprep 가이드](#windows-sysprep)를 참고합니다.
 
@@ -27,6 +27,25 @@ Windows 인스턴스의 이미지를 생성하려면 Sysprep을 이용하여 이
 
 Windows 이미지를 생성하려면 하드웨어와 사용자에 종속된 정보를 제거하여 인스턴스 생성에 사용할 수 있도록 이미지 초기화 작업이 필요합니다. 이미지 초기화는 Microsoft에서 Windows OS를 배포하기 위해 제공하는 시스템 준비 유틸리티인 Sysprep에서 실행할 수 있습니다.
 
+### 원본 인스턴스의 이미지 버전이 2020. 08. 18. 이후인 경우
+Windows 인스턴스에 접속한 후 **PowerShell**을 관리자 권한으로 실행합니다.
+![[그림 1 Powershell 실행]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep1.png)
+
+PowerShell 창이 나타나면 아래 명령을 실행합니다.
+
+    ToastSysprep
+
+![[그림 2 ToastSysprep 실행]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep2.png)
+> [참고]
+ToastSysprep은 TOAST에서 제공하는 Sysprep을 간편하게 사용할 수 있는 명령어입니다.
+
+**Y** 키를 눌러 작업을 진행합니다.
+![[그림 3 ToastSysprep 진행]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep3.png)
+
+Sysprep이 실행되면 Windows 인스턴스는 자동으로 종료됩니다. TOAST 콘솔에서 Windows 인스턴스의 종료를 확인하고, [이미지 생성](./console-guide/#_1) 기능으로 사용자 Windows 이미지를 생성합니다.
+
+### 원본 인스턴스의 이미지 버전이 2020. 08. 18. 이전인 경우
+
 먼저 Windows 인스턴스에 접속한 후 **앱**에서 **명령 프롬프트**를 마우스 오른쪽 버튼으로 클릭하고 **관리자 권한으로 실행**을 클릭합니다.
 ![[그림 1 명령 프롬프트 실행]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/001_170524_800px.PNG)
 
@@ -39,6 +58,8 @@ Windows 이미지를 생성하려면 하드웨어와 사용자에 종속된 정�
 ![[그림 2 Sysprep 실행]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/002_170524_800px.PNG)
 
 Sysprep이 실행되면 Windows 인스턴스는 자동으로 종료됩니다. TOAST 콘솔에서 Windows 인스턴스의 종료를 확인하고, [이미지 생성](./console-guide/#_1) 기능으로 사용자 Windows 이미지를 생성합니다.
+
+Sysprep을 이용하여 Windows 인스턴스를 초기화하면 비밀번호가 공백으로 변경되어 로그인할 수 없습니다. 이미지 생성 기능을 이용할 때, **이미지로 생성되는 Windows 비밀번호를 초기화합니다.** 옵션을 선택해 Windows 인스턴스의 비밀번호를 자동으로 초기화하는 것이 좋습니다. 초기화된 비밀번호는 인스턴스 접속 정보에서 확인합니다.
 
 ### Sysprep 옵션 상세 정보
 

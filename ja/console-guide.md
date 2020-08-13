@@ -2,7 +2,7 @@
 
 ## イメージ作成
 
-イメージは、インスタンスの基本ディスクから作成できます。u2タイプのインスタンスを除く、t2、m2、c2、r2、x1タイプのインスタンスは、起動中のイメージ作成をサポートしますが、データの整合性を保障しません。u2タイプのインスタンスは、終了状態のインスタンスのみイメージ作成が可能です。
+イメージは、インスタンスの基本ディスクから作成できます。u2タイプのインスタンスを除く、t2、m2、c2、r2、x1タイプのインスタンスでは実行中にもイメージを作成できますが、データの整合性は保障しません。u2タイプのインスタンスでは終了状態の時のみイメージを作成できます。
 
 Windowsインスタンスのイメージを作成するには、Sysprepを利用してイメージ作成を準備し、インスタンスを終了することを推奨します。Sysprepの詳細な使用方法は、[Windows Sysprepガイド](#windows-sysprep)を参照してください。
 
@@ -22,6 +22,26 @@ Windowsインスタンスのイメージを作成するには、Sysprepを利用
 ## Windows Sysprepガイド
 
 Windowsイメージを作成するには、ハードウェアとユーザーに従属された情報を削除して、インスタンス作成に使用できるようにイメージ初期化作業が必要です。イメージ初期化はMicrosoftからWindows OSを配布するために提供するシステム準備ユーティリティであるSysprepで実行できます。
+
+### 原本インスタンスのイメージバージョンが2020. 08. 18. 以降の場合
+Windowsインスタンスに接続した後、**PowerShell**を管理者権限で実行します。
+![[図1 Powershell実行]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep1.png)
+
+PowerShellウィンドウが表示されたら下記のコマンドを実行します。
+
+    ToastSysprep
+
+![[図2 ToastSysprep実行]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep2.png)
+> [参考]
+ToastSysprepはTOASTで提供するSysprepを簡単に使用できるコマンドです。
+**Y**キーを押すと作業を進行します。
+![[図3 ToastSysprep進行]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep3.png)
+
+Sysprepが実行されるとWindowsインスタンスは自動的に終了します。TOASTコンソールでWindowsインスタンスの終了を確認し、[イメージ作成](./console-guide/#_1)機能でユーザーWindowsイメージを作成します。
+
+Sysprepを利用してWindowsインスタンスを初期化すると、パスワードが空白に変更されてログインできません。イメージ作成機能を利用する時、**イメージに作成されるWindowsパスワードを初期化します。**オプションを選択してWindowsインスタンスのパスワードを自動的に初期化することを推奨します。初期化されたパスワードはインスタンス接続情報で確認します。
+
+### 原本インスタンスのイメージバージョンが2020. 08. 18. 以前の場合
 
 まずWindowsインスタンスに接続した後、 **アプリ**で**コマンドプロンプト**を右クリックして**管理者権限で実行**をクリックします。
 ![[図1コマンドプロンプト実行]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/001_170524_800px.PNG)
