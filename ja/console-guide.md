@@ -34,6 +34,7 @@ PowerShellウィンドウが表示されたら下記のコマンドを実行し�
 ![[図2 ToastSysprep実行]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep2.png)
 > [参考]
 ToastSysprepはTOASTで提供するSysprepを簡単に使用できるコマンドです。
+
 **Y**キーを押すと作業を進行します。
 ![[図3 ToastSysprep進行]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep3.png)
 
