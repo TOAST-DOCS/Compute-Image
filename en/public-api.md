@@ -24,7 +24,7 @@ This API does not require a request body.
 | Name | Type | Format | Required | Description |
 |---|---|---|---|---|
 | tokenId | Header | String | O | Token ID |
-| limit | Query | Integer | - | Image count to return (default is 1000) |
+| limit | Query | Integer | - | Image count to return (default is 20) |
 | marker | Query | UUID | - | ID of the first image on the list to query <br>Query as much as the `limit` after image specified as the `marker` according to the sorting order |
 | name | Query | String | - | Name of image to query |
 | visibility | Query | Enum | - | Visibility attribute of the image to query<br>Select only one of`public`, `private`, and `shared` <br>If left blank, list of all types of images are returned. |
