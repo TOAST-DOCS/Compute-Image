@@ -42,7 +42,6 @@ Press **Y** to execute a task.
 ![[Figure 3 Executing ToastSysprep]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep3.png)
 
 When Sysprep is completed, Windows instance is automatically closed. When Windows instance is confirmed closed, user's Windows image can be created by using [Create Images](./console-guide/#_1).
- 
 
 ### If the original instance image is dated before August 18, 2020 
 
@@ -58,8 +57,9 @@ When the order prompt window pops, execute the following order:
 
 When Sysprep is completed, Windows instance is automatically closed. When Windows instance is confirmed closed, user's Windows image can be created by using [Create Images](./console-guide/#_1).
 
-### Option Details of Sysprep
+If Windows instance is initialized by using Sysprep, password is changed to empty space, and hence, login become inavailable. It is recommended, when using the feature of creating images, to select **Initialize Windows Password created by Image** and automatically initilize password of Windows instance. Check the initialized password from instance access information.   
 
+### Option Details of Sysprep
 
 `\generalize`
 
