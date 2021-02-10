@@ -34,7 +34,7 @@
 
 ![[图2 Sysprep 运行]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/002_170524_800px.PNG)
 
-当Sysprep运行时，Windows实例会自动关闭。在TOAST控制台确认Windows实例确实关闭后，便可以使用[创建镜像](./console-guide/#_1)功能创建自定义Windows镜像。
+当Sysprep运行时，Windows实例会自动关闭。在NHN Cloud控制台确认Windows实例确实关闭后，便可以使用[创建镜像](./console-guide/#_1)功能创建自定义Windows镜像。
 
 ### Sysprep选项详情
 
@@ -56,7 +56,7 @@
 重新安装Windows之后，复原上一步骤中的用户设置。在此过程中，注册Windows用户信息，安装驱动程序、更新产品以及安装其它软件。除默认设置以外，用户可以在应答文件中进行自定义设置。
 
 > [参考]
-TOAST提供的Windows镜像应答文件位于C:\Program Files\Cloud Solutions\Cloudbase-Init\conf\Unattend.xml中。所有必要的设置都已准备就绪，除特殊用途外，无需用户进行修改。
+NHN Cloud提供的Windows镜像应答文件位于C:\Program Files\Cloud Solutions\Cloudbase-Init\conf\Unattend.xml中。所有必要的设置都已准备就绪，除特殊用途外，无需用户进行修改。
 
 ## 运行中的Windows实例镜像创建指南
 
