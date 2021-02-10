@@ -37,12 +37,12 @@ PowerShell 창이 나타나면 아래 명령을 실행합니다.
 
 ![[그림 2 ToastSysprep 실행]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep2.png)
 > [참고]
-ToastSysprep은 TOAST에서 제공하는 Sysprep을 간편하게 사용할 수 있는 명령어입니다.
+ToastSysprep은 NHN Cloud에서 제공하는 Sysprep을 간편하게 사용할 수 있는 명령어입니다.
 
 **Y** 키를 눌러 작업을 진행합니다.
 ![[그림 3 ToastSysprep 진행]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep3.png)
 
-Sysprep이 실행되면 Windows 인스턴스는 자동으로 종료됩니다. TOAST 콘솔에서 Windows 인스턴스의 종료를 확인하고, [이미지 생성](./console-guide/#_1) 기능으로 사용자 Windows 이미지를 생성합니다.
+Sysprep이 실행되면 Windows 인스턴스는 자동으로 종료됩니다. NHN Cloud 콘솔에서 Windows 인스턴스의 종료를 확인하고, [이미지 생성](./console-guide/#_1) 기능으로 사용자 Windows 이미지를 생성합니다.
 
 Sysprep을 이용하여 Windows 인스턴스를 초기화하면 비밀번호가 공백으로 변경되어 로그인할 수 없습니다. 이미지 생성 기능을 이용할 때, **이미지로 생성되는 Windows 비밀번호를 초기화합니다.** 옵션을 선택해 Windows 인스턴스의 비밀번호를 자동으로 초기화하는 것이 좋습니다. 초기화된 비밀번호는 인스턴스 접속 정보에서 확인합니다.
 
@@ -59,7 +59,7 @@ Sysprep을 이용하여 Windows 인스턴스를 초기화하면 비밀번호가 
 
 ![[그림 2 Sysprep 실행]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/002_170524_800px.PNG)
 
-Sysprep이 실행되면 Windows 인스턴스는 자동으로 종료됩니다. TOAST 콘솔에서 Windows 인스턴스의 종료를 확인하고, [이미지 생성](./console-guide/#_1) 기능으로 사용자 Windows 이미지를 생성합니다.
+Sysprep이 실행되면 Windows 인스턴스는 자동으로 종료됩니다. NHN Cloud 콘솔에서 Windows 인스턴스의 종료를 확인하고, [이미지 생성](./console-guide/#_1) 기능으로 사용자 Windows 이미지를 생성합니다.
 
 Sysprep을 이용하여 Windows 인스턴스를 초기화하면 비밀번호가 공백으로 변경되어 로그인할 수 없습니다. 이미지 생성 기능을 이용할 때, **이미지로 생성되는 Windows 비밀번호를 초기화합니다.** 옵션을 선택해 Windows 인스턴스의 비밀번호를 자동으로 초기화하는 것이 좋습니다. 초기화된 비밀번호는 인스턴스 접속 정보에서 확인합니다.
 
@@ -83,7 +83,7 @@ Windows를 종료합니다.
 Windows를 재설치한 뒤, 앞 단계에서 기록한 사용자 설정을 복구합니다. 이 단계에서는 Windows 사용자 정보를 등록하고, 드라이버 및 제품 업데이트 및 추가 소프트웨어를 설치합니다. 또한 기본으로 제공하는 설정 외에 사용자가 원하는 설정을 응답 파일에서 지정할 수 있습니다.
 
 > [참고]
-TOAST에서 제공하는 Windows 이미지의 응답 파일은 C:\Program Files\Cloud Solutions\Cloudbase-Init\conf\Unattend.xml에 있습니다. 필요한 설정은 모두 준비되었기 때문에 특별한 용도를 제외하면 수정하지 않아도 됩니다.
+NHN Cloud에서 제공하는 Windows 이미지의 응답 파일은 C:\Program Files\Cloud Solutions\Cloudbase-Init\conf\Unattend.xml에 있습니다. 필요한 설정은 모두 준비되었기 때문에 특별한 용도를 제외하면 수정하지 않아도 됩니다.
 
 
 ## 실행 중인 Windows 인스턴스 이미지 생성 가이드

@@ -2,7 +2,7 @@
 
 An image, as a virtual disk, contains an operating system and application, and is used as a default disk of an instance. A default disk of an instance is created upon images and the size can be adjusted as the user configures. However, the default disk size cannot be smaller than the size of an image.
 
-TOAST provides images installed upon various operating systems and applications. Such images are: 
+NHN Cloud provides images installed upon various operating systems and applications. Such images are: 
 
 - Configured for optimal execution under virtual hardware; 
 - Safe from security threats as they are provided after basic security check is done. 
@@ -17,9 +17,9 @@ Images are classified into three types in general:
 
 ### Public Images
 
-Provided by TOAST, public images are installed with operating systems to make the best use of virtual hardware. Security setting is also provided by default for safe use in customer services and applications. 
+Provided by NHN Cloud, public images are installed with operating systems to make the best use of virtual hardware. Security setting is also provided by default for safe use in customer services and applications. 
 
-TOAST currently supports CentOS, Debian, Ubuntu, and Windows. For more information about the versions we support, refer to [TOAST Service](https://toast.com/service/compute/instance).
+NHN Cloud currently supports CentOS, Debian, Ubuntu, and Windows. For more information about the versions we support, refer to [NHN Cloud Service](https://toast.com/service/compute/instance).
 
 Some images even have application programs to enable faster service implementation. Currently available images are based on CentOS, with MySQL database installed.   
 

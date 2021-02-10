@@ -78,7 +78,7 @@ Shut down Windows.
 Reinstall Windows, and restore the user settings as recorded in the previous phase. Here, Windows user information is registered, and drivers and products are updated, while additional software can be installed. Further user configuration is also available, adding to default settings provided by response files.     
 
 > [Note]
-Response files for Windows images that TOAST provides are located at C:\Program Files\Cloud Solutions\Cloudbase-Init\conf\Unattend.xml. As settings are all ready as required, no modification is necessary, except for special purposes.  
+Response files for Windows images that NHN Cloud provides are located at C:\Program Files\Cloud Solutions\Cloudbase-Init\conf\Unattend.xml. As settings are all ready as required, no modification is necessary, except for special purposes.  
 
 
 ## Guide to Create Windows Instance Images under Execution 
