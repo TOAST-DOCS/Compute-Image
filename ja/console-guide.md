@@ -33,12 +33,12 @@ PowerShellウィンドウが表示されたら下記のコマンドを実行し�
 
 ![[図2 ToastSysprep実行]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep2.png)
 > [参考]
-ToastSysprepはTOASTで提供するSysprepを簡単に使用できるコマンドです。
+ToastSysprepはNHN Cloudで提供するSysprepを簡単に使用できるコマンドです。
 
 **Y**キーを押すと作業を進行します。
 ![[図3 ToastSysprep進行]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep3.png)
 
-Sysprepが実行されるとWindowsインスタンスは自動的に終了します。TOASTコンソールでWindowsインスタンスの終了を確認し、[イメージ作成](./console-guide/#_1)機能でユーザーWindowsイメージを作成します。
+Sysprepが実行されるとWindowsインスタンスは自動的に終了します。NHN CloudコンソールでWindowsインスタンスの終了を確認し、[イメージ作成](./console-guide/#_1)機能でユーザーWindowsイメージを作成します。
 
 Sysprepを利用してWindowsインスタンスを初期化すると、パスワードが空白に変更されてログインできません。イメージ作成機能を利用する時、**イメージに作成されるWindowsパスワードを初期化します。**オプションを選択してWindowsインスタンスのパスワードを自動的に初期化することを推奨します。初期化されたパスワードはインスタンス接続情報で確認します。
 
@@ -54,7 +54,7 @@ Sysprepを利用してWindowsインスタンスを初期化すると、パスワ
 
 ![[図2 Sysprep実行]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/002_170524_800px.PNG)
 
-Sysprepが実行されるとWindowsインスタンスは自動的に終了します。TOASTコンソールでWindowsインスタンスの終了を確認して、 [イメージ作成](./console-guide/#_1)機能でユーザーWindowsイメージを作成します。
+Sysprepが実行されるとWindowsインスタンスは自動的に終了します。NHN CloudコンソールでWindowsインスタンスの終了を確認して、 [イメージ作成](./console-guide/#_1)機能でユーザーWindowsイメージを作成します。
 
 Sysprepを利用してWindowsインスタンスを初期化すると、パスワードが空白に変更されてログインできません。イメージ作成機能を利用する時、**イメージに作成されるWindowsパスワードを初期化します。**オプションを選択してWindowsインスタンスのパスワードを自動的に初期化することを推奨します。初期化されたパスワードはインスタンス接続情報で確認します。
 
@@ -78,7 +78,7 @@ Windowsを終了します。
 Windowsを再インストールした後、前段階で記録したユーザー設定を復元します。この段階ではWindowsユーザー情報を登録し、ドライバーや製品アップデート、追加ソフトウェアをインストールします。また基本的に提供する設定以外にユーザーが希望する設定を応答ファイルから指定することができます。
 
 > [参考]
-TOASTで提供するWindowsイメージの応答ファイルはC:\Program Files\Cloud Solutions\Cloudbase-Init\conf\Unattend.xmlにあります。必要な設定は全て準備されているので、特別な用途を除けば修正しなくてもよいです。
+NHN Cloudで提供するWindowsイメージの応答ファイルはC:\Program Files\Cloud Solutions\Cloudbase-Init\conf\Unattend.xmlにあります。必要な設定は全て準備されているので、特別な用途を除けば修正しなくてもよいです。
 
 
 ## 起動中のWindowsインスタンスからのイメージ作成ガイド
