@@ -35,7 +35,7 @@ On the popup of Powershell, execute the following command:
 
 ![[Figure 2 Executing ToastSysprep]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep2.png)
 > [Note]
-ToastSysprep is a command that makes it easy to use TOAST Sysprep.   
+ToastSysprep is a command that makes it easy to use NHN Cloud Sysprep.   
 
 Press **Y** to execute a task. 
 
