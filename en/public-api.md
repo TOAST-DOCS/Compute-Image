@@ -8,7 +8,7 @@ Use `image`-type endpoint for Image API. For more details, see `serviceCatalog` 
 |---|---|---|
 | image | Korea (Pangyo)<br>Japan | https://kr1-api-image.infrastructure.cloud.toast.com<br>https://jp1-api-image.infrastructure.cloud.toast.com |
 
-In API response, you may find fields that are not specified in the guide. Refrain from using them because such fields are only for the TOAST internal usage and might be changed without previous notice. 
+In API response, you may find fields that are not specified in the guide. Refrain from using them because such fields are only for the NHN Cloud internal usage and might be changed without previous notice. 
 
 ## Image
 ### List Images 
