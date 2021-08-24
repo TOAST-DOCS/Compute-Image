@@ -2,9 +2,9 @@
 
 ## Create Images
 
-Images can be created from default disk of an instance. Instances of the t2, m2, c2, r2, and x1 type, except u2 type, support for creating images during instance execution, but do not ensure data integrity. Only closed u2-type instances can create images.  
+Images can be created from default disk of an instance. Instances of the t2, m2, c2, r2, and x1 type, except u2 type, support for creating images during instance execution, but do not ensure data integrity. Only stopped u2-type instances can create images.
 
-To create images for Windows instance, it is recommended to prepare for creating images by using Sysprep and then close the next instance.  For more details on sysprep, see [Guide for Windows Sysprep](#windows-sysprep). 
+To create images for Windows instance, it is recommended to prepare for creating images by using Sysprep and then stop the next instance.  For more details on sysprep, see [Guide for Windows Sysprep](#windows-sysprep).
 
 To create an image for Windows instance which is under execution,  prerequisite tasks are required if the Windows instance is made out of images dated before May 28 of 2019. Check the Windows version of the image which created an instance from **Image Name** of **Instance Details**. For more details, see [Guide to Create Windows Instance Images under Execution](#windows).
 
@@ -41,7 +41,7 @@ Press **Y** to execute a task.
 
 ![[Figure 3 Executing ToastSysprep]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep3.png)
 
-When Sysprep is completed, Windows instance is automatically closed. When Windows instance is confirmed closed, user's Windows image can be created by using [Create Images](./console-guide/#_1).
+When Sysprep is completed, Windows instance is automatically stopped. When Windows instance is confirmed stopped, user's Windows image can be created by using [Create Images](./console-guide/#_1).
 
 ### If the original instance image is dated before August 18, 2020 
 
@@ -55,7 +55,7 @@ When the order prompt window pops, execute the following order:
 
 ![[Figure 2. Executing Sysprep]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/002_170524_800px.PNG)
 
-When Sysprep is completed, Windows instance is automatically closed. When Windows instance is confirmed closed, user's Windows image can be created by using [Create Images](./console-guide/#_1).
+When Sysprep is completed, Windows instance is automatically stopped. When Windows instance is confirmed stopped, user's Windows image can be created by using [Create Images](./console-guide/#_1).
 
 If Windows instance is initialized by using Sysprep, password is changed to empty space, and hence, login become inavailable. It is recommended, when using the feature of creating images, to select **Initialize Windows Password created by Image** and automatically initilize password of Windows instance. Check the initialized password from instance access information.   
 

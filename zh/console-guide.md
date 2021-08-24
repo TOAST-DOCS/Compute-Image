@@ -34,7 +34,7 @@
 
 ![[图2 Sysprep 运行]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/002_170524_800px.PNG)
 
-当Sysprep运行时，Windows实例会自动关闭。在NHN Cloud控制台确认Windows实例确实关闭后，便可以使用[创建镜像](./console-guide/#_1)功能创建自定义Windows镜像。
+当Sysprep运行时，Windows实例会自动终止。在NHN Cloud控制台确认Windows实例确实终止后，便可以使用[创建镜像](./console-guide/#_1)功能创建自定义Windows镜像。
 
 ### Sysprep选项详情
 
