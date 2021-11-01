@@ -22,7 +22,7 @@ NHN Cloud에서 제공하는 이미지입니다. 이 이미지들에는 가상 �
 
 NHN Cloud는 현재 CentOS, Debian, Ubuntu와 Windows를 제공하고 있습니다. 자세한 제공 운영체제 버전은 [NHN Cloud 서비스 소개](https://gov.toast.com/service/compute/instance)를 참고합니다.
 
-일부 이미지들에는 MySQL, MS-SQL 등과 같은 애플리케이션을 설치해 두었기 때문에 더욱 빠르게 서비스를 구축할 수 있습니다.
+일부 이미지들에는 애플리케이션을 설치해 두었기 때문에 더욱 빠르게 서비스를 구축할 수 있습니다.
 
 ### 사용자 이미지
 
