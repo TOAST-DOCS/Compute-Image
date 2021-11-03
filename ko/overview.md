@@ -21,7 +21,7 @@ NHN Cloud 이미지의 특징은 다음과 같습니다.
 
 NHN Cloud에서 제공하는 이미지입니다. 이 이미지들에는 가상 하드웨어를 최적으로 이용하도록 운영체제가 설치되어 있습니다. 또한 고객의 서비스와 애플리케이션에서 안심하고 사용할 수 있도록 기본적인 보안 설정이 되어 있습니다.
 
-NHN Cloud는 현재 CentOS, Debian, Ubuntu와 Windows를 제공하고 있습니다. 자세한 제공 운영체제 버전은 [엔에이치엔(NHN Cloud) 서비스 소개](https://toast.com/service/compute/instance)를 참고합니다.
+NHN Cloud는 현재 CentOS, Debian, Ubuntu와 Windows를 제공하고 있습니다. 자세한 제공 운영체제 버전은 [NHN Cloud 서비스 소개](https://toast.com/service/compute/instance)를 참고합니다.
 
 일부 이미지들에는 애플리케이션을 설치해 두었기 때문에 더욱 빠르게 서비스를 구축할 수 있습니다.
 
