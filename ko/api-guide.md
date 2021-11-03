@@ -81,7 +81,7 @@ X-Auth-Token: {tokenId}
 | Disk Format | Body | String | 이미지의 디스크 형식. <br />"ami", "ari", "aki", "vhd", "vhdx", "vmdk", "raw", "qcow2", "vdi", "ploop", "iso" |
 | Image ID | Body | String | 이미지 ID |
 | Is Public | Body | Boolean | 퍼블릭 이미지 여부 |
-| Min Disk | Body | Integer | 이 이미지로 만들 수 있는 인스턴스의 최소 블록 스토리지 크기(GB) |
+| Min Disk | Body | Integer | 이 이미지로 만들 수 있는 인스턴스의 최소 디스크 크기(GB) |
 | Min RAM | Body | Integer | 이 이미지로 만들 수 있는 인스턴스의 최소 RAM 크기(MB) |
 | Image Name | Body | String | 이미지 이름 |
 | Prop Key / Prop Value | Body | String | 이미지의 추가적인 속성 |
