@@ -19,11 +19,9 @@ Images are classified into three types in general:
 
 Provided by NHN Cloud, public images are installed with operating systems to make the best use of virtual hardware. Security setting is also provided by default for safe use in customer services and applications. 
 
-NHN Cloud currently supports CentOS, Debian, Ubuntu, and Windows. For more information about the versions we support, refer to [NHN Cloud Service](https://toast.com/service/compute/instance).
+NHN Cloud currently supports CentOS, Debian, Ubuntu, and Windows. For more information about the versions we support, refer to [NHN Cloud Service Introduction](https://toast.com/service/compute/instance).
 
-Some images even have application programs to enable faster service implementation. Currently available images are based on CentOS, with MySQL database installed.   
-
-In the near future, more application programs will be available as user demands. 
+Some images even have application programs to enable faster service implementation. In the near future, more application programs will be available as user demands. 
 
 ### User Images
 
@@ -39,4 +37,4 @@ User images can be shared with other projects by setting. Nevertheless, shared i
 
 ### Pricing
 
-An image is charged by the size of a created disk from the moment it is created.  
+An image is charged by the size of a created block storage from the moment it is created.  
