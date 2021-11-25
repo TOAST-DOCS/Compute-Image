@@ -6,9 +6,9 @@
 
 ## 이미지 생성
 
-이미지는 인스턴스의 기본 디스크에서 만들 수 있습니다. u2 타입의 인스턴스를 제외한 t2, m2, c2, r2, x1 타입의 인스턴스에서는 실행 중에도 이미지를 생성할 수 있지만, 데이터 정합성은 보장하지 않습니다. u2 타입 인스턴스에서는 종료 상태일 때만 이미지를 생성할 수 있습니다.
+이미지는 인스턴스의 기본 디스크에서 만들 수 있습니다. u2 타입의 인스턴스를 제외한 t2, m2, c2, r2, x1 타입의 인스턴스에서는 실행 중에도 이미지를 생성할 수 있지만, 데이터 정합성은 보장하지 않습니다. u2 타입 인스턴스에서는 중지 상태일 때만 이미지를 생성할 수 있습니다.
 
-Windows 인스턴스의 이미지를 생성하려면 Sysprep을 이용하여 이미지 생성을 준비한 다음 인스턴스를 종료하는 것을 권장합니다. 자세한 sysprep 사용 방법은 [Windows Sysprep 가이드](#windows-sysprep)를 참고합니다.
+Windows 인스턴스의 이미지를 생성하려면 Sysprep을 이용하여 이미지 생성을 준비한 다음 인스턴스를 중지하는 것을 권장합니다. 자세한 sysprep 사용 방법은 [Windows Sysprep 가이드](#windows-sysprep)를 참고합니다.
 
 실행 중인 Windows 인스턴스를 이미지로 생성할 경우, 2019. 05.28. 배포 버전 이전의 이미지로 만든 Windows 인스턴스라면 정확한 동작을 위해 선행 작업이 필요합니다. 인스턴스를 생성한 이미지의 Windows 버전은 **인스턴스 상세정보**의 **이미지 이름**에서 확인할 수 있습니다. 자세한 내용은 [실행 중인 Windows 인스턴스 이미지 생성 가이드](#windows)를 참고합니다.
 
@@ -42,7 +42,7 @@ ToastSysprep은 NHN Cloud에서 제공하는 Sysprep을 간편하게 사용할 �
 **Y** 키를 눌러 작업을 진행합니다.
 ![[그림 3 ToastSysprep 진행]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep3.png)
 
-Sysprep이 실행되면 Windows 인스턴스는 자동으로 종료됩니다. NHN Cloud 콘솔에서 Windows 인스턴스의 종료를 확인하고, [이미지 생성](./console-guide/#_1) 기능으로 사용자 Windows 이미지를 생성합니다.
+Sysprep이 실행되면 Windows 인스턴스는 자동으로 중지됩니다. NHN Cloud 콘솔에서 Windows 인스턴스의 중지를 확인하고, [이미지 생성](./console-guide/#_1) 기능으로 사용자 Windows 이미지를 생성합니다.
 
 Sysprep을 이용하여 Windows 인스턴스를 초기화하면 비밀번호가 공백으로 변경되어 로그인할 수 없습니다. 이미지 생성 기능을 이용할 때, **이미지로 생성되는 Windows 비밀번호를 초기화합니다.** 옵션을 선택해 Windows 인스턴스의 비밀번호를 자동으로 초기화하는 것이 좋습니다. 초기화된 비밀번호는 인스턴스 접속 정보에서 확인합니다.
 
@@ -59,7 +59,7 @@ Sysprep을 이용하여 Windows 인스턴스를 초기화하면 비밀번호가 
 
 ![[그림 2 Sysprep 실행]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/002_170524_800px.PNG)
 
-Sysprep이 실행되면 Windows 인스턴스는 자동으로 종료됩니다. NHN Cloud 콘솔에서 Windows 인스턴스의 종료를 확인하고, [이미지 생성](./console-guide/#_1) 기능으로 사용자 Windows 이미지를 생성합니다.
+Sysprep이 실행되면 Windows 인스턴스는 자동으로 중지됩니다. NHN Cloud 콘솔에서 Windows 인스턴스의 중지를 확인하고, [이미지 생성](./console-guide/#_1) 기능으로 사용자 Windows 이미지를 생성합니다.
 
 Sysprep을 이용하여 Windows 인스턴스를 초기화하면 비밀번호가 공백으로 변경되어 로그인할 수 없습니다. 이미지 생성 기능을 이용할 때, **이미지로 생성되는 Windows 비밀번호를 초기화합니다.** 옵션을 선택해 Windows 인스턴스의 비밀번호를 자동으로 초기화하는 것이 좋습니다. 초기화된 비밀번호는 인스턴스 접속 정보에서 확인합니다.
 
