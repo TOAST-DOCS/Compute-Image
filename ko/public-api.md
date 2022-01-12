@@ -32,7 +32,7 @@ X-Auth-Token: {tokenId}
 | status | Query | Enum    | - | 조회할 이미지 상태<br>`queued`: 이미지 변환 중<br>`saving`: 이미지 업로드 중<br>`active`: 정상<br>`killed`: 시스템에서 이미지 삭제<br>`deleted`: 삭제된 이미지<br>`pending_delete`: 이미지 삭제 대기 중 |
 | size_min | Query | Integer | - | 조회할 이미지의 최소 크기(바이트) |
 | size_max | Query | Integer | - | 조회할 이미지의 최대 크기(바이트) |
-| nhncloud_product | Query | Enum | - | 조회할 이미지의 인프라 상품 종류<br>`compute`: Instance 서비스 이미지<br>`gpu`: GPU Instance 서비스 이미지 |
+| nhncloud_product | Query | Enum | - | 조회할 이미지의 인프라 서비스 종류<br>`compute`: Instance 서비스 이미지<br>`gpu`: GPU Instance 서비스 이미지 |
 | sort_key | Query | String | - | 이미지 목록을 정렬할 때 사용할 속성<br>이미지의 모든 속성을 지정 가능, 기본값은 `created_at` |
 | sort_dir | Query | Enum | - | 이미지 목록 정렬 방향<br>`asc`(오름차순), `desc`(내림차순) 중 하나의 값만 선택 가능, 기본값은 내림차순 |
 
