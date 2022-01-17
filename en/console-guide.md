@@ -14,6 +14,10 @@ Modify an image name.
 
 Check **Protected** and update images, in order to prevent images from deleted by mistake. To delete an image where Protected is enabled, uncheck **Protected** in Modify Image and update an image.
 
+## Copy to Another Region
+
+Select the region you want to copy the image to, enter a name and description for the new image, and copy the image.
+
 ## Share with Other Projects
 
 Select a project to share images with and share.
