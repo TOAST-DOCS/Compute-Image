@@ -32,6 +32,7 @@ This API does not require a request body.
 | status | Query | Enum    | - | Image status to query <br>`queued`: Converting image<br>`saving`: Uploading image<br>`active`: Normal<br>`killed`: Deleting image from system<br>`deleted`: Image deleted<br>`pending_delete`: Delete Image is pending |
 | size_min | Query | Integer | - | Minimum size of image to query (bytes) |
 | size_max | Query | Integer | - | Maximum size of image to query (bytes) |
+| nhncloud_product | Query | Enum | - | Infrastructure service type of image to query<br>`compute`: Instance service image<br>`gpu`: GPU Instance service image |
 | sort_key | Query | String | - | Attribute to sort image list <br>Available to specify all attributes of image; default is `created_at` |
 | sort_dir | Query | Enum | - | Sorting direction of image on the list<br>Select only one of`asc`(ascending), or `desc`(descending) order |
 
