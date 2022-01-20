@@ -28,7 +28,7 @@ This API does not require a request body.
 | marker | Query | UUID | - | ID of the first image on the list to query <br>Query as much as the `limit` after image specified as the `marker` according to the sorting order |
 | name | Query | String | - | Name of image to query |
 | visibility | Query | Enum | - | Visibility attribute of the image to query<br>Select only one of `public`, `private`, and `shared` <br>If left blank, list of all types of images are returned. |
-| owner | Query | String  | - | ID of tenant to which the image belongs to query |
+| owner | Query | String  | - | ID of the tenant to which the image to query belongs |
 | status | Query | Enum    | - | Image status to query <br>`queued`: Converting image<br>`saving`: Uploading image<br>`active`: Normal<br>`killed`: Deleting image from system<br>`deleted`: Image deleted<br>`pending_delete`: Delete Image is pending |
 | size_min | Query | Integer | - | Minimum size of image to query (bytes) |
 | size_max | Query | Integer | - | Maximum size of image to query (bytes) |
@@ -53,7 +53,7 @@ This API does not require a request body.
 | images.id | Body | UUID | Image ID |
 | images.min_ram | Body | Integer | Minimum required memory size of image (MB)<br>Available only for instances that are larger than `min_disk` |
 | images.checksum | Body | String | Hash for image content <br>Used internally for image validation |
-| images.owner | Body | String | ID of tenant to which the image belongs |
+| images.owner | Body | String | ID of the tenant to which the image belongs |
 | images.visibility | Body | Enum | Image visibility <br>One of `public`, `private`, and `shared` |
 | images.virtual_size | Body | Integer | Virtual size of the image |
 | images.size | Body | Integer | Real size of the image (bytes) |
@@ -143,7 +143,7 @@ This API does not require a request body.
 | image.id | Body | UUID | Image ID |
 | image.min_ram | Body | Integer | Minimum required memory size of image (MB)<br/>Available only for instances that are larger than `min_disk` |
 | image.checksum | Body | String | Hash for image content <br/>Used internally for image validation |
-| image.owner | Body | String | ID of tenant to which the image belongs |
+| image.owner | Body | String | ID of the tenant to which the image belongs |
 | image.visibility | Body | Enum | Image visibility<br>One of `public`, `private`, and `shared` |
 | image.virtual_size | Body | Integer | Virtual size of the image |
 | image.size | Body | Integer | Real size of the image (bytes) |
