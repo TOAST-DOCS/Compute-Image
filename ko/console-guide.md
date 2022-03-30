@@ -1,9 +1,5 @@
 ## Compute > Image > 콘솔 사용 가이드
 
-## 동영상 가이드
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/X_p4ouMDCck" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 ## 이미지 생성
 
 이미지는 인스턴스의 기본 디스크에서 만들 수 있습니다. u2 타입의 인스턴스를 제외한 t2, m2, c2, r2, x1 타입의 인스턴스에서는 실행 중에도 이미지를 생성할 수 있지만, 데이터 정합성은 보장하지 않습니다. u2 타입 인스턴스에서는 중지 상태일 때만 이미지를 생성할 수 있습니다.
@@ -18,9 +14,9 @@ Windows 인스턴스의 이미지를 생성하려면 Sysprep을 이용하여 이
 
 **Protected** 속성을 선택하고 이미지를 업데이트하면 실수로 이미지를 삭제하는 것을 방지할 수 있습니다. Protected 속성이 선택된 이미지를 삭제하려면, 이미지 수정에서 **Protected** 속성을 선택 해제하고 이미지를 업데이트해야 합니다.
 
-## 다른 리전으로 복사
+## 다른 리전으로 복제
 
-이미지를 복사할 대상 리전을 선택하고, 새 이미지의 이름과 설명을 입력한 후 복사합니다.
+이미지를 복제할 대상 리전을 선택하고, 새 이미지의 이름과 설명을 입력한 후 복제합니다.
 
 ## 다른 프로젝트에 공유
 
