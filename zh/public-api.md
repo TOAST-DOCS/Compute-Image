@@ -1,71 +1,73 @@
-## Compute > Image > API v2 가이드
+## Compute > Image > API v2 Guide
 
-API를 사용하려면 API 엔드포인트와 토큰 등이 필요합니다. [API 사용 준비](/Compute/Compute/ko/identity-api/)를 참고하여 API 사용에 필요한 정보를 준비합니다.
+To use the API, API endpoint and token are required. Refer to [API usage preparations](/Compute/Compute/en/identity-api/) to prepare the information required to use the API.
 
-이미지 API는 `image` 타입 엔드포인트를 이용합니다. 정확한 엔드포인트는 토큰 발급 응답의 `serviceCatalog`를 참조합니다.
+Image API uses the `image` type endpoint. Refer to the `serviceCatalog` in the token issuance response for the valid endpoint.
 
-| 타입 | 리전 | 엔드포인트 |
+| Type | Region | Endpoint |
 |---|---|---|
-| image | 한국(판교) 리전<br>일본 리전 | https://kr1-api-image.infrastructure.cloud.toast.com<br>https://jp1-api-image.infrastructure.cloud.toast.com |
+| image | Korea (Pangyo) Region<br>Korea (Pyeongchon) Region<br>Japan Region | https://kr1-api-image.infrastructure.cloud.toast.com<br>https://kr2-api-image.infrastructure.cloud.toast.com<br>https://jp1-api-image.infrastructure.cloud.toast.com |
 
-API 응답에 가이드에 명시되지 않은 필드가 노출될 수 있습니다. 이런 필드는 NHN Cloud 내부 용도로 사용되며 사전 공지없이 변경될 수 있으므로 사용하지 않습니다.
+In API response, you may find fields that are not specified in the guide. These fields are only for the internal use by NHN Cloud and are subject to change without prior notice, so we advise you not to use them.
 
-## 이미지
-### 이미지 목록 조회
+## Image
+### List Images
 
 ```
 GET /v2/images
 X-Auth-Token: {tokenId}
 ```
 
-#### 요청
-이 API는 요청 본문을 요구하지 않습니다.
+#### Request
+This API does not require a request body.
 
-| 이름 | 종류 | 형식 | 필수 | 설명 |
+| Name | Type | Format | Required | Description |
 |---|---|---|---|---|
-| tokenId | Header | String | O | 토큰 ID |
-| limit | Query | Integer | - | 반환할 이미지 개수(기본값은 1000) |
-| marker | Query | UUID | - | 조회할 이미지 목록의 첫 번째 이미지 ID<br>정렬 방식에 따라 `marker`로 지정된 이미지부터 `limit`만큼의 이미지 목록을 조회 |
-| name | Query | String | - | 조회할 이미지 이름 |
-| visibility | Query | Enum | - | 조회할 이미지의 보여 주기 속성<br>`public`, `private`, `shared` 중 하나의 값만 선택 가능<br>생략하면 모든 종류의 이미지 목록 반환 |
-| owner | Query | String  | - | 조회할 이미지가 속한 테넌트 ID |
-| status | Query | Enum    | - | 조회할 이미지 상태<br>`queued`: 이미지 변환 중<br>`saving`: 이미지 업로드 중<br>`active`: 정상<br>`killed`: 시스템에서 이미지 삭제<br>`deleted`: 삭제된 이미지<br>`pending_delete`: 이미지 삭제 대기 중 |
-| size_min | Query | Integer | - | 조회할 이미지의 최소 크기(바이트) |
-| size_max | Query | Integer | - | 조회할 이미지의 최대 크기(바이트) |
-| sort_key | Query | String | - | 이미지 목록을 정렬할 때 사용할 속성<br>이미지의 모든 속성을 지정 가능, 기본값은 `created_at` |
-| sort_dir | Query | Enum | - | 이미지 목록 정렬 방향<br>`asc`(오름차순), `desc`(내림차순) 중 하나의 값만 선택 가능, 기본값은 내림차순 |
+| tokenId | Header | String | O | Token ID |
+| limit | Query | Integer | - | Image count to return (default is 20) |
+| marker | Query | UUID | - | ID of the first image on the list to query <br>Query as much as the `limit` after image specified as the `marker` according to the sorting order |
+| name | Query | String | - | Name of image to query |
+| visibility | Query | Enum | - | Visibility attribute of the image to query<br>Select only one of `public`, `private`, and `shared` <br>If left blank, list of all types of images are returned. |
+| owner | Query | String  | - | ID of the tenant to which the image to query belongs |
+| status | Query | Enum    | - | Image status to query <br>`queued`: Converting image<br>`saving`: Uploading image<br>`active`: Normal<br>`killed`: Deleting image from system<br>`deleted`: Image deleted<br>`pending_delete`: Delete Image is pending |
+| size_min | Query | Integer | - | Minimum size of image to query (bytes) |
+| size_max | Query | Integer | - | Maximum size of image to query (bytes) |
+| nhncloud_product | Query | Enum | - | Infrastructure service type of image to query<br>`compute`: Instance service image<br>`gpu`: GPU Instance service image |
+| sort_key | Query | String | - | Attribute to use when sorting the image list<br>All attributes of image can be specified, default is `created_at` |
+| sort_dir | Query | Enum | - | Sorting direction of the image list<br>Select only one of `asc` (ascending order) or `desc` (descending order) |
 
-#### 응답
+#### Response
 
-| 이름 | 종류 | 형식 | 설명 |
+| Name | Type | Format | Description |
 |---|---|---|---|
-| images | Body | Array | 이미지 목록 객체 |
-| images.status | Body | String | 이미지 상태<br>`queued`, `saving`, `active`, `killed`, `deleted`, `pending_delete` 중 하나 |
-| images.name | Body | String | 이미지 이름 |
-| images.tag | Body | String | 이미지 태그<br>`_AVAILABLE_` 태그를 삭제하면 콘솔에서는 조회되지 않으므로, 태그를 삭제하지 않도록 주의 |
-| images.container_format | Body | String | 이미지 컨테이너 포맷 |
-| images.created_at | Body | Datetime | 생성 시각 |
-| images.disk_format | Body | String | 이미지 디스크 포맷 |
-| images.updated_at | Body | Datetime | 수정 시각 |
-| images.min_disk | Body | Integer | 이미지 최소 디스크 요구량(GB)<br>`min_disk`값보다 큰 볼륨에서만 사용할 수 있음 |
-| images.protected | Body | Boolean | 이미지 보호 여부<br>`protected=true`인 경우 수정 및 삭제 불가 |
-| images.id | Body | UUID | 이미지 ID |
-| images.min_ram | Body | Integer | 이미지 최소 메모리 요구량(MB)<br>`min_disk`값보다 큰 인스턴스에서만 사용할 수 있음 |
-| images.checksum | Body | String | 이미지 내용 해시값<br>내부적으로 이미지 유효성 검증을 위해 사용 |
-| images.owner | Body | String | 이미지가 속한 테넌트 ID |
-| images.visibility | Body | Enum | 이미지 가시성<br>`public`, `private`, `shared` 중 하나 |
-| images.virtual_size | Body | Integer | 이미지 가상 크기 |
-| images.size | Body | Integer | 이미지 실제 크기(바이트) |
-| images.properties | Body | Object | 이미지 속성 객체<br>이미지별 사용자 지정 속성을 키-값 쌍 형태로 기술 |
-| images.self | Body | URI | 이미지 경로 |
-| images.file | Body | String | 이미지 파일 경로 |
-| images.schema | Body | URI | 이미지 스키마 경로 |
-| schema | Body | URI | 이미지 목록 스키마 경로 |
-| first | Body | URI | 이미지 목록의 첫 번째 페이지에 해당하는 경로 |
-| next| Body | URI | 이미지 목록의 다음 페이지에 해당하는 경로 |
+| images | Body | Array | Image list object |
+| images.status | Body | String | Image status <br>One of `queued`, `saving`, `active`, `killed`, `deleted`, and `pending_delete` |
+| images.name | Body | String | Image name |
+| images.tag | Body | String | Image tag<br>If you delete the `_AVAILABLE_` tag, it will not be queried in the console, so be careful not to delete the tag. |
+| images.container_format | Body | String | Image container format |
+| images.created_at | Body | Datetime | Creation time |
+| images.disk_format | Body | String | Image disk format |
+| images.updated_at | Body | Datetime | Modification time |
+| images.min_disk | Body | Integer | Minimum required disk size of image (GB)<br>Available only for volumes that are larger than `min_disk` |
+| images.protected | Body | Boolean | Protect image or not<br>Cannot be modified or deleted when `protected=true` |
+| images.id | Body | UUID | Image ID |
+| images.min_ram | Body | Integer | Minimum required memory size of image (MB)<br>Available only for instances that are larger than `min_disk` |
+| images.checksum | Body | String | Hash for image content <br>Used internally for image validation |
+| images.owner | Body | String | ID of the tenant to which the image belongs |
+| images.visibility | Body | Enum | Image visibility <br>One of `public`, `private`, and `shared` |
+| images.virtual_size | Body | Integer | Virtual size of the image |
+| images.size | Body | Integer | Real size of the image (bytes) |
+| images.properties | Body | Object | Image properties object <br>Describes user-specified properties for each image in the key-value pair format |
+| images.self | Body | URI | Image path |
+| images.file | Body | String | File path of image |
+| images.schema | Body | URI | Schema path of image |
+| schema | Body | URI | Schema path of image list |
+| first | Body | URI | Path of the first page of image list |
+| next| Body | URI | Path of the next page of image list |
 
-<details><summary>예시</summary>
+<details><summary>Example</summary>
 <p>
+
 
 ```json
 {
@@ -110,48 +112,49 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### 이미지 보기
+### Get Image
 
 ```
 GET /v2/images/{imageId}
 X-Auth-Token: {tokenId}
 ```
 
-#### 요청
-이 API는 요청 본문을 요구하지 않습니다.
+#### Request
+This API does not require a request body.
 
-| 이름 | 종류 | 형식 | 필수 | 설명 |
+| Name | Type | Format | Required | Description |
 |---|---|---|---|---|
-| imageId | URL | UUID | O | 조회할 이미지 ID |
-| tokenId | Header | String | O | 토큰 ID|
+| imageId | URL | UUID | O | Image ID to query |
+| tokenId | Header | String | O | Token ID |
 
-#### 응답
+#### Response
 
-| 이름 | 종류 | 형식 | 설명 |
+| Name | Type | Format | Description |
 |---|---|---|---|
-| image.status | Body | String | 이미지 상태 |
-| image.name | Body | String | 이미지 이름 |
-| image.tag | Body | String | 이미지 태그<br>`_AVAILABLE_` 태그를 삭제하면 콘솔에서는 조회되지 않으므로, 태그를 삭제하지 않도록 주의 |
-| image.container_format | Body | String | 이미지 컨테이너 포맷 |
-| image.created_at | Body | Datetime | 생성 시각 |
-| image.disk_format | Body | String | 이미지 디스크 포맷 |
-| image.updated_at | Body | Datetime | 수정 시각 |
-| image.min_disk | Body | Integer | 이미지 최소 디스크 요구량(GB)<br>`min_disk`값보다 큰 볼륨에서만 사용할 수 있음 |
-| image.protected | Body | boolean | 이미지 보호 여부<br>`protected=true`인 경우 수정 및 삭제가 불가 |
-| image.id | Body | UUID | 이미지 ID |
-| image.min_ram | Body | Integer | 이미지 최소 메모리 요구량(MB)<br>`min_disk`값보다 큰 인스턴스에서만 사용할 수 있음 |
-| image.checksum | Body | String | 이미지 내용의 해시값<br>내부적으로 이미지 유효성 검증을 위해 사용 |
-| image.owner | Body | String | 이미지가 속한 테넌트 ID |
-| image.visibility | Body | Enum | 이미지 가시성<br>`public`, `private`, `shared` 중 하나 |
-| image.virtual_size | Body | Integer | 이미지 가상 크기 |
-| image.size | Body | Integer | 이미지 실제 크기(바이트) |
-| image.properties | Body | Object | 이미지 속성 객체<br>이미지별 사용자 지정 속성을 키-값 쌍 형태로 기술 |
-| image.self | Body | URI | 이미지 경로 |
-| image.file | Body | String | 이미지 파일 경로 |
-| image.schema | Body | URI| 이미지 스키마 경로 |
+| image.status | Body | String | Image status |
+| image.name | Body | String | Image name |
+| image.tag | Body | String | Image tags <br>If you delete the `_AVAILABLE_` tag, it will not be queried in the console, so be careful not to delete the tag. |
+| image.container_format | Body | String | Image container format |
+| image.created_at | Body | Datetime | Creation time |
+| image.disk_format | Body | String | Image disk format |
+| image.updated_at | Body | Datetime | Modification time |
+| image.min_disk | Body | Integer | Minimum required disk size of image (GB)<br>Available only for instances that are larger than `min_disk` |
+| image.protected | Body | boolean | Protect image or not<br/>Cannot be modified or deleted when `protected=true` |
+| image.id | Body | UUID | Image ID |
+| image.min_ram | Body | Integer | Minimum required memory size of image (MB)<br/>Available only for instances that are larger than `min_disk` |
+| image.checksum | Body | String | Hash for image content <br/>Used internally for image validation |
+| image.owner | Body | String | ID of the tenant to which the image belongs |
+| image.visibility | Body | Enum | Image visibility<br>One of `public`, `private`, and `shared` |
+| image.virtual_size | Body | Integer | Virtual size of the image |
+| image.size | Body | Integer | Real size of the image (bytes) |
+| image.properties | Body | Object | Image properties object <br/>Describes user-specified properties for each image in the key-value pair format |
+| image.self | Body | URI | Image path |
+| image.file | Body | String | File path of image |
+| image.schema | Body | URI| Schema path of image |
 
-<details><summary>예시</summary>
+<details><summary>Example</summary>
 <p>
+
 
 ```json
 {
@@ -189,53 +192,53 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### 이미지 삭제
+### Delete Image
 
-가시성이 `public`인 이미지는 삭제할 수 없습니다.
+Images with `public` visibility cannot be deleted.
 
 ```
 DELETE /v2/images/{imageId}
 X-Auth-Token: {tokenId}
 ```
 
-#### 요청
-이 API는 요청 본문을 요구하지 않습니다.
+#### Request
+This API does not require a request body.
 
-| 이름 | 종류 | 형식 | 필수 | 설명 |
+| Name | Type | Format | Required | Description |
 |---|---|---|---|---|
-| imageId | URL | String | O | 삭제할 이미지 ID |
-| tokenId | Header | String | O | 토큰 ID |
+| imageId | URL | String | O | Image ID to delete |
+| tokenId | Header | String | O | Token ID |
 
-#### 응답
-이 API는 응답 본문을 반환하지 않습니다.
+#### Response
+This API does not return response body.
 
 ---
 
-## 이미지 태그
-### 태그 추가하기
-지정한 이미지에 태그를 추가합니다.
+## Image Tag
+### Add Tag
+Adds a tag to the specified image.
 
 ```
 PUT /v2/images/{imageId}/tags/{tag}
 X-Auth-Token: {tokenId}
 ```
 
-#### 요청
-이 API는 요청 본문을 요구하지 않습니다.
+#### Request
+This API does not require a request body.
 
-| 이름 | 종류 | 형식 | 필수 | 설명 |
+| Name | Type | Format | Required | Description |
 |---|---|---|---|---|
-| imageId | URL | UUID | O | 태그를 추가할 이미지 ID |
-| tag | URL | String | O | 추가할 태그 이름 (영문 기준 최대 255자)<br><font color='red'>**(주의) `_`로 시작하는 태그는 사용할 수 없습니다**</font> |
-| tokenId | Header | String | O | 토큰 ID |
+| imageId | URL | UUID | O | ID of the image to add a tag |
+| tag | URL | String | O | Name of the tag to add (no more than 255 letters in English)<br><font color='red'>**(Caution) Tags starting with `_` are not allowed**</font> |
+| tokenId | Header | String | O | Token ID |
 
-#### 응답
-이 API는 응답 본문을 반환하지 않습니다.
+#### Response
+This API does not return response body.
 
 ---
 
-### 태그 제거하기
-지정한 이미지에서 태그를 제거합니다.
+### Remove Tag
+Removes a tag from the specified image.
 
 
 ```
@@ -243,30 +246,30 @@ DELETE /v2/images/{imageId}/tags/{tag}
 X-Auth-Token: {tokenId}
 ```
 
-#### 요청
-이 API는 요청 본문을 요구하지 않습니다.
+#### Request
+This API does not require a request body.
 
-| 이름 | 종류 | 형식 | 필수 | 설명 |
+| Name | Type | Format | Required | Description |
 |---|---|---|---|---|
-| imageId | URL | UUID | O | 태그를 제거할 이미지 ID |
-| tag | URL | String | O | 제거할 태그 이름 |
-| tokenId | Header | String | O | 토큰 ID |
+| imageId | URL | UUID | O | ID of the image to remove the tag |
+| tag | URL | String | O | Name of the tag to remove |
+| tokenId | Header | String | O | Token ID |
 
-#### 응답
-이 API는 응답 본문을 반환하지 않습니다.
+#### Response
+This API does not return a response body.
 
 ---
 
-## 이미지 공유
+## Image Sharing
 
-이미지 공유를 통해 자신의 테넌트에 소속된 이미지를 다른 테넌트에 공유할 수 있습니다. 이미지 공유 방법은 다음과 같습니다.
+Image sharing allows you to share images belonging to your tenant with other tenants. You can share your images as follows:
 
-1. 이미지 가시성을 `shared`로 변경합니다.
-2. 공유받을 테넌트를 이미지의 맴버로 등록합니다.
+1. Change the image visibility to `shared`.
+2. Register the tenant to share the image with as a member of the image.
 
-공유한 이미지는 공유받은 테넌트에서 바로 사용할 수 있지만 이미지 목록 조회에서는 표시되지 않습니다. **공유받은 테넌트**에서 맴버 상태를 `active`로 변경하면 공유받은 이미지가 조회됩니다.
+The shared image becomes immediately available to the target tenant, but is not displayed in the image list query. If you change the member status to `active` in **Shared Tenant**, the shared image can be queried.
 
-### 가시성 변경
+### Change Visibility
 
 ```
 PATCH /v2/images/{imageId}
@@ -274,18 +277,19 @@ X-Auth-Token: {tokenId}
 Content-Type: application/openstack-images-v2.1-json-patch
 ```
 
-#### 요청
+#### Request
 
-| 이름 | 종류 | 형식 | 필수 | 설명 |
+| Name | Type | Format | Required | Description |
 |---|---|---|---|---|
-| imageId | URL | UUID | O | 공유할 이미지 ID |
-| tokenId | Header | String | O | 토큰 ID |
-| op | Body | String | O | `replace`로 지정 |
-| path | Body | String | O | `/visibility`로 지정 |
-| value | Body | String | O | 변경할 가시성값, `private` 또는 `shared` |
+| imageId | URL | UUID | O | ID of the image to share |
+| tokenId | Header | String | O | Token ID |
+| op | Body | String | O | Specify as `replace` |
+| path | Body | String | O | Specify as `/visibility` |
+| value | Body | String | O | Visibility value to change, `private` or `shared` |
 
-<details><summary>예시</summary>
+<details><summary>Example</summary>
 <p>
+
 
 ```json
 [
@@ -300,32 +304,33 @@ Content-Type: application/openstack-images-v2.1-json-patch
 </p>
 </details>
 
-#### 응답
+#### Response
 
-이미지 보기와 동일한 응답을 반환합니다.
+Returns the same response as Get Image.
 
 ---
 
-### 맴버 추가
-공유받을 테넌트를 지정한 이미지의 맴버로 등록합니다.
+### Add Member
+Registers the tenant to share the image with as a member of the specified image.
 
 ```
 POST /v2/images/{imageId}/members
 X-Auth-Token: {tokenId}
 ```
 
-> 한 이미지의 멤버 최대 갯수는 127개로 제한됩니다.
+> The maximum number of members in an image is limited to 127.
 
-#### 요청
+#### Request
 
-| 이름 | 종류 | 형식 | 필수 | 설명 |
+| Name | Type | Format | Required | Description |
 |---|---|---|---|---|
-| imageId | URL | UUID | O | 공유할 이미지 ID |
-| tokenId | Header | String | O | 토큰 ID |
-| member | Body | String | O | 공유받을 테넌트 ID |
+| imageId | URL | UUID | O | ID of the image to share |
+| tokenId | Header | String | O | Token ID |
+| member | Body | String | O | Tenant ID to share the image with |
 
-<details><summary>예시</summary>
+<details><summary>Example</summary>
 <p>
+
 
 ```
 {
@@ -336,18 +341,19 @@ X-Auth-Token: {tokenId}
 </p>
 </details>
 
-#### 응답
+#### Response
 
-| 이름 | 종류 | 형식 | 설명 |
+| Name | Type | Format | Description |
 |---|---|---|---|
-| created_at | Body | Datetime | 맴버 생성 시각<br>`YYYY-MM-DDThh:mm:ssZ` 형식 |
-| image_id | Body | UUID | 공유한 이미지 ID |
-| member_id | Body | String | 이미지를 공유받은 테넌트 ID |
-| schema | Body | URI | 이미지 맴버에 대한 스키마 경로 |
-| status | Body | Enum | 이미지 맴버 상태<br>`pending`, `accepted` 중 하나 |
+| created_at | Body | Datetime | Member creation time<br>In  `YYYY-MM-DDThh:mm:ssZ` format |
+| image_id | Body | UUID | ID of the shared image |
+| member_id | Body | String | ID of the target tenant for image sharing |
+| schema | Body | URI | Schema path of the image member |
+| status | Body | Enum | Status of the image member<br>Either `pending` or `accepted` |
 
-<details><summary>예시</summary>
+<details><summary>Example</summary>
 <p>
+
 
 ```json
 {
@@ -365,36 +371,37 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### 맴버 목록 보기
-지정한 이미지를 공유받은 테넌트 목록을 조회합니다. 반드시 해당 이미지가 소속된 테넌트나 공유받은 테넌트의 토큰으로 요청합니다.
+### List Members
+Retrieves the list of tenants that the specified image has been shared with. The request must be made with the token of the tenant to which the image belongs or the target tenant of the image sharing.
 
 ```
 GET /v2/images/{imageId}/members
 X-Auth-Token: {tokenId}
 ```
 
-#### 요청
-이 API는 요청 본문을 요구하지 않습니다.
+#### Request
+This API does not require a request body.
 
-| 이름 | 종류 | 형식 | 필수 | 설명 |
+| Name | Type | Format | Required | Description |
 |---|---|---|---|---|
-| imageId | URL | UUID | O | 이미지 ID |
-| tokenId | Header | String | O | 토큰 ID |
+| imageId | URL | UUID | O | Image ID |
+| tokenId | Header | String | O | Token ID |
 
-#### 응답
+#### Response
 
-| 이름 | 종류 | 형식 | 설명 |
+| Name | Type | Format | Description |
 |---|---|---|---|
-| members | Body | Object | 맴버 객체 목록 |
-| members.created_at | Body | Datetime | 맴버 생성 시각 `YYYY-MM-DDThh:mm:ssZ` 형식       |
-| members.image_id | Body | UUID | 공유한 이미지 ID |
-| members.member_id | Body | String | 이미지를 공유받은 테넌트 ID |
-| members.schema | Body | URI | 이미지 맴버 스키마 경로 |
-| members.status | Body | Enum | 이미지 맴버 상태<br/>`pending`, `accepted` 중 하나 |
-| schema | Body | URI | 이미지 맴버 목록에 대한 스키마 경로 |
+| members | Body | Object | List of member objects |
+| members.created_at | Body | Datetime | Member creation time, in `YYYY-MM-DDThh:mm:ssZ` format |
+| members.image_id | Body | UUID | ID of the shared image |
+| members.member_id | Body | String | ID of the target tenant for image sharing |
+| members.schema | Body | URI | Schema path of the image member |
+| members.status | Body | Enum | Status of the image member<br/>Either `pending` or `accepted` |
+| schema | Body | URI | Schema path for the list of image members |
 
-<details><summary>예시</summary>
+<details><summary>Example</summary>
 <p>
+
 
 ```json
 {
@@ -425,35 +432,35 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### 맴버 상세 보기
+### Get Member Details
 
-지정한 이미지의 특정 맴버에 대한 상세 정보를 반환합니다. 반드시 해당 이미지가 소속된 테넌트나 공유받은 테넌트의 토큰으로 요청합니다.
+Returns details of a particular member of specified image. The request must be made with the token of the tenant to which the image belongs or the target tenant of the image sharing.
 
 ```
 GET /v2/images/{imageId}/members/{memberId}
 X-Auth-Token: {tokenId}
 ```
 
-#### 요청
-이 API는 요청 본문을 요구하지 않습니다.
+#### Request
+This API does not require a request body.
 
-| 이름 | 종류 | 형식 | 필수 | 설명 |
+| Name | Type | Format | Required | Description |
 |---|---|---|---|---|
-| imageId | URL | UUID | O | 이미지 ID |
-| memberId | URL | String | O | 맴버 ID |
-| tokenId | Header | String | O | 토큰 ID |
+| imageId | URL | UUID | O | Image ID |
+| memberId | URL | String | O | Member ID |
+| tokenId | Header | String | O | Token ID |
 
-#### 응답
+#### Response
 
-| 이름 | 종류 | 형식 | 설명 |
-|---|---|---|---|
-| created_at | Body | Datetime | 맴버 생성 시각 `YYYY-MM-DDThh:mm:ssZ` 형식 |
-| image_id | Body | UUID | 공유한 이미지 ID |
-| member_id | Body | String | 이미지를 공유받은 테넌트 ID |
-| schema | Body | URI | 이미지 맴버 스키마 경로 |
-| status | Body | Enum | 이미지 맴버 상태<br/>`pending`, `accepted` 중 하나 |
+| Name       | Type | Format   | Description                                               |
+| ---------- | ---- | -------- | --------------------------------------------------------- |
+| created_at | Body | Datetime | Member creation time in `YYYY-MM-DDThh:mm:ssZ` format |
+| image_id   | Body | UUID     | ID of the shared image                                           |
+| member_id  | Body | String   | ID of the target tenant for image sharing                               |
+| schema     | Body | URI      | Schema path of the image member                              |
+| status     | Body | Enum     | Status of the image member, either `pending` or `accepted`       |
 
-<details><summary>예시</summary>
+<details><summary>Example</summary>
 <p>
 
 ```json
@@ -472,26 +479,27 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### 맴버 상태 변경
+### Change Member Status
 
-공유받은 테넌트에서 공유받은 이미지를 승인합니다. 이미지 공유를 승인하면 이미지 목록 조회에서도 해당 이미지가 조회됩니다. 반드시 공유받은 테넌트의 토큰으로 요청합니다.
+The shared image is approved by the sharing target tenant. If the image sharing is approved, the image can be queried in the image list query. The request must be made with the sharing target tenant's token.
 
 ```
 PUT /v2/images/{imageId}/members/{memberId}
 X-Auth-Token: {tokenId}
 ```
 
-#### 요청
+#### Request
 
-| 이름 | 종류 | 형식 | 필수 | 설명 |
+| Name | Type | Format | Required | Description |
 |---|---|---|---|---|
-| imageId | URL | UUID | O | 이미지 ID |
-| memberId | URL | String | O | 맴버 ID |
-| tokenId | Header | String | O | 토큰 ID |
-| status  | Body | Enum | O | `accepted`, `pending`, `rejected` 중 하나 |
+| imageId | URL | UUID | O | Image ID |
+| memberId | URL | String | O | Member ID |
+| tokenId | Header | String | O | Token ID |
+| status  | Body | Enum | O | One of `accepted`, `pending`, or `rejected` |
 
-<details><summary>예시</summary>
+<details><summary>Example</summary>
 <p>
+
 
 ```json
 {
@@ -502,19 +510,20 @@ X-Auth-Token: {tokenId}
 </p>
 </details>
 
-#### 응답
+#### Response
 
-| 이름 | 종류 | 유형 | 설명 |
+| Name | Type | Format | Description |
 |---|---|---|---|
-| created_at | Body | Datetime | 맴버 생성 시각<br>`YYYY-MM-DDThh:mm:ssZ` 형식 |
-| image_id | Body | UUID | 공유한 이미지 ID |
-| member_id | Body | String | 이미지를 공유받은 테넌트 ID |
-| schema | Body | URI | 이미지 맴버 스키마 경로 |
-| status | Body | Enum | 이미지 맴버 상태<br>`accpeted`,`pending`,`rejected` 중 하나 |
-| updated_at | Body | Datetime | 맴버 상태 수정 시각<br>`YYYY-MM-DDThh:mm:ssZ` 형식 |
+| created_at | Body | Datetime | Member creation time<br>In `YYYY-MM-DDThh:mm:ssZ` format |
+| image_id | Body | UUID | ID of shared image |
+| member_id | Body | String | ID of the target tenant for image sharing |
+| schema | Body | URI | Schema path of the image member |
+| status | Body | Enum | Status of the image member<br>One of `accepted`,`pending`, or `rejected` |
+| updated_at | Body | Datetime | Member status modification time<br>In `YYYY-MM-DDThh:mm:ssZ` format |
 
-<details><summary>예시</summary>
+<details><summary>Example</summary>
 <p>
+
 
 
 ```json
@@ -533,23 +542,23 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### 맴버 삭제
+### Delete Member
 
-지정한 이미지의 맴버를 삭제합니다. 공유를 취소할 때 사용합니다. 반드시 지정한 이미지의 소속된 테넌트의 토큰으로 요청해야 합니다.
+Deletes a member of the specified image. This is used to cancel sharing. The request must be made with the token of the tenant to which the specified image belongs.
 
 ```
 DELETE /v2/images/{imageId}/members/{memberId}
 X-Auth-Token: {tokenId}
 ```
 
-#### 요청
-이 API는 요청 본문을 요구하지 않습니다.
+#### Request
+This API does not require a request body.
 
-| 이름 | 종류 | 형식 | 필수 | 설명 |
+| Name | Type | Format | Required | Description |
 |---|---|---|---|---|
-| imageId | URL | UUID | O | 이미지 ID |
-| memberId | URL | String | O | 맴버 ID |
-| tokenId | Header | String | O | 토큰 ID |
+| imageId | URL | UUID | O | Image ID |
+| memberId | URL | String | O | Member ID |
+| tokenId | Header | String | O | Token ID |
 
-#### 응답
-이 API는 응답 본문을 반환하지 않습니다.
+#### Response
+This API does not return a response body.

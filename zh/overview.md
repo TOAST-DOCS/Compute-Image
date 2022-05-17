@@ -1,49 +1,40 @@
-## 计算 > 镜像 > 概述
+## Compute > Image > Overview
 
-镜像是搭载操作系统和应用程序的虚拟磁盘，作为实例的系统盘使用。NHN Cloud提供了多种操作系统和应用程序的内置镜像，用户可通过修改镜像以满足其需求。
+An image, as a virtual disk, contains an operating system and application, and is used as a default disk of an instance. A default disk of an instance is created upon images and the size can be adjusted as the user configures. However, the default disk size cannot be smaller than the size of an image.
 
-实例的系统盘基于镜像创建，可根据用户设置进行伸缩。但，系统盘大小必须大于镜像大小。
+NHN Cloud provides images installed upon various operating systems and applications. Such images are: 
 
-NHN Cloud镜像特征如下：
+- Configured for optimal execution under virtual hardware; 
+- Safe from security threats as they are provided after basic security check is done. 
 
-- 适合在虚拟硬件上运行。
-- 已通过基本安全检查，安全性较高。
+User can modify default images to fit his needs. 
 
-镜像大体分为3类：
+Images are classified into three types in general: 
 
-* 公共镜像
-* 自定义镜像
-* 共享镜像
+* Public Images
+* User Images
+* Shared Images
 
-### 公共镜像
+### Public Images
 
-NHN Cloud提供公共镜像。这些镜像安装了操作系统，可以实现虚拟硬件应用最优。并且，已做好基本的安全设置，用户可以放心使用。
+Provided by NHN Cloud, public images are installed with operating systems to make the best use of virtual hardware. Security setting is also provided by default for safe use in customer services and applications. 
 
-目前NHN Cloud支持以下操作系统：
+NHN Cloud currently supports CentOS, Debian, Ubuntu, and Windows. For more information about the versions we support, refer to [NHN Cloud Service Introduction](https://toast.com/service/compute/instance).
 
-| 操作系统 | 版本 |
-|------- | ---- |
-| CentOS | 6.5<br>7.1|
-| Debian | 8.2.0 |
-| Ubuntu | 14.04<br>16.04 |
-| window | 2008R2 standard<br>2012R2 standard |
+Some images even have application programs to enable faster service implementation. In the near future, more application programs will be available as user demands. 
 
-部分镜像安装了应用程序，可帮助用户快速有效地构建服务。目前，CentOS操作系统中提供的镜像已安装MySQL数据库。
+### User Images
 
-未来，我们将根据用户需求，提供多种搭载应用程序的镜像。
+User images are modified images by user based upon public images. New application may be installed to suit for services or applications that are in use, or OS setting can be modified. 
 
-### 自定义镜像
+User images are useful for service scale-ups. To scale out services with public images, it takes a lot of time to create new instances and install services. However, with user images, once created in advance, speedier response to load hikes is available, without having to repeat the burden of installations.   
 
-自定义镜像是指用户基于公共镜像进行修改之后的镜像。用户可以根据服务需要安装新的应用程序，或更改各种操作系统的设置。
+User images can be easily created by using **Additional Functions** of Image Service or Compute Service.  For more details, refer to [Guide to Use Image Console](/Compute/Image/en/console-guide/) or [User Guide to Instance Console](/Compute/Instance/en/console-guide/).
 
-自定义镜像多用于服务扩展。当您需要扩展服务时，若使用公共镜像创建实例，再去安装服务可能需要消耗较长时间。但，如果您事先将服务所需的镜像作成自定义镜像，可以免去每次重复的繁琐设置，快速创建实例。同时，对于服务负荷激增情况也可以较快作出反应。
+### Shared Images
 
-自定义镜像可以通过Image服务和Compute服务中的**添加功能**，轻松创建。详细方法请参考[镜像控制台使用指南](/Compute/Image/zh/console-guide/)或[实例控制台使用指南](/Compute/Instance/zh/console-guide/)。
+User images can be shared with other projects by setting. Nevertheless, shared images are available between projects of a same owner only. 
 
-### 共享镜像
+### Pricing
 
-您可以将您的镜像设置为与其它项目共享。但，共享镜像只能用于同一所有者的项目之间。
-
-### 计费
-
-镜像创建后即按照创建磁盘的大小计费。
+An image is charged by the size of a created block storage from the moment it is created.  
