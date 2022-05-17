@@ -1,96 +1,126 @@
-## 计算 > 镜像 > 控制台使用指南
+## Compute > Image > Console Guide
 
-## 创建镜像
+## Create Image
 
-仅可在实例的默认磁盘中创建镜像。除u2类型的实例外，t2、m2、c2、r2、x1类型的实例支持在运行中创建镜像，但无法保障数据整合性。u2类型的实例，仅终止状态的实例可创建镜像。
+Images can be created from the default disk of an instance. In t2, m2, c2, r2, and x1 type instances except for u2 type instances, images can be created even when the instance is running, but data consistency is not guaranteed. In u2 type instances, images can be created only when the instance is stopped.
 
-若欲创建Windows实例的镜像，建议使用Sysprep完成创建镜像准备后终止实例。详细的sysprep使用方法参考[Windows Sysprep指南](#windows-sysprep)。
+To create an image of a Windows instance, it is recommended to prepare for creating an image by using Sysprep and then stop the instance. For more details on how to use Sysprep, see [Guide for Windows Sysprep](#guide-for-windows-sysprep).
 
-将运行中的Windows实例创建为镜像时，若是创建为低于2019.05.28发行版本的镜像的Windows实例，为保证运行正确，需要先行操作。创建实例的镜像的Windows版本可在**实例详细信息**的**镜像名**中确认。详细内容参考[运行中的Windows实例镜像创建指南](#windows)。
+When creating an image from a running Windows instance, prerequisites are required for correct operation if the Windows instance has been made from an image before the distribution version 2019.05.28. You can check the Windows version of the image from which an instance has been created in **Image Name** of **Instance Details**. For more details, see [Guide to Creating Images from Running Windows Instances](#guide-to-creating-images-from-running-windows-instances).
 
-## 编辑镜像
+## Modify Image
 
-更改镜像名称。
+Modify an image name.
 
-选择**Protected**属性并更新镜像可防止镜像被意外删除。如果要删除Protected 属性开启状态下的镜像，需要在镜像编辑页面中取消已选中的**Protected**属性，然后更新镜像。
+By selecting the **Protected** property and updating the image, you can prevent accidental deletion of the image. To delete an image with the Protected property selected, you must clear the **Protected** property in Modify Image and update the image.
 
-## 共享至其它项目
+## Copy to Another Region
 
-选择要共享的项目，共享镜像。
+Select the region you want to copy the image to, enter a name and description for the new image, and copy the image.
+
+## Share with Other Projects
+
+Select a project to share the image with, and share the image.
 
 
-## Windows Sysprep指南
+## Guide for Windows Sysprep
 
-如果要创建Windows镜像，需要先删除硬件信息和用户所属信息对镜像进行初始化，才可将其用于实例创建。上述过程可借助Sysprep完成，Sysprep是由Microsoft提供，用于部署Windows操作系统的系统准备工具。
+To create a Windows image, you must reset the image by removing hardware-dependent and user-dependent information so that it can be used for instance creation. Image reset can be run from Sysprep, a system preparation utility provided by Microsoft for deploying Windows OS.
 
-首先，连接到您的Windows实例，进入**App**，右键单击**命令提示符**，选择**以管理员身份运行**。
-![[图1 命令提示符
-运行]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/001_170524_800px.PNG)
+### If the original instance image version is 2018.08.18 or later
 
-在弹出的命令提示符窗口运行以下命令：
+Connect to the Windows instance and run **Powershell** as administrator.
 
+![[Figure 1 Running Powershell]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep1.png)
+
+When the Powershell window appears, run the following command:
+
+    ToastSysprep
+
+![[Figure 2 Running ToastSysprep]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep2.png)
+> [Note]
+ToastSysprep is a command that makes it easy to use Sysprep provided by NHN Cloud.
+
+Press **Y** to run a task.
+
+![[Figure 3 Proceeding with ToastSysprep]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep3.png)
+
+Once Sysprep is run, the Windows instance is automatically stopped. Confirm that the Windows instance is stopped in the NHN Cloud console, and create a custom Windows image with the [Create Image](./console-guide/#create-image) feature.
+
+Once the Windows instance is reset by using Sysprep, the password is changed to blank, so you cannot log in. When using the image creation feature, it is recommended to select the **Reset Windows Password Created by Image** option and automatically reset the password of Windows instance. You can check the reset password from instance access information.
+
+### If the original instance image version is earlier than 2018.08.18
+
+First, connect to the Windows instance. In **Apps**, right-click **Command Prompt** and click **Run as administrator**.
+![[Figure 1 Running Command Prompt]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/001_170524_800px.PNG)
+
+When the Command Prompt window appears, run the following commands:
+
+	sc config cloudbase-init start= demand
 	cd C:\Program Files\Cloudbase Solutions\Cloudbase-Init\conf
 	C:\Windows\System32\Sysprep\sysprep.exe /generalize /oobe /shutdown /unattend:Unattend.xml
 
-![[图2 Sysprep 运行]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/002_170524_800px.PNG)
+![[Figure 2. Running Sysprep]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/002_170524_800px.PNG)
 
-当Sysprep运行时，Windows实例会自动终止。在NHN Cloud控制台确认Windows实例确实终止后，便可以使用[创建镜像](./console-guide/#_1)功能创建自定义Windows镜像。
+Once Sysprep is run, the Windows instance is automatically stopped. Confirm that the Windows instance is stopped in the NHN Cloud console, and create a custom Windows image with the [Create Image](./console-guide/#create-image) feature.
 
-### Sysprep选项详情
+Once the Windows instance is reset by using Sysprep, the password is changed to blank, so you cannot log in. When using the image creation feature, it is recommended to select the **Reset Windows Password Created by Image** option and automatically reset the password of Windows instance. You can check the reset password from instance access information.
 
+### Sysprep Option Details
 
 `\generalize`
 
-删除在Windows中注册的固有系统信息。在此过程，会重置SID(Security ID)，并清除所有系统还原点和删除事件日志。当完成上述步骤后重启程序，将会显示`Windows配置步骤`。
-> [参考]
-在此阶段，您可以通过删除SID及用户信息和唯一信息，影响现有程序的执行。
+Remove unique system information registered in Windows. This step resets the Security ID (SID), clears all system restore points, and deletes the event log. After going through these steps, reboot and the ‘Windows Configuration Step’ will appear.
+> [Note]
+This step deletes SID, user information, and unique information, so the operation of existing programs may be affected.
 
 
 `\oobe`
-重启Windows进入启动模式后可以应用用户事先指定的设置。这些设置包括国家/地区设置、网络位置、语言和时区等。
+Reboot Windows to enter startup mode and apply the pre-defined settings, such as regional settings, network location, language settings, and time zone.
 
 `\shutdown`
-关闭Windows。
+Shut down Windows.
 
 `\unattend`
-重新安装Windows之后，复原上一步骤中的用户设置。在此过程中，注册Windows用户信息，安装驱动程序、更新产品以及安装其它软件。除默认设置以外，用户可以在应答文件中进行自定义设置。
+Reinstall Windows, and then restore the user settings recorded in the previous steps. This step registers Windows user information, updates drivers and products, and installs additional software. In addition to the default settings, the user can specify the desired settings in the response files.
 
-> [参考]
-NHN Cloud提供的Windows镜像应答文件位于C:\Program Files\Cloud Solutions\Cloudbase-Init\conf\Unattend.xml中。所有必要的设置都已准备就绪，除特殊用途外，无需用户进行修改。
+> [Note]
+Response files for Windows images provided by NHN Cloud are located in C:\Program Files\Cloud Solutions\Cloudbase-Init\conf\Unattend.xml. All required settings are prepared, so there is no need to modify them except for special purposes.
 
-## 运行中的Windows实例镜像创建指南
 
-利用运行中的Windows实例创建镜像时，若原实例的镜像版本低于2019.05.28，则需要进行如下先行操作。
-若为高于2019.05.28发行版本的Windows镜像，则不需要如下过程。
+## Guide to Creating Images from Running Windows Instances
 
-1.连接Windows实例后，在**应用程序**中运行**Task Scheduler**。
-![[图3 运行Task Scheudler]](http://static.toastoven.net/prod_infrastructure/compute/windows/001_190604.png)
+When creating an image with a running Windows instance, the prerequisites below are required if the image version of the original instance is earlier than 2019.05.28.
+If the image is a Windows image of 2019.05.28 distribution version or later, the process below is unnecessary.
 
-2.单击**Task Scheduler**右侧**Actions**标签的**Create Task**。
-![[图4 开始Create Task]](http://static.toastoven.net/prod_infrastructure/compute/windows/002_190604.png)
+1. Connect to the Windows instance and run **Task Scheduler** from the **Apps**.
+![[Figure 3 Running Task Scheduler]](http://static.toastoven.net/prod_infrastructure/compute/windows/001_190604.png)
 
-3.在**Create Task**窗口的**General**标签中，在**Name**中输入名称，选择**Security options**的**Run with highest privileges**后单击**Change User or Group**。
-![[图5 更改User并设置优先顺序]](http://static.toastoven.net/prod_infrastructure/compute/windows/003_190604.png)
+2. Click **Create Task** from the **Actions** tab on the right of **Task Scheduler**.
+![[Figure 4 Starting Create Task]](http://static.toastoven.net/prod_infrastructure/compute/windows/002_190604.png)
 
-4.在**Enter the object name to select**下端的输入框中输入**SYSTEM**并单击**OK**按钮。
-![[图6 设置SYSTEM用户]](http://static.toastoven.net/prod_infrastructure/compute/windows/004_190604.png)
+3. In the **General** tab of the **Create Task** window, enter a name in **Name**. Select **Run with highest privileges** in **Security options** and then click **Change User or Group**.
+![[Figure 5 Changing User and Setting Priority]](http://static.toastoven.net/prod_infrastructure/compute/windows/003_190604.png)
 
-5.在**Create Task**窗口的**Triggers**标签中单击**New**按钮，创建新的触发器(trigger)。
-![[图7 设置Trigger 1]](http://static.toastoven.net/prod_infrastructure/compute/windows/005_190604.png)
+4. In the input box below **Enter the object name to select**, enter **SYSTEM** and click **OK**.
+![[Figure 6 Setting SYSTEM User]](http://static.toastoven.net/prod_infrastructure/compute/windows/004_190604.png)
 
-6.将**Begin the task**的触发器选择为**At startup**并单击**OK**按钮，完成创建触发器。
-![[图8 设置Trigger 2]](http://static.toastoven.net/prod_infrastructure/compute/windows/006_190604.png)
+5. In the **Triggers** tab of the **Create Task** window, click **New** to create a new trigger.
+![[Figure 7 Setting Trigger 1]](http://static.toastoven.net/prod_infrastructure/compute/windows/005_190604.png)
 
-7.在**Create Task**窗口的**Actions**标签中单击**New**按钮，创建新的动作(action)。
-![[图9 设置Action 1]](http://static.toastoven.net/prod_infrastructure/compute/windows/007_190604.png)
+6. Select the trigger for **Begin the task** as **At startup** and click the **OK** button to complete the trigger creation.
+![[Figure 8 Setting Trigger 2]](http://static.toastoven.net/prod_infrastructure/compute/windows/006_190604.png)
 
-8.在**创建Action**窗口中输入如下值。
+7. In the **Actions** tab of the **Create Task** window, click the **New** button to create a new action.
+![[Figure 9 Setting Action 1]](http://static.toastoven.net/prod_infrastructure/compute/windows/007_190604.png)
+
+8. In the **New Action** window, enter the values as follows.
 
 ```
-	Program/script:C:\Windows\System32\ipconfig.exe
-	Add arguments(optional): /renew
+	Program/script: C:\Windows\System32\ipconfig.exe
+	Add arguments (optional): /renew
 ```
 
-![[图10 设置Action 2]](http://static.toastoven.net/prod_infrastructure/compute/windows/008_190604.png)
+![[Figure 10 Setting Action 2]](http://static.toastoven.net/prod_infrastructure/compute/windows/008_190604.png)
 
-9.单击**OK**按钮，关闭**New Action**窗口与**Create Task**窗口，完成日程登记。
+9. Click the **OK** button to close the **New Action** window and the **Create Task** window to complete the scheduler registration.
