@@ -9,7 +9,7 @@ The characteristics of NHN Cloud images are as follows.
 - The images are configured to run optimally on virtual hardware.
 - The images are provided with basic security checks completed, so they are safe from security threats.
 
-Images are divided into the following three main categories.
+Images are classified into the following three main categories.
 
 * Public images
 * User images

@@ -212,7 +212,7 @@ This API does not return a response body.
 
 ---
 
-## Image tag
+## Image Tag
 ### Add Tag
 Adds a tag to the specified image.
 
