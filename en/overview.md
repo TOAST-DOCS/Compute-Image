@@ -1,40 +1,42 @@
 ## Compute > Image > Overview
 
-An image, as a virtual disk, contains an operating system and application, and is used as a default disk of an instance. A default disk of an instance is created upon images and the size can be adjusted as the user configures. However, the default disk size cannot be smaller than the size of an image.
+An image is a virtual disk that contains the operating system and applications, which is used as the default disk for an instance. NHN Cloud provides images with various operating systems and applications installed by default, and the images can be modified and used according to the user's requirements.
 
-NHN Cloud provides images installed upon various operating systems and applications. Such images are: 
+An instance's default disk is created from an image and can be resized according to user settings. However, the default disk size can only be adjusted beyond the size of the image.
 
-- Configured for optimal execution under virtual hardware; 
-- Safe from security threats as they are provided after basic security check is done. 
+The characteristics of NHN Cloud images are as follows.
 
-User can modify default images to fit his needs. 
+- The images are configured to run optimally on virtual hardware.
+- The images are provided with basic security checks completed, so they are safe from security threats.
 
-Images are classified into three types in general: 
+Images are classified into the following three main categories.
 
-* Public Images
-* User Images
-* Shared Images
+* Public images
+* User images
+* Shared images
+
+**NHN Cloud does not support uploading private images.**
 
 ### Public Images
 
-Provided by NHN Cloud, public images are installed with operating systems to make the best use of virtual hardware. Security setting is also provided by default for safe use in customer services and applications. 
+Public images are images provided by NHN Cloud. These images have an operating system installed for optimal use of virtual hardware. In addition, basic security settings are in place so that you can use it with confidence in your services and applications.
 
-NHN Cloud currently supports CentOS, Debian, Ubuntu, and Windows. For more information about the versions we support, refer to [NHN Cloud Service Introduction](https://toast.com/service/compute/instance).
+NHN Cloud currently offers CentOS, Debian, Ubuntu, and Windows. For more details on operating system versions offered, refer to [NHN Cloud Service Introduction](https://toast.com/service/compute/instance).
 
-Some images even have application programs to enable faster service implementation. In the near future, more application programs will be available as user demands. 
+Some images have applications installed, so you can build services faster. In the future, we plan to provide images in which more applications are installed according to various user needs.
 
 ### User Images
 
-User images are modified images by user based upon public images. New application may be installed to suit for services or applications that are in use, or OS setting can be modified. 
+User images are images modified by the user based on public images. You can install new applications or change various operating system settings according to the service or application you are using.
 
-User images are useful for service scale-ups. To scale out services with public images, it takes a lot of time to create new instances and install services. However, with user images, once created in advance, speedier response to load hikes is available, without having to repeat the burden of installations.   
+User images are useful for service scale-out. It takes a lot of time to create new instances with a public image and install the service for service scale-out. You can respond to a surge in service load more quickly by creating a user image in advance and using it for instance creation, rather than repeating the cumbersome installation work every time.
 
-User images can be easily created by using **Additional Functions** of Image Service or Compute Service.  For more details, refer to [Guide to Use Image Console](/Compute/Image/en/console-guide/) or [User Guide to Instance Console](/Compute/Instance/en/console-guide/).
+User images can be easily created by using **Additional Functions** of the Image service or the Compute service. For details on how to create an image, see the [Image Console User Guide](/Compute/Image/en/console-guide/) or the [Instance Console User Guide](/Compute/Instance/en/console-guide/).
 
 ### Shared Images
 
-User images can be shared with other projects by setting. Nevertheless, shared images are available between projects of a same owner only. 
+You can set your images to be shared with other projects. However, shared images can only be used among projects of the same owner.
 
 ### Pricing
 
-An image is charged by the size of a created block storage from the moment it is created.  
+Users are charged for an image by the size of the created block storage from the moment the image is created.

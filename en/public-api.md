@@ -25,11 +25,11 @@ This API does not require a request body.
 |---|---|---|---|---|
 | tokenId | Header | String | O | Token ID |
 | limit | Query | Integer | - | Image count to return (default is 20) |
-| marker | Query | UUID | - | ID of the first image on the list to query <br>Query as much as the `limit` after image specified as the `marker` according to the sorting order |
+| marker | Query | UUID | - | ID of the first image on the list to query<br>Query as much as the `limit` after image specified as the `marker` according to the sorting order |
 | name | Query | String | - | Name of image to query |
-| visibility | Query | Enum | - | Visibility attribute of the image to query<br>Select only one of `public`, `private`, and `shared` <br>If left blank, list of all types of images are returned. |
+| visibility | Query | Enum | - | Visibility attribute of the image to query<br>Select only one of `public`, `private`, and `shared`<br>If left blank, list of all types of images are returned. |
 | owner | Query | String  | - | ID of the tenant to which the image to query belongs |
-| status | Query | Enum    | - | Image status to query <br>`queued`: Converting image<br>`saving`: Uploading image<br>`active`: Normal<br>`killed`: Deleting image from system<br>`deleted`: Image deleted<br>`pending_delete`: Delete Image is pending |
+| status | Query | Enum    | - | Image status to query<br>`queued`: Converting image<br>`saving`: Uploading image<br>`active`: Normal<br>`killed`: Deleting image from system<br>`deleted`: Image deleted<br>`pending_delete`: Delete Image is pending |
 | size_min | Query | Integer | - | Minimum size of image to query (bytes) |
 | size_max | Query | Integer | - | Maximum size of image to query (bytes) |
 | nhncloud_product | Query | Enum | - | Infrastructure service type of image to query<br>`compute`: Instance service image<br>`gpu`: GPU Instance service image |
@@ -41,7 +41,7 @@ This API does not require a request body.
 | Name | Type | Format | Description |
 |---|---|---|---|
 | images | Body | Array | Image list object |
-| images.status | Body | String | Image status <br>One of `queued`, `saving`, `active`, `killed`, `deleted`, and `pending_delete` |
+| images.status | Body | String | Image status<br>One of `queued`, `saving`, `active`, `killed`, `deleted`, and `pending_delete` |
 | images.name | Body | String | Image name |
 | images.tag | Body | String | Image tag<br>If you delete the `_AVAILABLE_` tag, it will not be queried in the console, so be careful not to delete the tag. |
 | images.container_format | Body | String | Image container format |
@@ -52,12 +52,12 @@ This API does not require a request body.
 | images.protected | Body | Boolean | Protect image or not<br>Cannot be modified or deleted when `protected=true` |
 | images.id | Body | UUID | Image ID |
 | images.min_ram | Body | Integer | Minimum required memory size of image (MB)<br>Available only for instances that are larger than `min_disk` |
-| images.checksum | Body | String | Hash for image content <br>Used internally for image validation |
+| images.checksum | Body | String | Hash for image content<br>Used internally for image validation |
 | images.owner | Body | String | ID of the tenant to which the image belongs |
-| images.visibility | Body | Enum | Image visibility <br>One of `public`, `private`, and `shared` |
+| images.visibility | Body | Enum | Image visibility<br>One of `public`, `private`, and `shared` |
 | images.virtual_size | Body | Integer | Virtual size of the image |
 | images.size | Body | Integer | Real size of the image (bytes) |
-| images.properties | Body | Object | Image properties object <br>Describes user-specified properties for each image in the key-value pair format |
+| images.properties | Body | Object | Image properties object<br>Describes user-specified properties for each image in the key-value pair format |
 | images.self | Body | URI | Image path |
 | images.file | Body | String | File path of image |
 | images.schema | Body | URI | Schema path of image |
@@ -67,7 +67,6 @@ This API does not require a request body.
 
 <details><summary>Example</summary>
 <p>
-
 
 ```json
 {
@@ -125,7 +124,7 @@ This API does not require a request body.
 | Name | Type | Format | Required | Description |
 |---|---|---|---|---|
 | imageId | URL | UUID | O | Image ID to query |
-| tokenId | Header | String | O | Token ID |
+| tokenId | Header | String | O | Token ID|
 
 #### Response
 
@@ -133,28 +132,27 @@ This API does not require a request body.
 |---|---|---|---|
 | image.status | Body | String | Image status |
 | image.name | Body | String | Image name |
-| image.tag | Body | String | Image tags <br>If you delete the `_AVAILABLE_` tag, it will not be queried in the console, so be careful not to delete the tag. |
+| image.tag | Body | String | Image tag<br>If you delete the `_AVAILABLE_` tag, it will not be queried in the console, so be careful not to delete the tag. |
 | image.container_format | Body | String | Image container format |
 | image.created_at | Body | Datetime | Creation time |
 | image.disk_format | Body | String | Image disk format |
 | image.updated_at | Body | Datetime | Modification time |
-| image.min_disk | Body | Integer | Minimum required disk size of image (GB)<br>Available only for instances that are larger than `min_disk` |
-| image.protected | Body | boolean | Protect image or not<br/>Cannot be modified or deleted when `protected=true` |
+| image.min_disk | Body | Integer | Minimum required disk size of image (GB)<br>Available only for volumes that are larger than `min_disk` |
+| image.protected | Body | boolean | Protect image or not<br>Cannot be modified or deleted when `protected=true` |
 | image.id | Body | UUID | Image ID |
-| image.min_ram | Body | Integer | Minimum required memory size of image (MB)<br/>Available only for instances that are larger than `min_disk` |
-| image.checksum | Body | String | Hash for image content <br/>Used internally for image validation |
+| image.min_ram | Body | Integer | Minimum required memory size of image (MB)<br>Available only for instances that are larger than `min_disk` |
+| image.checksum | Body | String | Hash for image content<br>Used internally for image validation |
 | image.owner | Body | String | ID of the tenant to which the image belongs |
 | image.visibility | Body | Enum | Image visibility<br>One of `public`, `private`, and `shared` |
 | image.virtual_size | Body | Integer | Virtual size of the image |
 | image.size | Body | Integer | Real size of the image (bytes) |
-| image.properties | Body | Object | Image properties object <br/>Describes user-specified properties for each image in the key-value pair format |
+| image.properties | Body | Object | Image properties object<br>Describes user-specified properties for each image in the key-value pair format |
 | image.self | Body | URI | Image path |
 | image.file | Body | String | File path of image |
 | image.schema | Body | URI| Schema path of image |
 
 <details><summary>Example</summary>
 <p>
-
 
 ```json
 {
@@ -210,7 +208,7 @@ This API does not require a request body.
 | tokenId | Header | String | O | Token ID |
 
 #### Response
-This API does not return response body.
+This API does not return a response body.
 
 ---
 
@@ -233,7 +231,7 @@ This API does not require a request body.
 | tokenId | Header | String | O | Token ID |
 
 #### Response
-This API does not return response body.
+This API does not return a response body.
 
 ---
 
@@ -290,7 +288,6 @@ Content-Type: application/openstack-images-v2.1-json-patch
 <details><summary>Example</summary>
 <p>
 
-
 ```json
 [
     {
@@ -331,7 +328,6 @@ X-Auth-Token: {tokenId}
 <details><summary>Example</summary>
 <p>
 
-
 ```
 {
     "member": "8989447062e04a818baf9e073fd04fa7"
@@ -345,7 +341,7 @@ X-Auth-Token: {tokenId}
 
 | Name | Type | Format | Description |
 |---|---|---|---|
-| created_at | Body | Datetime | Member creation time<br>In  `YYYY-MM-DDThh:mm:ssZ` format |
+| created_at | Body | Datetime | Member creation time<br>In `YYYY-MM-DDThh:mm:ssZ` format |
 | image_id | Body | UUID | ID of the shared image |
 | member_id | Body | String | ID of the target tenant for image sharing |
 | schema | Body | URI | Schema path of the image member |
@@ -353,7 +349,6 @@ X-Auth-Token: {tokenId}
 
 <details><summary>Example</summary>
 <p>
-
 
 ```json
 {
@@ -392,7 +387,7 @@ This API does not require a request body.
 | Name | Type | Format | Description |
 |---|---|---|---|
 | members | Body | Object | List of member objects |
-| members.created_at | Body | Datetime | Member creation time, in `YYYY-MM-DDThh:mm:ssZ` format |
+| members.created_at | Body | Datetime | Member creation time, in `YYYY-MM-DDThh:mm:ssZ` format       |
 | members.image_id | Body | UUID | ID of the shared image |
 | members.member_id | Body | String | ID of the target tenant for image sharing |
 | members.schema | Body | URI | Schema path of the image member |
@@ -401,7 +396,6 @@ This API does not require a request body.
 
 <details><summary>Example</summary>
 <p>
-
 
 ```json
 {
@@ -452,13 +446,13 @@ This API does not require a request body.
 
 #### Response
 
-| Name       | Type | Format   | Description                                               |
-| ---------- | ---- | -------- | --------------------------------------------------------- |
-| created_at | Body | Datetime | Member creation time in `YYYY-MM-DDThh:mm:ssZ` format |
-| image_id   | Body | UUID     | ID of the shared image                                           |
-| member_id  | Body | String   | ID of the target tenant for image sharing                               |
-| schema     | Body | URI      | Schema path of the image member                              |
-| status     | Body | Enum     | Status of the image member, either `pending` or `accepted`       |
+| Name | Type | Format | Description |
+|---|---|---|---|
+| created_at | Body | Datetime | Member creation time, in `YYYY-MM-DDThh:mm:ssZ` format |
+| image_id | Body | UUID | ID of the shared image |
+| member_id | Body | String | ID of the target tenant for image sharing |
+| schema | Body | URI | Schema path of the image member |
+| status | Body | Enum | Status of the image member<br/>Either `pending` or `accepted` |
 
 <details><summary>Example</summary>
 <p>
@@ -500,7 +494,6 @@ X-Auth-Token: {tokenId}
 <details><summary>Example</summary>
 <p>
 
-
 ```json
 {
     "status": "accepted"
@@ -523,7 +516,6 @@ X-Auth-Token: {tokenId}
 
 <details><summary>Example</summary>
 <p>
-
 
 
 ```json
