@@ -263,9 +263,9 @@ X-Auth-Token: {tokenId}
 이미지 공유를 통해 자신의 테넌트에 소속된 이미지를 다른 테넌트에 공유할 수 있습니다. 이미지 공유 방법은 다음과 같습니다.
 
 1. 이미지 가시성을 `shared`로 변경합니다.
-2. 공유받을 테넌트를 이미지의 맴버로 등록합니다.
+2. 공유받을 테넌트를 이미지의 멤버로 등록합니다.
 
-공유한 이미지는 공유받은 테넌트에서 바로 사용할 수 있지만 이미지 목록 조회에서는 표시되지 않습니다. **공유받은 테넌트**에서 맴버 상태를 `active`로 변경하면 공유받은 이미지가 조회됩니다.
+공유한 이미지는 공유받은 테넌트에서 바로 사용할 수 있지만 이미지 목록 조회에서는 표시되지 않습니다. **공유받은 테넌트**에서 멤버 상태를 `active`로 변경하면 공유받은 이미지가 조회됩니다.
 
 ### 가시성 변경
 
@@ -307,8 +307,8 @@ Content-Type: application/openstack-images-v2.1-json-patch
 
 ---
 
-### 맴버 추가
-공유받을 테넌트를 지정한 이미지의 맴버로 등록합니다.
+### 멤버 추가
+공유받을 테넌트를 지정한 이미지의 멤버로 등록합니다.
 
 ```
 POST /v2/images/{imageId}/members
@@ -341,11 +341,11 @@ X-Auth-Token: {tokenId}
 
 | 이름 | 종류 | 형식 | 설명 |
 |---|---|---|---|
-| created_at | Body | Datetime | 맴버 생성 시각<br>`YYYY-MM-DDThh:mm:ssZ` 형식 |
+| created_at | Body | Datetime | 멤버 생성 시각<br>`YYYY-MM-DDThh:mm:ssZ` 형식 |
 | image_id | Body | UUID | 공유한 이미지 ID |
 | member_id | Body | String | 이미지를 공유받은 테넌트 ID |
-| schema | Body | URI | 이미지 맴버에 대한 스키마 경로 |
-| status | Body | Enum | 이미지 맴버 상태<br>`pending`, `accepted` 중 하나 |
+| schema | Body | URI | 이미지 멤버에 대한 스키마 경로 |
+| status | Body | Enum | 이미지 멤버 상태<br>`pending`, `accepted` 중 하나 |
 
 <details><summary>예시</summary>
 <p>
@@ -366,7 +366,7 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### 맴버 목록 보기
+### 멤버 목록 보기
 지정한 이미지를 공유받은 테넌트 목록을 조회합니다. 반드시 해당 이미지가 소속된 테넌트나 공유받은 테넌트의 토큰으로 요청합니다.
 
 ```
@@ -386,13 +386,13 @@ X-Auth-Token: {tokenId}
 
 | 이름 | 종류 | 형식 | 설명 |
 |---|---|---|---|
-| members | Body | Object | 맴버 객체 목록 |
-| members.created_at | Body | Datetime | 맴버 생성 시각 `YYYY-MM-DDThh:mm:ssZ` 형식       |
+| members | Body | Object | 멤버 객체 목록 |
+| members.created_at | Body | Datetime | 멤버 생성 시각 `YYYY-MM-DDThh:mm:ssZ` 형식       |
 | members.image_id | Body | UUID | 공유한 이미지 ID |
 | members.member_id | Body | String | 이미지를 공유받은 테넌트 ID |
-| members.schema | Body | URI | 이미지 맴버 스키마 경로 |
-| members.status | Body | Enum | 이미지 맴버 상태<br/>`pending`, `accepted` 중 하나 |
-| schema | Body | URI | 이미지 맴버 목록에 대한 스키마 경로 |
+| members.schema | Body | URI | 이미지 멤버 스키마 경로 |
+| members.status | Body | Enum | 이미지 멤버 상태<br/>`pending`, `accepted` 중 하나 |
+| schema | Body | URI | 이미지 멤버 목록에 대한 스키마 경로 |
 
 <details><summary>예시</summary>
 <p>
@@ -426,9 +426,9 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### 맴버 상세 보기
+### 멤버 상세 보기
 
-지정한 이미지의 특정 맴버에 대한 상세 정보를 반환합니다. 반드시 해당 이미지가 소속된 테넌트나 공유받은 테넌트의 토큰으로 요청합니다.
+지정한 이미지의 특정 멤버에 대한 상세 정보를 반환합니다. 반드시 해당 이미지가 소속된 테넌트나 공유받은 테넌트의 토큰으로 요청합니다.
 
 ```
 GET /v2/images/{imageId}/members/{memberId}
@@ -441,18 +441,18 @@ X-Auth-Token: {tokenId}
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 |---|---|---|---|---|
 | imageId | URL | UUID | O | 이미지 ID |
-| memberId | URL | String | O | 맴버 ID |
+| memberId | URL | String | O | 멤버 ID |
 | tokenId | Header | String | O | 토큰 ID |
 
 #### 응답
 
 | 이름 | 종류 | 형식 | 설명 |
 |---|---|---|---|
-| created_at | Body | Datetime | 맴버 생성 시각 `YYYY-MM-DDThh:mm:ssZ` 형식 |
+| created_at | Body | Datetime | 멤버 생성 시각 `YYYY-MM-DDThh:mm:ssZ` 형식 |
 | image_id | Body | UUID | 공유한 이미지 ID |
 | member_id | Body | String | 이미지를 공유받은 테넌트 ID |
-| schema | Body | URI | 이미지 맴버 스키마 경로 |
-| status | Body | Enum | 이미지 맴버 상태<br/>`pending`, `accepted` 중 하나 |
+| schema | Body | URI | 이미지 멤버 스키마 경로 |
+| status | Body | Enum | 이미지 멤버 상태<br/>`pending`, `accepted` 중 하나 |
 
 <details><summary>예시</summary>
 <p>
@@ -473,7 +473,7 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### 맴버 상태 변경
+### 멤버 상태 변경
 
 공유받은 테넌트에서 공유받은 이미지를 승인합니다. 이미지 공유를 승인하면 이미지 목록 조회에서도 해당 이미지가 조회됩니다. 반드시 공유받은 테넌트의 토큰으로 요청합니다.
 
@@ -487,7 +487,7 @@ X-Auth-Token: {tokenId}
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 |---|---|---|---|---|
 | imageId | URL | UUID | O | 이미지 ID |
-| memberId | URL | String | O | 맴버 ID |
+| memberId | URL | String | O | 멤버 ID |
 | tokenId | Header | String | O | 토큰 ID |
 | status  | Body | Enum | O | `accepted`, `pending`, `rejected` 중 하나 |
 
@@ -507,12 +507,12 @@ X-Auth-Token: {tokenId}
 
 | 이름 | 종류 | 유형 | 설명 |
 |---|---|---|---|
-| created_at | Body | Datetime | 맴버 생성 시각<br>`YYYY-MM-DDThh:mm:ssZ` 형식 |
+| created_at | Body | Datetime | 멤버 생성 시각<br>`YYYY-MM-DDThh:mm:ssZ` 형식 |
 | image_id | Body | UUID | 공유한 이미지 ID |
 | member_id | Body | String | 이미지를 공유받은 테넌트 ID |
-| schema | Body | URI | 이미지 맴버 스키마 경로 |
-| status | Body | Enum | 이미지 맴버 상태<br>`accpeted`,`pending`,`rejected` 중 하나 |
-| updated_at | Body | Datetime | 맴버 상태 수정 시각<br>`YYYY-MM-DDThh:mm:ssZ` 형식 |
+| schema | Body | URI | 이미지 멤버 스키마 경로 |
+| status | Body | Enum | 이미지 멤버 상태<br>`accpeted`,`pending`,`rejected` 중 하나 |
+| updated_at | Body | Datetime | 멤버 상태 수정 시각<br>`YYYY-MM-DDThh:mm:ssZ` 형식 |
 
 <details><summary>예시</summary>
 <p>
@@ -534,9 +534,9 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### 맴버 삭제
+### 멤버 삭제
 
-지정한 이미지의 맴버를 삭제합니다. 공유를 취소할 때 사용합니다. 반드시 지정한 이미지의 소속된 테넌트의 토큰으로 요청해야 합니다.
+지정한 이미지의 멤버를 삭제합니다. 공유를 취소할 때 사용합니다. 반드시 지정한 이미지의 소속된 테넌트의 토큰으로 요청해야 합니다.
 
 ```
 DELETE /v2/images/{imageId}/members/{memberId}
@@ -549,7 +549,7 @@ X-Auth-Token: {tokenId}
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 |---|---|---|---|---|
 | imageId | URL | UUID | O | 이미지 ID |
-| memberId | URL | String | O | 맴버 ID |
+| memberId | URL | String | O | 멤버 ID |
 | tokenId | Header | String | O | 토큰 ID |
 
 #### 응답
