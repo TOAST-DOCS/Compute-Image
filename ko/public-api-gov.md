@@ -129,26 +129,26 @@ X-Auth-Token: {tokenId}
 
 | 이름 | 종류 | 형식 | 설명 |
 |---|---|---|---|
-| image.status | Body | String | 이미지 상태 |
-| image.name | Body | String | 이미지 이름 |
-| image.tag | Body | String | 이미지 태그<br>`_AVAILABLE_` 태그를 삭제하면 콘솔에서는 조회되지 않으므로, 태그를 삭제하지 않도록 주의 |
-| image.container_format | Body | String | 이미지 컨테이너 포맷 |
-| image.created_at | Body | Datetime | 생성 시각 |
-| image.disk_format | Body | String | 이미지 디스크 포맷 |
-| image.updated_at | Body | Datetime | 수정 시각 |
-| image.min_disk | Body | Integer | 이미지 최소 디스크 요구량(GB)<br>`min_disk`값보다 큰 볼륨에서만 사용할 수 있음 |
-| image.protected | Body | boolean | 이미지 보호 여부<br>`protected=true`인 경우 수정 및 삭제가 불가 |
-| image.id | Body | UUID | 이미지 ID |
-| image.min_ram | Body | Integer | 이미지 최소 메모리 요구량(MB)<br>`min_disk`값보다 큰 인스턴스에서만 사용할 수 있음 |
-| image.checksum | Body | String | 이미지 내용의 해시값<br>내부적으로 이미지 유효성 검증을 위해 사용 |
-| image.owner | Body | String | 이미지가 속한 테넌트 ID |
-| image.visibility | Body | Enum | 이미지 가시성<br>`public`, `private`, `shared` 중 하나 |
-| image.virtual_size | Body | Integer | 이미지 가상 크기 |
-| image.size | Body | Integer | 이미지 실제 크기(바이트) |
-| image.properties | Body | Object | 이미지 속성 객체<br>이미지별 사용자 지정 속성을 키-값 쌍 형태로 기술 |
-| image.self | Body | URI | 이미지 경로 |
-| image.file | Body | String | 이미지 파일 경로 |
-| image.schema | Body | URI| 이미지 스키마 경로 |
+| status | Body | String | 이미지 상태 |
+| name | Body | String | 이미지 이름 |
+| tag | Body | String | 이미지 태그<br>`_AVAILABLE_` 태그를 삭제하면 콘솔에서는 조회되지 않으므로, 태그를 삭제하지 않도록 주의 |
+| container_format | Body | String | 이미지 컨테이너 포맷 |
+| created_at | Body | Datetime | 생성 시각 |
+| disk_format | Body | String | 이미지 디스크 포맷 |
+| updated_at | Body | Datetime | 수정 시각 |
+| min_disk | Body | Integer | 이미지 최소 디스크 요구량(GB)<br>`min_disk`값보다 큰 볼륨에서만 사용할 수 있음 |
+| protected | Body | boolean | 이미지 보호 여부<br>`protected=true`인 경우 수정 및 삭제가 불가 |
+| id | Body | UUID | 이미지 ID |
+| min_ram | Body | Integer | 이미지 최소 메모리 요구량(MB)<br>`min_disk`값보다 큰 인스턴스에서만 사용할 수 있음 |
+| checksum | Body | String | 이미지 내용의 해시값<br>내부적으로 이미지 유효성 검증을 위해 사용 |
+| owner | Body | String | 이미지가 속한 테넌트 ID |
+| visibility | Body | Enum | 이미지 가시성<br>`public`, `private`, `shared` 중 하나 |
+| virtual_size | Body | Integer | 이미지 가상 크기 |
+| size | Body | Integer | 이미지 실제 크기(바이트) |
+| properties | Body | Object | 이미지 속성 객체<br>이미지별 사용자 지정 속성을 키-값 쌍 형태로 기술 |
+| self | Body | URI | 이미지 경로 |
+| file | Body | String | 이미지 파일 경로 |
+| schema | Body | URI| 이미지 스키마 경로 |
 
 <details><summary>예시</summary>
 <p>
