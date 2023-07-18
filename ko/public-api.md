@@ -554,3 +554,48 @@ X-Auth-Token: {tokenId}
 
 #### 응답
 이 API는 응답 본문을 반환하지 않습니다.
+
+---
+
+## 이미지 업로드/다운로드
+
+### 이미지 업로드
+
+지정한 이미지에 실제 이미지 파일을 업로드 합니다.
+
+```
+PUT /v2/images/{imageId}/file
+X-Auth-Token: {tokenId}
+Content-Type: application/octet-stream
+```
+
+#### 요청
+요청 시 Header의 Content-Type을 application/octet-stream 으로 설정해야 합니다.
+
+| 이름 | 종류 | 형식 | 필수 | 설명 |
+|---|---|---|---|---|
+| imageId | URL | UUID | O | 이미지 ID |
+| tokenId | Header | String | O | 토큰 ID |
+| -       | Body | Binary | O | 업로드할 이미지 파일의 바이너리 데이터 |
+
+#### 응답
+이 API는 응답 본문을 반환하지 않습니다. 요청이 올바르면 상태 코드 204를 반환합니다.
+
+### 이미지 다운로드
+
+지정한 이미지의 바이너리 데이터를 다운로드 합니다.
+
+```
+GET /v2/images/{imageId}/file
+X-Auth-Token: {tokenId}
+```
+
+#### 요청
+| 이름 | 종류 | 형식 | 필수 | 설명 |
+|---|---|---|---|---|
+| imageId | URL | UUID | O | 이미지 ID |
+| tokenId | Header | String | O | 토큰 ID |
+
+#### 응답
+이미지의 바이너리 데이터가 반환됩니다. 요청이 올바르면 상태 코드 200을 반환합니다.
+
