@@ -48,10 +48,10 @@ X-Auth-Token: {tokenId}
 | images.created_at | Body | Datetime | 생성 시각 |
 | images.disk_format | Body | String | 이미지 디스크 포맷 |
 | images.updated_at | Body | Datetime | 수정 시각 |
-| images.min_disk | Body | Integer | 이미지 최소 디스크 요구량(GB)<br>`min_disk`값보다 큰 볼륨에서만 사용할 수 있음 |
+| images.min_disk | Body | Integer | 이미지 최소 디스크 요구량(GB)<br>`min_disk` 값보다 큰 볼륨에서만 사용할 수 있음 |
 | images.protected | Body | Boolean | 이미지 보호 여부<br>`protected=true`인 경우 수정 및 삭제 불가 |
 | images.id | Body | UUID | 이미지 ID |
-| images.min_ram | Body | Integer | 이미지 최소 메모리 요구량(MB)<br>`min_disk`값보다 큰 인스턴스에서만 사용할 수 있음 |
+| images.min_ram | Body | Integer | 이미지 최소 메모리 요구량(MB)<br>`min_disk` 값보다 큰 인스턴스에서만 사용할 수 있음 |
 | images.checksum | Body | String | 이미지 내용 해시값<br>내부적으로 이미지 유효성 검증을 위해 사용 |
 | images.owner | Body | String | 이미지가 속한 테넌트 ID |
 | images.visibility | Body | Enum | 이미지 가시성<br>`public`, `private`, `shared` 중 하나 |
@@ -137,10 +137,10 @@ X-Auth-Token: {tokenId}
 | created_at | Body | Datetime | 생성 시각 |
 | disk_format | Body | String | 이미지 디스크 포맷 |
 | updated_at | Body | Datetime | 수정 시각 |
-| min_disk | Body | Integer | 이미지 최소 디스크 요구량(GB)<br>`min_disk`값보다 큰 볼륨에서만 사용할 수 있음 |
-| protected | Body | Boolean | 이미지 보호 여부<br>`protected=true`인 경우 수정 및 삭제가 불가 |
+| min_disk | Body | Integer | 이미지 최소 디스크 요구량(GB)<br>`min_disk` 값보다 큰 볼륨에서만 사용할 수 있음 |
+| protected | Body | Boolean | 이미지 보호 여부<br>`protected=true`인 경우 수정 및 삭제 불가 |
 | id | Body | UUID | 이미지 ID |
-| min_ram | Body | Integer | 이미지 최소 메모리 요구량(MB)<br>`min_disk`값보다 큰 인스턴스에서만 사용할 수 있음 |
+| min_ram | Body | Integer | 이미지 최소 메모리 요구량(MB)<br>`min_disk` 값보다 큰 인스턴스에서만 사용할 수 있음 |
 | checksum | Body | String | 이미지 내용의 해시값<br>내부적으로 이미지 유효성 검증을 위해 사용 |
 | owner | Body | String | 이미지가 속한 테넌트 ID |
 | visibility | Body | Enum | 이미지 가시성<br>`public`, `private`, `shared` 중 하나 |
@@ -233,10 +233,10 @@ X-Auth-Token: {tokenId}
 | created_at | Body | Datetime | 생성 시각 |
 | disk_format | Body | String | 이미지 디스크 포맷 |
 | updated_at | Body | Datetime | 수정 시각 |
-| min_disk | Body | Integer | 이미지 최소 디스크 요구량(GB)<br>`min_disk`값보다 큰 볼륨에서만 사용할 수 있음 |
-| protected | Body | Boolean | 이미지 보호 여부<br>`protected=true`인 경우 수정 및 삭제가 불가 |
+| min_disk | Body | Integer | 이미지 최소 디스크 요구량(GB)<br>`min_disk` 값보다 큰 볼륨에서만 사용할 수 있음 |
+| protected | Body | Boolean | 이미지 보호 여부<br>`protected=true`인 경우 수정 및 삭제 불가 |
 | id | Body | UUID | 이미지 ID |
-| min_ram | Body | Integer | 이미지 최소 메모리 요구량(MB)<br>`min_disk`값보다 큰 인스턴스에서만 사용할 수 있음 |
+| min_ram | Body | Integer | 이미지 최소 메모리 요구량(MB)<br>`min_disk` 값보다 큰 인스턴스에서만 사용할 수 있음 |
 | checksum | Body | String | 이미지 내용의 해시값<br>내부적으로 이미지 유효성 검증을 위해 사용 |
 | owner | Body | String | 이미지가 속한 테넌트 ID |
 | visibility | Body | Enum | 이미지 가시성<br>`public`, `private`, `shared` 중 하나 |
@@ -285,7 +285,7 @@ X-Auth-Token: {tokenId}
 
 ### 이미지 업로드
 
-지정한 이미지에 실제 이미지 파일을 업로드 합니다.
+지정한 이미지에 실제 이미지 파일을 업로드합니다.
 
 ```
 PUT /v2/images/{imageId}/file
@@ -294,7 +294,7 @@ Content-Type: application/octet-stream
 ```
 
 #### 요청
-요청 시 Header의 Content-Type을 application/octet-stream 으로 설정해야 합니다.
+요청 시 Header의 Content-Type을 application/octet-stream으로 설정해야 합니다.
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 |---|---|---|---|---|
@@ -309,7 +309,7 @@ Content-Type: application/octet-stream
 
 ### 이미지 다운로드
 
-지정한 이미지의 바이너리 데이터를 다운로드 합니다.
+지정한 이미지의 바이너리 데이터를 다운로드합니다.
 
 ```
 GET /v2/images/{imageId}/file
