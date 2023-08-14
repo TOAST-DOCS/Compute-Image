@@ -479,7 +479,7 @@ X-Auth-Token: {tokenId}
 | Name | Type | Format | Description |
 |---|---|---|---|
 | created_at | Body | Datetime | Member creation time<br>In `YYYY-MM-DDThh:mm:ssZ` format |
-| image_id | Body | UUID | ID of shared image |
+| image_id | Body | UUID | ID of the shared image |
 | member_id | Body | String | ID of the target tenant for image sharing |
 | schema | Body | URI | Schema path of the image member |
 | status | Body | Enum | Status of the image member<br>Either `pending` or `accepted` |
@@ -525,7 +525,7 @@ This API does not require a request body.
 |---|---|---|---|
 | members | Body | Object | List of member objects |
 | members.created_at | Body | Datetime | Member creation time, in `YYYY-MM-DDThh:mm:ssZ` format       |
-| members.image_id | Body | UUID | ID of shared image |
+| members.image_id | Body | UUID | ID of the shared image |
 | members.member_id | Body | String | ID of the target tenant for image sharing |
 | members.schema | Body | URI | Schema path of the image member |
 | members.status | Body | Enum | Status of the image member<br/>Either `pending` or `accepted` |
@@ -586,7 +586,7 @@ This API does not require a request body.
 | Name | Type | Format | Description |
 |---|---|---|---|
 | created_at | Body | Datetime | Member creation time, in `YYYY-MM-DDThh:mm:ssZ` format |
-| image_id | Body | UUID | ID of shared image |
+| image_id | Body | UUID | ID of the shared image |
 | member_id | Body | String | ID of the target tenant for image sharing |
 | schema | Body | URI | Schema path of the image member |
 | status | Body | Enum | Status of the image member<br/>Either `pending` or `accepted` |
@@ -645,7 +645,7 @@ X-Auth-Token: {tokenId}
 | Name | Type | Format | Description |
 |---|---|---|---|
 | created_at | Body | Datetime | Member creation time<br>In `YYYY-MM-DDThh:mm:ssZ` format |
-| image_id | Body | UUID | ID of shared image |
+| image_id | Body | UUID | ID of the shared image |
 | member_id | Body | String | ID of the target tenant for image sharing |
 | schema | Body | URI | Schema path of the image member |
 | status | Body | Enum | Status of the image member<br>One of `accepted`,`pending`, or `rejected` |
