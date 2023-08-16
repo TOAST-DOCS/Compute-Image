@@ -48,7 +48,7 @@ X-Auth-Token: {tokenId}
 | images.created_at | Body | Datetime | 생성 시각 |
 | images.disk_format | Body | String | 이미지 디스크 포맷 |
 | images.updated_at | Body | Datetime | 수정 시각 |
-| images.min_disk | Body | Integer | 이미지 최소 디스크 요구량(GB)<br>`min_disk` 값보다 큰 볼륨에서만 사용할 수 있음 |
+| images.min_disk | Body | Integer | 이미지 최소 디스크 요구량(GB)<br>`min_disk` 값보다 큰 블록 스토리지에서만 사용할 수 있음 |
 | images.protected | Body | Boolean | 이미지 보호 여부<br>`protected=true`인 경우 수정 및 삭제 불가 |
 | images.id | Body | UUID | 이미지 ID |
 | images.min_ram | Body | Integer | 이미지 최소 메모리 요구량(MB)<br>`min_disk` 값보다 큰 인스턴스에서만 사용할 수 있음 |
@@ -137,7 +137,7 @@ X-Auth-Token: {tokenId}
 | created_at | Body | Datetime | 생성 시각 |
 | disk_format | Body | String | 이미지 디스크 포맷 |
 | updated_at | Body | Datetime | 수정 시각 |
-| min_disk | Body | Integer | 이미지 최소 디스크 요구량(GB)<br>`min_disk` 값보다 큰 볼륨에서만 사용할 수 있음 |
+| min_disk | Body | Integer | 이미지 최소 디스크 요구량(GB)<br>`min_disk` 값보다 큰 블록 스토리지에서만 사용할 수 있음 |
 | protected | Body | Boolean | 이미지 보호 여부<br>`protected=true`인 경우 수정 및 삭제 불가 |
 | id | Body | UUID | 이미지 ID |
 | min_ram | Body | Integer | 이미지 최소 메모리 요구량(MB)<br>`min_disk` 값보다 큰 인스턴스에서만 사용할 수 있음 |
@@ -233,7 +233,7 @@ X-Auth-Token: {tokenId}
 | created_at | Body | Datetime | 생성 시각 |
 | disk_format | Body | String | 이미지 디스크 포맷 |
 | updated_at | Body | Datetime | 수정 시각 |
-| min_disk | Body | Integer | 이미지 최소 디스크 요구량(GB)<br>`min_disk` 값보다 큰 볼륨에서만 사용할 수 있음 |
+| min_disk | Body | Integer | 이미지 최소 디스크 요구량(GB)<br>`min_disk` 값보다 큰 블록 스토리지에서만 사용할 수 있음 |
 | protected | Body | Boolean | 이미지 보호 여부<br>`protected=true`인 경우 수정 및 삭제 불가 |
 | id | Body | UUID | 이미지 ID |
 | min_ram | Body | Integer | 이미지 최소 메모리 요구량(MB)<br>`min_disk` 값보다 큰 인스턴스에서만 사용할 수 있음 |
