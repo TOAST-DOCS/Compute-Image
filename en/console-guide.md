@@ -4,6 +4,8 @@
 
 Images can be created from the default disk of an instance. In t2, m2, c2, r2, and x1 type instances except for u2 type instances, images can be created even when the instance is running, but data consistency is not guaranteed. In u2 type instances, images can be created only when the instance is stopped.
 
+To create an image of a Linux instance, it is recommended to avoid duplication by initializing the machine-id. For more details on initialization of machine-id, see [Guide for Initialization of Linux machine-id](#Linux-machineid).
+
 To create an image of a Windows instance, it is recommended to prepare for creating an image by using Sysprep and then stop the instance. For more details on how to use Sysprep, see [Guide for Windows Sysprep](#guide-for-windows-sysprep).
 
 When creating an image from a running Windows instance, prerequisites are required for correct operation if the Windows instance has been made from an image before the distribution version 2019.05.28. You can check the Windows version of the image from which an instance has been created in **Image Name** of **Instance Details**. For more details, see [Guide to Creating Images from Running Windows Instances](#guide-to-creating-images-from-running-windows-instances).
@@ -22,15 +24,21 @@ Select the region you want to copy the image to, enter a name and description fo
 
 Select a project to share the image with, and share the image.
 
+## Guide for Initialization of Linux machine-id
+
+When creating a Linux user image to create an instance from the image, unexpected issues may occur due to duplicate machine-ids.
+You can avoid duplication by initializing the machine-id before creating a user image.
+
+	$ sudo sh -c "echo -n > /etc/machine-id"
+	$ sudo rm /var/lib/dbus/machine-id
+	$ sudo ln -s /etc/machine-id /var/lib/dbus/machine-id
 
 ## Guide for Windows Sysprep
 
 To create a Windows image, you must reset the image by removing hardware-dependent and user-dependent information so that it can be used for instance creation. Image reset can be run from Sysprep, a system preparation utility provided by Microsoft for deploying Windows OS.
 
 ### If the original instance image version is 2018.08.18 or later
-
 Connect to the Windows instance and run **Powershell** as administrator.
-
 ![[Figure 1 Running Powershell]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep1.png)
 
 When the Powershell window appears, run the following command:
@@ -42,7 +50,6 @@ When the Powershell window appears, run the following command:
 ToastSysprep is a command that makes it easy to use Sysprep provided by NHN Cloud.
 
 Press **Y** to run a task.
-
 ![[Figure 3 Proceeding with ToastSysprep]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep3.png)
 
 Once Sysprep is run, the Windows instance is automatically stopped. Confirm that the Windows instance is stopped in the NHN Cloud console, and create a custom Windows image with the [Create Image](./console-guide/#create-image) feature.
@@ -67,6 +74,7 @@ Once Sysprep is run, the Windows instance is automatically stopped. Confirm that
 Once the Windows instance is reset by using Sysprep, the password is changed to blank, so you cannot log in. When using the image creation feature, it is recommended to select the **Reset Windows Password Created by Image** option and automatically reset the password of Windows instance. You can check the reset password from instance access information.
 
 ### Sysprep Option Details
+
 
 `\generalize`
 
