@@ -43,7 +43,7 @@ X-Auth-Token: {tokenId}
 | images | Body | Array | イメージリストオブジェクト |
 | images.status | Body | String | イメージの状態<br>`queued`、`saving`、`active`、`killed`、`deleted`、`pending_delete`のいずれか1つ。 |
 | images.name | Body | String | イメージの名前 |
-| images.tag | Body | String | イメージタグ<br>`_AVAILABLE_`タグを削除すると、コンソールでは照会できないため、タグを削除しないでください。 |
+| images.tags | Body | Array | イメージタグリスト<br>`_AVAILABLE_`タグを削除すると、コンソールでは照会できないため、タグを削除しないでください。 |
 | images.container_format | Body | String | イメージコンテナフォーマット |
 | images.created_at | Body | Datetime | 作成時刻 |
 | images.disk_format | Body | String | イメージディスクフォーマット |
@@ -130,26 +130,26 @@ X-Auth-Token: {tokenId}
 
 | 名前 | 種類 | 形式 | 説明 |
 |---|---|---|---|
-| image.status | Body | String | イメージの状態 |
-| image.name | Body | String | イメージの名前 |
-| image.tag | Body | String | イメージタグ<br>`_AVAILABLE_`タグを削除すると、コンソールでは照会されないため、タグを削除しないでください。 |
-| image.container_format | Body | String | イメージコンテナフォーマット |
-| image.created_at | Body | Datetime | 作成時刻 |
-| image.disk_format | Body | String | イメージディスクフォーマット |
-| image.updated_at | Body | Datetime | 修正時刻 |
-| image.min_disk | Body | Integer | イメージ最小ディスク要求量(GB)<br>`min_disk`の値より大きいボリュームでのみ使用できる |
-| image.protected | Body | boolean | イメージ保護有無<br>`protected=true`の場合、修正および削除不可 |
-| image.id | Body | UUID | イメージID |
-| image.min_ram | Body | Integer | イメージ最小メモリ要求量(MB)<br>`min_disk`の値より大きいインスタンスでのみ使用できる |
-| image.checksum | Body | String | イメージ内容のハッシュ値<br>内部的にイメージの有効性を検証するために使用 |
-| image.owner | Body | String | イメージが属しているテナントID |
-| image.visibility | Body | Enum | イメージの可視性<br>`public`、`private`、`shared`のいずれか1つ。 |
-| image.virtual_size | Body | Integer | イメージの仮想サイズ |
-| image.size | Body | Integer | イメージの実際のサイズ(Byte) |
-| image.properties | Body | Object | イメージプロパティオブジェクト<br>イメージごとにユーザー指定プロパティをキーと値のペアで記述 |
-| image.self | Body | URI | イメージのパス |
-| image.file | Body | String | イメージファイルのパス |
-| image.schema | Body | URI | イメージスキーマのパス |
+| status | Body | String | イメージの状態 |
+| name | Body | String | イメージの名前 |
+| tag | Body | String | イメージタグ<br>`_AVAILABLE_`タグを削除すると、コンソールでは照会されないため、タグを削除しないでください。 |
+| container_format | Body | String | イメージコンテナフォーマット |
+| created_at | Body | Datetime | 作成時刻 |
+| disk_format | Body | String | イメージディスクフォーマット |
+| updated_at | Body | Datetime | 修正時刻 |
+| min_disk | Body | Integer | イメージ最小ディスク要求量(GB)<br>`min_disk`の値より大きいボリュームでのみ使用できる |
+| protected | Body | boolean | イメージ保護有無<br>`protected=true`の場合、修正および削除不可 |
+| id | Body | UUID | イメージID |
+| min_ram | Body | Integer | イメージ最小メモリ要求量(MB)<br>`min_disk`の値より大きいインスタンスでのみ使用できる |
+| checksum | Body | String | イメージ内容のハッシュ値<br>内部的にイメージの有効性を検証するために使用 |
+| owner | Body | String | イメージが属しているテナントID |
+| visibility | Body | Enum | イメージの可視性<br>`public`、`private`、`shared`のいずれか1つ。 |
+| virtual_size | Body | Integer | イメージの仮想サイズ |
+| size | Body | Integer | イメージの実際のサイズ(Byte) |
+| properties | Body | Object | イメージプロパティオブジェクト<br>イメージごとにユーザー指定プロパティをキーと値のペアで記述 |
+| self | Body | URI | イメージのパス |
+| file | Body | String | イメージファイルのパス |
+| schema | Body | URI | イメージスキーマのパス |
 
 <details><summary>例</summary>
 <p>
@@ -187,6 +187,143 @@ X-Auth-Token: {tokenId}
 
 </p>
 </details>
+
+---
+
+### イメージ作成
+
+```
+POST /v2/images
+X-Auth-Token: {tokenId}
+```
+
+#### リクエスト
+| 名前 | 種類 | 形式 | 必須 | 説明 |
+|---|---|---|---|---|
+| tokenId | Header | String | O | トークンID |
+| container_format | Body | String | - | イメージコンテナフォーマット |
+| disk_format | Body | String | - | イメージディスクフォーマット |
+| min_disk | Body | Integer | - | イメージ最小ディスク要求量(GB) |
+| min_ram | Body | Integer | - | イメージ最小メモリ要求量(MB) |
+| protected | Body | Boolean | - | イメージ保護有無、trueまたはfalse |
+| tags | Body | Array | - | イメージタグリスト<br>`_AVAILABLE_`タグを削除するとコンソールでは照会できないため、タグを削除しないように注意 |
+| visibility | Body | String | - | イメージ可視性<br>`public`、`private`、`shared`のいずれか |
+
+<details><summary>例</summary>
+<p>
+
+```json
+{
+    "container_format": "bare",
+    "disk_format": "raw",
+    "name": "Ubuntu",
+}
+```
+
+<p>
+</details>
+
+#### レスポンス
+| 名前 | 種類 | 形式 | 説明 |
+|---|---|---|---|
+| status | Body | String | イメージ状態<br>`queued`, `saving`, `active`, `killed`, `deleted`, `pending_delete`のいずれか |
+| name | Body | String | イメージの名前 |
+| tag | Body | String | イメージタグ<br>`_AVAILABLE_`タグを削除すると、コンソールでは照会されないため、タグを削除しないでください。 |
+| container_format | Body | String | イメージコンテナフォーマット |
+| created_at | Body | Datetime | 作成時刻 |
+| disk_format | Body | String | イメージディスクフォーマット |
+| updated_at | Body | Datetime | 修正時刻 |
+| min_disk | Body | Integer | イメージ最小ディスク要求量(GB)<br>`min_disk`の値より大きいボリュームでのみ使用できる |
+| protected | Body | boolean | イメージ保護有無<br>`protected=true`の場合、修正および削除不可 |
+| id | Body | UUID | イメージID |
+| min_ram | Body | Integer | イメージ最小メモリ要求量(MB)<br>`min_disk`の値より大きいインスタンスでのみ使用できる |
+| checksum | Body | String | イメージ内容のハッシュ値<br>内部的にイメージの有効性を検証するために使用 |
+| owner | Body | String | イメージが属しているテナントID |
+| visibility | Body | Enum | イメージの可視性<br>`public`、`private`、`shared`のいずれか1つ。 |
+| virtual_size | Body | Integer | イメージの仮想サイズ |
+| size | Body | Integer | イメージの実際のサイズ(Byte) |
+| properties | Body | Object | イメージプロパティオブジェクト<br>イメージごとにユーザー指定プロパティをキーと値のペアで記述 |
+| self | Body | URI | イメージのパス |
+| file | Body | String | イメージファイルのパス |
+| schema | Body | URI | イメージスキーマのパス |
+
+<details><summary>例</summary>
+<p>
+
+```json
+{
+    "status": "queued",
+    "name": "Ubuntu",
+    "tags": [],
+    "container_format": "bare",
+    "created_at": "2015-11-29T22:21:42Z",
+    "size": null,
+    "disk_format": "raw",
+    "updated_at": "2015-11-29T22:21:42Z",
+    "visibility": "private",
+    "locations": [],
+    "self": "/v2/images/b2173dd3-7ad6-4362-baa6-a68bce3565cb",
+    "min_disk": 0,
+    "protected": false,
+    "id": "b2173dd3-7ad6-4362-baa6-a68bce3565cb",
+    "file": "/v2/images/b2173dd3-7ad6-4362-baa6-a68bce3565cb/file",
+    "checksum": null,
+    "os_hash_algo": null,
+    "os_hash_value": null,
+    "os_hidden": false,
+    "owner": "bab7d5c60cd041a0a36f7c4b6e1dd978",
+    "virtual_size": null,
+    "min_ram": 0,
+    "schema": "/v2/schemas/image"
+}
+```
+
+<p>
+</details>
+
+---
+
+### イメージアップロード
+
+指定したイメージに実際のイメージファイルをアップロードします。
+
+```
+PUT /v2/images/{imageId}/file
+X-Auth-Token: {tokenId}
+Content-Type: application/octet-stream
+```
+
+#### リクエスト
+リクエスト時、HeaderのContent-Typeをapplication/octet-streamに設定する必要があります。
+
+| 名前 | 種類 | 形式 | 必須 | 説明 |
+|---|---|---|---|---|
+| imageId | URL | UUID | O | イメージID |
+| tokenId | Header | String | O | トークンID |
+| -       | Body | Binary | O | アップロードするイメージファイルのバイナリデータ |
+
+#### レスポンス
+このAPIはレスポンス本文を返しません。リクエストが正しい場合はステータスコード204を返します。
+
+---
+
+### イメージダウンロード
+
+指定したイメージのバイナリデータをダウンロードします。
+
+```
+GET /v2/images/{imageId}/file
+X-Auth-Token: {tokenId}
+```
+
+#### リクエスト
+| 名前 | 種類 | 形式 | 必須 | 説明 |
+|---|---|---|---|---|
+| imageId | URL | UUID | O | イメージID |
+| tokenId | Header | String | O | トークンID |
+
+#### レスポンス
+イメージのバイナリデータが返されます。リクエストが正しい場合、ステータスコード200を返します。
 
 ---
 
