@@ -48,7 +48,7 @@ X-Auth-Token: {tokenId}
 | images.created_at | Body | Datetime | 作成時刻 |
 | images.disk_format | Body | String | イメージディスクフォーマット |
 | images.updated_at | Body | Datetime | 修正時刻 |
-| images.min_disk | Body | Integer | イメージの最小ディスク要求量(GB)<br>`min_disk`の値より大きいボリュームでのみ使用できる。 |
+| images.min_disk | Body | Integer | イメージの最小ディスク要求量(GB)<br>`min_disk`の値より大きいブロックストレージでのみ使用できる。 |
 | images.protected | Body | Boolean | イメージの保護有無<br>`protected=true`の場合、修正および削除不可 |
 | images.id | Body | UUID | イメージID |
 | images.min_ram | Body | Integer | イメージ最小メモリ要求量(MB)<br>`min_disk`の値より大きいインスタンスでのみ使用できる |
@@ -137,7 +137,7 @@ X-Auth-Token: {tokenId}
 | created_at | Body | Datetime | 作成時刻 |
 | disk_format | Body | String | イメージディスクフォーマット |
 | updated_at | Body | Datetime | 修正時刻 |
-| min_disk | Body | Integer | イメージ最小ディスク要求量(GB)<br>`min_disk`の値より大きいボリュームでのみ使用できる |
+| min_disk | Body | Integer | イメージ最小ディスク要求量(GB)<br>`min_disk`の値より大きいブロックストレージでのみ使用できる |
 | protected | Body | boolean | イメージ保護有無<br>`protected=true`の場合、修正および削除不可 |
 | id | Body | UUID | イメージID |
 | min_ram | Body | Integer | イメージ最小メモリ要求量(MB)<br>`min_disk`の値より大きいインスタンスでのみ使用できる |
@@ -233,7 +233,7 @@ X-Auth-Token: {tokenId}
 | created_at | Body | Datetime | 作成時刻 |
 | disk_format | Body | String | イメージディスクフォーマット |
 | updated_at | Body | Datetime | 修正時刻 |
-| min_disk | Body | Integer | イメージ最小ディスク要求量(GB)<br>`min_disk`の値より大きいボリュームでのみ使用できる |
+| min_disk | Body | Integer | イメージ最小ディスク要求量(GB)<br>`min_disk`の値より大きいブロックストレージでのみ使用できる |
 | protected | Body | boolean | イメージ保護有無<br>`protected=true`の場合、修正および削除不可 |
 | id | Body | UUID | イメージID |
 | min_ram | Body | Integer | イメージ最小メモリ要求量(MB)<br>`min_disk`の値より大きいインスタンスでのみ使用できる |
