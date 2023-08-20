@@ -1,8 +1,8 @@
 ## Compute > Image > Overview
 
-An image is a virtual disk that contains the operating system and applications, which is used as the default disk for an instance. NHN Cloud provides images with various operating systems and applications installed by default, and the images can be modified and used according to the user's requirements.
+An image contains the operating system and applications and is used to create an instance’s root block storage. NHN Cloud provides images with various operating systems and applications installed by default, and the images can be modified and used according to the user's requirements.
 
-An instance's default disk is created from an image and can be resized according to user settings. However, the default disk size can only be adjusted beyond the size of the image.
+An instance's root block storage is created from an image and can be resized according to user settings. However, the default disk size can only be adjusted beyond the size of the image.
 
 The characteristics of NHN Cloud images are as follows.
 

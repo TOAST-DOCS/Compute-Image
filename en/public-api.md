@@ -48,7 +48,7 @@ This API does not require a request body.
 | images.created_at | Body | Datetime | Creation time |
 | images.disk_format | Body | String | Image disk format |
 | images.updated_at | Body | Datetime | Modification time |
-| images.min_disk | Body | Integer | Minimum required disk size of image (GB)<br>Available only for volumes that are larger than `min_disk` |
+| images.min_disk | Body | Integer | Minimum required disk size of image (GB)<br>Available only for block storage that are larger than `min_disk` |
 | images.protected | Body | Boolean | Protect image or not<br>Cannot be modified or deleted when `protected=true` |
 | images.id | Body | UUID | Image ID |
 | images.min_ram | Body | Integer | Minimum required memory size of image (MB)<br>Available only for instances that are larger than `min_disk` |
@@ -137,7 +137,7 @@ This API does not require a request body.
 | created_at | Body | Datetime | Creation time |
 | disk_format | Body | String | Image disk format |
 | updated_at | Body | Datetime | Modification time |
-| min_disk | Body | Integer | Minimum required disk size of image (GB)<br>Available only for volumes that are larger than `min_disk` |
+| min_disk | Body | Integer | Minimum required disk size of image (GB)<br>Available only for block storage that are larger than `min_disk` |
 | protected | Body | Boolean | Protect image or not<br>Cannot be modified or deleted when `protected=true` |
 | id | Body | UUID | Image ID |
 | min_ram | Body | Integer | Minimum required memory size of image (MB)<br>Available only for instances that are larger than `min_disk` |
@@ -233,7 +233,7 @@ X-Auth-Token: {tokenId}
 | created_at | Body | Datetime | Creation time |
 | disk_format | Body | String | Image disk format |
 | updated_at | Body | Datetime | Modification time |
-| min_disk | Body | Integer | Minimum required disk size of image (GB)<br>Available only for volumes that are larger than `min_disk` |
+| min_disk | Body | Integer | Minimum required disk size of image (GB)<br>Available only for block storage that are larger than `min_disk` |
 | protected | Body | Boolean | Protect image or not<br>Cannot be modified or deleted when `protected=true` |
 | id | Body | UUID | Image ID |
 | min_ram | Body | Integer | Minimum required memory size of image (MB)<br>Available only for instances that are larger than `min_disk` |
@@ -479,7 +479,7 @@ X-Auth-Token: {tokenId}
 | Name | Type | Format | Description |
 |---|---|---|---|
 | created_at | Body | Datetime | Member creation time<br>In `YYYY-MM-DDThh:mm:ssZ` format |
-| image_id | Body | UUID | ID of the shared image |
+| image_id | Body | UUID | ID of shared image |
 | member_id | Body | String | ID of the target tenant for image sharing |
 | schema | Body | URI | Schema path of the image member |
 | status | Body | Enum | Status of the image member<br>Either `pending` or `accepted` |
@@ -525,7 +525,7 @@ This API does not require a request body.
 |---|---|---|---|
 | members | Body | Object | List of member objects |
 | members.created_at | Body | Datetime | Member creation time, in `YYYY-MM-DDThh:mm:ssZ` format       |
-| members.image_id | Body | UUID | ID of the shared image |
+| members.image_id | Body | UUID | ID of shared image |
 | members.member_id | Body | String | ID of the target tenant for image sharing |
 | members.schema | Body | URI | Schema path of the image member |
 | members.status | Body | Enum | Status of the image member<br/>Either `pending` or `accepted` |
@@ -586,7 +586,7 @@ This API does not require a request body.
 | Name | Type | Format | Description |
 |---|---|---|---|
 | created_at | Body | Datetime | Member creation time, in `YYYY-MM-DDThh:mm:ssZ` format |
-| image_id | Body | UUID | ID of the shared image |
+| image_id | Body | UUID | ID of shared image |
 | member_id | Body | String | ID of the target tenant for image sharing |
 | schema | Body | URI | Schema path of the image member |
 | status | Body | Enum | Status of the image member<br/>Either `pending` or `accepted` |
