@@ -2,7 +2,7 @@
 
 ## Create Image
 
-Images can be created from the default disk of an instance. In t2, m2, c2, r2, and x1 type instances except for u2 type instances, images can be created even when the instance is running, but data consistency is not guaranteed. In u2 type instances, images can be created only when the instance is stopped.
+Images can be created from the root block storage of an instance. In t2, m2, c2, r2, and x1 type instances except for u2 type instances, images can be created even when the instance is running, but data consistency is not guaranteed. In u2 type instances, images can be created only when the instance is stopped.
 
 To create an image of a Linux instance, it is recommended to avoid duplication by initializing the machine-id. For more details on initialization of machine-id, see [Guide for Initialization of Linux machine-id](#Linux-machineid).
 
