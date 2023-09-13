@@ -327,6 +327,72 @@ X-Auth-Token: {tokenId}
 
 ---
 
+### 이미지 수정
+
+이미지 수정을 통해 이미지의 메타데이터를 변경할 수 있습니다.
+
+```
+PATCH /v2/images/{imageId}
+X-Auth-Token: {tokenId}
+Content-Type: application/openstack-images-v2.1-json-patch
+```
+
+#### 요청
+요청 시 Header의 Content-Type을 application/openstack-images-v2.1-json-patch로 설정해야 합니다.
+
+| 이름 | 종류 | 형식     | 필수 | 설명                                                                                      |
+|---|---|--------|----|-----------------------------------------------------------------------------------------|
+| imageId | URL | UUID   | O  | 수정할 이미지 ID                                                                              |
+| tokenId | Header | String | O  | 토큰 ID                                                                                   |
+| op | Body | Enum   | O  | 수정할 작업 유형</br>`add` : 메타데이터 추가</br>`replace` : 메타데이터 값(value) 수정</br>`remove` : 메타데이터 삭제 |
+| path | Body | String | O  | 수정할 메타데이터 속성</br>`/{path}` 형식                                                           |
+| value | Body | String | -  | 수정할 메타데이터 값                                                                             |
+
+<details><summary>예시</summary>
+<p>
+
+```json
+// 메타데이터 추가
+[
+    {
+        "op": "add",
+        "path": "/metadata1",
+        "value": "value1"
+    },
+    {
+        "op": "add",
+        "path": "/metadata2",
+        "value": "1"
+    }
+]
+
+// 메타데이터 값 수정
+[
+    {
+        "op": "replace",
+        "path": "/metadata1",
+        "value": "value2"
+    }
+]
+
+// 메타데이터 삭제
+[
+    {
+        "op": "remove",
+        "path": "/metadata1"
+    }
+]
+```
+
+<p>
+</details>
+
+#### 응답
+
+이미지 보기와 동일한 응답을 반환합니다.
+
+---
+
 ### 이미지 삭제
 
 가시성이 `public`인 이미지는 삭제할 수 없습니다.
@@ -691,4 +757,3 @@ X-Auth-Token: {tokenId}
 
 #### 응답
 이 API는 응답 본문을 반환하지 않습니다.
-
