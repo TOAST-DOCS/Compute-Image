@@ -21,20 +21,20 @@ X-Auth-Token: {tokenId}
 #### リクエスト
 このAPIはリクエスト本文を要求しません。
 
-| 名前 | 種類 | 形式 | 必須 | 説明 |
-|---|---|---|---|---|
-| tokenId | Header | String | O | トークンID |
-| limit | Query | Integer | - | 返すイメージの個数。(基本値は20) |
-| marker | Query | UUID | - | 照会するイメージリストの最初のイメージID<br>ソート方式に従って`marker`に指定されたイメージから`limit`分のイメージリストを照会 |
-| name | Query | String | - | 照会するイメージ名 |
-| visibility | Query | Enum | - | 照会するイメージの表示プロパティ<br>`public`, `private`、`shared`の中から1つの値のみ選択可能<br>省略するとすべての種類のイメージリストを返す |
-| owner | Query | String  | - | 照会するイメージが属しているテナントID |
+| 名前 | 種類 | 形式 | 必須 | 説明                                                                                                                                                             |
+|---|---|---|---|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| tokenId | Header | String | O | トークンID                                                                                                                                                         |
+| limit | Query | Integer | - | 返すイメージの個数。(基本値は25)                                                                                                                                             |
+| marker | Query | UUID | - | 照会するイメージリストの最初のイメージID<br>ソート方式に従って`marker`に指定されたイメージから`limit`分のイメージリストを照会                                                                                      |
+| name | Query | String | - | 照会するイメージ名                                                                                                                                                      |
+| visibility | Query | Enum | - | 照会するイメージの表示プロパティ<br>`public`, `private`、`shared`の中から1つの値のみ選択可能<br>省略するとすべての種類のイメージリストを返す                                                                       |
+| owner | Query | String  | - | 照会するイメージが属しているテナントID                                                                                                                                           |
 | status | Query | Enum    | - | 照会するイメージの状態<br>`queued`：イメージをコンバーティング中<br>`saving`：イメージをアップロード中<br>`active`：正常<br>`killed`：システムによってイメージ削除<br>`deleted`：削除されたイメージ<br>`pending_delete`：イメージ削除待機中 |
-| size_min | Query | Integer | - | 照会するイメージの最小サイズ(Byte) |
-| size_max | Query | Integer | - | 照会するイメージの最大サイズ(Byte) |
-| nhncloud_product | Query | Enum | - | 照会するイメージのインフラサービスの種類<br>`compute`: Instanceサービスイメージ<br>`gpu`: GPU Instanceサービスイメージ |
-| sort_key | Query | String | - | イメージリストをソートする時に使用するプロパティ<br>イメージのすべてのプロパティを指定可能。基本値は`created_at` |
-| sort_dir | Query | Enum | - | イメージリストのソート方向<br>`asc` (昇順)、`desc` (降順)のうち、1つの値のみ選択可能。基本値は降順 |
+| size_min | Query | Integer | - | 照会するイメージの最小サイズ(Byte)                                                                                                                                           |
+| size_max | Query | Integer | - | 照会するイメージの最大サイズ(Byte)                                                                                                                                           |
+| nhncloud_product | Query | Enum | - | 照会するイメージのインフラサービスの種類<br>`compute`: Instanceサービスイメージ<br>`gpu`: GPU Instanceサービスイメージ                                                                             |
+| sort_key | Query | String | - | イメージリストをソートする時に使用するプロパティ<br>イメージのすべてのプロパティを指定可能。基本値は`created_at`                                                                                               |
+| sort_dir | Query | Enum | - | イメージリストのソート方向<br>`asc` (昇順)、`desc` (降順)のうち、1つの値のみ選択可能。基本値は降順                                                                                                   |
 
 #### レスポンス
 

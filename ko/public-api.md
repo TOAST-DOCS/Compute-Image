@@ -21,20 +21,20 @@ X-Auth-Token: {tokenId}
 #### 요청
 이 API는 요청 본문을 요구하지 않습니다.
 
-| 이름 | 종류 | 형식 | 필수 | 설명 |
-|---|---|---|---|---|
-| tokenId | Header | String | O | 토큰 ID |
-| limit | Query | Integer | - | 반환할 이미지 개수(기본값은 20) |
-| marker | Query | UUID | - | 조회할 이미지 목록의 첫 번째 이미지 ID<br>정렬 방식에 따라 `marker`로 지정된 이미지부터 `limit`만큼의 이미지 목록을 조회 |
-| name | Query | String | - | 조회할 이미지 이름 |
-| visibility | Query | Enum | - | 조회할 이미지의 보여 주기 속성<br>`public`, `private`, `shared` 중 하나의 값만 선택 가능<br>생략하면 모든 종류의 이미지 목록 반환 |
-| owner | Query | String  | - | 조회할 이미지가 속한 테넌트 ID |
+| 이름 | 종류 | 형식 | 필수 | 설명                                                                                                                                                       |
+|---|---|---|---|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| tokenId | Header | String | O | 토큰 ID                                                                                                                                                    |
+| limit | Query | Integer | - | 반환할 이미지 개수(기본값은 25)                                                                                                                                      |
+| marker | Query | UUID | - | 조회할 이미지 목록의 첫 번째 이미지 ID<br>정렬 방식에 따라 `marker`로 지정된 이미지부터 `limit`만큼의 이미지 목록을 조회                                                                           |
+| name | Query | String | - | 조회할 이미지 이름                                                                                                                                               |
+| visibility | Query | Enum | - | 조회할 이미지의 보여 주기 속성<br>`public`, `private`, `shared` 중 하나의 값만 선택 가능<br>생략하면 모든 종류의 이미지 목록 반환                                                               |
+| owner | Query | String  | - | 조회할 이미지가 속한 테넌트 ID                                                                                                                                       |
 | status | Query | Enum    | - | 조회할 이미지 상태<br>`queued`: 이미지 변환 중<br>`saving`: 이미지 업로드 중<br>`active`: 정상<br>`killed`: 시스템에서 이미지 삭제<br>`deleted`: 삭제된 이미지<br>`pending_delete`: 이미지 삭제 대기 중 |
-| size_min | Query | Integer | - | 조회할 이미지의 최소 크기(바이트) |
-| size_max | Query | Integer | - | 조회할 이미지의 최대 크기(바이트) |
-| nhncloud_product | Query | Enum | - | 조회할 이미지의 인프라 서비스 종류<br>`compute`: Instance 서비스 이미지<br>`gpu`: GPU Instance 서비스 이미지 |
-| sort_key | Query | String | - | 이미지 목록을 정렬할 때 사용할 속성<br>이미지의 모든 속성을 지정 가능, 기본값은 `created_at` |
-| sort_dir | Query | Enum | - | 이미지 목록 정렬 방향<br>`asc`(오름차순), `desc`(내림차순) 중 하나의 값만 선택 가능, 기본값은 내림차순 |
+| size_min | Query | Integer | - | 조회할 이미지의 최소 크기(바이트)                                                                                                                                      |
+| size_max | Query | Integer | - | 조회할 이미지의 최대 크기(바이트)                                                                                                                                      |
+| nhncloud_product | Query | Enum | - | 조회할 이미지의 인프라 서비스 종류<br>`compute`: Instance 서비스 이미지<br>`gpu`: GPU Instance 서비스 이미지                                                                        |
+| sort_key | Query | String | - | 이미지 목록을 정렬할 때 사용할 속성<br>이미지의 모든 속성을 지정 가능, 기본값은 `created_at`                                                                                             |
+| sort_dir | Query | Enum | - | 이미지 목록 정렬 방향<br>`asc`(오름차순), `desc`(내림차순) 중 하나의 값만 선택 가능, 기본값은 내림차순                                                                                      |
 
 #### 응답
 
