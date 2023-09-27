@@ -21,20 +21,20 @@ X-Auth-Token: {tokenId}
 #### Request
 This API does not require a request body.
 
-| Name | Type | Format | Required | Description |
-|---|---|---|---|---|
-| tokenId | Header | String | O | Token ID |
-| limit | Query | Integer | - | Image count to return (default is 20) |
-| marker | Query | UUID | - | ID of the first image on the list to query<br>Query as much as the `limit` after image specified as the `marker` according to the sorting order |
-| name | Query | String | - | Name of image to query |
-| visibility | Query | Enum | - | Visibility attribute of the image to query<br>Select only one of `public`, `private`, and `shared`<br>If left blank, list of all types of images are returned. |
-| owner | Query | String  | - | ID of the tenant to which the image to query belongs |
+| Name | Type | Format | Required | Description                                                                                                                                                                                                           |
+|---|---|---|---|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| tokenId | Header | String | O | Token ID                                                                                                                                                                                                              |
+| limit | Query | Integer | - | Image count to return (default is 25)                                                                                                                                                                                 |
+| marker | Query | UUID | - | ID of the first image on the list to query<br>Query as much as the `limit` after image specified as the `marker` according to the sorting order                                                                       |
+| name | Query | String | - | Name of image to query                                                                                                                                                                                                |
+| visibility | Query | Enum | - | Visibility attribute of the image to query<br>Select only one of `public`, `private`, and `shared`<br>If left blank, list of all types of images are returned.                                                        |
+| owner | Query | String  | - | ID of the tenant to which the image to query belongs                                                                                                                                                                  |
 | status | Query | Enum    | - | Image status to query<br>`queued`: Converting image<br>`saving`: Uploading image<br>`active`: Normal<br>`killed`: Deleting image from system<br>`deleted`: Image deleted<br>`pending_delete`: Delete Image is pending |
-| size_min | Query | Integer | - | Minimum size of image to query (bytes) |
-| size_max | Query | Integer | - | Maximum size of image to query (bytes) |
-| nhncloud_product | Query | Enum | - | Infrastructure service type of image to query<br>`compute`: Instance service image<br>`gpu`: GPU Instance service image |
-| sort_key | Query | String | - | Attribute to use when sorting the image list<br>All attributes of image can be specified, default is `created_at` |
-| sort_dir | Query | Enum | - | Sorting direction of the image list<br>Select only one of `asc` (ascending order) or `desc` (descending order) |
+| size_min | Query | Integer | - | Minimum size of image to query (bytes)                                                                                                                                                                                |
+| size_max | Query | Integer | - | Maximum size of image to query (bytes)                                                                                                                                                                                |
+| nhncloud_product | Query | Enum | - | Infrastructure service type of image to query<br>`compute`: Instance service image<br>`gpu`: GPU Instance service image                                                                                               |
+| sort_key | Query | String | - | Attribute to use when sorting the image list<br>All attributes of image can be specified, default is `created_at`                                                                                                     |
+| sort_dir | Query | Enum | - | Sorting direction of the image list<br>Select only one of `asc` (ascending order) or `desc` (descending order)                                                                                                        |
 
 #### Response
 
