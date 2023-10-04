@@ -453,8 +453,6 @@ POST /v2/images/{imageId}/members
 X-Auth-Token: {tokenId}
 ```
 
-> 1つのイメージの最大メンバー数は127に制限されます。
-
 #### リクエスト
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |

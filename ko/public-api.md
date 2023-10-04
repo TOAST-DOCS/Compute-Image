@@ -452,8 +452,6 @@ POST /v2/images/{imageId}/members
 X-Auth-Token: {tokenId}
 ```
 
-> 한 이미지의 멤버 최대 개수는 127개로 제한됩니다.
-
 #### 요청
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
