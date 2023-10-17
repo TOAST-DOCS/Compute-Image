@@ -329,7 +329,7 @@ X-Auth-Token: {tokenId}
 
 ### 이미지 수정
 
-이미지 수정을 통해 이미지의 메타데이터를 변경할 수 있습니다.
+이미지 수정을 통해 이미지 속성을 변경할 수 있습니다.
 
 ```
 PATCH /v2/images/{imageId}
@@ -340,19 +340,19 @@ Content-Type: application/openstack-images-v2.1-json-patch
 #### 요청
 요청 시 Header의 Content-Type을 application/openstack-images-v2.1-json-patch로 설정해야 합니다.
 
-| 이름 | 종류 | 형식     | 필수 | 설명                                                                                      |
-|---|---|--------|----|-----------------------------------------------------------------------------------------|
-| imageId | URL | UUID   | O  | 수정할 이미지 ID                                                                              |
-| tokenId | Header | String | O  | 토큰 ID                                                                                   |
-| op | Body | Enum   | O  | 수정할 작업 유형</br>`add` : 메타데이터 추가</br>`replace` : 메타데이터 값(value) 수정</br>`remove` : 메타데이터 삭제 |
-| path | Body | String | O  | 수정할 메타데이터 속성</br>`/{path}` 형식                                                           |
-| value | Body | String | -  | 수정할 메타데이터 값                                                                             |
+| 이름 | 종류 | 형식     | 필수 | 설명                                                                              |
+|---|---|--------|----|---------------------------------------------------------------------------------|
+| imageId | URL | UUID   | O  | 수정할 이미지 ID                                                                      |
+| tokenId | Header | String | O  | 토큰 ID                                                                           |
+| op | Body | Enum   | O  | 수정할 작업 유형</br>`add` : 속성 추가</br>`replace` : 속성 값(value) 수정</br>`remove` : 속성 삭제 |
+| path | Body | String | O  | 수정할 속성 속성</br>`/{path}` 형식                                                      |
+| value | Body | String | -  | 수정할 속성 값                                                                        |
 
 <details><summary>예시</summary>
 <p>
 
 ```json
-// 메타데이터 추가
+// 속성 추가
 [
     {
         "op": "add",
@@ -366,7 +366,7 @@ Content-Type: application/openstack-images-v2.1-json-patch
     }
 ]
 
-// 메타데이터 값 수정
+// 속성 수정
 [
     {
         "op": "replace",
@@ -375,7 +375,7 @@ Content-Type: application/openstack-images-v2.1-json-patch
     }
 ]
 
-// 메타데이터 삭제
+// 속성 삭제
 [
     {
         "op": "remove",
