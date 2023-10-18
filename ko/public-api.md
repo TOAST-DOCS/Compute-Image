@@ -344,7 +344,7 @@ Content-Type: application/openstack-images-v2.1-json-patch
 |---|---|--------|----|---------------------------------------------------------------------------------|
 | imageId | URL | UUID   | O  | 수정할 이미지 ID                                                                      |
 | tokenId | Header | String | O  | 토큰 ID                                                                           |
-| op | Body | Enum   | O  | 수정할 작업 유형</br>`add` : 속성 추가</br>`replace` : 속성 값(value) 수정</br>`remove` : 속성 삭제 |
+| op | Body | Enum   | O  | 수정할 작업 유형</br>`add` : 속성 추가</br>`replace` : 속성 값 수정</br>`remove` : 속성 삭제 |
 | path | Body | String | O  | 수정할 속성</br>`/{path}` 형식                                                         |
 | value | Body | String | -  | 수정할 속성의 값                                                                       |
 
@@ -366,7 +366,7 @@ Content-Type: application/openstack-images-v2.1-json-patch
     }
 ]
 
-// 속성 수정
+// 속성 값 수정
 [
     {
         "op": "replace",
