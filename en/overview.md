@@ -35,7 +35,9 @@ User images can be easily created by using **Additional Functions** of the Image
 
 ### Shared Images
 
-You can set your images to be shared with other projects. However, shared images can only be used among projects of the same owner.
+Shared images are images that are being shared with other projects. You can set images from your projects to be shared with other projects you belong to.
+
+But, images shared from other projects can't be re-shared.
 
 ### Pricing
 

@@ -452,8 +452,6 @@ POST /v2/images/{imageId}/members
 X-Auth-Token: {tokenId}
 ```
 
-> The maximum number of members in an image is limited to 127.
-
 #### Request
 
 | Name | Type | Format | Required | Description |
