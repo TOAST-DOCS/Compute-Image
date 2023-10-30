@@ -327,6 +327,72 @@ X-Auth-Token: {tokenId}
 
 ---
 
+### イメージ修正
+
+イメージ修正によりイメージプロパティを変更できます。
+
+```
+PATCH /v2/images/{imageId}
+X-Auth-Token: {tokenId}
+Content-Type: application/openstack-images-v2.1-json-patch
+```
+
+#### リクエスト
+リクエスト時、HeaderのContent-Typeをapplication/openstack-images-v2.1-json-patchに設定する必要があります。
+
+| 名前 | 種類 | 形式    | 必須 | 説明                                                                          |
+|---|---|--------|----|------------------------------------------------------------------------------|
+| imageId | URL | UUID   | O  | 修正するイメージID                                                                   |
+| tokenId | Header | String | O  | トークンID                                                                        |
+| op | Body | Enum   | O  | 修正する作業タイプ</br>`add`:プロパティの追加</br>`replace`:プロパティ値の修正</br>`remove`:プロパティの削除 |
+| path | Body | String | O  | 修正するプロパティ</br>`/{path}`形式                                                     |
+| value | Body | String | -  | 修正するプロパティの値                                                                   |
+
+<details><summary>例</summary>
+<p>
+
+```json
+// プロパティの追加
+[
+    {
+        "op": "add",
+        "path": "/metadata1",
+        "value": "value1"
+    },
+    {
+        "op": "add",
+        "path": "/metadata2",
+        "value": "1"
+    }
+]
+
+// プロパティ値の修正
+[
+    {
+        "op": "replace",
+        "path": "/metadata1",
+        "value": "value2"
+    }
+]
+
+// プロパティの削除
+[
+    {
+        "op": "remove",
+        "path": "/metadata1"
+    }
+]
+```
+
+<p>
+</details>
+
+#### レスポンス
+
+イメージ表示と同じレスポンスを返します。
+
+---
+
 ### イメージ削除
 
 可視性が`public`のイメージは削除できません。

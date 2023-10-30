@@ -327,6 +327,72 @@ The binary data for the image is returned. For a valid request, return status co
 
 ---
 
+### Modify Image
+
+Modifies image properties through modification.
+
+```
+PATCH /v2/images/{imageId}
+X-Auth-Token: {tokenId}
+Content-Type: application/openstack-images-v2.1-json-patch
+```
+
+#### Request
+For a request, the content type for the header must be set to application/openstack-images-v2.1-json-patch.
+
+| Name | Type | Format     | Required | Description                                                                           |
+|---|---|--------|----|------------------------------------------------------------------------------|
+| imageId | URL | UUID   | O  | Image ID to modify                                                                   |
+| tokenId | Header | String | O  | Token ID                                                                        |
+| op | Body | Enum   | O  | Type of task to modify</br>`add`: Add a property</br>`replace`: Modify a property value</br>`remove`: Delete a property |
+| path | Body | String | O  | Property to modify</br>`/{path}` format                                                      |
+| value | Body | String | -  | The value of the property to modify                                                                    |
+
+<details><summary>Example</summary>
+<p>
+
+```json
+// Add a property
+[
+    {
+        "op": "add",
+        "path": "/metadata1",
+        "value": "value1"
+    },
+    {
+        "op": "add",
+        "path": "/metadata2",
+        "value": "1"
+    }
+]
+
+// Modify property value.
+[
+    {
+        "op": "replace",
+        "path": "/metadata1",
+        "value": "value2"
+    }
+]
+
+// delete property
+[
+    {
+        "op": "remove",
+        "path": "/metadata1"
+    }
+]
+```
+
+<p>
+</details>
+
+#### Response
+
+Returns the same response as Get Image.
+
+---
+
 ### Delete Image
 
 Images with `public` visibility cannot be deleted.
