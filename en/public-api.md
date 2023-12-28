@@ -132,7 +132,7 @@ This API does not require a request body.
 |---|---|---|---|
 | status | Body | String | Image status |
 | name | Body | String | Image name |
-| tags | Body | String | Image tag list<br>If you delete the `_AVAILABLE_` tag, it will not be queried in the console, so be careful not to delete the tag. |
+| tags | Body | Array | Image tag list<br>If you delete the `_AVAILABLE_` tag, it will not be queried in the console, so be careful not to delete the tag. |
 | container_format | Body | String | Image container format |
 | created_at | Body | Datetime | Creation time |
 | disk_format | Body | String | Image disk format |
@@ -228,7 +228,7 @@ X-Auth-Token: {tokenId}
 |---|---|---|---|
 | status | Body | String | Image status<br>One of `queued`, `saving`, `active`, `killed`, `deleted`, and `pending_delete` |
 | name | Body | String | Image name |
-| tags | Body | String | Image tag list<br>If you delete the `_AVAILABLE_` tag, it will not be queried in the console, so be careful not to delete the tag. |
+| tags | Body | Array | Image tag list<br>If you delete the `_AVAILABLE_` tag, it will not be queried in the console, so be careful not to delete the tag. |
 | container_format | Body | String | Image container format |
 | created_at | Body | Datetime | Creation time |
 | disk_format | Body | String | Image disk format |
