@@ -42,7 +42,7 @@ X-Auth-Token: {tokenId}
 | images | Body | Array | 이미지 목록 객체                                                                          |
 | images.status | Body | String | 이미지 상태<br>`queued`, `saving`, `active`, `killed`, `deleted`, `pending_delete` 중 하나 |
 | images.name | Body | String | 이미지 이름                                                                             |
-| images.tags | Body | Array | 이미지 태그<br>`_AVAILABLE_` 태그를 삭제하면 콘솔에서는 조회되지 않으므로, 태그를 삭제하지 않도록 주의                  |
+| images.tags | Body | Array | 이미지 태그 목록<br>`_AVAILABLE_` 태그를 삭제하면 콘솔에서는 조회되지 않으므로, 태그를 삭제하지 않도록 주의               |
 | images.container_format | Body | String | 이미지 컨테이너 포맷                                                                        |
 | images.created_at | Body | Datetime | 생성 시각                                                                              |
 | images.disk_format | Body | String | 이미지 디스크 포맷                                                                         |
