@@ -192,7 +192,7 @@ X-Auth-Token: {tokenId}
 
 ### 이미지 생성
 
-이미지를 생성합니다. 
+이미지를 생성합니다.
 NHN Cloud에서 이미지를 사용하기 위해서는 `이미지 생성`후에 `이미지 업로드` API를 이용하여 실제 파일을 업로드 해야 합니다.
 
 ```
@@ -201,20 +201,19 @@ X-Auth-Token: {tokenId}
 ```
 
 #### 요청
-| 이름               | 종류     | 형식 | 필수 | 설명                                  |
-|------------------|--------|---|----|-------------------------------------|
-| tokenId          | Header | String | O  | 토큰 ID                               |
-| name             | Body   | String | O  | 이미지 이름                              |
-| container_format | Body   | String | -  | 이미지 컨테이너 포맷                         |
-| disk_format      | Body   | String | -  | 이미지 디스크 포맷                          |
-| min_disk         | Body   | Integer | -  | 이미지 최소 디스크 요구량(GB)                  |
-| min_ram          | Body   | Integer | -  | 이미지 최소 메모리 요구량(MB)                  |
-| protected        | Body   | Boolean | -  | 이미지 보호 여부, true 또는 false            |
-| tags             | Body   | Array | -  | 이미지 태그 목록                           |
-| visibility       | Body   | String | -  | 이미지 가시성<br>`private`, `shared` 중 하나 |
-| os_type          | Body | String   | O  | 운영체제 타입<br>`windows`, `linux` 중 하나  |
-| os_distro        | Body | String   | -  | 운영체제 배포판 |
-| os_version       | Body | String   | -  | 운영체제 버전                             |
+| 이름 | 종류 | 형식 | 필수 | 설명 |
+|---|---|---|---|---|
+| tokenId | Header | String | O | 토큰 ID |
+| container_format | Body | String | - | 이미지 컨테이너 포맷 |
+| disk_format | Body | String | - | 이미지 디스크 포맷 |
+| min_disk | Body | Integer | - | 이미지 최소 디스크 요구량(GB) |
+| min_ram | Body | Integer | - | 이미지 최소 메모리 요구량(MB) |
+| protected | Body | Boolean | - | 이미지 보호 여부, true 또는 false |
+| tags | Body | Array | - | 이미지 태그 목록 |
+| visibility | Body | String | - | 이미지 가시성<br>`private`, `shared` 중 하나 |
+| os_type | Body | String   | O  | 운영체제 타입<br>`windows`, `linux` 중 하나 |
+| os_distro | Body | String   | -  | 운영체제 배포판 |
+| os_version | Body | String   | -  | 운영체제 버전 |
 
 <details><summary>예시</summary>
 <p>
@@ -234,31 +233,31 @@ X-Auth-Token: {tokenId}
 </details>
 
 #### 응답
-| 이름               | 종류 | 형식       | 설명                                                                                |
-|------------------|---|----------|-----------------------------------------------------------------------------------|
-| status           | Body | String   | 이미지 상태<br>`queued`, `saving`, `active`, `killed`, `deleted`, `pending_delete` 중 하나 |
-| name             | Body | String   | 이미지 이름                                                                            |
-| tags             | Body | String   | 이미지 태그 목록                                                                         |
-| container_format | Body | String   | 이미지 컨테이너 포맷                                                                       |
-| created_at       | Body | Datetime | 생성 시각                                                                             |
-| disk_format      | Body | String   | 이미지 디스크 포맷                                                                        |
-| updated_at       | Body | Datetime | 수정 시각                                                                             |
-| min_disk         | Body | Integer  | 이미지 최소 디스크 요구량(GB)<br>`min_disk` 값보다 큰 블록 스토리지에서만 사용할 수 있음                        |
-| protected        | Body | Boolean  | 이미지 보호 여부<br>`protected=true`인 경우 수정 및 삭제 불가                                      |
-| id               | Body | UUID     | 이미지 ID                                                                            |
-| min_ram          | Body | Integer  | 이미지 최소 메모리 요구량(MB)<br>`min_disk` 값보다 큰 인스턴스에서만 사용할 수 있음                           |
-| checksum         | Body | String   | 이미지 내용의 해시값<br>내부적으로 이미지 유효성 검증을 위해 사용                                            |
-| owner            | Body | String   | 이미지가 속한 테넌트 ID                                                                    |
-| visibility       | Body | Enum     | 이미지 가시성<br>`private`, `shared` 중 하나                                               |
-| virtual_size     | Body | Integer  | 이미지 가상 크기                                                                         |
-| size             | Body | Integer  | 이미지 실제 크기(바이트)                                                                    |
-| properties       | Body | Object   | 이미지 속성 객체<br>이미지별 사용자 지정 속성을 키-값 쌍 형태로 기술                                         |
-| self             | Body | URI      | 이미지 경로                                                                            |
-| file             | Body | String   | 이미지 파일 경로                                                                         |
-| schema           | Body | URI      | 이미지 스키마 경로                                                                        |
-| os_type          | Body | String   | 운영체제 타입<br>`windows`, `linux` 중 하나                                                |
-| os_distro        | Body | String   | 운영체제 배포판 |
-| os_version       | Body | String   | 운영체제 버전                            |
+| 이름 | 종류 | 형식 | 설명 |
+|---|---|---|---|
+| status | Body | String | 이미지 상태<br>`queued`, `saving`, `active`, `killed`, `deleted`, `pending_delete` 중 하나 |
+| name | Body | String | 이미지 이름 |
+| tags | Body | String | 이미지 태그 목록 |
+| container_format | Body | String | 이미지 컨테이너 포맷 |
+| created_at | Body | Datetime | 생성 시각 |
+| disk_format | Body | String | 이미지 디스크 포맷 |
+| updated_at | Body | Datetime | 수정 시각 |
+| min_disk | Body | Integer | 이미지 최소 디스크 요구량(GB)<br>`min_disk` 값보다 큰 블록 스토리지에서만 사용할 수 있음 |
+| protected | Body | Boolean | 이미지 보호 여부<br>`protected=true`인 경우 수정 및 삭제 불가 |
+| id | Body | UUID | 이미지 ID |
+| min_ram | Body | Integer | 이미지 최소 메모리 요구량(MB)<br>`min_disk` 값보다 큰 인스턴스에서만 사용할 수 있음 |
+| checksum | Body | String | 이미지 내용의 해시값<br>내부적으로 이미지 유효성 검증을 위해 사용 |
+| owner | Body | String | 이미지가 속한 테넌트 ID |
+| visibility | Body | Enum | 이미지 가시성<br>`private`, `shared` 중 하나 |
+| virtual_size | Body | Integer | 이미지 가상 크기 |
+| size | Body | Integer | 이미지 실제 크기(바이트) |
+| properties | Body | Object | 이미지 속성 객체<br>이미지별 사용자 지정 속성을 키-값 쌍 형태로 기술 |
+| self | Body | URI | 이미지 경로 |
+| file | Body | String | 이미지 파일 경로 |
+| schema | Body | URI| 이미지 스키마 경로 |
+| os_type | Body | String   | O  | 운영체제 타입<br>`windows`, `linux` 중 하나 |
+| os_distro | Body | String   | -  | 운영체제 배포판 |
+| os_version | Body | String   | -  | 운영체제 버전 |
 
 <details><summary>예시</summary>
 <p>
@@ -370,33 +369,33 @@ Content-Type: application/openstack-images-v2.1-json-patch
 ```json
 // 속성 추가
 [
-    {
-        "op": "add",
-        "path": "/metadata1",
-        "value": "value1"
-    },
-    {
-        "op": "add",
-        "path": "/metadata2",
-        "value": "1"
-    }
+  {
+    "op": "add",
+    "path": "/metadata1",
+    "value": "value1"
+  },
+  {
+    "op": "add",
+    "path": "/metadata2",
+    "value": "1"
+  }
 ]
 
 // 속성 값 수정
 [
-    {
-        "op": "replace",
-        "path": "/metadata1",
-        "value": "value2"
-    }
+  {
+    "op": "replace",
+    "path": "/metadata1",
+    "value": "value2"
+  }
 ]
 
 // 속성 삭제
 [
-    {
-        "op": "remove",
-        "path": "/metadata1"
-    }
+  {
+    "op": "remove",
+    "path": "/metadata1"
+  }
 ]
 ```
 
@@ -509,11 +508,11 @@ Content-Type: application/openstack-images-v2.1-json-patch
 
 ```json
 [
-    {
-        "op" : "replace",
-        "path" : "/visibility",
-        "value" : "shared"
-    }
+  {
+    "op" : "replace",
+    "path" : "/visibility",
+    "value" : "shared"
+  }
 ]
 ```
 
@@ -569,12 +568,12 @@ X-Auth-Token: {tokenId}
 
 ```json
 {
-    "created_at": "2013-09-20T19:22:19Z",
-    "image_id": "a96be11e-8536-4910-92cb-de50aa19dfe6",
-    "member_id": "8989447062e04a818baf9e073fd04fa7",
-    "schema": "/v2/schemas/member",
-    "status": "pending",
-    "updated_at": "2013-09-20T19:25:31Z"
+  "created_at": "2013-09-20T19:22:19Z",
+  "image_id": "a96be11e-8536-4910-92cb-de50aa19dfe6",
+  "member_id": "8989447062e04a818baf9e073fd04fa7",
+  "schema": "/v2/schemas/member",
+  "status": "pending",
+  "updated_at": "2013-09-20T19:25:31Z"
 }
 ```
 
@@ -616,25 +615,25 @@ X-Auth-Token: {tokenId}
 
 ```json
 {
-    "members": [
-        {
-            "created_at": "2013-10-07T17:58:03Z",
-            "image_id": "dbc999e3-c52f-4200-bedd-3b18fe7f87fe",
-            "member_id": "123456789",
-            "schema": "/v2/schemas/member",
-            "status": "pending",
-            "updated_at": "2013-10-07T17:58:03Z"
-        },
-        {
-            "created_at": "2013-10-07T17:58:55Z",
-            "image_id": "dbc999e3-c52f-4200-bedd-3b18fe7f87fe",
-            "member_id": "987654321",
-            "schema": "/v2/schemas/member",
-            "status": "accepted",
-            "updated_at": "2013-10-08T12:08:55Z"
-        }
-    ],
-    "schema": "/v2/schemas/members"
+  "members": [
+    {
+      "created_at": "2013-10-07T17:58:03Z",
+      "image_id": "dbc999e3-c52f-4200-bedd-3b18fe7f87fe",
+      "member_id": "123456789",
+      "schema": "/v2/schemas/member",
+      "status": "pending",
+      "updated_at": "2013-10-07T17:58:03Z"
+    },
+    {
+      "created_at": "2013-10-07T17:58:55Z",
+      "image_id": "dbc999e3-c52f-4200-bedd-3b18fe7f87fe",
+      "member_id": "987654321",
+      "schema": "/v2/schemas/member",
+      "status": "accepted",
+      "updated_at": "2013-10-08T12:08:55Z"
+    }
+  ],
+  "schema": "/v2/schemas/members"
 }
 ```
 
@@ -676,12 +675,12 @@ X-Auth-Token: {tokenId}
 
 ```json
 {
-    "status": "pending",
-    "created_at": "2013-11-26T07:21:21Z",
-    "updated_at": "2013-11-26T07:21:21Z",
-    "image_id": "0ae74cc5-5147-4239-9ce2-b0c580f7067e",
-    "member_id": "8989447062e04a818baf9e073fd04fa7",
-    "schema": "/v2/schemas/member"
+  "status": "pending",
+  "created_at": "2013-11-26T07:21:21Z",
+  "updated_at": "2013-11-26T07:21:21Z",
+  "image_id": "0ae74cc5-5147-4239-9ce2-b0c580f7067e",
+  "member_id": "8989447062e04a818baf9e073fd04fa7",
+  "schema": "/v2/schemas/member"
 }
 ```
 
@@ -713,7 +712,7 @@ X-Auth-Token: {tokenId}
 
 ```json
 {
-    "status": "accepted"
+  "status": "accepted"
 }
 ```
 
@@ -737,12 +736,12 @@ X-Auth-Token: {tokenId}
 
 ```json
 {
-    "created_at": "2013-09-20T19:22:19Z",
-    "image_id": "a96be11e-8536-4910-92cb-de50aa19dfe6",
-    "member_id": "8989447062e04a818baf9e073fd04fa7",
-    "schema": "/v2/schemas/member",
-    "status": "accepted",
-    "updated_at": "2013-09-20T20:15:31Z"
+  "created_at": "2013-09-20T19:22:19Z",
+  "image_id": "a96be11e-8536-4910-92cb-de50aa19dfe6",
+  "member_id": "8989447062e04a818baf9e073fd04fa7",
+  "schema": "/v2/schemas/member",
+  "status": "accepted",
+  "updated_at": "2013-09-20T20:15:31Z"
 }
 ```
 
