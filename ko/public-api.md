@@ -43,7 +43,7 @@ X-Auth-Token: {tokenId}
 | images | Body | Array | 이미지 목록 객체 |
 | images.status | Body | String | 이미지 상태<br>`queued`, `saving`, `active`, `killed`, `deleted`, `pending_delete` 중 하나 |
 | images.name | Body | String | 이미지 이름 |
-| images.tags | Body | Array | 이미지 태그 목록<br>`_AVAILABLE_` 태그를 삭제하면 콘솔에서는 조회되지 않으므로, 태그를 삭제하지 않도록 주의 |
+| images.tags | Body | Array | 이미지 태그 목록 |
 | images.container_format | Body | String | 이미지 컨테이너 포맷 |
 | images.created_at | Body | Datetime | 생성 시각 |
 | images.disk_format | Body | String | 이미지 디스크 포맷 |
@@ -132,7 +132,7 @@ X-Auth-Token: {tokenId}
 |---|---|---|---|
 | status | Body | String | 이미지 상태 |
 | name | Body | String | 이미지 이름 |
-| tags | Body | String | 이미지 태그 목록<br>`_AVAILABLE_` 태그를 삭제하면 콘솔에서는 조회되지 않으므로, 태그를 삭제하지 않도록 주의 |
+| tags | Body | String | 이미지 태그 목록 |
 | container_format | Body | String | 이미지 컨테이너 포맷 |
 | created_at | Body | Datetime | 생성 시각 |
 | disk_format | Body | String | 이미지 디스크 포맷 |
@@ -192,31 +192,41 @@ X-Auth-Token: {tokenId}
 
 ### 이미지 생성
 
+이미지를 생성합니다. 
+NHN Cloud에서 이미지를 사용하기 위해서는 `이미지 생성`후에 `이미지 업로드` API를 이용하여 실제 파일을 업로드 해야 합니다.
+
 ```
 POST /v2/images
 X-Auth-Token: {tokenId}
 ```
 
 #### 요청
-| 이름 | 종류 | 형식 | 필수 | 설명 |
-|---|---|---|---|---|
-| tokenId | Header | String | O | 토큰 ID |
-| container_format | Body | String | - | 이미지 컨테이너 포맷 |
-| disk_format | Body | String | - | 이미지 디스크 포맷 |
-| min_disk | Body | Integer | - | 이미지 최소 디스크 요구량(GB) |
-| min_ram | Body | Integer | - | 이미지 최소 메모리 요구량(MB) |
-| protected | Body | Boolean | - | 이미지 보호 여부, true 또는 false |
-| tags | Body | Array | - | 이미지 태그 목록<br>`_AVAILABLE_` 태그를 삭제하면 콘솔에서는 조회되지 않으므로, 태그를 삭제하지 않도록 주의 |
-| visibility | Body | String | - | 이미지 가시성<br>`public`, `private`, `shared` 중 하나 |
+| 이름               | 종류     | 형식 | 필수 | 설명                                  |
+|------------------|--------|---|----|-------------------------------------|
+| tokenId          | Header | String | O  | 토큰 ID                               |
+| name             | Body   | String | O  | 이미지 이름                              |
+| container_format | Body   | String | -  | 이미지 컨테이너 포맷                         |
+| disk_format      | Body   | String | -  | 이미지 디스크 포맷                          |
+| min_disk         | Body   | Integer | -  | 이미지 최소 디스크 요구량(GB)                  |
+| min_ram          | Body   | Integer | -  | 이미지 최소 메모리 요구량(MB)                  |
+| protected        | Body   | Boolean | -  | 이미지 보호 여부, true 또는 false            |
+| tags             | Body   | Array | -  | 이미지 태그 목록                           |
+| visibility       | Body   | String | -  | 이미지 가시성<br>`private`, `shared` 중 하나 |
+| os_type          | Body | String   | O  | 운영체제 타입<br>`windows`, `linux` 중 하나  |
+| os_distro        | Body | String   | -  | 운영체제 배포판 |
+| os_version       | Body | String   | -  | 운영체제 버전                             |
 
 <details><summary>예시</summary>
 <p>
 
 ```json
 {
+    "name": "Ubuntu Image",
     "container_format": "bare",
-    "disk_format": "raw",
-    "name": "Ubuntu",
+    "disk_format": "qcow2",
+    "os_type": "linux",
+    "os_distro": "ubuntu",
+    "os_version": "Server 22.04 LTS"
 }
 ```
 
@@ -224,28 +234,31 @@ X-Auth-Token: {tokenId}
 </details>
 
 #### 응답
-| 이름 | 종류 | 형식 | 설명 |
-|---|---|---|---|
-| status | Body | String | 이미지 상태<br>`queued`, `saving`, `active`, `killed`, `deleted`, `pending_delete` 중 하나 |
-| name | Body | String | 이미지 이름 |
-| tags | Body | String | 이미지 태그 목록<br>`_AVAILABLE_` 태그를 삭제하면 콘솔에서는 조회되지 않으므로, 태그를 삭제하지 않도록 주의 |
-| container_format | Body | String | 이미지 컨테이너 포맷 |
-| created_at | Body | Datetime | 생성 시각 |
-| disk_format | Body | String | 이미지 디스크 포맷 |
-| updated_at | Body | Datetime | 수정 시각 |
-| min_disk | Body | Integer | 이미지 최소 디스크 요구량(GB)<br>`min_disk` 값보다 큰 블록 스토리지에서만 사용할 수 있음 |
-| protected | Body | Boolean | 이미지 보호 여부<br>`protected=true`인 경우 수정 및 삭제 불가 |
-| id | Body | UUID | 이미지 ID |
-| min_ram | Body | Integer | 이미지 최소 메모리 요구량(MB)<br>`min_disk` 값보다 큰 인스턴스에서만 사용할 수 있음 |
-| checksum | Body | String | 이미지 내용의 해시값<br>내부적으로 이미지 유효성 검증을 위해 사용 |
-| owner | Body | String | 이미지가 속한 테넌트 ID |
-| visibility | Body | Enum | 이미지 가시성<br>`public`, `private`, `shared` 중 하나 |
-| virtual_size | Body | Integer | 이미지 가상 크기 |
-| size | Body | Integer | 이미지 실제 크기(바이트) |
-| properties | Body | Object | 이미지 속성 객체<br>이미지별 사용자 지정 속성을 키-값 쌍 형태로 기술 |
-| self | Body | URI | 이미지 경로 |
-| file | Body | String | 이미지 파일 경로 |
-| schema | Body | URI| 이미지 스키마 경로 |
+| 이름               | 종류 | 형식       | 설명                                                                                |
+|------------------|---|----------|-----------------------------------------------------------------------------------|
+| status           | Body | String   | 이미지 상태<br>`queued`, `saving`, `active`, `killed`, `deleted`, `pending_delete` 중 하나 |
+| name             | Body | String   | 이미지 이름                                                                            |
+| tags             | Body | String   | 이미지 태그 목록                                                                         |
+| container_format | Body | String   | 이미지 컨테이너 포맷                                                                       |
+| created_at       | Body | Datetime | 생성 시각                                                                             |
+| disk_format      | Body | String   | 이미지 디스크 포맷                                                                        |
+| updated_at       | Body | Datetime | 수정 시각                                                                             |
+| min_disk         | Body | Integer  | 이미지 최소 디스크 요구량(GB)<br>`min_disk` 값보다 큰 블록 스토리지에서만 사용할 수 있음                        |
+| protected        | Body | Boolean  | 이미지 보호 여부<br>`protected=true`인 경우 수정 및 삭제 불가                                      |
+| id               | Body | UUID     | 이미지 ID                                                                            |
+| min_ram          | Body | Integer  | 이미지 최소 메모리 요구량(MB)<br>`min_disk` 값보다 큰 인스턴스에서만 사용할 수 있음                           |
+| checksum         | Body | String   | 이미지 내용의 해시값<br>내부적으로 이미지 유효성 검증을 위해 사용                                            |
+| owner            | Body | String   | 이미지가 속한 테넌트 ID                                                                    |
+| visibility       | Body | Enum     | 이미지 가시성<br>`private`, `shared` 중 하나                                               |
+| virtual_size     | Body | Integer  | 이미지 가상 크기                                                                         |
+| size             | Body | Integer  | 이미지 실제 크기(바이트)                                                                    |
+| properties       | Body | Object   | 이미지 속성 객체<br>이미지별 사용자 지정 속성을 키-값 쌍 형태로 기술                                         |
+| self             | Body | URI      | 이미지 경로                                                                            |
+| file             | Body | String   | 이미지 파일 경로                                                                         |
+| schema           | Body | URI      | 이미지 스키마 경로                                                                        |
+| os_type          | Body | String   | 운영체제 타입<br>`windows`, `linux` 중 하나                                                |
+| os_distro        | Body | String   | 운영체제 배포판 |
+| os_version       | Body | String   | 운영체제 버전                            |
 
 <details><summary>예시</summary>
 <p>
@@ -253,12 +266,12 @@ X-Auth-Token: {tokenId}
 ```json
 {
     "status": "queued",
-    "name": "Ubuntu",
+    "name": "Ubuntu Image",
     "tags": [],
     "container_format": "bare",
     "created_at": "2015-11-29T22:21:42Z",
     "size": null,
-    "disk_format": "raw",
+    "disk_format": "qcow2",
     "updated_at": "2015-11-29T22:21:42Z",
     "visibility": "private",
     "locations": [],
@@ -274,7 +287,10 @@ X-Auth-Token: {tokenId}
     "owner": "bab7d5c60cd041a0a36f7c4b6e1dd978",
     "virtual_size": null,
     "min_ram": 0,
-    "schema": "/v2/schemas/image"
+    "schema": "/v2/schemas/image",
+    "os_type": "linux",
+    "os_distro": "ubuntu",
+    "os_version": "Server 22.04 LTS"
 }
 ```
 
@@ -285,7 +301,7 @@ X-Auth-Token: {tokenId}
 
 ### 이미지 업로드
 
-지정한 이미지에 실제 이미지 파일을 업로드합니다.
+생성한 이미지에 실제 이미지 파일을 업로드합니다.
 
 ```
 PUT /v2/images/{imageId}/file
