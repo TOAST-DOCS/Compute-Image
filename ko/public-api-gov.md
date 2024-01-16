@@ -42,7 +42,7 @@ X-Auth-Token: {tokenId}
 | images | Body | Array | 이미지 목록 객체                                                                          |
 | images.status | Body | String | 이미지 상태<br>`queued`, `saving`, `active`, `killed`, `deleted`, `pending_delete` 중 하나 |
 | images.name | Body | String | 이미지 이름                                                                             |
-| images.tags | Body | String | 이미지 태그 목록                  |
+| images.tags | Body | Array | 이미지 태그 목록                  |
 | images.container_format | Body | String | 이미지 컨테이너 포맷                                                                        |
 | images.created_at | Body | Datetime | 생성 시각                                                                              |
 | images.disk_format | Body | String | 이미지 디스크 포맷                                                                         |
@@ -131,7 +131,7 @@ X-Auth-Token: {tokenId}
 |---|---|---|---|
 | status | Body | String | 이미지 상태 |
 | name | Body | String | 이미지 이름 |
-| tags | Body | String | 이미지 태그 목록 |
+| tags | Body | Array | 이미지 태그 목록 |
 | container_format | Body | String | 이미지 컨테이너 포맷 |
 | created_at | Body | Datetime | 생성 시각 |
 | disk_format | Body | String | 이미지 디스크 포맷 |
@@ -235,7 +235,7 @@ X-Auth-Token: {tokenId}
 |---|---|---|---|
 | status | Body | String | 이미지 상태<br>`queued`, `saving`, `active`, `killed`, `deleted`, `pending_delete` 중 하나 |
 | name | Body | String | 이미지 이름 |
-| tags | Body | String | 이미지 태그 목록 |
+| tags | Body | Array | 이미지 태그 목록 |
 | container_format | Body | String | 이미지 컨테이너 포맷 |
 | created_at | Body | Datetime | 생성 시각 |
 | disk_format | Body | String | 이미지 디스크 포맷 |
