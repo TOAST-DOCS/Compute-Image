@@ -43,7 +43,7 @@ This API does not require a request body.
 | images | Body | Array | Image list object |
 | images.status | Body | String | Image status<br>One of `queued`, `saving`, `active`, `killed`, `deleted`, and `pending_delete` |
 | images.name | Body | String | Image name |
-| images.tags | Body | Array | Image tag list<br>If you delete the `_AVAILABLE_` tag, it will not be queried in the console, so be careful not to delete the tag. |
+| images.tags | Body | Array | Image tag list |
 | images.container_format | Body | String | Image container format |
 | images.created_at | Body | Datetime | Creation time |
 | images.disk_format | Body | String | Image disk format |
@@ -132,7 +132,7 @@ This API does not require a request body.
 |---|---|---|---|
 | status | Body | String | Image status |
 | name | Body | String | Image name |
-| tags | Body | String | Image tag list<br>If you delete the `_AVAILABLE_` tag, it will not be queried in the console, so be careful not to delete the tag. |
+| tags | Body | String | Image tag list |
 | container_format | Body | String | Image container format |
 | created_at | Body | Datetime | Creation time |
 | disk_format | Body | String | Image disk format |
@@ -192,6 +192,8 @@ This API does not require a request body.
 
 ### Create Image
 
+Create an empty image. To use the image in NHN Cloud, you must upload the actual file using the `Upload Image` API after `creating an image`.
+
 ```
 POST /v2/images
 X-Auth-Token: {tokenId}
@@ -206,8 +208,11 @@ X-Auth-Token: {tokenId}
 | min_disk | Body | Integer | - | Minimum required disk size of image (GB) |
 | min_ram | Body | Integer | - | Minimum required memory size of image (MB) |
 | protected | Body | Boolean | - | Whether to protect image, true or false |
-| tags | Body | Array | - | Image tag list<br>If you delete the `_AVAILABLE_` tag, it will not be queried in the console, so be careful not to delete the tag. |
-| visibility | Body | String | - | Image visibility<br>One of `public`, `private`, and `shared` |
+| tags | Body | Array | - | Image tag list |
+| visibility | Body | String | - | Image visibility<br>`private` or `shared` |
+| os_type | Body | String | O | OS type<br>`windows` or `linux` |
+| os_distro | Body | String | - | OS distribution |
+| os_version | Body | String | - | OS version |
 
 <details><summary>Example</summary>
 <p>
@@ -253,12 +258,12 @@ X-Auth-Token: {tokenId}
 ```json
 {
     "status": "queued",
-    "name": "Ubuntu",
+    "name": "Ubuntu Image",
     "tags": [],
     "container_format": "bare",
     "created_at": "2015-11-29T22:21:42Z",
     "size": null,
-    "disk_format": "raw",
+    "disk_format": "qcow2",
     "updated_at": "2015-11-29T22:21:42Z",
     "visibility": "private",
     "locations": [],
@@ -274,7 +279,10 @@ X-Auth-Token: {tokenId}
     "owner": "bab7d5c60cd041a0a36f7c4b6e1dd978",
     "virtual_size": null,
     "min_ram": 0,
-    "schema": "/v2/schemas/image"
+    "schema": "/v2/schemas/image",
+    "os_type": "linux",
+    "os_distro": "ubuntu",
+    "os_version": "Server 22.04 LTS"
 }
 ```
 
@@ -285,7 +293,7 @@ X-Auth-Token: {tokenId}
 
 ### Upload Image
 
-Uploads the actual image file to the specified image.
+Uploads the actual image file to the created image.
 
 ```
 PUT /v2/images/{imageId}/file
