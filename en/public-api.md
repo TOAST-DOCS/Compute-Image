@@ -132,7 +132,7 @@ This API does not require a request body.
 |---|---|---|---|
 | status | Body | String | Image status |
 | name | Body | String | Image name |
-| tags | Body | String | Image tag list |
+| tags | Body | Array | Image tag list |
 | container_format | Body | String | Image container format |
 | created_at | Body | Datetime | Creation time |
 | disk_format | Body | String | Image disk format |
