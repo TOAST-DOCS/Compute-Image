@@ -219,9 +219,12 @@ X-Auth-Token: {tokenId}
 
 ```json
 {
+    "name": "Ubuntu Image",
     "container_format": "bare",
-    "disk_format": "raw",
-    "name": "Ubuntu",
+    "disk_format": "qcow2",
+    "os_type": "linux",
+    "os_distro": "ubuntu",
+    "os_version": "Server 22.04 LTS"
 }
 ```
 
@@ -233,7 +236,7 @@ X-Auth-Token: {tokenId}
 |---|---|---|---|
 | status | Body | String | Image status<br>One of `queued`, `saving`, `active`, `killed`, `deleted`, and `pending_delete` |
 | name | Body | String | Image name |
-| tags | Body | String | Image tag list<br>If you delete the `_AVAILABLE_` tag, it will not be queried in the console, so be careful not to delete the tag. |
+| tags | Body | String | Image tag list |
 | container_format | Body | String | Image container format |
 | created_at | Body | Datetime | Creation time |
 | disk_format | Body | String | Image disk format |
@@ -244,13 +247,16 @@ X-Auth-Token: {tokenId}
 | min_ram | Body | Integer | Minimum required memory size of image (MB)<br>Available only for instances that are larger than `min_disk` |
 | checksum | Body | String | Hash for image content<br>Used internally for image validation |
 | owner | Body | String | ID of the tenant to which the image belongs |
-| visibility | Body | Enum | Image visibility<br>One of `public`, `private`, and `shared` |
+| visibility | Body | Enum | Image visibility<br>`private` or `shared` |
 | virtual_size | Body | Integer | Virtual size of the image |
 | size | Body | Integer | Real size of the image (bytes) |
 | properties | Body | Object | Image properties object<br>Describes user-specified properties for each image in the key-value pair format |
 | self | Body | URI | Image path |
 | file | Body | String | File path of image |
 | schema | Body | URI| Schema path of image |
+| os_type | Body | String | OS type<br>`windows` or `linux` |
+| os_distro | Body | String | OS distribution |
+| os_version | Body | String | OS version |
 
 <details><summary>Example</summary>
 <p>
