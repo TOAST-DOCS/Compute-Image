@@ -138,7 +138,7 @@ X-Auth-Token: {tokenId}
 | disk_format | Body | String | イメージディスクフォーマット |
 | updated_at | Body | Datetime | 修正時刻 |
 | min_disk | Body | Integer | イメージ最小ディスク要求量(GB)<br>`min_disk`の値より大きいブロックストレージでのみ使用できる |
-| protected | Body | boolean | イメージ保護有無<br>`protected=true`の場合、修正および削除不可 |
+| protected | Body | Boolean | イメージ保護有無<br>`protected=true`の場合、修正および削除不可 |
 | id | Body | UUID | イメージID |
 | min_ram | Body | Integer | イメージ最小メモリ要求量(MB)<br>`min_disk`の値より大きいインスタンスでのみ使用できる |
 | checksum | Body | String | イメージ内容のハッシュ値<br>内部的にイメージの有効性を検証するために使用 |
@@ -242,7 +242,7 @@ X-Auth-Token: {tokenId}
 | disk_format | Body | String | イメージディスクフォーマット |
 | updated_at | Body | Datetime | 修正時刻 |
 | min_disk | Body | Integer | イメージ最小ディスク要求量(GB)<br>`min_disk`の値より大きいブロックストレージでのみ使用できる |
-| protected | Body | boolean | イメージ保護有無<br>`protected=true`の場合、修正および削除不可 |
+| protected | Body | Boolean | イメージ保護有無<br>`protected=true`の場合、修正および削除不可 |
 | id | Body | UUID | イメージID |
 | min_ram | Body | Integer | イメージ最小メモリ要求量(MB)<br>`min_disk`の値より大きいインスタンスでのみ使用できる |
 | checksum | Body | String | イメージ内容のハッシュ値<br>内部的にイメージの有効性を検証するために使用 |
