@@ -42,7 +42,7 @@ X-Auth-Token: {tokenId}
 | images | Body | Array | 이미지 목록 객체                                                                          |
 | images.status | Body | String | 이미지 상태<br>`queued`, `saving`, `active`, `killed`, `deleted`, `pending_delete` 중 하나 |
 | images.name | Body | String | 이미지 이름                                                                             |
-| images.tag | Body | String | 이미지 태그<br>`_AVAILABLE_` 태그를 삭제하면 콘솔에서는 조회되지 않으므로, 태그를 삭제하지 않도록 주의                  |
+| images.tags | Body | Array | 이미지 태그 목록                  |
 | images.container_format | Body | String | 이미지 컨테이너 포맷                                                                        |
 | images.created_at | Body | Datetime | 생성 시각                                                                              |
 | images.disk_format | Body | String | 이미지 디스크 포맷                                                                         |
@@ -131,13 +131,13 @@ X-Auth-Token: {tokenId}
 |---|---|---|---|
 | status | Body | String | 이미지 상태 |
 | name | Body | String | 이미지 이름 |
-| tag | Body | String | 이미지 태그<br>`_AVAILABLE_` 태그를 삭제하면 콘솔에서는 조회되지 않으므로, 태그를 삭제하지 않도록 주의 |
+| tags | Body | Array | 이미지 태그 목록 |
 | container_format | Body | String | 이미지 컨테이너 포맷 |
 | created_at | Body | Datetime | 생성 시각 |
 | disk_format | Body | String | 이미지 디스크 포맷 |
 | updated_at | Body | Datetime | 수정 시각 |
 | min_disk | Body | Integer | 이미지 최소 디스크 요구량(GB)<br>`min_disk` 값보다 큰 블록 스토리지에서만 사용할 수 있음 |
-| protected | Body | boolean | 이미지 보호 여부<br>`protected=true`인 경우 수정 및 삭제 불가 |
+| protected | Body | Boolean | 이미지 보호 여부<br>`protected=true`인 경우 수정 및 삭제 불가 |
 | id | Body | UUID | 이미지 ID |
 | min_ram | Body | Integer | 이미지 최소 메모리 요구량(MB)<br>`min_disk` 값보다 큰 인스턴스에서만 사용할 수 있음 |
 | checksum | Body | String | 이미지 내용의 해시값<br>내부적으로 이미지 유효성 검증을 위해 사용 |
@@ -191,6 +191,8 @@ X-Auth-Token: {tokenId}
 
 ### 이미지 생성
 
+빈 이미지를 생성합니다. NHN Cloud에서 이미지를 사용하려면 `이미지 생성` 후에 `이미지 업로드` API를 이용해 실제 파일을 업로드해야 합니다.
+
 ```
 POST /v2/images
 X-Auth-Token: {tokenId}
@@ -205,17 +207,23 @@ X-Auth-Token: {tokenId}
 | min_disk | Body | Integer | - | 이미지 최소 디스크 요구량(GB) |
 | min_ram | Body | Integer | - | 이미지 최소 메모리 요구량(MB) |
 | protected | Body | Boolean | - | 이미지 보호 여부, true 또는 false |
-| tags | Body | Array | - | 이미지 태그 목록<br>`_AVAILABLE_` 태그를 삭제하면 콘솔에서는 조회되지 않으므로, 태그를 삭제하지 않도록 주의 |
-| visibility | Body | String | - | 이미지 가시성<br>`public`, `private`, `shared` 중 하나 |
+| tags | Body | Array | - | 이미지 태그 목록 |
+| visibility | Body | String | - | 이미지 가시성<br>`private`, `shared` 중 하나 |
+| os_type | Body | String | O | 운영체제 타입<br>`windows`, `linux` 중 하나 |
+| os_distro | Body | String | - | 운영체제 배포판 |
+| os_version | Body | String | - | 운영체제 버전 |
 
 <details><summary>예시</summary>
 <p>
 
 ```json
 {
+    "name": "Ubuntu Image",
     "container_format": "bare",
-    "disk_format": "raw",
-    "name": "Ubuntu",
+    "disk_format": "qcow2",
+    "os_type": "linux",
+    "os_distro": "ubuntu",
+    "os_version": "Server 22.04 LTS"
 }
 ```
 
@@ -227,7 +235,7 @@ X-Auth-Token: {tokenId}
 |---|---|---|---|
 | status | Body | String | 이미지 상태<br>`queued`, `saving`, `active`, `killed`, `deleted`, `pending_delete` 중 하나 |
 | name | Body | String | 이미지 이름 |
-| tags | Body | String | 이미지 태그 목록<br>`_AVAILABLE_` 태그를 삭제하면 콘솔에서는 조회되지 않으므로, 태그를 삭제하지 않도록 주의 |
+| tags | Body | Array | 이미지 태그 목록 |
 | container_format | Body | String | 이미지 컨테이너 포맷 |
 | created_at | Body | Datetime | 생성 시각 |
 | disk_format | Body | String | 이미지 디스크 포맷 |
@@ -245,6 +253,9 @@ X-Auth-Token: {tokenId}
 | self | Body | URI | 이미지 경로 |
 | file | Body | String | 이미지 파일 경로 |
 | schema | Body | URI| 이미지 스키마 경로 |
+| os_type | Body | String | 운영체제 타입<br>`windows`, `linux` 중 하나 |
+| os_distro | Body | String | 운영체제 배포판 |
+| os_version | Body | String | 운영체제 버전 |
 
 <details><summary>예시</summary>
 <p>
@@ -252,12 +263,12 @@ X-Auth-Token: {tokenId}
 ```json
 {
     "status": "queued",
-    "name": "Ubuntu",
+    "name": "Ubuntu Image",
     "tags": [],
     "container_format": "bare",
     "created_at": "2015-11-29T22:21:42Z",
     "size": null,
-    "disk_format": "raw",
+    "disk_format": "qcow2",
     "updated_at": "2015-11-29T22:21:42Z",
     "visibility": "private",
     "locations": [],
@@ -273,7 +284,10 @@ X-Auth-Token: {tokenId}
     "owner": "bab7d5c60cd041a0a36f7c4b6e1dd978",
     "virtual_size": null,
     "min_ram": 0,
-    "schema": "/v2/schemas/image"
+    "schema": "/v2/schemas/image",
+    "os_type": "linux",
+    "os_distro": "ubuntu",
+    "os_version": "Server 22.04 LTS"
 }
 ```
 
@@ -284,7 +298,7 @@ X-Auth-Token: {tokenId}
 
 ### 이미지 업로드
 
-지정한 이미지에 실제 이미지 파일을 업로드합니다.
+생성한 이미지에 실제 이미지 파일을 업로드합니다.
 
 ```
 PUT /v2/images/{imageId}/file
@@ -323,6 +337,72 @@ X-Auth-Token: {tokenId}
 
 #### 응답
 이미지의 바이너리 데이터가 반환됩니다. 요청이 올바르면 상태 코드 200을 반환합니다.
+
+---
+
+### 이미지 수정
+
+이미지 수정을 통해 이미지 속성을 변경할 수 있습니다.
+
+```
+PATCH /v2/images/{imageId}
+X-Auth-Token: {tokenId}
+Content-Type: application/openstack-images-v2.1-json-patch
+```
+
+#### 요청
+요청 시 Header의 Content-Type을 application/openstack-images-v2.1-json-patch로 설정해야 합니다.
+
+| 이름 | 종류 | 형식     | 필수 | 설명                                                                           |
+|---|---|--------|----|------------------------------------------------------------------------------|
+| imageId | URL | UUID   | O  | 수정할 이미지 ID                                                                   |
+| tokenId | Header | String | O  | 토큰 ID                                                                        |
+| op | Body | Enum   | O  | 수정할 작업 유형</br>`add`: 속성 추가</br>`replace`: 속성 값 수정</br>`remove`: 속성 삭제 |
+| path | Body | String | O  | 수정할 속성</br>`/{path}` 형식                                                      |
+| value | Body | String | -  | 수정할 속성의 값                                                                    |
+
+<details><summary>예시</summary>
+<p>
+
+```json
+// 속성 추가
+[
+    {
+        "op": "add",
+        "path": "/metadata1",
+        "value": "value1"
+    },
+    {
+        "op": "add",
+        "path": "/metadata2",
+        "value": "1"
+    }
+]
+
+// 속성 값 수정
+[
+    {
+        "op": "replace",
+        "path": "/metadata1",
+        "value": "value2"
+    }
+]
+
+// 속성 삭제
+[
+    {
+        "op": "remove",
+        "path": "/metadata1"
+    }
+]
+```
+
+<p>
+</details>
+
+#### 응답
+
+이미지 보기와 동일한 응답을 반환합니다.
 
 ---
 
