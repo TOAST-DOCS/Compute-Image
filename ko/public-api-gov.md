@@ -202,6 +202,7 @@ X-Auth-Token: {tokenId}
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 |---|---|---|---|---|
 | tokenId | Header | String | O | 토큰 ID |
+| name | Body | String | O | 이미지 이름 |
 | container_format | Body | String | - | 이미지 컨테이너 포맷 |
 | disk_format | Body | String | - | 이미지 디스크 포맷 |
 | min_disk | Body | Integer | - | 이미지 최소 디스크 요구량(GB) |
