@@ -203,6 +203,7 @@ X-Auth-Token: {tokenId}
 | 名前 | 種類 | 形式 | 必須 | 説明 |
 |---|---|---|---|---|
 | tokenId | Header | String | O | トークンID |
+| name | Body | String | O | イメージの名前 |
 | container_format | Body | String | - | イメージコンテナフォーマット |
 | disk_format | Body | String | - | イメージディスクフォーマット |
 | min_disk | Body | Integer | - | イメージ最小ディスク要求量(GB) |

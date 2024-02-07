@@ -203,6 +203,7 @@ X-Auth-Token: {tokenId}
 | Name | Type | Format | Required | Description |
 |---|---|---|---|---|
 | tokenId | Header | String | O | Token ID |
+| name | Body | String | O | Image name |
 | container_format | Body | String | - | Image container format |
 | disk_format | Body | String | - | Image disk format |
 | min_disk | Body | Integer | - | Minimum required disk size of image (GB) |
