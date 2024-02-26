@@ -229,7 +229,7 @@ X-Auth-Token: {tokenId}
 }
 ```
 
-<p>
+</p>
 </details>
 
 #### レスポンス
@@ -258,6 +258,7 @@ X-Auth-Token: {tokenId}
 | os_type | Body | String | OSタイプ<br>`windows`, `linux`のいずれか |
 | os_distro | Body | String | OSディストリビューション |
 | os_version | Body | String | OSバージョン |
+
 <details><summary>例</summary>
 <p>
 
@@ -292,7 +293,7 @@ X-Auth-Token: {tokenId}
 }
 ```
 
-<p>
+</p>
 </details>
 
 ---
@@ -398,7 +399,7 @@ Content-Type: application/openstack-images-v2.1-json-patch
 ]
 ```
 
-<p>
+</p>
 </details>
 
 #### レスポンス
