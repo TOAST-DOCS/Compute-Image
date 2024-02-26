@@ -255,7 +255,6 @@ X-Auth-Token: {tokenId}
 | self | Body | URI | イメージのパス |
 | file | Body | String | イメージファイルのパス |
 | schema | Body | URI | イメージスキーマのパス |
-
 | os_type | Body | String | OSタイプ<br>`windows`, `linux`のいずれか |
 | os_distro | Body | String | OSディストリビューション |
 | os_version | Body | String | OSバージョン |
