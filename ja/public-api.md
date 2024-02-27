@@ -43,7 +43,7 @@ X-Auth-Token: {tokenId}
 | images | Body | Array | イメージリストオブジェクト |
 | images.status | Body | String | イメージの状態<br>`queued`、`saving`、`active`、`killed`、`deleted`、`pending_delete`のいずれか1つ。 |
 | images.name | Body | String | イメージの名前 |
-| images.tags | Body | Array | イメージタグリスト<br>`_AVAILABLE_`タグを削除すると、コンソールでは照会できないため、タグを削除しないでください。 |
+| images.tags | Body | Array | イメージタグリスト |
 | images.container_format | Body | String | イメージコンテナフォーマット |
 | images.created_at | Body | Datetime | 作成時刻 |
 | images.disk_format | Body | String | イメージディスクフォーマット |
@@ -132,13 +132,13 @@ X-Auth-Token: {tokenId}
 |---|---|---|---|
 | status | Body | String | イメージの状態 |
 | name | Body | String | イメージの名前 |
-| tag | Body | String | イメージタグ<br>`_AVAILABLE_`タグを削除すると、コンソールでは照会されないため、タグを削除しないでください。 |
+| tags | Body | String | イメージタグリスト |
 | container_format | Body | String | イメージコンテナフォーマット |
 | created_at | Body | Datetime | 作成時刻 |
 | disk_format | Body | String | イメージディスクフォーマット |
 | updated_at | Body | Datetime | 修正時刻 |
 | min_disk | Body | Integer | イメージ最小ディスク要求量(GB)<br>`min_disk`の値より大きいブロックストレージでのみ使用できる |
-| protected | Body | boolean | イメージ保護有無<br>`protected=true`の場合、修正および削除不可 |
+| protected | Body | Boolean | イメージ保護有無<br>`protected=true`の場合、修正および削除不可 |
 | id | Body | UUID | イメージID |
 | min_ram | Body | Integer | イメージ最小メモリ要求量(MB)<br>`min_disk`の値より大きいインスタンスでのみ使用できる |
 | checksum | Body | String | イメージ内容のハッシュ値<br>内部的にイメージの有効性を検証するために使用 |
@@ -192,6 +192,8 @@ X-Auth-Token: {tokenId}
 
 ### イメージ作成
 
+空のイメージを作成します。 NHN Cloudでイメージを使用するには`イメージ作成`後に`イメージアップロード`APIを利用して実際のファイルをアップロードする必要があります。
+
 ```
 POST /v2/images
 X-Auth-Token: {tokenId}
@@ -201,26 +203,33 @@ X-Auth-Token: {tokenId}
 | 名前 | 種類 | 形式 | 必須 | 説明 |
 |---|---|---|---|---|
 | tokenId | Header | String | O | トークンID |
+| name | Body | String | O | イメージの名前 |
 | container_format | Body | String | - | イメージコンテナフォーマット |
 | disk_format | Body | String | - | イメージディスクフォーマット |
 | min_disk | Body | Integer | - | イメージ最小ディスク要求量(GB) |
 | min_ram | Body | Integer | - | イメージ最小メモリ要求量(MB) |
 | protected | Body | Boolean | - | イメージ保護有無、trueまたはfalse |
-| tags | Body | Array | - | イメージタグリスト<br>`_AVAILABLE_`タグを削除するとコンソールでは照会できないため、タグを削除しないように注意 |
-| visibility | Body | String | - | イメージ可視性<br>`public`、`private`、`shared`のいずれか |
+| tags | Body | Array | - | イメージタグリスト |
+| visibility | Body | String | - | イメージの可視性<br>`private`, `shared`のいずれか |
+| os_type | Body | String | O | OSタイプ<br>`windows`, `linux`のいずれか |
+| os_distro | Body | String | - | OSディストリビューション |
+| os_version | Body | String | - | OSバージョン |
 
 <details><summary>例</summary>
 <p>
 
 ```json
 {
+    "name": "Ubuntu Image",
     "container_format": "bare",
-    "disk_format": "raw",
-    "name": "Ubuntu",
+    "disk_format": "qcow2",
+    "os_type": "linux",
+    "os_distro": "ubuntu",
+    "os_version": "Server 22.04 LTS"
 }
 ```
 
-<p>
+</p>
 </details>
 
 #### レスポンス
@@ -228,24 +237,27 @@ X-Auth-Token: {tokenId}
 |---|---|---|---|
 | status | Body | String | イメージ状態<br>`queued`, `saving`, `active`, `killed`, `deleted`, `pending_delete`のいずれか |
 | name | Body | String | イメージの名前 |
-| tag | Body | String | イメージタグ<br>`_AVAILABLE_`タグを削除すると、コンソールでは照会されないため、タグを削除しないでください。 |
+| tags | Body | String | イメージタグリスト |
 | container_format | Body | String | イメージコンテナフォーマット |
 | created_at | Body | Datetime | 作成時刻 |
 | disk_format | Body | String | イメージディスクフォーマット |
 | updated_at | Body | Datetime | 修正時刻 |
 | min_disk | Body | Integer | イメージ最小ディスク要求量(GB)<br>`min_disk`の値より大きいブロックストレージでのみ使用できる |
-| protected | Body | boolean | イメージ保護有無<br>`protected=true`の場合、修正および削除不可 |
+| protected | Body | Boolean | イメージ保護有無<br>`protected=true`の場合、修正および削除不可 |
 | id | Body | UUID | イメージID |
 | min_ram | Body | Integer | イメージ最小メモリ要求量(MB)<br>`min_disk`の値より大きいインスタンスでのみ使用できる |
 | checksum | Body | String | イメージ内容のハッシュ値<br>内部的にイメージの有効性を検証するために使用 |
 | owner | Body | String | イメージが属しているテナントID |
-| visibility | Body | Enum | イメージの可視性<br>`public`、`private`、`shared`のいずれか1つ。 |
+| visibility | Body | Enum | イメージの可視性<br>`private`、`shared`のいずれか1つ。 |
 | virtual_size | Body | Integer | イメージの仮想サイズ |
 | size | Body | Integer | イメージの実際のサイズ(Byte) |
 | properties | Body | Object | イメージプロパティオブジェクト<br>イメージごとにユーザー指定プロパティをキーと値のペアで記述 |
 | self | Body | URI | イメージのパス |
 | file | Body | String | イメージファイルのパス |
 | schema | Body | URI | イメージスキーマのパス |
+| os_type | Body | String | OSタイプ<br>`windows`, `linux`のいずれか |
+| os_distro | Body | String | OSディストリビューション |
+| os_version | Body | String | OSバージョン |
 
 <details><summary>例</summary>
 <p>
@@ -253,12 +265,12 @@ X-Auth-Token: {tokenId}
 ```json
 {
     "status": "queued",
-    "name": "Ubuntu",
+    "name": "Ubuntu Image",
     "tags": [],
     "container_format": "bare",
     "created_at": "2015-11-29T22:21:42Z",
     "size": null,
-    "disk_format": "raw",
+    "disk_format": "qcow2",
     "updated_at": "2015-11-29T22:21:42Z",
     "visibility": "private",
     "locations": [],
@@ -274,18 +286,21 @@ X-Auth-Token: {tokenId}
     "owner": "bab7d5c60cd041a0a36f7c4b6e1dd978",
     "virtual_size": null,
     "min_ram": 0,
-    "schema": "/v2/schemas/image"
+    "schema": "/v2/schemas/image",
+    "os_type": "linux",
+    "os_distro": "ubuntu",
+    "os_version": "Server 22.04 LTS"
 }
 ```
 
-<p>
+</p>
 </details>
 
 ---
 
 ### イメージアップロード
 
-指定したイメージに実際のイメージファイルをアップロードします。
+作成したイメージに実際のイメージファイルをアップロードします。
 
 ```
 PUT /v2/images/{imageId}/file
@@ -384,7 +399,7 @@ Content-Type: application/openstack-images-v2.1-json-patch
 ]
 ```
 
-<p>
+</p>
 </details>
 
 #### レスポンス
