@@ -35,6 +35,7 @@ X-Auth-Token: {tokenId}
 | nhncloud_product | Query | Enum | - | 조회할 이미지의 인프라 서비스 종류<br>`compute`: Instance 서비스 이미지<br>`gpu`: GPU Instance 서비스 이미지                                                                        |
 | sort_key | Query | String | - | 이미지 목록을 정렬할 때 사용할 속성<br>이미지의 모든 속성을 지정 가능, 기본값은 `created_at`                                                                                             |
 | sort_dir | Query | Enum | - | 이미지 목록 정렬 방향<br>`asc`(오름차순), `desc`(내림차순) 중 하나의 값만 선택 가능, 기본값은 내림차순                                                                                      |
+| member_status | Query | Enum | - | 공유받은 이미지의 경우 멤버 상태에 따른 이미지 목록을 조회<br>`accepted`, `pending`, `rejected`, `all` 중 하나의 값만 선택 가능<br>기본값은 `accepted` |
 
 #### 응답
 
@@ -483,7 +484,8 @@ X-Auth-Token: {tokenId}
 1. 이미지 가시성을 `shared`로 변경합니다.
 2. 공유받을 테넌트를 이미지의 멤버로 등록합니다.
 
-공유한 이미지는 공유받은 테넌트에서 바로 사용할 수 있지만 이미지 목록 조회에서는 표시되지 않습니다. **공유받은 테넌트**에서 멤버 상태를 `active`로 변경하면 공유받은 이미지가 조회됩니다.
+공유한 이미지는 공유받은 테넌트에서 바로 사용할 수 있지만 기본적으로 이미지 목록 조회에서는 표시되지 않습니다.
+공유받은 테넌트에서 공유받은 이미지를 조회하기 위해서는 **공유받은 테넌트**에서 멤버 상태를 `accepted`로 변경하거나 이미지 목록 조회시 쿼리 파라미터에 `memeber_status` 를 `all` 로 설정하면 됩니다.
 
 ### 가시성 변경
 
