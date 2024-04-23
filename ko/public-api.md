@@ -32,9 +32,10 @@ X-Auth-Token: {tokenId}
 | status | Query | Enum    | - | 조회할 이미지 상태<br>`queued`: 이미지 변환 중<br>`saving`: 이미지 업로드 중<br>`active`: 정상<br>`killed`: 시스템에서 이미지 삭제<br>`deleted`: 삭제된 이미지<br>`pending_delete`: 이미지 삭제 대기 중 |
 | size_min | Query | Integer | - | 조회할 이미지의 최소 크기(바이트)                                                                                                                                      |
 | size_max | Query | Integer | - | 조회할 이미지의 최대 크기(바이트)                                                                                                                                      |
-| nhncloud_product | Query | Enum | - | 조회할 이미지의 인프라 서비스 종류<br>`compute`: Instance 서비스 이미지<br>`gpu`: GPU Instance 서비스 이미지                                                                        |
+| nhncloud_product | Query | Enum | - | 조회할 이미지의 인프라 서비스 종류<br>`compute`: Instance 서비스 이미지<br>`gpu`: GPU Instance 서비스 이미지<br>`container`: NHN Kubernetes 서비스 이미지                                                                        |
 | sort_key | Query | String | - | 이미지 목록을 정렬할 때 사용할 속성<br>이미지의 모든 속성을 지정 가능, 기본값은 `created_at`                                                                                             |
 | sort_dir | Query | Enum | - | 이미지 목록 정렬 방향<br>`asc`(오름차순), `desc`(내림차순) 중 하나의 값만 선택 가능, 기본값은 내림차순                                                                                      |
+| member_status | Query | Enum | - | 공유 받은 이미지의 경우 멤버 상태에 따른 이미지 목록을 조회<br>`accepted`, `pending`, `rejected`, `all` 중 하나의 값만 선택 가능<br>기본값은 `accepted` |
 
 #### 응답
 
@@ -481,9 +482,10 @@ X-Auth-Token: {tokenId}
 이미지 공유를 통해 자신의 테넌트에 소속된 이미지를 다른 테넌트에 공유할 수 있습니다. 이미지 공유 방법은 다음과 같습니다.
 
 1. 이미지 가시성을 `shared`로 변경합니다.
-2. 공유받을 테넌트를 이미지의 멤버로 등록합니다.
+2. 공유 받을 테넌트를 이미지의 멤버로 등록합니다.
 
-공유한 이미지는 공유받은 테넌트에서 바로 사용할 수 있지만 이미지 목록 조회에서는 표시되지 않습니다. **공유받은 테넌트**에서 멤버 상태를 `active`로 변경하면 공유받은 이미지가 조회됩니다.
+공유한 이미지는 공유 받은 테넌트에서 바로 사용할 수 있지만 기본적으로 이미지 목록 조회에서는 표시되지 않습니다.
+공유 받은 테넌트에서 공유 받은 이미지를 조회하려면 `공유 받은 테넌트`에서 멤버 상태를 `accepted`로 변경하거나 이미지 목록 조회 시 쿼리 파라미터의 `memeber_status`를 `all`로 설정합니다.
 
 ### 가시성 변경
 
@@ -526,7 +528,7 @@ Content-Type: application/openstack-images-v2.1-json-patch
 ---
 
 ### 멤버 추가
-공유받을 테넌트를 지정한 이미지의 멤버로 등록합니다.
+공유 받을 테넌트를 지정한 이미지의 멤버로 등록합니다.
 
 ```
 POST /v2/images/{imageId}/members
@@ -539,7 +541,7 @@ X-Auth-Token: {tokenId}
 |---|---|---|---|---|
 | imageId | URL | UUID | O | 공유할 이미지 ID |
 | tokenId | Header | String | O | 토큰 ID |
-| member | Body | String | O | 공유받을 테넌트 ID |
+| member | Body | String | O | 공유 받을 테넌트 ID |
 
 <details><summary>예시</summary>
 <p>
@@ -559,7 +561,7 @@ X-Auth-Token: {tokenId}
 |---|---|---|---|
 | created_at | Body | Datetime | 멤버 생성 시각<br>`YYYY-MM-DDThh:mm:ssZ` 형식 |
 | image_id | Body | UUID | 공유한 이미지 ID |
-| member_id | Body | String | 이미지를 공유받은 테넌트 ID |
+| member_id | Body | String | 이미지를 공유 받은 테넌트 ID |
 | schema | Body | URI | 이미지 멤버에 대한 스키마 경로 |
 | status | Body | Enum | 이미지 멤버 상태<br>`pending`, `accepted` 중 하나 |
 
@@ -583,7 +585,7 @@ X-Auth-Token: {tokenId}
 ---
 
 ### 멤버 목록 보기
-지정한 이미지를 공유받은 테넌트 목록을 조회합니다. 반드시 해당 이미지가 소속된 테넌트나 공유받은 테넌트의 토큰으로 요청합니다.
+지정한 이미지를 공유 받은 테넌트 목록을 조회합니다. 반드시 해당 이미지가 소속된 테넌트나 공유 받은 테넌트의 토큰으로 요청합니다.
 
 ```
 GET /v2/images/{imageId}/members
@@ -605,7 +607,7 @@ X-Auth-Token: {tokenId}
 | members | Body | Object | 멤버 객체 목록 |
 | members.created_at | Body | Datetime | 멤버 생성 시각 `YYYY-MM-DDThh:mm:ssZ` 형식       |
 | members.image_id | Body | UUID | 공유한 이미지 ID |
-| members.member_id | Body | String | 이미지를 공유받은 테넌트 ID |
+| members.member_id | Body | String | 이미지를 공유 받은 테넌트 ID |
 | members.schema | Body | URI | 이미지 멤버 스키마 경로 |
 | members.status | Body | Enum | 이미지 멤버 상태<br/>`pending`, `accepted` 중 하나 |
 | schema | Body | URI | 이미지 멤버 목록에 대한 스키마 경로 |
@@ -644,7 +646,7 @@ X-Auth-Token: {tokenId}
 
 ### 멤버 상세 보기
 
-지정한 이미지의 특정 멤버에 대한 상세 정보를 반환합니다. 반드시 해당 이미지가 소속된 테넌트나 공유받은 테넌트의 토큰으로 요청합니다.
+지정한 이미지의 특정 멤버에 대한 상세 정보를 반환합니다. 반드시 해당 이미지가 소속된 테넌트나 공유 받은 테넌트의 토큰으로 요청합니다.
 
 ```
 GET /v2/images/{imageId}/members/{memberId}
@@ -666,7 +668,7 @@ X-Auth-Token: {tokenId}
 |---|---|---|---|
 | created_at | Body | Datetime | 멤버 생성 시각 `YYYY-MM-DDThh:mm:ssZ` 형식 |
 | image_id | Body | UUID | 공유한 이미지 ID |
-| member_id | Body | String | 이미지를 공유받은 테넌트 ID |
+| member_id | Body | String | 이미지를 공유 받은 테넌트 ID |
 | schema | Body | URI | 이미지 멤버 스키마 경로 |
 | status | Body | Enum | 이미지 멤버 상태<br/>`pending`, `accepted` 중 하나 |
 
@@ -691,7 +693,7 @@ X-Auth-Token: {tokenId}
 
 ### 멤버 상태 변경
 
-공유받은 테넌트에서 공유받은 이미지를 승인합니다. 이미지 공유를 승인하면 이미지 목록 조회에서도 해당 이미지가 조회됩니다. 반드시 공유받은 테넌트의 토큰으로 요청합니다.
+공유 받은 테넌트에서 공유 받은 이미지를 승인합니다. 이미지 공유를 승인하면 이미지 목록 조회에서도 해당 이미지가 조회됩니다. 반드시 공유 받은 테넌트의 토큰으로 요청합니다.
 
 ```
 PUT /v2/images/{imageId}/members/{memberId}
@@ -725,7 +727,7 @@ X-Auth-Token: {tokenId}
 |---|---|---|---|
 | created_at | Body | Datetime | 멤버 생성 시각<br>`YYYY-MM-DDThh:mm:ssZ` 형식 |
 | image_id | Body | UUID | 공유한 이미지 ID |
-| member_id | Body | String | 이미지를 공유받은 테넌트 ID |
+| member_id | Body | String | 이미지를 공유 받은 테넌트 ID |
 | schema | Body | URI | 이미지 멤버 스키마 경로 |
 | status | Body | Enum | 이미지 멤버 상태<br>`accpeted`,`pending`,`rejected` 중 하나 |
 | updated_at | Body | Datetime | 멤버 상태 수정 시각<br>`YYYY-MM-DDThh:mm:ssZ` 형식 |
