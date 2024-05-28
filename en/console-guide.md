@@ -23,6 +23,7 @@ Select the region you want to copy the image to, enter a name and description fo
 ## Share with Other Projects
 
 Select a project to share the image with, and share the image.
+For how to use the API for this feature, see **Image Sharing** from **the User Guide > Compute > Image > API Guide**.
 
 ## Guide for Initialization of Linux machine-id
 

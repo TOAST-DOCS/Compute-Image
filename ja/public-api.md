@@ -32,9 +32,11 @@ X-Auth-Token: {tokenId}
 | status | Query | Enum    | - | 照会するイメージの状態<br>`queued`：イメージをコンバーティング中<br>`saving`：イメージをアップロード中<br>`active`：正常<br>`killed`：システムによってイメージ削除<br>`deleted`：削除されたイメージ<br>`pending_delete`：イメージ削除待機中 |
 | size_min | Query | Integer | - | 照会するイメージの最小サイズ(Byte)                                                                                                                                           |
 | size_max | Query | Integer | - | 照会するイメージの最大サイズ(Byte)                                                                                                                                           |
+| nhncloud_product | Query | Enum | - | 照会するイメージのインフラサービスの種類<br>`compute`: Instanceサービスイメージ<br>`gpu`: GPU Instanceサービスイメージ<br>`container`: NHN Kubernetesサービスイメージ                                                                       |
 | nhncloud_product | Query | Enum | - | 照会するイメージのインフラサービスの種類<br>`compute`: Instanceサービスイメージ<br>`gpu`: GPU Instanceサービスイメージ                                                                             |
 | sort_key | Query | String | - | イメージリストをソートする時に使用するプロパティ<br>イメージのすべてのプロパティを指定可能。基本値は`created_at`                                                                                               |
 | sort_dir | Query | Enum | - | イメージリストのソート方向<br>`asc` (昇順)、`desc` (降順)のうち、1つの値のみ選択可能。基本値は降順                                                                                                   |
+| member_status | Query | Enum | - | 共有されたイメージの場合、メンバーステータスに応じたイメージリストを照会<br>`accepted`, `pending`, `rejected`, `all`のいずれか1つの値のみ選択可能<br>デフォルト値は`accepted` |
 
 #### レスポンス
 
@@ -483,8 +485,9 @@ X-Auth-Token: {tokenId}
 
 1. イメージの可視性を`shared`に変更
 2. 共有を受けるテナントをイメージのメンバーに登録
+共有したイメージは、共有されたテナントですぐに使用できますが、基本的にイメージリスト検索では表示されません。
+共有されたテナントで共有されたイメージを照会するには、 `共有されたテナント`でメンバーステータスを `accepted` に変更するか、イメージリスト照会時にクエリパラメータの `memeber_status` を `all` に設定します。
 
-共有したイメージは共有されたテナントですぐに使用できますが、イメージリスト照会では表示されません。**共有されたテナント**でメンバーの状態を`active`に変更すると、共有されたイメージが照会されます。
 
 ### 可視性の変更
 
