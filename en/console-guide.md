@@ -10,6 +10,9 @@ To create an image of a Windows instance, it is recommended to prepare for creat
 
 When creating an image from a running Windows instance, prerequisites are required for correct operation if the Windows instance has been made from an image before the distribution version 2019.05.28. You can check the Windows version of the image from which an instance has been created in **Image Name** of **Instance Details**. For more details, see [Guide to Creating Images from Running Windows Instances](#guide-to-creating-images-from-running-windows-instances).
 
+> [Caution]
+> The created image size may be larger than the actual usage of the root block storage.
+
 ## Modify Image
 
 Modify an image name.
