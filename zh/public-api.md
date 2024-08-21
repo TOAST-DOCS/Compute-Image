@@ -6,7 +6,7 @@ Image API uses the `image` type endpoint. Refer to the `serviceCatalog` in the t
 
 | Type | Region | Endpoint |
 |---|---|---|
-| image | Korea (Pangyo) Region<br>Korea (Pyeongchon) Region<br>Japan Region | https://kr1-api-image-infrastructure.nhncloudservice.com<br>https://kr2-api-image-infrastructure.nhncloudservice.com<br>https://jp1-api-image-infrastructure.nhncloudservice.com |
+| image | Korea (Pangyo) Region<br>Korea (Pyeongchon) Region<br>Japan Region<br>US (California) Region | https://kr1-api-image-infrastructure.nhncloudservice.com<br>https://kr2-api-image-infrastructure.nhncloudservice.com<br>https://jp1-api-image-infrastructure.nhncloudservice.com<br>https://us1-api-image-infrastructure.nhncloudservice.com |
 
 In API response, you may find fields that are not specified in the guide. These fields are only for the internal use by NHN Cloud and are subject to change without prior notice, so we advise you not to use them.
 
