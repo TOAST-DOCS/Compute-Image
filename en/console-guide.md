@@ -38,7 +38,7 @@ Modifying image information may affect related services and features, and you ar
 On the **Compute > Image** page, click the deletion protection icon for an image to enable, or select the image and click **Change Deletion Protection Settings > Use Deletion Protection > Confirm**.
 
 ### Disable Deletion Protection
-* *On the **Compute > Image** page, click the deletion protection icon for the desired image to disable the feature, or select the image and click **Change Deletion Protection Settings > Disable Deletion Protection > Confirm**
+* On the **Compute > Image** page, click the deletion protection icon for the desired image to disable the feature, or select the image and click **Change Deletion Protection Settings > Disable Deletion Protection > Confirm**
 
 ## Copy to Another Region
 
