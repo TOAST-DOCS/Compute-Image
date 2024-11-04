@@ -19,7 +19,7 @@ On the **Compute > Image** page, select an image, and then click **Modify Image*
 
 * **Image name**: Image name information.
 * **Description**: Image description information.
-* **OS Type**: Information about the OS type of the image. You cannot change the OS classification.
+* **OS Distro**: Information about the OS type of the image. You cannot change the OS classification.
 * **OS Version**: OS version information for the image.
 * **Max CPU**: The maximum number of CPU cores when creating an instance with this image. If not entered, the maximum CPU core limit is disabled.
 * **Min CPU**: The minimum number of CPU cores when creating an instance with this image. If not entered, the minimum CPU core count limit is disabled.
