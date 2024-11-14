@@ -15,18 +15,47 @@ When creating an image from a running Windows instance, prerequisites are requir
 
 ## Modify Image
 
-Modify an image name.
+On the **Compute > Image** page, select an image, and then click **Modify Image** to modify the image. You can modify the image for the items below.
 
-By selecting the **Protected** property and updating the image, you can prevent accidental deletion of the image. To delete an image with the Protected property selected, you must clear the **Protected** property in Modify Image and update the image.
+* **Image name**: Image name information.
+* **Description**: Image description information.
+* **OS Distro**: Information about the OS type of the image. You cannot change the OS classification.
+* **OS Version**: OS version information for the image.
+* **Max CPU**: The maximum number of CPU cores when creating an instance with this image. If not entered, the maximum CPU core limit is disabled.
+* **Min CPU**: The minimum number of CPU cores when creating an instance with this image. If not entered, the minimum CPU core count limit is disabled.
+* **Min Memory**: The minimum amount of RAM when creating an instance with this image. The default unit is **MB**. The minimum memory value must be entered.
+* **Min Block Storage**: The minimum disk size when creating an instance with this image. The default unit is **GB**. The minimum block storage value is required.
+* **Image Creation**: Whether to allow the feature to create other images from this image.
+* **User Script **: About whether to enable user script when creating an instance with this image.
+* **Applicable Services**: About whether services will use the instance when creating it with this image.
+
+> [Caution]
+Modifying image information may affect related services and features, and you are responsible for the consequences.
+
+## Change Delete Protection Settings
+
+### Deletion Protection Settings
+
+On the **Compute > Image** page, click the deletion protection icon for an image to enable, or select the image and click **Change Deletion Protection Settings > Use Deletion Protection > Confirm**.
+
+### Disable Deletion Protection
+
+On the **Compute > Image** page, click the deletion protection icon for the desired image to disable the feature, or select the image and click **Change Deletion Protection Settings > Disable Deletion Protection > Confirm**
 
 ## Copy to Another Region
 
 Select the region you want to copy the image to, enter a name and description for the new image, and copy the image.
 
+On the **Compute > Image** page, select an image and click **Copy to Another Region** to duplicate the image.
+
 ## Share with Other Projects
 
 Select a project to share the image with, and share the image.
-For how to use the API for this feature, see **Image Sharing** from **the User Guide > Compute > Image > API Guide**.
+
+On the **Compute > Image** page, select an image, and then click **Share to Other Projects** to share the image to a different project.
+
+> [Note]
+> For API usage for this feature, see the **Share Image** topic in the **User Guide > Compute > Image > API Guide**.
 
 ## Guide for Initialization of Linux machine-id
 
