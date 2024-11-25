@@ -32,6 +32,9 @@ On the **Compute > Image** page, select an image, and then click **Modify Image*
 > [Caution]
 Modifying image information may affect related services and features, and you are responsible for the consequences.
 
+> [Note]
+> To use **NKS(GPU)**, you must also select **NKS(CPU)** for the target service.
+
 ## Change Delete Protection Settings
 
 ### Deletion Protection Settings
