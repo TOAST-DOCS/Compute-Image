@@ -27,8 +27,8 @@ On the **Compute > Image** page, select an image, and then click **Modify Image*
 * **Min Block Storage**: The minimum disk size when creating an instance with this image. The default unit is **GB**. The minimum block storage value is required.
 * **Image Creation**: Whether to allow the feature to create other images from this image.
 * **User Script **: About whether to enable user script when creating an instance with this image.
-* **Applicable Services**: About whether services will use the instance when creating it with this image.
-
+* **Applicable Services**: Information about the service on which the image will be exposed. This item only determines whether the image will be exposed on that service, and does not guarantee proper behavior.
+ 
 > [Caution]
 Modifying image information may affect related services and features, and you are responsible for the consequences.
 
