@@ -32,8 +32,6 @@ X-Auth-Token: {tokenId}
 | status | Query | Enum    | - | 照会するイメージの状態<br>`queued`：イメージをコンバーティング中<br>`saving`：イメージをアップロード中<br>`active`：正常<br>`killed`：システムによってイメージ削除<br>`deleted`：削除されたイメージ<br>`pending_delete`：イメージ削除待機中 |
 | size_min | Query | Integer | - | 照会するイメージの最小サイズ(Byte)                                                                                                                                           |
 | size_max | Query | Integer | - | 照会するイメージの最大サイズ(Byte)                                                                                                                                           |
-| nhncloud_product | Query | Enum | - | 照会するイメージのインフラサービスの種類<br>`compute`: Instanceサービスイメージ<br>`gpu`: GPU Instanceサービスイメージ<br>`container`: NHN Kubernetesサービスイメージ                                                                       |
-| nhncloud_product | Query | Enum | - | 照会するイメージのインフラサービスの種類<br>`compute`: Instanceサービスイメージ<br>`gpu`: GPU Instanceサービスイメージ                                                                             |
 | sort_key | Query | String | - | イメージリストをソートする時に使用するプロパティ<br>イメージのすべてのプロパティを指定可能。基本値は`created_at`                                                                                               |
 | sort_dir | Query | Enum | - | イメージリストのソート方向<br>`asc` (昇順)、`desc` (降順)のうち、1つの値のみ選択可能。基本値は降順                                                                                                   |
 | member_status | Query | Enum | - | 共有されたイメージの場合、メンバーステータスに応じたイメージリストを照会<br>`accepted`, `pending`, `rejected`, `all`のいずれか1つの値のみ選択可能<br>デフォルト値は`accepted` |
