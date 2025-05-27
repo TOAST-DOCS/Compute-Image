@@ -21,7 +21,7 @@ Images are classified into the following three main categories.
 
 Public images are images provided by NHN Cloud. These images have an operating system installed for optimal use of virtual hardware. In addition, basic security settings are in place so that you can use it with confidence in your services and applications.
 
-NHN Cloud currently offers CentOS, Debian, Ubuntu, and Windows. For more details on operating system versions offered, refer to [NHN Cloud Service Introduction](https://toast.com/service/compute/instance).
+NHN Cloud currently offers Debian, Ubuntu, and Windows. For more details on operating system versions offered, refer to [NHN Cloud Service Introduction](https://toast.com/service/compute/instance).
 
 Some images have applications installed, so you can build services faster. In the future, we plan to provide images in which more applications are installed according to various user needs.
 
