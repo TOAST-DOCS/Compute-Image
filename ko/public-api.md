@@ -302,6 +302,9 @@ X-Auth-Token: {tokenId}
 
 생성한 이미지에 실제 이미지 파일을 업로드합니다.
 
+> [주의]
+> 사용자가 업로드한 이미지로 생성한 인스턴스는 정상적으로 동작하지 않을 수 있으며, 이에 따른 결과에 대한 책임은 사용자에게 있습니다.
+
 ```
 PUT /v2/images/{imageId}/file
 X-Auth-Token: {tokenId}
