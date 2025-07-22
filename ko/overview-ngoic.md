@@ -20,7 +20,7 @@ NHN Cloud 이미지의 특징은 다음과 같습니다.
 
 NHN Cloud에서 제공하는 이미지입니다. 이 이미지들에는 가상 하드웨어를 최적으로 이용하도록 운영체제가 설치되어 있습니다. 또한 고객의 서비스와 애플리케이션에서 안심하고 사용할 수 있도록 기본적인 보안 설정이 되어 있습니다.
 
-NHN Cloud는 현재 Rocky Linux, Debian, Ubuntu와 Windows를 제공하고 있습니다. 자세한 제공 운영체제 버전은 [NHN Cloud 서비스 소개](https://ninc.go.kr/service/compute/instance)를 참고합니다.
+NHN Cloud는 현재 Rocky Linux, Debian, Ubuntu와 Windows를 제공하고 있습니다. 자세한 제공 운영체제 버전은 [NHN Cloud 서비스 소개](https://ngoic.go.kr/service/compute/instance)를 참고합니다.
 
 일부 이미지들에는 애플리케이션을 설치해 두었기 때문에 더욱 빠르게 서비스를 구축할 수 있습니다. 앞으로 사용자 요구에 따라 다양한 애플리케이션을 구축해 놓은 이미지들을 제공할 예정입니다.
 
@@ -30,7 +30,7 @@ NHN Cloud는 현재 Rocky Linux, Debian, Ubuntu와 Windows를 제공하고 있�
 
 사용자 이미지는 서비스 증설에 유용하게 쓰입니다. 서비스를 증설하기 위해 퍼블릭 이미지로 새로운 인스턴스를 생성하고 서비스를 설치하려면 많은 시간이 걸립니다. 매번 번거로운 설치 작업을 반복하지 않고, 서비스에 사용할 이미지를 미리 사용자 이미지로 만들어서 인스턴스 생성에 사용한다면 서비스 부하 급증에 더욱 빠르게 대처할 수 있습니다.
 
-사용자 이미지는 Image 서비스 또는 Compute 서비스의 **추가 기능**을 이용하여 쉽게 생성할 수 있습니다. 자세한 이미지 생성 방법은 [이미지 콘솔 사용 가이드](/Compute/Image/ko/console-guide/)나 [인스턴스 콘솔 사용 가이드](/Compute/Instance/ko/console-guide-ninc/)를 참조하세요.
+사용자 이미지는 Image 서비스 또는 Compute 서비스의 **추가 기능**을 이용하여 쉽게 생성할 수 있습니다. 자세한 이미지 생성 방법은 [이미지 콘솔 사용 가이드](/Compute/Image/ko/console-guide/)나 [인스턴스 콘솔 사용 가이드](/Compute/Instance/ko/console-guide-ngoic/)를 참조하세요.
 
 ### 과금
 
