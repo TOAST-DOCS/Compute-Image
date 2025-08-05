@@ -328,7 +328,11 @@ Content-Type: application/octet-stream
 
 아래 조건이 모두 충족된 경우 이미지 다운로드가 가능합니다.
 * 기본 인프라 서비스 ADMIN 또는 MEMBER 권한이 있는 경우
-* **nhncloud_allow_download** 속성이 true인 경우
+* 다운로드할 이미지의 **nhncloud_allow_download** 속성이 true인 경우
+
+
+> [참고]
+> **nhncloud_allow_download** 속성이 false인 경우 [이미지 수정 API](./public-api/#_17)를 통해 속성을 true로 변경할 수 있습니다.
 
 ```
 GET /v2/images/{imageId}/file
