@@ -301,6 +301,9 @@ X-Auth-Token: {tokenId}
 
 생성한 이미지에 실제 이미지 파일을 업로드합니다.
 
+> [주의]
+> 사용자가 업로드한 이미지로 생성한 인스턴스는 정상적으로 동작하지 않을 수 있으며, 이에 따른 결과에 대한 책임은 사용자에게 있습니다.
+
 ```
 PUT /v2/images/{imageId}/file
 X-Auth-Token: {tokenId}
@@ -325,6 +328,11 @@ Content-Type: application/octet-stream
 
 지정한 이미지의 바이너리 데이터를 다운로드합니다.
 
+!!! tip "알아두기"
+    nhncloud_allow_download 속성이 false인 경우 [이미지 수정 API](./public-api/#_17)를 통해 속성을 true로 변경할 수 있습니다.
+    아래 조건이 모두 충족된 경우 이미지 다운로드가 가능합니다.
+    * 기본 인프라 서비스 ADMIN 또는 MEMBER 권한이 있는 경우
+    * 다운로드할 이미지의 nhncloud_allow_download 속성이 true인 경우
 ```
 GET /v2/images/{imageId}/file
 X-Auth-Token: {tokenId}
