@@ -302,6 +302,9 @@ X-Auth-Token: {tokenId}
 
 Uploads the actual image file to the created image.
 
+> [Caution]
+> The instance may not function properly if it's created with images that a user uploads, the user is responsible for any consequences resulting from this.
+
 ```
 PUT /v2/images/{imageId}/file
 X-Auth-Token: {tokenId}
@@ -325,6 +328,12 @@ This API does not return request body. When the request is appropriate, return s
 ### Download Image
 
 Downloads the binary data of the specified image.
+
+!!! tip "Note"
+    When the attribute of nhncloud_allow_download is false, you can change the attribute to true with the [Image Modification API](./public-api/#_17).
+    You can download the image if all the conditions below are met:
+    * When you have ADMIN or MEMBER permission for the basic infrastructure services
+    * When the nhncloud_allow_download attribute of the image is true
 
 ```
 GET /v2/images/{imageId}/file
