@@ -30,7 +30,7 @@ NHN Cloud는 현재 Rocky Linux, Debian, Ubuntu와 Windows를 제공하고 있�
 
 사용자 이미지는 서비스 증설에 유용하게 쓰입니다. 서비스를 증설하기 위해 퍼블릭 이미지로 새로운 인스턴스를 생성하고 서비스를 설치하려면 많은 시간이 걸립니다. 매번 번거로운 설치 작업을 반복하지 않고, 서비스에 사용할 이미지를 미리 사용자 이미지로 만들어서 인스턴스 생성에 사용한다면 서비스 부하 급증에 더욱 빠르게 대처할 수 있습니다.
 
-사용자 이미지는 Image 서비스 또는 Compute 서비스의 **추가 기능**을 이용하여 쉽게 생성할 수 있습니다. 자세한 이미지 생성 방법은 [이미지 콘솔 사용 가이드](/Compute/Image/ko/console-guide/)나 [인스턴스 콘솔 사용 가이드](/Compute/Instance/ko/console-guide-gov/)를 참조하세요.
+사용자 이미지는 Image 서비스 또는 Compute 서비스의 **추가 기능**을 이용하여 쉽게 생성할 수 있습니다. 자세한 이미지 생성 방법은 [이미지 콘솔 사용 가이드](/Compute/Image/ko/console-guide/)나 [인스턴스 콘솔 사용 가이드](/Compute/Instance/ko/console-guide-ncgn/)를 참조하세요.
 
 ### 과금
 
