@@ -330,10 +330,10 @@ Content-Type: application/octet-stream
 指定したイメージのバイナリデータをダウンロードします。
 
 !!! tip 「ポイント」
-    nhncloud_allow_downloadプロパティがfalseの場合、[イメージ修正API](./public-api/#_17)を利用してプロパティをtrueに変更できます。
-    以下の条件がすべて満たされている場合、イメージのダウンロードが可能です。
-    * 基本インフラサービスのADMINまたはMEMBER権限がある場合
-    * ダウンロードするイメージのnhncloud_allow_downloadプロパティがtrueの場合
+    nhncloud_allow_downloadプロパティがfalseの場合、[イメージ修正API](./public-api/#_17)を利用してプロパティをtrueに変更できます。
+    以下の条件がすべて満たされている場合、イメージのダウンロードが可能です。
+    * 基本インフラサービスのADMINまたはMEMBER権限がある場合
+    * ダウンロードするイメージのnhncloud_allow_downloadプロパティがtrueの場合
     
 ```
 GET /v2/images/{imageId}/file
