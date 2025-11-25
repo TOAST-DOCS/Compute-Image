@@ -6,7 +6,7 @@ API를 사용하려면 API 엔드포인트와 토큰 등이 필요합니다. [AP
 
 | 타입 | 리전 | 엔드포인트 |
 |---|---|---|
-| image | 한국(판교) 리전 | https://kr1-api-image-infrastructure.gncloud.go.kr |
+| image | 한국(대구) 리전 | https://kr4-api-image-infrastructure.ngsc.go.kr |
 
 API 응답에 가이드에 명시되지 않은 필드가 나타날 수 있습니다. 이런 필드는 NHN Cloud 내부 용도로 사용되며 사전 공지 없이 변경될 수 있으므로 사용하지 않습니다.
 
@@ -314,7 +314,7 @@ Content-Type: application/octet-stream
 지정한 이미지의 바이너리 데이터를 다운로드합니다.
 
 !!! tip "알아두기"
-    nhncloud_allow_download 속성이 false인 경우 [이미지 수정 API](./public-api/#_17)를 통해 속성을 true로 변경할 수 있습니다.
+    nhncloud_allow_download 속성이 false인 경우 [이미지 수정 API](./public-api-ngsc/#_17)를 통해 속성을 true로 변경할 수 있습니다.
     아래 조건이 모두 충족된 경우 이미지 다운로드가 가능합니다.
     * 기본 인프라 서비스 ADMIN 또는 MEMBER 권한이 있는 경우
     * 다운로드할 이미지의 nhncloud_allow_download 속성이 true인 경우
