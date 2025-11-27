@@ -1,5 +1,7 @@
+<a id="compute-image-console-guide"></a>
 ## Compute > Image > コンソール使用ガイド
 
+<a id="create-image"></a>
 ## イメージ作成
 
 イメージは、インスタンスのルートブロックストレージから作成できます。u2タイプのインスタンスを除く、t2、m2、c2、r2、x1タイプのインスタンスでは実行中にもイメージを作成できますが、データの整合性は保障しません。u2タイプのインスタンスでは停止状態の時のみイメージを作成できます。
@@ -13,6 +15,7 @@ Windowsインスタンスのイメージを作成するには、Sysprepを利用
 > [注意]
 > 作成されたイメージのサイズはルートブロックストレージの実際の使用量より大きい場合があります。
 
+<a id="modify-image"></a>
 ## イメージ修正
 
 **Compute > Image** サービスページでイメージを選択した後、**イメージ修正**をクリックしてイメージを修正します。イメージ修正項目は次のとおりです。
@@ -37,44 +40,36 @@ Windowsインスタンスのイメージを作成するには、Sysprepを利用
 > [参考]
 > **NKS(GPU)**を使用するには対象サービスの**NKS(CPU)**を一緒に選択する必要があります。
 
+<a id="change-delete-protection-settings"></a>
 ## 削除保護設定の変更
 
+<a id="deletion-protection-settings"></a>
 ### 削除保護設定
 **Compute > Image** サービスページでイメージの削除保護アイコンをクリックして有効化するか、イメージを選択した後、**削除保護設定変更 > 削除保護使用 > 確認**をクリックします。
 
+<a id="disable-deletion-protection"></a>
 ### 削除保護の解除
 **Compute > Image** サービスページでイメージの削除保護アイコンをクリックして無効化するか、イメージを選択した後、**削除保護設定変更 > 削除保護使用しない > 確認**をクリックします。
 
+<a id="copy-to-another-region"></a>
 ## 他のリージョンに複製
 
 イメージを複製する対象リージョンを選択し、新しいイメージの名前と説明を入力した後、複製します。
 
 **Compute > Image**サービスページでイメージを選択した後、**他のリージョンに複製**をクリックしてイメージを複製します。
 
+<a id="share-with-other-projects"></a>
 ## 他のプロジェクトに共有
 
 イメージを共有するプロジェクトを選択して共有します。
-
-**Compute > Image** サービスページでイメージを選択した後、**他のプロジェクトに共有**をクリックしてイメージを他のプロジェクトに共有します。
-
-> [参考] 
-> この機能に対するAPI使用方法は**ユーザーガイド > Compute > Image > APIガイド**で**イメージ共有**項目を参照してください。
-
-## 別のリージョンにコピー
-
-イメージをコピーする対象リージョンを選択し、新しいイメージの名前と説明を入力してコピーします。
-
-**Compute > Image**サービスページでイメージを選択した後、**他のリージョンに複製**をクリックしてイメージを複製します。
-
-## 他のプロジェクトに共有
-
-イメージを共有するプロジェクトを選択して共有します。
-この機能のAPIの使い方は、**ユーザーガイド > Compute > Image > APIガイド**で**イメージ共有**の項目を参照してください。
 
 **Compute > Image**サービスページでイメージを選択した後、**他のプロジェクトに共有**をクリックしてイメージを他のプロジェクトに共有します。
 
 > [参考] 
 > 該当機能に対するAPI使用方法は**ユーザーガイド > Compute > Image > APIガイド**で**イメージ共有**項目を参照してください。
+
+<a id="guide-for-initialization-of-linux-machine-id"></a>
+## Linux machine-id初期化ガイド
 
 Linuxユーザーイメージを作成して、そのイメージでインスタンスを作成する場合、machine-idが重複して予期しない問題が発生する可能性があります。
 ユーザーイメージを作成する前にmachine-idを初期化して重複を予防できます。
@@ -83,10 +78,12 @@ Linuxユーザーイメージを作成して、そのイメージでインスタ
 	$ sudo rm /var/lib/dbus/machine-id
 	$ sudo ln -s /etc/machine-id /var/lib/dbus/machine-id
 
+<a id="guide-for-windows-sysprep"></a>
 ## Windows Sysprepガイド
 
 Windowsイメージを作成するには、ハードウェアとユーザーに従属された情報を削除して、インスタンス作成に使用できるようにイメージ初期化作業が必要です。イメージ初期化はMicrosoftからWindows OSを配布するために提供するシステム準備ユーティリティであるSysprepで実行できます。
 
+<a id="if-the-original-instance-image-version-is-20180818-or-later"></a>
 ### 原本インスタンスのイメージバージョンが2020. 08. 18. 以降の場合
 Windowsインスタンスに接続した後、**PowerShell**を管理者権限で実行します。
 ![[図1 Powershell実行]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep1.png)
@@ -102,10 +99,11 @@ ToastSysprepはNHN Cloudで提供するSysprepを簡単に使用できるコマ�
 **Y**キーを押すと作業を進行します。
 ![[図3 ToastSysprep進行]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep3.png)
 
-Sysprepが実行されるとWindowsインスタンスは自動的に停止します。NHN CloudコンソールでWindowsインスタンスの停止を確認し、[イメージ作成](./console-guide/#_1)機能でユーザーWindowsイメージを作成します。
+Sysprepが実行されるとWindowsインスタンスは自動的に停止します。NHN CloudコンソールでWindowsインスタンスの停止を確認し、[イメージ作成](./console-guide/#create-image)機能でユーザーWindowsイメージを作成します。
 
 Sysprepを利用してWindowsインスタンスを初期化すると、パスワードが空白に変更されてログインできません。イメージ作成機能を利用する時、**イメージに作成されるWindowsパスワードを初期化します。**オプションを選択してWindowsインスタンスのパスワードを自動的に初期化することを推奨します。初期化されたパスワードはインスタンス接続情報で確認します。
 
+<a id="if-the-original-instance-image-version-is-earlier-than-20180818"></a>
 ### 原本インスタンスのイメージバージョンが2020. 08. 18. 以前の場合
 
 まずWindowsインスタンスに接続した後、 **アプリ**で**コマンドプロンプト**を右クリックして**管理者権限で実行**をクリックします。
@@ -118,10 +116,11 @@ Sysprepを利用してWindowsインスタンスを初期化すると、パスワ
 
 ![[図2 Sysprep実行]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/002_170524_800px.PNG)
 
-Sysprepが実行されるとWindowsインスタンスは自動的に停止します。NHN CloudコンソールでWindowsインスタンスの停止を確認して、 [イメージ作成](./console-guide/#_1)機能でユーザーWindowsイメージを作成します。
+Sysprepが実行されるとWindowsインスタンスは自動的に停止します。NHN CloudコンソールでWindowsインスタンスの停止を確認して、 [イメージ作成](./console-guide/#create-image)機能でユーザーWindowsイメージを作成します。
 
 Sysprepを利用してWindowsインスタンスを初期化すると、パスワードが空白に変更されてログインできません。イメージ作成機能を利用する時、**イメージに作成されるWindowsパスワードを初期化します。**オプションを選択してWindowsインスタンスのパスワードを自動的に初期化することを推奨します。初期化されたパスワードはインスタンス接続情報で確認します。
 
+<a id="sysprep-option-details"></a>
 ### Sysprepオプション詳細情報
 
 
@@ -145,6 +144,7 @@ Windowsを再インストールした後、前段階で記録したユーザー�
 NHN Cloudで提供するWindowsイメージの応答ファイルはC:\Program Files\Cloud Solutions\Cloudbase-Init\conf\Unattend.xmlにあります。必要な設定は全て準備されているので、特別な用途を除けば修正しなくてもよいです。
 
 
+<a id="guide-to-creating-images-from-running-windows-instances"></a>
 ## 起動中のWindowsインスタンスからのイメージ作成ガイド
 
 起動中のWindowsインスタンスからイメージを作成する時、原本インスタンスのイメージのバージョンが2019. 05. 28.以前の場合は、下記の先行作業が必要です。

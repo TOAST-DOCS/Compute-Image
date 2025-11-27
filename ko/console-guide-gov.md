@@ -1,5 +1,7 @@
+<a id="compute-image-console-guide"></a>
 ## Compute > Image > 콘솔 사용 가이드
 
+<a id="create-image"></a>
 ## 이미지 생성
 
 이미지는 인스턴스의 루트 블록 스토리지에서 만들 수 있습니다. u2 타입의 인스턴스를 제외한 t2, m2, c2, r2, x1 타입의 인스턴스에서는 실행 중에도 이미지를 생성할 수 있지만, 데이터 정합성은 보장하지 않습니다. u2 타입 인스턴스에서는 중지 상태일 때만 이미지를 생성할 수 있습니다.
@@ -13,6 +15,7 @@ Windows 인스턴스의 이미지를 생성하려면 Sysprep을 이용하여 이
 > [주의]
 > 생성된 이미지의 크기는 루트 블록 스토리지의 실제 사용량보다 더 클 수 있습니다.
 
+<a id="modify-image"></a>
 ## 이미지 수정
 
 **Compute > Image** 서비스 페이지에서 원하는 이미지를 선택한 후 **이미지 수정**을 클릭하여 이미지를 수정합니다. 이미지 수정 항목은 다음과 같습니다.
@@ -33,20 +36,28 @@ Windows 인스턴스의 이미지를 생성하려면 Sysprep을 이용하여 이
 > [주의]
 > 이미지 정보 수정 시 연관 서비스 및 기능에 영향이 발생할 수 있으며, 이에 따른 결과에 대한 책임은 사용자에게 있습니다.
 
+> [참고]
+> **NKS(GPU)**를 사용하려면 대상 서비스의 **NKS(CPU)**를 함께 선택해야 합니다.
+
+<a id="change-delete-protection-settings"></a>
 ## 삭제 보호 설정 변경
 
+<a id="deletion-protection-settings"></a>
 ### 삭제 보호 설정
 **Compute > Image** 서비스 페이지에서 원하는 이미지의 삭제 보호 아이콘을 클릭하여 활성화하거나 이미지를 선택한 후 **삭제 보호 설정 변경 > 삭제 보호 사용 > 확인**을 클릭합니다.
 
+<a id="disable-deletion-protection"></a>
 ### 삭제 보호 해제
 **Compute > Image** 서비스 페이지에서 원하는 이미지의 삭제 보호 아이콘을 클릭하여 비활성화하거나 이미지를 선택한 후 **삭제 보호 설정 변경 > 삭제 보호 사용 안함 > 확인**을 클릭합니다.
 
+<a id="copy-to-another-region"></a>
 ## 다른 리전으로 복제
 
 이미지를 복제할 대상 리전을 선택하고, 새 이미지의 이름과 설명을 입력한 후 복제합니다.
 
 **Compute > Image** 서비스 페이지에서 원하는 이미지를 선택한 후 **다른 리전으로 복제**을 클릭하여 이미지를 복제합니다.
 
+<a id="share-with-other-projects"></a>
 ## 다른 프로젝트에 공유
 
 이미지를 공유할 프로젝트를 선택하고 공유합니다.
@@ -55,6 +66,8 @@ Windows 인스턴스의 이미지를 생성하려면 Sysprep을 이용하여 이
 
 > [참고] 
 > 해당 기능에 대한 API 사용법은 **사용자 가이드 > Compute > Image > API 가이드**에서 **이미지 공유** 항목을 참고합니다.
+
+<a id="guide-for-initialization-of-linux-machine-id"></a>
 ## Linux machine-id 초기화 가이드
 
 Linux 사용자 이미지를 만들어 해당 이미지로 인스턴스를 생성할 경우 machine-id가 중복되어 예기치 못한 문제가 발생할 수 있습니다.
@@ -64,10 +77,12 @@ Linux 사용자 이미지를 만들어 해당 이미지로 인스턴스를 생�
 	$ sudo rm /var/lib/dbus/machine-id
 	$ sudo ln -s /etc/machine-id /var/lib/dbus/machine-id
 
+<a id="guide-for-windows-sysprep"></a>
 ## Windows Sysprep 가이드
 
 Windows 이미지를 생성하려면 하드웨어와 사용자에 종속된 정보를 제거하여 인스턴스 생성에 사용할 수 있도록 이미지 초기화 작업이 필요합니다. 이미지 초기화는 Microsoft에서 Windows OS를 배포하기 위해 제공하는 시스템 준비 유틸리티인 Sysprep에서 실행할 수 있습니다.
 
+<a id="if-the-original-instance-image-version-is-20180818-or-later"></a>
 ### 원본 인스턴스의 이미지 버전이 2020. 08. 18. 이후인 경우
 Windows 인스턴스에 접속한 후 **PowerShell**을 관리자 권한으로 실행합니다.
 ![[그림 1 Powershell 실행]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep1.png)
@@ -83,10 +98,11 @@ ToastSysprep은 NHN Cloud에서 제공하는 Sysprep을 간편하게 사용할 �
 **Y** 키를 눌러 작업을 진행합니다.
 ![[그림 3 ToastSysprep 진행]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep3.png)
 
-Sysprep이 실행되면 Windows 인스턴스는 자동으로 중지됩니다. NHN Cloud 콘솔에서 Windows 인스턴스의 중지를 확인하고, [이미지 생성](./console-guide/#_1) 기능으로 사용자 Windows 이미지를 생성합니다.
+Sysprep이 실행되면 Windows 인스턴스는 자동으로 중지됩니다. NHN Cloud 콘솔에서 Windows 인스턴스의 중지를 확인하고, [이미지 생성](./console-guide/#create-image) 기능으로 사용자 Windows 이미지를 생성합니다.
 
 Sysprep을 이용하여 Windows 인스턴스를 초기화하면 비밀번호가 공백으로 변경되어 로그인할 수 없습니다. 이미지 생성 기능을 이용할 때, **이미지로 생성되는 Windows 비밀번호를 초기화합니다.** 옵션을 선택해 Windows 인스턴스의 비밀번호를 자동으로 초기화하는 것이 좋습니다. 초기화된 비밀번호는 인스턴스 접속 정보에서 확인합니다.
 
+<a id="if-the-original-instance-image-version-is-earlier-than-20180818"></a>
 ### 원본 인스턴스의 이미지 버전이 2020. 08. 18. 이전인 경우
 
 먼저 Windows 인스턴스에 접속한 후 **앱**에서 **명령 프롬프트**를 마우스 오른쪽 버튼으로 클릭하고 **관리자 권한으로 실행**을 클릭합니다.
@@ -100,10 +116,11 @@ Sysprep을 이용하여 Windows 인스턴스를 초기화하면 비밀번호가 
 
 ![[그림 2 Sysprep 실행]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/002_170524_800px.PNG)
 
-Sysprep이 실행되면 Windows 인스턴스는 자동으로 중지됩니다. NHN Cloud 콘솔에서 Windows 인스턴스의 중지를 확인하고, [이미지 생성](./console-guide/#_1) 기능으로 사용자 Windows 이미지를 생성합니다.
+Sysprep이 실행되면 Windows 인스턴스는 자동으로 중지됩니다. NHN Cloud 콘솔에서 Windows 인스턴스의 중지를 확인하고, [이미지 생성](./console-guide/#create-image) 기능으로 사용자 Windows 이미지를 생성합니다.
 
 Sysprep을 이용하여 Windows 인스턴스를 초기화하면 비밀번호가 공백으로 변경되어 로그인할 수 없습니다. 이미지 생성 기능을 이용할 때, **이미지로 생성되는 Windows 비밀번호를 초기화합니다.** 옵션을 선택해 Windows 인스턴스의 비밀번호를 자동으로 초기화하는 것이 좋습니다. 초기화된 비밀번호는 인스턴스 접속 정보에서 확인합니다.
 
+<a id="sysprep-option-details"></a>
 ### Sysprep 옵션 상세 정보
 
 
@@ -127,6 +144,7 @@ Windows를 재설치한 뒤, 앞 단계에서 기록한 사용자 설정을 복�
 NHN Cloud에서 제공하는 Windows 이미지의 응답 파일은 C:\Program Files\Cloud Solutions\Cloudbase-Init\conf\Unattend.xml에 있습니다. 필요한 설정은 모두 준비되었기 때문에 특별한 용도를 제외하면 수정하지 않아도 됩니다.
 
 
+<a id="guide-to-creating-images-from-running-windows-instances"></a>
 ## 실행 중인 Windows 인스턴스 이미지 생성 가이드
 
 실행 중인 Windows 인스턴스로 이미지를 생성할 때 원본 인스턴스의 이미지 버전이 2019. 05. 28. 이전이라면 아래의 선행 작업이 필요합니다.
