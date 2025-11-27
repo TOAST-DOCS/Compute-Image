@@ -1,3 +1,4 @@
+<a id="compute-image-api-v2-guide"></a>
 ## Compute > Image > API v2 Guide
 
 To use the API, API endpoint and token are required. Refer to [API usage preparations](/Compute/Compute/en/identity-api/) to prepare the information required to use the API.
@@ -10,7 +11,10 @@ Image API uses the `image` type endpoint. Refer to the `serviceCatalog` in the t
 
 In API response, you may find fields that are not specified in the guide. These fields are only for the internal use by NHN Cloud and are subject to change without prior notice, so we advise you not to use them.
 
+<a id="image"></a>
 ## Image
+
+<a id="list-images"></a>
 ### List Images
 
 ```
@@ -111,6 +115,7 @@ This API does not require a request body.
 
 ---
 
+<a id="get-image"></a>
 ### Get Image
 
 ```
@@ -190,6 +195,7 @@ This API does not require a request body.
 
 ---
 
+<a id="create-image"></a>
 ### Create Image
 
 Create an empty image. To use the image in NHN Cloud, you must upload the actual file using the `Upload Image` API after `creating an image`.
@@ -298,6 +304,7 @@ X-Auth-Token: {tokenId}
 
 ---
 
+<a id="upload-image"></a>
 ### Upload Image
 
 Uploads the actual image file to the created image.
@@ -325,6 +332,7 @@ This API does not return request body. When the request is appropriate, return s
 
 ---
 
+<a id="download-image"></a>
 ### Download Image
 
 Downloads the binary data of the specified image.
@@ -351,6 +359,7 @@ The binary data for the image is returned. For a valid request, return status co
 
 ---
 
+<a id="modify-image"></a>
 ### Modify Image
 
 Modifies image properties through modification.
@@ -417,6 +426,7 @@ Returns the same response as Get Image.
 
 ---
 
+<a id="delete-image"></a>
 ### Delete Image
 
 Images with `public` visibility cannot be deleted.
@@ -439,7 +449,10 @@ This API does not return a response body.
 
 ---
 
+<a id="image-tag"></a>
 ## Image Tag
+
+<a id="add-tag"></a>
 ### Add Tag
 Adds a tag to the specified image.
 
@@ -462,6 +475,7 @@ This API does not return a response body.
 
 ---
 
+<a id="remove-tag"></a>
 ### Remove Tag
 Removes a tag from the specified image.
 
@@ -485,6 +499,7 @@ This API does not return a response body.
 
 ---
 
+<a id="image-sharing"></a>
 ## Image Sharing
 
 Image sharing allows you to share images belonging to your tenant with other tenants. You can share your images as follows:
@@ -495,6 +510,7 @@ Image sharing allows you to share images belonging to your tenant with other ten
 The shared image becomes immediately available to the target tenant, but is not displayed in the image list query.
 To retrieve shared images from a shared tenant, change the member status to `accepted` in the `shared tenant` or set `member_status` in the query parameter to `all` when retrieving the image list.
 
+<a id="change-visibility"></a>
 ### Change Visibility
 
 ```
@@ -535,6 +551,7 @@ Returns the same response as Get Image.
 
 ---
 
+<a id="add-member"></a>
 ### Add Member
 Registers the tenant to share the image with as a member of the specified image.
 
@@ -592,6 +609,7 @@ X-Auth-Token: {tokenId}
 
 ---
 
+<a id="list-members"></a>
 ### List Members
 Retrieves the list of tenants that the specified image has been shared with. The request must be made with the token of the tenant to which the image belongs or the target tenant of the image sharing.
 
@@ -652,6 +670,7 @@ This API does not require a request body.
 
 ---
 
+<a id="get-member-details"></a>
 ### Get Member Details
 
 Returns details of a particular member of specified image. The request must be made with the token of the tenant to which the image belongs or the target tenant of the image sharing.
@@ -699,6 +718,7 @@ This API does not require a request body.
 
 ---
 
+<a id="change-member-status"></a>
 ### Change Member Status
 
 The shared image is approved by the sharing target tenant. If the image sharing is approved, the image can be queried in the image list query. The request must be made with the sharing target tenant's token.
@@ -760,6 +780,7 @@ X-Auth-Token: {tokenId}
 
 ---
 
+<a id="delete-member"></a>
 ### Delete Member
 
 Deletes a member of the specified image. This is used to cancel sharing. The request must be made with the token of the tenant to which the specified image belongs.
@@ -780,4 +801,3 @@ This API does not require a request body.
 
 #### Response
 This API does not return a response body.
-
