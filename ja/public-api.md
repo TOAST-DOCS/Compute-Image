@@ -370,7 +370,7 @@ Content-Type: application/openstack-images-v2.1-json-patch
 | tokenId | Header | String | O  | トークンID                                                                        |
 | op | Body | Enum   | O  | 修正する作業タイプ</br>`add`:プロパティの追加</br>`replace`:プロパティ値の修正</br>`remove`:プロパティの削除 |
 | path | Body | String | O  | 修正するプロパティ</br>`/{path}`形式                                                     |
-| value | Body | String | -  | 修正するプロパティの値                                                                   |
+| value | Body | String, Integer | -  | 修正するプロパティの値                                                                   |
 
 <details><summary>例</summary>
 <p>

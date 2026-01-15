@@ -1,3 +1,4 @@
+<a id="compute-image-api-v2-guide"></a>
 ## Compute > Image > API v2 가이드
 
 API를 사용하려면 API 엔드포인트와 토큰 등이 필요합니다. [API 사용 준비](/Compute/Compute/ko/identity-api-ngoic/)를 참고하여 API 사용에 필요한 정보를 준비합니다.
@@ -10,7 +11,10 @@ API를 사용하려면 API 엔드포인트와 토큰 등이 필요합니다. [AP
 
 API 응답에 가이드에 명시되지 않은 필드가 나타날 수 있습니다. 이런 필드는 NHN Cloud 내부 용도로 사용되며 사전 공지 없이 변경될 수 있으므로 사용하지 않습니다.
 
+<a id="image"></a>
 ## 이미지
+
+<a id="list-images"></a>
 ### 이미지 목록 조회
 
 ```
@@ -110,6 +114,7 @@ X-Auth-Token: {tokenId}
 
 ---
 
+<a id="get-image"></a>
 ### 이미지 보기
 
 ```
@@ -189,6 +194,7 @@ X-Auth-Token: {tokenId}
 
 ---
 
+<a id="create-image"></a>
 ### 이미지 생성
 
 ```
@@ -282,6 +288,7 @@ X-Auth-Token: {tokenId}
 
 ---
 
+<a id="upload-image"></a>
 ### 이미지 업로드
 
 지정한 이미지에 실제 이미지 파일을 업로드합니다.
@@ -309,6 +316,7 @@ Content-Type: application/octet-stream
 
 ---
 
+<a id="download-image"></a>
 ### 이미지 다운로드
 
 지정한 이미지의 바이너리 데이터를 다운로드합니다.
@@ -335,6 +343,90 @@ X-Auth-Token: {tokenId}
 
 ---
 
+<a id="modify-image"></a>
+### 이미지 수정
+
+이미지 수정을 통해 이미지 속성을 변경할 수 있습니다.
+
+```
+PATCH /v2/images/{imageId}
+X-Auth-Token: {tokenId}
+Content-Type: application/openstack-images-v2.1-json-patch
+```
+
+#### 요청
+요청 시 Header의 Content-Type을 application/openstack-images-v2.1-json-patch로 설정해야 합니다.
+
+| 이름 | 종류 | 형식     | 필수 | 설명                                                                           |
+|---|---|--------|----|------------------------------------------------------------------------------|
+| imageId | URL | UUID   | O  | 수정할 이미지 ID                                                                   |
+| tokenId | Header | String | O  | 토큰 ID                                                                        |
+| op | Body | Enum   | O  | 수정할 작업 유형</br>`add`: 속성 추가</br>`replace`: 속성 값 수정</br>`remove`: 속성 삭제 |
+| path | Body | String | O  | 수정할 속성</br>`/{path}` 형식                                                      |
+| value | Body | String, Integer | -  | 수정할 속성의 값                                                                    |
+
+#### 수정 가능한 속성
+
+| path | 값 형식 | 설명 |
+|------|---------|------|
+| /name | String | 이미지 이름 |
+| /description | String | 이미지 설명 |
+| /os_version | String | OS 버전 정보 |
+| /max_cpu | String | 인스턴스 생성 시 최대 CPU 코어 수 |
+| /min_cpu | String | 인스턴스 생성 시 최소 CPU 코어 수 |
+| /min_ram | Integer | 인스턴스 생성 시 최소 RAM 크기(MB) |
+| /min_disk | Integer | 인스턴스 생성 시 최소 디스크 크기(GB) |
+| /nhncloud_allow_image_create | String | 이미지 생성 기능 사용 여부. `true` / `false` |
+| /nhncloud_allow_download | String | 이미지 다운로드 기능 사용 여부. `true` / `false` |
+| /nhncloud_allow_user_script | String | 사용자 스크립트 기능 사용 여부. `true` / `false` |
+| /nhncloud_product | String | 사용 대상 서비스. `compute` 등 |
+
+<details><summary>예시</summary>
+<p>
+
+```json
+// 속성 추가
+[
+    {
+        "op": "add",
+        "path": "/metadata1",
+        "value": "value1"
+    },
+    {
+        "op": "add",
+        "path": "/metadata2",
+        "value": "1"
+    }
+]
+
+// 속성 값 수정
+[
+    {
+        "op": "replace",
+        "path": "/metadata1",
+        "value": "value2"
+    }
+]
+
+// 속성 삭제
+[
+    {
+        "op": "remove",
+        "path": "/metadata1"
+    }
+]
+```
+
+<p>
+</details>
+
+#### 응답
+
+이미지 보기와 동일한 응답을 반환합니다.
+
+---
+
+<a id="delete-image"></a>
 ### 이미지 삭제
 
 가시성이 `public`인 이미지는 삭제할 수 없습니다.
@@ -357,7 +449,10 @@ X-Auth-Token: {tokenId}
 
 ---
 
+<a id="image-tag"></a>
 ## 이미지 태그
+
+<a id="add-tag"></a>
 ### 태그 추가하기
 지정한 이미지에 태그를 추가합니다.
 
@@ -380,6 +475,7 @@ X-Auth-Token: {tokenId}
 
 ---
 
+<a id="remove-tag"></a>
 ### 태그 제거하기
 지정한 이미지에서 태그를 제거합니다.
 
@@ -400,4 +496,3 @@ X-Auth-Token: {tokenId}
 
 #### 응답
 이 API는 응답 본문을 반환하지 않습니다.
-
