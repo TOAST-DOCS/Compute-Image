@@ -376,10 +376,10 @@ Content-Type: application/openstack-images-v2.1-json-patch
 | /min_cpu | String | 인스턴스 생성 시 최소 CPU 코어 수 |
 | /min_ram | Integer | 인스턴스 생성 시 최소 RAM 크기(MB) |
 | /min_disk | Integer | 인스턴스 생성 시 최소 디스크 크기(GB) |
-| /nhncloud_allow_image_create | String | 이미지 생성 기능 사용 여부. `"true"` / `"false"` |
-| /nhncloud_allow_download | String | 이미지 다운로드 기능 사용 여부. `"true"` / `"false"` |
-| /nhncloud_allow_user_script | String | 사용자 스크립트 기능 사용 여부. `"true"` / `"false"` |
-| /nhncloud_product | String | 사용 대상 서비스. `"compute"` 등 |
+| /nhncloud_allow_image_create | String | 이미지 생성 기능 사용 여부. `true` / `false` |
+| /nhncloud_allow_download | String | 이미지 다운로드 기능 사용 여부. `true` / `false` |
+| /nhncloud_allow_user_script | String | 사용자 스크립트 기능 사용 여부. `true` / `false` |
+| /nhncloud_product | String | 사용 대상 서비스. `compute` 등 |
 
 <details><summary>예시</summary>
 <p>
