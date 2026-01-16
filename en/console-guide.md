@@ -6,7 +6,7 @@
 
 Images can be created from the root block storage of an instance. In t2, m2, c2, r2, and x1 type instances except for u2 type instances, images can be created even when the instance is running, but data consistency is not guaranteed. In u2 type instances, images can be created only when the instance is stopped.
 
-To create an image of a Linux instance, it is recommended to avoid duplication by initializing the machine-id. For more details on initialization of machine-id, see [Guide for Initialization of Linux machine-id](#Linux-machineid).
+To create an image of a Linux instance, it is recommended to avoid duplication by initializing the machine-id. For more details on initialization of machine-id, see [Guide for Initialization of Linux machine-id](#guide-for-initialization-of-linux-machine-id).
 
 To create an image of a Windows instance, it is recommended to prepare for creating an image by using Sysprep and then stop the instance. For more details on how to use Sysprep, see [Guide for Windows Sysprep](#guide-for-windows-sysprep).
 

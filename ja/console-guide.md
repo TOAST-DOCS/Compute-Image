@@ -6,7 +6,7 @@
 
 イメージは、インスタンスのルートブロックストレージから作成できます。u2タイプのインスタンスを除く、t2、m2、c2、r2、x1タイプのインスタンスでは実行中にもイメージを作成できますが、データの整合性は保障しません。u2タイプのインスタンスでは停止状態の時のみイメージを作成できます。
 
-Linuxインスタンスのイメージを作成する前にmachine-idを初期化して重複を予防することを推奨します。machine-idの初期化方法については[Linux machine-id初期化ガイド](#Linux-machineid)を参照します。
+Linuxインスタンスのイメージを作成する前にmachine-idを初期化して重複を予防することを推奨します。machine-idの初期化方法については[Linux machine-id初期化ガイド](#guide-for-initialization-of-linux-machine-id)を参照します。
 
 Windowsインスタンスのイメージを作成するには、Sysprepを利用してイメージ作成を準備し、インスタンスを停止することを推奨します。Sysprepの詳細な使用方法は、[Windows Sysprepガイド](#windows-sysprep)を参照してください。
 
