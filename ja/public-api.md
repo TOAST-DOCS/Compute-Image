@@ -1,7 +1,7 @@
 <a id="compute-image-api-v2-guide"></a>
 ## Compute > Image > API v2ガイド
 
-APIを使用するには、APIエンドポイントとトークンなどが必要です。 [API使用準備](/Compute/Compute/ko/identity-api/)を参照してAPIを使用するために必要な情報を準備します。
+APIを使用するには、APIエンドポイントとトークンなどが必要です。 [API使用準備](/Compute/Compute/ja/identity-api/)を参照してAPIを使用するために必要な情報を準備します。
 
 イメージAPIは、`image`タイプエンドポイントを利用します。正確なエンドポイントはトークン発行レスポンスの`serviceCatalog`を参照します。
 
@@ -338,7 +338,7 @@ Content-Type: application/octet-stream
 指定したイメージのバイナリデータをダウンロードします。
 
 !!! tip "「ポイント」"
-    nhncloud_allow_downloadプロパティがfalseの場合、[イメージ修正API](./public-api/#_17)を利用してプロパティをtrueに変更できます。
+    nhncloud_allow_downloadプロパティがfalseの場合、[イメージ修正API](./public-api/#modify-image)を利用してプロパティをtrueに変更できます。
     以下の条件がすべて満たされている場合、イメージのダウンロードが可能です。
     * 基本インフラサービスのADMINまたはMEMBER権限がある場合
     * ダウンロードするイメージのnhncloud_allow_downloadプロパティがtrueの場合

@@ -338,7 +338,7 @@ This API does not return request body. When the request is appropriate, return s
 Downloads the binary data of the specified image.
 
 !!! tip "Note"
-    When the attribute of nhncloud_allow_download is false, you can change the attribute to true with the [Image Modification API](./public-api/#_17).
+    When the attribute of nhncloud_allow_download is false, you can change the attribute to true with the [Image Modification API](./public-api/#modify-image).
     You can download the image if all the conditions below are met:
     * When you have ADMIN or MEMBER permission for the basic infrastructure services
     * When the nhncloud_allow_download attribute of the image is true
