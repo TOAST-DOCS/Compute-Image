@@ -343,6 +343,89 @@ X-Auth-Token: {tokenId}
 
 ---
 
+<a id="modify-image"></a>
+### 이미지 수정
+
+이미지 수정을 통해 이미지 속성을 변경할 수 있습니다.
+
+```
+PATCH /v2/images/{imageId}
+X-Auth-Token: {tokenId}
+Content-Type: application/openstack-images-v2.1-json-patch
+```
+
+#### 요청
+요청 시 Header의 Content-Type을 application/openstack-images-v2.1-json-patch로 설정해야 합니다.
+
+| 이름 | 종류 | 형식     | 필수 | 설명                                                                           |
+|---|---|--------|----|------------------------------------------------------------------------------|
+| imageId | URL | UUID   | O  | 수정할 이미지 ID                                                                   |
+| tokenId | Header | String | O  | 토큰 ID                                                                        |
+| op | Body | Enum   | O  | 수정할 작업 유형</br>`add`: 속성 추가</br>`replace`: 속성 값 수정</br>`remove`: 속성 삭제 |
+| path | Body | String | O  | 수정할 속성</br>`/{path}` 형식                                                      |
+| value | Body | String, Integer | -  | 수정할 속성의 값                                                                    |
+
+#### 수정 가능한 속성
+
+| path | 값 형식 | 설명 |
+|------|---------|------|
+| /name | String | 이미지 이름 |
+| /description | String | 이미지 설명 |
+| /os_version | String | OS 버전 정보 |
+| /max_cpu | String | 인스턴스 생성 시 최대 CPU 코어 수 |
+| /min_cpu | String | 인스턴스 생성 시 최소 CPU 코어 수 |
+| /min_ram | Integer | 인스턴스 생성 시 최소 RAM 크기(MB) |
+| /min_disk | Integer | 인스턴스 생성 시 최소 디스크 크기(GB) |
+| /nhncloud_allow_image_create | String | 이미지 생성 기능 사용 여부. `true` / `false` |
+| /nhncloud_allow_download | String | 이미지 다운로드 기능 사용 여부. `true` / `false` |
+| /nhncloud_allow_user_script | String | 사용자 스크립트 기능 사용 여부. `true` / `false` |
+| /nhncloud_product | String | 사용 대상 서비스. `compute` 등 |
+
+<details><summary>예시</summary>
+<p>
+
+```json
+// 속성 추가
+[
+    {
+        "op": "add",
+        "path": "/metadata1",
+        "value": "value1"
+    },
+    {
+        "op": "add",
+        "path": "/metadata2",
+        "value": "1"
+    }
+]
+
+// 속성 값 수정
+[
+    {
+        "op": "replace",
+        "path": "/metadata1",
+        "value": "value2"
+    }
+]
+
+// 속성 삭제
+[
+    {
+        "op": "remove",
+        "path": "/metadata1"
+    }
+]
+```
+
+<p>
+</details>
+
+#### 응답
+
+이미지 보기와 동일한 응답을 반환합니다.
+
+---
+
 <a id="delete-image"></a>
 ### 이미지 삭제
 
