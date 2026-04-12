@@ -1,7 +1,7 @@
 <a id="compute-image-api-v2-guide"></a>
 ## Compute > Image > API v2ガイド
 
-APIを使用するには、APIエンドポイントとトークンなどが必要です。 [API使用準備](/Compute/Compute/ja/identity-api/)を参照してAPIを使用するために必要な情報を準備します。
+Imageは、API呼び出し時の認証/認可のためにIaaSトークンを使用します。IaaSトークンは、NHN CloudのOpenStackベースのインフラサービス(IaaS)で使用する認証トークンです。IaaSトークンの発行及び使用に関する詳細は、[IaaSトークン](/nhncloud/ja/public-api/iaas-token) を参照してください。
 
 イメージAPIは、`image`タイプエンドポイントを利用します。正確なエンドポイントはトークン発行レスポンスの`serviceCatalog`を参照します。
 
