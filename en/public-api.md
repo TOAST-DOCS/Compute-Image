@@ -379,7 +379,7 @@ For a request, the content type for the header must be set to application/openst
 | tokenId | Header | String | O  | Token ID                                                                        |
 | op | Body | Enum   | O  | Type of task to modify</br>`add`: Add a property</br>`replace`: Modify a property value</br>`remove`: Delete a property |
 | path | Body | String | O  | Property to modify</br>`/{path}` format                                                      |
-| value | Body | String | -  | The value of the property to modify                                                                    |
+| value | Body | String, Integer | -  | The value of the property to modify                                                                    |
 
 <details><summary>Example</summary>
 <p>
