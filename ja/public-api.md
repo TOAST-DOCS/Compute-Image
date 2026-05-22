@@ -1,7 +1,7 @@
 <a id="compute-image-api-v2-guide"></a>
 ## Compute > Image > API v2ガイド
 
-APIを使用するには、APIエンドポイントとトークンなどが必要です。 [API使用準備](/Compute/Compute/ja/identity-api/)を参照してAPIを使用するために必要な情報を準備します。
+Imageは、API呼び出し時の認証/認可のためにIaaSトークンを使用します。IaaSトークンは、NHN CloudのOpenStackベースのインフラサービス(IaaS)で使用する認証トークンです。IaaSトークンの発行及び使用に関する詳細は、[IaaSトークン](/nhncloud/ja/public-api/iaas-token) を参照してください。
 
 イメージAPIは、`image`タイプエンドポイントを利用します。正確なエンドポイントはトークン発行レスポンスの`serviceCatalog`を参照します。
 
@@ -28,7 +28,7 @@ X-Auth-Token: {tokenId}
 | 名前 | 種類 | 形式 | 必須 | 説明                                                                                                                                                             |
 |---|---|---|---|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | tokenId | Header | String | O | トークンID                                                                                                                                                         |
-| limit | Query | Integer | - | 返すイメージの個数。(基本値は25)                                                                                                                                             |
+| limit | Query | Integer | - | 返すイメージの個数<br>基本値は100、最大1000                                                                                                                                             |
 | marker | Query | UUID | - | 照会するイメージリストの最初のイメージID<br>ソート方式に従って`marker`に指定されたイメージから`limit`分のイメージリストを照会                                                                                      |
 | name | Query | String | - | 照会するイメージ名                                                                                                                                                      |
 | visibility | Query | Enum | - | 照会するイメージの表示プロパティ<br>`public`, `private`、`shared`の中から1つの値のみ選択可能<br>省略するとすべての種類のイメージリストを返す                                                                       |
@@ -379,7 +379,7 @@ Content-Type: application/openstack-images-v2.1-json-patch
 | tokenId | Header | String | O  | トークンID                                                                        |
 | op | Body | Enum   | O  | 修正する作業タイプ</br>`add`:プロパティの追加</br>`replace`:プロパティ値の修正</br>`remove`:プロパティの削除 |
 | path | Body | String | O  | 修正するプロパティ</br>`/{path}`形式                                                     |
-| value | Body | String | -  | 修正するプロパティの値                                                                   |
+| value | Body | String, Integer | -  | 修正するプロパティの値                                                                   |
 
 <details><summary>例</summary>
 <p>
