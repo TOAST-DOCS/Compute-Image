@@ -1,7 +1,7 @@
 <a id="compute-image-api-v2-guide"></a>
 ## Compute > Image > API v2 Guide
 
-To use the API, API endpoint and token are required. Refer to [API usage preparations](/Compute/Compute/en/identity-api/) to prepare the information required to use the API.
+Image uses IaaS tokens for authentication and authorization when making API calls. The IaaS token is an authentication token used for NHN Cloud's OpenStack-based infrastructure services (IaaS). For more information on issuing and using IaaS tokens, please refer to the [IaaS Token](/nhncloud/en/public-api/iaas-token).
 
 Image API uses the `image` type endpoint. Refer to the `serviceCatalog` in the token issuance response for the valid endpoint.
 
@@ -379,7 +379,7 @@ For a request, the content type for the header must be set to application/openst
 | tokenId | Header | String | O  | Token ID                                                                        |
 | op | Body | Enum   | O  | Type of task to modify</br>`add`: Add a property</br>`replace`: Modify a property value</br>`remove`: Delete a property |
 | path | Body | String | O  | Property to modify</br>`/{path}` format                                                      |
-| value | Body | String | -  | The value of the property to modify                                                                    |
+| value | Body | String, Integer | -  | The value of the property to modify                                                                    |
 
 <details><summary>Example</summary>
 <p>
