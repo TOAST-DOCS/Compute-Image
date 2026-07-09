@@ -1,8 +1,10 @@
+<!-- pre-align:aligned sig=266d47e7967d -->
+
 <a id="compute-image-console-guide"></a>
-## Compute > Image > Console Guide
+## Compute > Image > Console Guide { #compute-image-console-guide }
 
 <a id="create-image"></a>
-## Create Image
+## Create Image { #create-image }
 
 Images can be created from the root block storage of an instance. In t2, m2, c2, r2, and x1 type instances except for u2 type instances, images can be created even when the instance is running, but data consistency is not guaranteed. In u2 type instances, images can be created only when the instance is stopped.
 
@@ -16,7 +18,7 @@ When creating an image from a running Windows instance, prerequisites are requir
 > The created image size may be larger than the actual usage of the root block storage.
 
 <a id="modify-image"></a>
-## Modify Image
+## Modify Image { #modify-image }
 
 On the **Compute > Image** page, select an image, and then click **Modify Image** to modify the image. You can modify the image for the items below.
 
@@ -40,27 +42,27 @@ Modifying image information may affect related services and features, and you ar
 > To use **NKS(GPU)**, you must also select **NKS(CPU)** for the target service.
 
 <a id="change-delete-protection-settings"></a>
-## Change Delete Protection Settings
+## Change Delete Protection Settings { #change-delete-protection-settings }
 
 <a id="deletion-protection-settings"></a>
-### Deletion Protection Settings
+### Deletion Protection Settings { #deletion-protection-settings }
 
 On the **Compute > Image** page, click the deletion protection icon for an image to enable, or select the image and click **Change Deletion Protection Settings > Use Deletion Protection > Confirm**.
 
 <a id="disable-deletion-protection"></a>
-### Disable Deletion Protection
+### Disable Deletion Protection { #disable-deletion-protection }
 
 On the **Compute > Image** page, click the deletion protection icon for the desired image to disable the feature, or select the image and click **Change Deletion Protection Settings > Disable Deletion Protection > Confirm**
 
 <a id="copy-to-another-region"></a>
-## Copy to Another Region
+## Copy to Another Region { #copy-to-another-region }
 
 Select the region you want to copy the image to, enter a name and description for the new image, and copy the image.
 
 On the **Compute > Image** page, select an image and click **Copy to Another Region** to duplicate the image.
 
 <a id="share-with-other-projects"></a>
-## Share with Other Projects
+## Share with Other Projects { #share-with-other-projects }
 
 Select a project to share the image with, and share the image.
 
@@ -70,7 +72,7 @@ On the **Compute > Image** page, select an image, and then click **Share to Othe
 > For API usage for this feature, see the **Share Image** topic in the **User Guide > Compute > Image > API Guide**.
 
 <a id="guide-for-initialization-of-linux-machine-id"></a>
-## Guide for Initialization of Linux machine-id
+## Guide for Initialization of Linux machine-id { #guide-for-initialization-of-linux-machine-id }
 
 When creating a Linux user image to create an instance from the image, unexpected issues may occur due to duplicate machine-ids.
 You can avoid duplication by initializing the machine-id before creating a user image.
@@ -80,12 +82,12 @@ You can avoid duplication by initializing the machine-id before creating a user 
 	$ sudo ln -s /etc/machine-id /var/lib/dbus/machine-id
 
 <a id="guide-for-windows-sysprep"></a>
-## Guide for Windows Sysprep
+## Guide for Windows Sysprep { #guide-for-windows-sysprep }
 
 To create a Windows image, you must reset the image by removing hardware-dependent and user-dependent information so that it can be used for instance creation. Image reset can be run from Sysprep, a system preparation utility provided by Microsoft for deploying Windows OS.
 
 <a id="if-the-original-instance-image-version-is-20180818-or-later"></a>
-### If the original instance image version is 2018.08.18 or later
+### If the original instance image version is 2018.08.18 or later { #if-the-original-instance-image-version-is-20180818-or-later }
 Connect to the Windows instance and run **Powershell** as administrator.
 ![[Figure 1 Running Powershell]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep1.png)
 
@@ -105,7 +107,7 @@ Once Sysprep is run, the Windows instance is automatically stopped. Confirm that
 Once the Windows instance is reset by using Sysprep, the password is changed to blank, so you cannot log in. When using the image creation feature, it is recommended to select the **Reset Windows Password Created by Image** option and automatically reset the password of Windows instance. You can check the reset password from instance access information.
 
 <a id="if-the-original-instance-image-version-is-earlier-than-20180818"></a>
-### If the original instance image version is earlier than 2018.08.18
+### If the original instance image version is earlier than 2018.08.18 { #if-the-original-instance-image-version-is-earlier-than-20180818 }
 
 First, connect to the Windows instance. In **Apps**, right-click **Command Prompt** and click **Run as administrator**.
 ![[Figure 1 Running Command Prompt]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/001_170524_800px.PNG)
@@ -123,7 +125,7 @@ Once Sysprep is run, the Windows instance is automatically stopped. Confirm that
 Once the Windows instance is reset by using Sysprep, the password is changed to blank, so you cannot log in. When using the image creation feature, it is recommended to select the **Reset Windows Password Created by Image** option and automatically reset the password of Windows instance. You can check the reset password from instance access information.
 
 <a id="sysprep-option-details"></a>
-### Sysprep Option Details
+### Sysprep Option Details { #sysprep-option-details }
 
 
 `\generalize`
@@ -147,7 +149,7 @@ Response files for Windows images provided by NHN Cloud are located in C:\Progra
 
 
 <a id="guide-to-creating-images-from-running-windows-instances"></a>
-## Guide to Creating Images from Running Windows Instances
+## Guide to Creating Images from Running Windows Instances { #guide-to-creating-images-from-running-windows-instances }
 
 When creating an image with a running Windows instance, the prerequisites below are required if the image version of the original instance is earlier than 2019.05.28.
 If the image is a Windows image of 2019.05.28 distribution version or later, the process below is unnecessary.
