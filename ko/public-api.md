@@ -1,7 +1,9 @@
-<a id="compute-image-api-v2-guide"></a>
-## Compute > Image > API v2 가이드
+<!-- pre-align:aligned sig=77a16f7da63f -->
 
-API를 사용하려면 API 엔드포인트와 토큰 등이 필요합니다. [API 사용 준비](/Compute/Compute/ko/identity-api/)를 참고하여 API 사용에 필요한 정보를 준비합니다.
+<a id="compute-image-api-v2-guide"></a>
+## Compute > Image > API v2 가이드 { #compute-image-api-v2-guide }
+
+Image은(는) API 호출 시 인증/인가를 위해 IaaS 토큰을 사용합니다. IaaS 토큰은 NHN Cloud의 OpenStack 기반 인프라 서비스(IaaS)에서 사용하는 인증 토큰입니다. IaaS 토큰 발급 및 사용에 대한 자세한 내용은 [IaaS 토큰](/nhncloud/ko/public-api/iaas-token) 을 참고하세요.
 
 이미지 API는 `image` 타입 엔드포인트를 이용합니다. 정확한 엔드포인트는 토큰 발급 응답의 `serviceCatalog`를 참조합니다.
 
@@ -12,16 +14,17 @@ API를 사용하려면 API 엔드포인트와 토큰 등이 필요합니다. [AP
 API 응답에 가이드에 명시되지 않은 필드가 나타날 수 있습니다. 이런 필드는 NHN Cloud 내부 용도로 사용되며 사전 공지 없이 변경될 수 있으므로 사용하지 않습니다.
 
 <a id="image"></a>
-## 이미지
+## 이미지 { #image }
 
 <a id="list-images"></a>
-### 이미지 목록 조회
+### 이미지 목록 조회 { #list-images }
 
 ```
 GET /v2/images
 X-Auth-Token: {tokenId}
 ```
 
+<a id="list-images-request"></a>
 #### 요청
 이 API는 요청 본문을 요구하지 않습니다.
 
@@ -40,6 +43,7 @@ X-Auth-Token: {tokenId}
 | sort_dir | Query | Enum | - | 이미지 목록 정렬 방향<br>`asc`(오름차순), `desc`(내림차순) 중 하나의 값만 선택 가능, 기본값은 내림차순                                                                                      |
 | member_status | Query | Enum | - | 공유 받은 이미지의 경우 멤버 상태에 따른 이미지 목록을 조회<br>`accepted`, `pending`, `rejected`, `all` 중 하나의 값만 선택 가능<br>기본값은 `accepted` |
 
+<a id="list-images-response"></a>
 #### 응답
 
 | 이름 | 종류 | 형식 | 설명 |
@@ -116,13 +120,14 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="get-image"></a>
-### 이미지 보기
+### 이미지 보기 { #get-image }
 
 ```
 GET /v2/images/{imageId}
 X-Auth-Token: {tokenId}
 ```
 
+<a id="get-image-request"></a>
 #### 요청
 이 API는 요청 본문을 요구하지 않습니다.
 
@@ -131,6 +136,7 @@ X-Auth-Token: {tokenId}
 | imageId | URL | UUID | O | 조회할 이미지 ID |
 | tokenId | Header | String | O | 토큰 ID|
 
+<a id="get-image-response"></a>
 #### 응답
 
 | 이름 | 종류 | 형식 | 설명 |
@@ -196,7 +202,7 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="create-image"></a>
-### 이미지 생성
+### 이미지 생성 { #create-image }
 
 빈 이미지를 생성합니다. NHN Cloud에서 이미지를 사용하려면 `이미지 생성` 후에 `이미지 업로드` API를 이용해 실제 파일을 업로드해야 합니다.
 
@@ -205,6 +211,7 @@ POST /v2/images
 X-Auth-Token: {tokenId}
 ```
 
+<a id="create-image-request"></a>
 #### 요청
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 |---|---|---|---|---|
@@ -238,6 +245,7 @@ X-Auth-Token: {tokenId}
 <p>
 </details>
 
+<a id="create-image-response"></a>
 #### 응답
 | 이름 | 종류 | 형식 | 설명 |
 |---|---|---|---|
@@ -305,7 +313,7 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="upload-image"></a>
-### 이미지 업로드
+### 이미지 업로드 { #upload-image }
 
 생성한 이미지에 실제 이미지 파일을 업로드합니다.
 
@@ -318,6 +326,7 @@ X-Auth-Token: {tokenId}
 Content-Type: application/octet-stream
 ```
 
+<a id="upload-image-request"></a>
 #### 요청
 요청 시 Header의 Content-Type을 application/octet-stream으로 설정해야 합니다.
 
@@ -327,13 +336,14 @@ Content-Type: application/octet-stream
 | tokenId | Header | String | O | 토큰 ID |
 | -       | Body | Binary | O | 업로드할 이미지 파일의 바이너리 데이터 |
 
+<a id="upload-image-response"></a>
 #### 응답
 이 API는 응답 본문을 반환하지 않습니다. 요청이 올바르면 상태 코드 204를 반환합니다.
 
 ---
 
 <a id="download-image"></a>
-### 이미지 다운로드
+### 이미지 다운로드 { #download-image }
 
 지정한 이미지의 바이너리 데이터를 다운로드합니다.
 
@@ -348,19 +358,21 @@ GET /v2/images/{imageId}/file
 X-Auth-Token: {tokenId}
 ```
 
+<a id="download-image-request"></a>
 #### 요청
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 |---|---|---|---|---|
 | imageId | URL | UUID | O | 이미지 ID |
 | tokenId | Header | String | O | 토큰 ID |
 
+<a id="download-image-response"></a>
 #### 응답
 이미지의 바이너리 데이터가 반환됩니다. 요청이 올바르면 상태 코드 200을 반환합니다.
 
 ---
 
 <a id="modify-image"></a>
-### 이미지 수정
+### 이미지 수정 { #modify-image }
 
 이미지 수정을 통해 이미지 속성을 변경할 수 있습니다.
 
@@ -370,6 +382,7 @@ X-Auth-Token: {tokenId}
 Content-Type: application/openstack-images-v2.1-json-patch
 ```
 
+<a id="modify-image-request"></a>
 #### 요청
 요청 시 Header의 Content-Type을 application/openstack-images-v2.1-json-patch로 설정해야 합니다.
 
@@ -379,7 +392,24 @@ Content-Type: application/openstack-images-v2.1-json-patch
 | tokenId | Header | String | O  | 토큰 ID                                                                        |
 | op | Body | Enum   | O  | 수정할 작업 유형</br>`add`: 속성 추가</br>`replace`: 속성 값 수정</br>`remove`: 속성 삭제 |
 | path | Body | String | O  | 수정할 속성</br>`/{path}` 형식                                                      |
-| value | Body | String | -  | 수정할 속성의 값                                                                    |
+| value | Body | String, Integer | -  | 수정할 속성의 값                                                                    |
+
+<a id="modify-image-1"></a>
+#### 수정 가능한 속성
+
+| path | 값 형식 | 설명 |
+|------|---------|------|
+| /name | String | 이미지 이름 |
+| /description | String | 이미지 설명 |
+| /os_version | String | OS 버전 정보 |
+| /max_cpu | String | 인스턴스 생성 시 최대 CPU 코어 수 |
+| /min_cpu | String | 인스턴스 생성 시 최소 CPU 코어 수 |
+| /min_ram | Integer | 인스턴스 생성 시 최소 RAM 크기(MB) |
+| /min_disk | Integer | 인스턴스 생성 시 최소 디스크 크기(GB) |
+| /nhncloud_allow_image_create | String | 이미지 생성 기능 사용 여부. `true` / `false` |
+| /nhncloud_allow_download | String | 이미지 다운로드 기능 사용 여부. `true` / `false` |
+| /nhncloud_allow_user_script | String | 사용자 스크립트 기능 사용 여부. `true` / `false` |
+| /nhncloud_product | String | 사용 대상 서비스. `compute` 등 |
 
 <details><summary>예시</summary>
 <p>
@@ -420,6 +450,7 @@ Content-Type: application/openstack-images-v2.1-json-patch
 <p>
 </details>
 
+<a id="modify-image-response"></a>
 #### 응답
 
 이미지 보기와 동일한 응답을 반환합니다.
@@ -427,7 +458,7 @@ Content-Type: application/openstack-images-v2.1-json-patch
 ---
 
 <a id="delete-image"></a>
-### 이미지 삭제
+### 이미지 삭제 { #delete-image }
 
 가시성이 `public`인 이미지는 삭제할 수 없습니다.
 
@@ -436,6 +467,7 @@ DELETE /v2/images/{imageId}
 X-Auth-Token: {tokenId}
 ```
 
+<a id="delete-image-request"></a>
 #### 요청
 이 API는 요청 본문을 요구하지 않습니다.
 
@@ -444,16 +476,17 @@ X-Auth-Token: {tokenId}
 | imageId | URL | String | O | 삭제할 이미지 ID |
 | tokenId | Header | String | O | 토큰 ID |
 
+<a id="delete-image-response"></a>
 #### 응답
 이 API는 응답 본문을 반환하지 않습니다.
 
 ---
 
 <a id="image-tag"></a>
-## 이미지 태그
+## 이미지 태그 { #image-tag }
 
 <a id="add-tag"></a>
-### 태그 추가하기
+### 태그 추가하기 { #add-tag }
 지정한 이미지에 태그를 추가합니다.
 
 ```
@@ -461,6 +494,7 @@ PUT /v2/images/{imageId}/tags/{tag}
 X-Auth-Token: {tokenId}
 ```
 
+<a id="add-tag-request"></a>
 #### 요청
 이 API는 요청 본문을 요구하지 않습니다.
 
@@ -470,13 +504,14 @@ X-Auth-Token: {tokenId}
 | tag | URL | String | O | 추가할 태그 이름(영문 기준 최대 255자)<br><font color='red'>**(주의) `_`로 시작하는 태그는 사용할 수 없습니다**</font> |
 | tokenId | Header | String | O | 토큰 ID |
 
+<a id="add-tag-response"></a>
 #### 응답
 이 API는 응답 본문을 반환하지 않습니다.
 
 ---
 
 <a id="remove-tag"></a>
-### 태그 제거하기
+### 태그 제거하기 { #remove-tag }
 지정한 이미지에서 태그를 제거합니다.
 
 
@@ -485,6 +520,7 @@ DELETE /v2/images/{imageId}/tags/{tag}
 X-Auth-Token: {tokenId}
 ```
 
+<a id="remove-tag-request"></a>
 #### 요청
 이 API는 요청 본문을 요구하지 않습니다.
 
@@ -494,13 +530,14 @@ X-Auth-Token: {tokenId}
 | tag | URL | String | O | 제거할 태그 이름 |
 | tokenId | Header | String | O | 토큰 ID |
 
+<a id="remove-tag-response"></a>
 #### 응답
 이 API는 응답 본문을 반환하지 않습니다.
 
 ---
 
 <a id="image-sharing"></a>
-## 이미지 공유
+## 이미지 공유 { #image-sharing }
 
 이미지 공유를 통해 자신의 테넌트에 소속된 이미지를 다른 테넌트에 공유할 수 있습니다. 이미지 공유 방법은 다음과 같습니다.
 
@@ -511,7 +548,7 @@ X-Auth-Token: {tokenId}
 공유 받은 테넌트에서 공유 받은 이미지를 조회하려면 `공유 받은 테넌트`에서 멤버 상태를 `accepted`로 변경하거나 이미지 목록 조회 시 쿼리 파라미터의 `memeber_status`를 `all`로 설정합니다.
 
 <a id="change-visibility"></a>
-### 가시성 변경
+### 가시성 변경 { #change-visibility }
 
 ```
 PATCH /v2/images/{imageId}
@@ -519,6 +556,7 @@ X-Auth-Token: {tokenId}
 Content-Type: application/openstack-images-v2.1-json-patch
 ```
 
+<a id="change-visibility-request"></a>
 #### 요청
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -545,6 +583,7 @@ Content-Type: application/openstack-images-v2.1-json-patch
 </p>
 </details>
 
+<a id="change-visibility-response"></a>
 #### 응답
 
 이미지 보기와 동일한 응답을 반환합니다.
@@ -552,7 +591,7 @@ Content-Type: application/openstack-images-v2.1-json-patch
 ---
 
 <a id="add-member"></a>
-### 멤버 추가
+### 멤버 추가 { #add-member }
 공유 받을 테넌트를 지정한 이미지의 멤버로 등록합니다.
 
 ```
@@ -560,6 +599,7 @@ POST /v2/images/{imageId}/members
 X-Auth-Token: {tokenId}
 ```
 
+<a id="add-member-request"></a>
 #### 요청
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -580,6 +620,7 @@ X-Auth-Token: {tokenId}
 </p>
 </details>
 
+<a id="add-member-response"></a>
 #### 응답
 
 | 이름 | 종류 | 형식 | 설명 |
@@ -610,7 +651,7 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="list-members"></a>
-### 멤버 목록 보기
+### 멤버 목록 보기 { #list-members }
 지정한 이미지를 공유 받은 테넌트 목록을 조회합니다. 반드시 해당 이미지가 소속된 테넌트나 공유 받은 테넌트의 토큰으로 요청합니다.
 
 ```
@@ -618,6 +659,7 @@ GET /v2/images/{imageId}/members
 X-Auth-Token: {tokenId}
 ```
 
+<a id="list-members-request"></a>
 #### 요청
 이 API는 요청 본문을 요구하지 않습니다.
 
@@ -626,6 +668,7 @@ X-Auth-Token: {tokenId}
 | imageId | URL | UUID | O | 이미지 ID |
 | tokenId | Header | String | O | 토큰 ID |
 
+<a id="list-members-response"></a>
 #### 응답
 
 | 이름 | 종류 | 형식 | 설명 |
@@ -671,7 +714,7 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="get-member-details"></a>
-### 멤버 상세 보기
+### 멤버 상세 보기 { #get-member-details }
 
 지정한 이미지의 특정 멤버에 대한 상세 정보를 반환합니다. 반드시 해당 이미지가 소속된 테넌트나 공유 받은 테넌트의 토큰으로 요청합니다.
 
@@ -680,6 +723,7 @@ GET /v2/images/{imageId}/members/{memberId}
 X-Auth-Token: {tokenId}
 ```
 
+<a id="get-member-details-request"></a>
 #### 요청
 이 API는 요청 본문을 요구하지 않습니다.
 
@@ -689,6 +733,7 @@ X-Auth-Token: {tokenId}
 | memberId | URL | String | O | 멤버 ID |
 | tokenId | Header | String | O | 토큰 ID |
 
+<a id="get-member-details-response"></a>
 #### 응답
 
 | 이름 | 종류 | 형식 | 설명 |
@@ -719,7 +764,7 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="change-member-status"></a>
-### 멤버 상태 변경
+### 멤버 상태 변경 { #change-member-status }
 
 공유 받은 테넌트에서 공유 받은 이미지를 승인합니다. 이미지 공유를 승인하면 이미지 목록 조회에서도 해당 이미지가 조회됩니다. 반드시 공유 받은 테넌트의 토큰으로 요청합니다.
 
@@ -728,6 +773,7 @@ PUT /v2/images/{imageId}/members/{memberId}
 X-Auth-Token: {tokenId}
 ```
 
+<a id="change-member-status-request"></a>
 #### 요청
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -749,6 +795,7 @@ X-Auth-Token: {tokenId}
 </p>
 </details>
 
+<a id="change-member-status-response"></a>
 #### 응답
 
 | 이름 | 종류 | 유형 | 설명 |
@@ -781,7 +828,7 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="delete-member"></a>
-### 멤버 삭제
+### 멤버 삭제 { #delete-member }
 
 지정한 이미지의 멤버를 삭제합니다. 공유를 취소할 때 사용합니다. 반드시 지정한 이미지의 소속된 테넌트의 토큰으로 요청해야 합니다.
 
@@ -790,6 +837,7 @@ DELETE /v2/images/{imageId}/members/{memberId}
 X-Auth-Token: {tokenId}
 ```
 
+<a id="delete-member-request"></a>
 #### 요청
 이 API는 요청 본문을 요구하지 않습니다.
 
@@ -799,5 +847,6 @@ X-Auth-Token: {tokenId}
 | memberId | URL | String | O | 멤버 ID |
 | tokenId | Header | String | O | 토큰 ID |
 
+<a id="delete-member-response"></a>
 #### 응답
 이 API는 응답 본문을 반환하지 않습니다.

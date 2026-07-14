@@ -1,7 +1,7 @@
 <a id="compute-image-api-v2-guide"></a>
 ## Compute > Image > API v2 가이드
 
-API를 사용하려면 API 엔드포인트와 토큰 등이 필요합니다. [API 사용 준비](/Compute/Compute/ko/identity-api-gov/)를 참고하여 API 사용에 필요한 정보를 준비합니다.
+Image은(는) API 호출 시 인증/인가를 위해 IaaS 토큰을 사용합니다. IaaS 토큰은 NHN Cloud의 OpenStack 기반 인프라 서비스(IaaS)에서 사용하는 인증 토큰입니다. IaaS 토큰 발급 및 사용에 대한 자세한 내용은 [IaaS 토큰](/nhncloud/ko/public-api/iaas-token-gov) 을 참고하세요.
 
 이미지 API는 `image` 타입 엔드포인트를 이용합니다. 정확한 엔드포인트는 토큰 발급 응답의 `serviceCatalog`를 참조합니다.
 
@@ -377,7 +377,23 @@ Content-Type: application/openstack-images-v2.1-json-patch
 | tokenId | Header | String | O  | 토큰 ID                                                                        |
 | op | Body | Enum   | O  | 수정할 작업 유형</br>`add`: 속성 추가</br>`replace`: 속성 값 수정</br>`remove`: 속성 삭제 |
 | path | Body | String | O  | 수정할 속성</br>`/{path}` 형식                                                      |
-| value | Body | String | -  | 수정할 속성의 값                                                                    |
+| value | Body | String, Integer | -  | 수정할 속성의 값                                                                    |
+
+#### 수정 가능한 속성
+
+| path | 값 형식 | 설명 |
+|------|---------|------|
+| /name | String | 이미지 이름 |
+| /description | String | 이미지 설명 |
+| /os_version | String | OS 버전 정보 |
+| /max_cpu | String | 인스턴스 생성 시 최대 CPU 코어 수 |
+| /min_cpu | String | 인스턴스 생성 시 최소 CPU 코어 수 |
+| /min_ram | Integer | 인스턴스 생성 시 최소 RAM 크기(MB) |
+| /min_disk | Integer | 인스턴스 생성 시 최소 디스크 크기(GB) |
+| /nhncloud_allow_image_create | String | 이미지 생성 기능 사용 여부. `true` / `false` |
+| /nhncloud_allow_download | String | 이미지 다운로드 기능 사용 여부. `true` / `false` |
+| /nhncloud_allow_user_script | String | 사용자 스크립트 기능 사용 여부. `true` / `false` |
+| /nhncloud_product | String | 사용 대상 서비스. `compute` 등 |
 
 <details><summary>예시</summary>
 <p>
