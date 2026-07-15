@@ -1,5 +1,7 @@
+<!-- pre-align:aligned sig=77a16f7da63f -->
+
 <a id="compute-image-api-v2-guide"></a>
-## Compute > Image > API v2ガイド
+## Compute > Image > API v2ガイド { #compute-image-api-v2-guide }
 
 Imageは、API呼び出し時の認証/認可のためにIaaSトークンを使用します。IaaSトークンは、NHN CloudのOpenStackベースのインフラサービス(IaaS)で使用する認証トークンです。IaaSトークンの発行及び使用に関する詳細は、[IaaSトークン](/nhncloud/ja/public-api/iaas-token) を参照してください。
 
@@ -12,16 +14,17 @@ Imageは、API呼び出し時の認証/認可のためにIaaSトークンを使�
 APIレスポンスにガイドに明示されていないフィールドが表示される場合があります。それらのフィールドは、NHN Cloud内部用途で使用され、事前に告知せずに変更する場合があるため使用しないでください。
 
 <a id="image"></a>
-## イメージ
+## イメージ { #image }
 
 <a id="list-images"></a>
-### イメージリスト照会
+### イメージリスト照会 { #list-images }
 
 ```
 GET /v2/images
 X-Auth-Token: {tokenId}
 ```
 
+<a id="list-images-request"></a>
 #### リクエスト
 このAPIはリクエスト本文を要求しません。
 
@@ -40,6 +43,7 @@ X-Auth-Token: {tokenId}
 | sort_dir | Query | Enum | - | イメージリストのソート方向<br>`asc` (昇順)、`desc` (降順)のうち、1つの値のみ選択可能。基本値は降順                                                                                                   |
 | member_status | Query | Enum | - | 共有されたイメージの場合、メンバーステータスに応じたイメージリストを照会<br>`accepted`, `pending`, `rejected`, `all`のいずれか1つの値のみ選択可能<br>デフォルト値は`accepted` |
 
+<a id="list-images-response"></a>
 #### レスポンス
 
 | 名前 | 種類 | 形式 | 説明 |
@@ -116,13 +120,14 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="get-image"></a>
-### イメージ表示
+### イメージ表示 { #get-image }
 
 ```
 GET /v2/images/{imageId}
 X-Auth-Token: {tokenId}
 ```
 
+<a id="get-image-request"></a>
 #### リクエスト
 このAPIはリクエスト本文を要求しません。
 
@@ -131,6 +136,7 @@ X-Auth-Token: {tokenId}
 | imageId | URL | UUID | O | 照会するイメージID |
 | tokenId | Header | String | O | トークンID|
 
+<a id="get-image-response"></a>
 #### レスポンス
 
 | 名前 | 種類 | 形式 | 説明 |
@@ -196,7 +202,7 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="create-image"></a>
-### イメージ作成
+### イメージ作成 { #create-image }
 
 空のイメージを作成します。 NHN Cloudでイメージを使用するには`イメージ作成`後に`イメージアップロード`APIを利用して実際のファイルをアップロードする必要があります。
 
@@ -205,6 +211,7 @@ POST /v2/images
 X-Auth-Token: {tokenId}
 ```
 
+<a id="create-image-request"></a>
 #### リクエスト
 | 名前 | 種類 | 形式 | 必須 | 説明 |
 |---|---|---|---|---|
@@ -238,6 +245,7 @@ X-Auth-Token: {tokenId}
 </p>
 </details>
 
+<a id="create-image-response"></a>
 #### レスポンス
 | 名前 | 種類 | 形式 | 説明 |
 |---|---|---|---|
@@ -305,7 +313,7 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="upload-image"></a>
-### イメージアップロード
+### イメージアップロード { #upload-image }
 
 作成したイメージに実際のイメージファイルをアップロードします。
 
@@ -318,6 +326,7 @@ X-Auth-Token: {tokenId}
 Content-Type: application/octet-stream
 ```
 
+<a id="upload-image-request"></a>
 #### リクエスト
 リクエスト時、HeaderのContent-Typeをapplication/octet-streamに設定する必要があります。
 
@@ -327,13 +336,14 @@ Content-Type: application/octet-stream
 | tokenId | Header | String | O | トークンID |
 | -       | Body | Binary | O | アップロードするイメージファイルのバイナリデータ |
 
+<a id="upload-image-response"></a>
 #### レスポンス
 このAPIはレスポンス本文を返しません。リクエストが正しい場合はステータスコード204を返します。
 
 ---
 
 <a id="download-image"></a>
-### イメージダウンロード
+### イメージダウンロード { #download-image }
 
 指定したイメージのバイナリデータをダウンロードします。
 
@@ -348,19 +358,21 @@ GET /v2/images/{imageId}/file
 X-Auth-Token: {tokenId}
 ```
 
+<a id="download-image-request"></a>
 #### リクエスト
 | 名前 | 種類 | 形式 | 必須 | 説明 |
 |---|---|---|---|---|
 | imageId | URL | UUID | O | イメージID |
 | tokenId | Header | String | O | トークンID |
 
+<a id="download-image-response"></a>
 #### レスポンス
 イメージのバイナリデータが返されます。リクエストが正しい場合、ステータスコード200を返します。
 
 ---
 
 <a id="modify-image"></a>
-### イメージ修正
+### イメージ修正 { #modify-image }
 
 イメージ修正によりイメージプロパティを変更できます。
 
@@ -370,6 +382,7 @@ X-Auth-Token: {tokenId}
 Content-Type: application/openstack-images-v2.1-json-patch
 ```
 
+<a id="modify-image-request"></a>
 #### リクエスト
 リクエスト時、HeaderのContent-Typeをapplication/openstack-images-v2.1-json-patchに設定する必要があります。
 
@@ -420,6 +433,12 @@ Content-Type: application/openstack-images-v2.1-json-patch
 </p>
 </details>
 
+<a id="modify-image-1"></a>
+#### 修正可能な属性
+
+<!-- TODO: translate body -->
+
+<a id="modify-image-response"></a>
 #### レスポンス
 
 イメージ表示と同じレスポンスを返します。
@@ -427,7 +446,7 @@ Content-Type: application/openstack-images-v2.1-json-patch
 ---
 
 <a id="delete-image"></a>
-### イメージ削除
+### イメージ削除 { #delete-image }
 
 可視性が`public`のイメージは削除できません。
 
@@ -436,6 +455,7 @@ DELETE /v2/images/{imageId}
 X-Auth-Token: {tokenId}
 ```
 
+<a id="delete-image-request"></a>
 #### リクエスト
 このAPIはリクエスト本文を要求しません。
 
@@ -444,6 +464,7 @@ X-Auth-Token: {tokenId}
 | imageId | URL | String | O | 削除するイメージID |
 | tokenId | Header | String | O | トークンID |
 
+<a id="delete-image-response"></a>
 #### レスポンス
 このAPIはレスポンス本文を返しません。
 
@@ -451,10 +472,10 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="image-tag"></a>
-## イメージタグ
+## イメージタグ { #image-tag }
 
 <a id="add-tag"></a>
-### タグを追加する
+### タグを追加する { #add-tag }
 指定したイメージにタグを追加します。
 
 ```
@@ -462,6 +483,7 @@ PUT /v2/images/{imageId}/tags/{tag}
 X-Auth-Token: {tokenId}
 ```
 
+<a id="add-tag-request"></a>
 #### リクエスト
 このAPIはリクエスト本文を要求しません。
 
@@ -471,13 +493,14 @@ X-Auth-Token: {tokenId}
 | tag | URL | String | O | 追加するタグ名(英字基準最大255文字)<br><font color='red'>**(注意) `_`で始まるタグは使用できません。**</font> |
 | tokenId | Header | String | O | トークンID |
 
+<a id="add-tag-response"></a>
 #### レスポンス
 このAPIはレスポンス本文を返しません。
 
 ---
 
 <a id="remove-tag"></a>
-### タグを削除する
+### タグを削除する { #remove-tag }
 指定したイメージからタグを削除します。
 
 
@@ -486,6 +509,7 @@ DELETE /v2/images/{imageId}/tags/{tag}
 X-Auth-Token: {tokenId}
 ```
 
+<a id="remove-tag-request"></a>
 #### リクエスト
 このAPIはリクエスト本文を要求しません。
 
@@ -495,13 +519,14 @@ X-Auth-Token: {tokenId}
 | tag | URL | String | O | 削除するタグ名 |
 | tokenId | Header | String | O | トークンID |
 
+<a id="remove-tag-response"></a>
 #### レスポンス
 このAPIはレスポンス本文を返しません。
 
 ---
 
 <a id="image-sharing"></a>
-## イメージ共有
+## イメージ共有 { #image-sharing }
 
 イメージ共有を通して、自分のテナントに属しているイメージを他のテナントに共有できます。次の2段階によりイメージを共有します。
 
@@ -512,7 +537,7 @@ X-Auth-Token: {tokenId}
 
 
 <a id="change-visibility"></a>
-### 可視性の変更
+### 可視性の変更 { #change-visibility }
 
 ```
 PATCH /v2/images/{imageId}
@@ -520,6 +545,7 @@ X-Auth-Token: {tokenId}
 Content-Type: application/openstack-images-v2.1-json-patch
 ```
 
+<a id="change-visibility-request"></a>
 #### リクエスト
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
@@ -546,6 +572,7 @@ Content-Type: application/openstack-images-v2.1-json-patch
 </p>
 </details>
 
+<a id="change-visibility-response"></a>
 #### レスポンス
 
 イメージ表示と同じレスポンスを返します。
@@ -553,7 +580,7 @@ Content-Type: application/openstack-images-v2.1-json-patch
 ---
 
 <a id="add-member"></a>
-### メンバー追加
+### メンバー追加 { #add-member }
 共有を受けるテナントを、指定したイメージのメンバーに登録します。
 
 ```
@@ -561,6 +588,7 @@ POST /v2/images/{imageId}/members
 X-Auth-Token: {tokenId}
 ```
 
+<a id="add-member-request"></a>
 #### リクエスト
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
@@ -581,6 +609,7 @@ X-Auth-Token: {tokenId}
 </p>
 </details>
 
+<a id="add-member-response"></a>
 #### レスポンス
 
 | 名前 | 種類 | 形式 | 説明 |
@@ -611,7 +640,7 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="list-members"></a>
-### メンバーリスト表示
+### メンバーリスト表示 { #list-members }
 指定したイメージを共有されたテナントリストを照会します。必ず該当イメージが属しているテナントや共有されたテナントのトークンでリクエストします。
 
 ```
@@ -619,6 +648,7 @@ GET /v2/images/{imageId}/members
 X-Auth-Token: {tokenId}
 ```
 
+<a id="list-members-request"></a>
 #### リクエスト
 このAPIはリクエスト本文を要求しません。
 
@@ -627,6 +657,7 @@ X-Auth-Token: {tokenId}
 | imageId | URL | UUID | O | イメージID |
 | tokenId | Header | String | O | トークンID |
 
+<a id="list-members-response"></a>
 #### レスポンス
 
 | 名前 | 種類 | 形式 | 説明 |
@@ -672,7 +703,7 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="get-member-details"></a>
-### メンバー詳細表示
+### メンバー詳細表示 { #get-member-details }
 
 指定したイメージの特定メンバーについての詳細情報を返します。必ず該当イメージが属しているテナントや、共有を受けたテナントのトークンでリクエストします。
 
@@ -681,6 +712,7 @@ GET /v2/images/{imageId}/members/{memberId}
 X-Auth-Token: {tokenId}
 ```
 
+<a id="get-member-details-request"></a>
 #### リクエスト
 このAPIはリクエスト本文を要求しません。
 
@@ -690,6 +722,7 @@ X-Auth-Token: {tokenId}
 | memberId | URL | String | O | メンバーID |
 | tokenId | Header | String | O | トークンID |
 
+<a id="get-member-details-response"></a>
 #### レスポンス
 
 | 名前 | 種類 | 形式 | 説明 |
@@ -720,7 +753,7 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="change-member-status"></a>
-### メンバーの状態変更
+### メンバーの状態変更 { #change-member-status }
 
 共有を受けたテナントで、共有されたイメージを承認します。イメージの共有を承認すると、イメージリスト照会でも該当イメージが照会されます。必ず共有を受けたテナントのトークンでリクエストします。
 
@@ -729,6 +762,7 @@ PUT /v2/images/{imageId}/members/{memberId}
 X-Auth-Token: {tokenId}
 ```
 
+<a id="change-member-status-request"></a>
 #### リクエスト
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
@@ -750,6 +784,7 @@ X-Auth-Token: {tokenId}
 </p>
 </details>
 
+<a id="change-member-status-response"></a>
 #### レスポンス
 
 | 名前 | 種類 | タイプ | 説明 |
@@ -782,7 +817,7 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="delete-member"></a>
-### メンバーの削除
+### メンバーの削除 { #delete-member }
 
 指定したイメージのメンバーを削除します。共有をキャンセルする時に使用します。必ず指定したイメージが属しているテナントのトークンでリクエストする必要があります。
 
@@ -791,6 +826,7 @@ DELETE /v2/images/{imageId}/members/{memberId}
 X-Auth-Token: {tokenId}
 ```
 
+<a id="delete-member-request"></a>
 #### リクエスト
 このAPIはリクエスト本文を要求しません。
 
@@ -800,5 +836,6 @@ X-Auth-Token: {tokenId}
 | memberId | URL | String | O | メンバーID |
 | tokenId | Header | String | O | トークンID |
 
+<a id="delete-member-response"></a>
 #### レスポンス
 このAPIはレスポンス本文を返しません。

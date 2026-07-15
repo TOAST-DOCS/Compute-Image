@@ -1,14 +1,16 @@
+<!-- pre-align:aligned sig=266d47e7967d -->
+
 <a id="compute-image-console-guide"></a>
-## Compute > Image > コンソール使用ガイド
+## Compute > Image > コンソール使用ガイド { #compute-image-console-guide }
 
 <a id="create-image"></a>
-## イメージ作成
+## イメージ作成 { #create-image }
 
 イメージは、インスタンスのルートブロックストレージから作成できます。u2タイプのインスタンスを除く、t2、m2、c2、r2、x1タイプのインスタンスでは実行中にもイメージを作成できますが、データの整合性は保障しません。u2タイプのインスタンスでは停止状態の時のみイメージを作成できます。
 
 Linuxインスタンスのイメージを作成する前にmachine-idを初期化して重複を予防することを推奨します。machine-idの初期化方法については[Linux machine-id初期化ガイド](#guide-for-initialization-of-linux-machine-id)を参照します。
 
-Windowsインスタンスのイメージを作成するには、Sysprepを利用してイメージ作成を準備し、インスタンスを停止することを推奨します。Sysprepの詳細な使用方法は、[Windows Sysprepガイド](#windows-sysprep)を参照してください。
+Windowsインスタンスのイメージを作成するには、Sysprepを利用してイメージ作成を準備し、インスタンスを停止することを推奨します。Sysprepの詳細な使用方法は、[Windows Sysprepガイド](#guide-for-windows-sysprep)を参照してください。
 
 起動中のWindowsインスタンスからイメージを作成する場合、2019. 05.28.配布バージョン以前のイメージで作成したWindowsインスタンスの場合は、正常に動作させるために先行作業が必要です。インスタンスを作成したイメージのWindowsバージョンは、**インスタンス詳細情報**の**イメージ名**で確認できます。詳細は[起動中のWindowsインスタンスからのイメージ作成ガイド](#guide-to-creating-images-from-running-windows-instances)を参照してください。
 
@@ -16,7 +18,7 @@ Windowsインスタンスのイメージを作成するには、Sysprepを利用
 > 作成されたイメージのサイズはルートブロックストレージの実際の使用量より大きい場合があります。
 
 <a id="modify-image"></a>
-## イメージ修正
+## イメージ修正 { #modify-image }
 
 **Compute > Image** サービスページでイメージを選択した後、**イメージ修正**をクリックしてイメージを修正します。イメージ修正項目は次のとおりです。
 
@@ -41,25 +43,25 @@ Windowsインスタンスのイメージを作成するには、Sysprepを利用
 > **NKS(GPU)**を使用するには対象サービスの**NKS(CPU)**を一緒に選択する必要があります。
 
 <a id="change-delete-protection-settings"></a>
-## 削除保護設定の変更
+## 削除保護設定の変更 { #change-delete-protection-settings }
 
 <a id="deletion-protection-settings"></a>
-### 削除保護設定
+### 削除保護設定 { #deletion-protection-settings }
 **Compute > Image** サービスページでイメージの削除保護アイコンをクリックして有効化するか、イメージを選択した後、**削除保護設定変更 > 削除保護使用 > 確認**をクリックします。
 
 <a id="disable-deletion-protection"></a>
-### 削除保護の解除
+### 削除保護の解除 { #disable-deletion-protection }
 **Compute > Image** サービスページでイメージの削除保護アイコンをクリックして無効化するか、イメージを選択した後、**削除保護設定変更 > 削除保護使用しない > 確認**をクリックします。
 
 <a id="copy-to-another-region"></a>
-## 他のリージョンに複製
+## 他のリージョンに複製 { #copy-to-another-region }
 
 イメージを複製する対象リージョンを選択し、新しいイメージの名前と説明を入力した後、複製します。
 
 **Compute > Image**サービスページでイメージを選択した後、**他のリージョンに複製**をクリックしてイメージを複製します。
 
 <a id="share-with-other-projects"></a>
-## 他のプロジェクトに共有
+## 他のプロジェクトに共有 { #share-with-other-projects }
 
 イメージを共有するプロジェクトを選択して共有します。
 
@@ -69,7 +71,7 @@ Windowsインスタンスのイメージを作成するには、Sysprepを利用
 > 該当機能に対するAPI使用方法は**ユーザーガイド > Compute > Image > APIガイド**で**イメージ共有**項目を参照してください。
 
 <a id="guide-for-initialization-of-linux-machine-id"></a>
-## Linux machine-id初期化ガイド
+## Linux machine-id初期化ガイド { #guide-for-initialization-of-linux-machine-id }
 
 Linuxユーザーイメージを作成して、そのイメージでインスタンスを作成する場合、machine-idが重複して予期しない問題が発生する可能性があります。
 ユーザーイメージを作成する前にmachine-idを初期化して重複を予防できます。
@@ -79,12 +81,12 @@ Linuxユーザーイメージを作成して、そのイメージでインスタ
 	$ sudo ln -s /etc/machine-id /var/lib/dbus/machine-id
 
 <a id="guide-for-windows-sysprep"></a>
-## Windows Sysprepガイド
+## Windows Sysprepガイド { #guide-for-windows-sysprep }
 
 Windowsイメージを作成するには、ハードウェアとユーザーに従属された情報を削除して、インスタンス作成に使用できるようにイメージ初期化作業が必要です。イメージ初期化はMicrosoftからWindows OSを配布するために提供するシステム準備ユーティリティであるSysprepで実行できます。
 
 <a id="if-the-original-instance-image-version-is-20180818-or-later"></a>
-### 原本インスタンスのイメージバージョンが2020. 08. 18. 以降の場合
+### 原本インスタンスのイメージバージョンが2020. 08. 18. 以降の場合 { #if-the-original-instance-image-version-is-20180818-or-later }
 Windowsインスタンスに接続した後、**PowerShell**を管理者権限で実行します。
 ![[図1 Powershell実行]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep1.png)
 
@@ -104,7 +106,7 @@ Sysprepが実行されるとWindowsインスタンスは自動的に停止しま
 Sysprepを利用してWindowsインスタンスを初期化すると、パスワードが空白に変更されてログインできません。イメージ作成機能を利用する時、**イメージに作成されるWindowsパスワードを初期化します。**オプションを選択してWindowsインスタンスのパスワードを自動的に初期化することを推奨します。初期化されたパスワードはインスタンス接続情報で確認します。
 
 <a id="if-the-original-instance-image-version-is-earlier-than-20180818"></a>
-### 原本インスタンスのイメージバージョンが2020. 08. 18. 以前の場合
+### 原本インスタンスのイメージバージョンが2020. 08. 18. 以前の場合 { #if-the-original-instance-image-version-is-earlier-than-20180818 }
 
 まずWindowsインスタンスに接続した後、 **アプリ**で**コマンドプロンプト**を右クリックして**管理者権限で実行**をクリックします。
 ![[図1コマンドプロンプト実行]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/001_170524_800px.PNG)
@@ -121,7 +123,7 @@ Sysprepが実行されるとWindowsインスタンスは自動的に停止しま
 Sysprepを利用してWindowsインスタンスを初期化すると、パスワードが空白に変更されてログインできません。イメージ作成機能を利用する時、**イメージに作成されるWindowsパスワードを初期化します。**オプションを選択してWindowsインスタンスのパスワードを自動的に初期化することを推奨します。初期化されたパスワードはインスタンス接続情報で確認します。
 
 <a id="sysprep-option-details"></a>
-### Sysprepオプション詳細情報
+### Sysprepオプション詳細情報 { #sysprep-option-details }
 
 
 `\generalize`
@@ -145,7 +147,7 @@ NHN Cloudで提供するWindowsイメージの応答ファイルはC:\Program Fi
 
 
 <a id="guide-to-creating-images-from-running-windows-instances"></a>
-## 起動中のWindowsインスタンスからのイメージ作成ガイド
+## 起動中のWindowsインスタンスからのイメージ作成ガイド { #guide-to-creating-images-from-running-windows-instances }
 
 起動中のWindowsインスタンスからイメージを作成する時、原本インスタンスのイメージのバージョンが2019. 05. 28.以前の場合は、下記の先行作業が必要です。
 2019. 05. 28.配布バージョン以降のWindowsイメージの場合は、下記のプロセスは不要です。
