@@ -1,14 +1,12 @@
-<!-- pre-align:aligned sig=9483554734d5 -->
-
 <a id="compute-image-api-guide"></a>
-## Compute > Image > API Guide { #compute-image-api-guide }
+## Compute > Image > API Guide
 
 API is currently available only in the Korea region.
 
 Image API provides List Images API only. For Create Image API, refer to [Add Instance API](/Compute/Instance/en/api-guide/#add-instances-api).  
 
 <a id="prerequisites"></a>
-## Prerequisites { #prerequisites }
+## Prerequisites
 
 Using an image API requires an appkey and a token. Get an appkey and a token by using [API Endpoint URL](/Compute/Instance/en/api-guide/#api-endpoint-url) and [Token API](/Compute/Instance/en/api-guide/#api): include the appkey to Endpoint URL and the token to the Request Body. 
 
@@ -17,7 +15,7 @@ For example, List Images must be requested to the following URL:
 	GET https://api-compute.cloud.toast.com/compute/v1.0/appkeys/{appkey}/images
 
 <a id="image-status"></a>
-## Image Status { #image-status }
+## Image Status
 Images have the following status values:
 
 | Status | Description |
@@ -31,10 +29,10 @@ Images have the following status values:
 | deactivated | Data use is unavailable |
 
 <a id="image-api"></a>
-## Image API { #image-api }
+## Image API
 
 <a id="list-images"></a>
-### List Images { #list-images }
+### List Images
 
 List images with details. 
 
@@ -101,7 +99,7 @@ This API does not require a request body.
 | Updated At | Body | String | Time when an image is updated: in the format of yyyy-mm-ddTHH:MM:ssZ. e.g) 2017-05-16T02:17:50.166563 |
 
 <a id="delete-images"></a>
-### Delete Images { #delete-images }
+### Delete Images
 
 Delete specified images. However, only user-created images can be deleted.
 

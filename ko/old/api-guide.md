@@ -1,14 +1,12 @@
-<!-- pre-align:aligned sig=9483554734d5 -->
-
 <a id="compute-image-api-guide"></a>
-## Compute > Image > API 가이드 { #compute-image-api-guide }
+## Compute > Image > API 가이드
 
 API는 현재 한국 리전에서만 사용할 수 있습니다.
 
 이미지 API에서는 이미지의 목록을 조회하는 API만 제공합니다. 이미지 생성 API는 [인스턴스 추가 기능 API](/Compute/Instance/ko/api-guide/#api_4)를 참고합니다.
 
 <a id="prerequisites"></a>
-## 사전 준비 { #prerequisites }
+## 사전 준비
 
 이미지 API를 사용하려면 앱키(Appkey)와 토큰이 필요합니다. [API Endpoint URL](/Compute/Instance/ko/api-guide/#api-endpoint-url)과 [토큰 API](/Compute/Instance/ko/api-guide/#api)를 이용하여 앱키와 토큰을 준비합니다. 앱키는 API Endpoint URL에, 토큰은 Request Body에 포함하여 사용합니다.
 
@@ -17,7 +15,7 @@ API는 현재 한국 리전에서만 사용할 수 있습니다.
 	GET https://api-compute.cloud.toast.com/compute/v1.0/appkeys/{appkey}/images
 
 <a id="image-status"></a>
-## 이미지 상태 { #image-status }
+## 이미지 상태
 이미지는 다음의 상탯값을 갖습니다.
 
 | 상태 | 설명 |
@@ -31,10 +29,10 @@ API는 현재 한국 리전에서만 사용할 수 있습니다.
 | deactivated | 이미지 데이터를 사용할 수 없는 상태 |
 
 <a id="image-api"></a>
-## 이미지 API { #image-api }
+## 이미지 API
 
 <a id="list-images"></a>
-### 이미지 목록 조회 { #list-images }
+### 이미지 목록 조회
 
 이미지의 목록 및 상세 정보를 조회합니다.
 
@@ -101,7 +99,7 @@ X-Auth-Token: {tokenId}
 | Updated At | Body | String | 이미지가 업데이트된 시간. yyyy-mm-ddTHH:MM:ssZ의 형태. 예) 2017-05-16T02:17:50.166563 |
 
 <a id="delete-images"></a>
-### 이미지 삭제 { #delete-images }
+### 이미지 삭제
 
 지정한 이미지를 삭제 합니다. 단, 사용자가 생성한 이미지들만 삭제할 수 있습니다.
 

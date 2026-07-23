@@ -1,10 +1,8 @@
-<!-- pre-align:aligned sig=266d47e7967d -->
-
 <a id="compute-image-console-guide"></a>
-## Compute > Image > コンソール使用ガイド { #compute-image-console-guide }
+## Compute > Image > コンソール使用ガイド
 
 <a id="create-image"></a>
-## イメージ作成 { #create-image }
+## イメージ作成
 
 イメージは、インスタンスのルートブロックストレージから作成できます。u2タイプのインスタンスを除く、t2、m2、c2、r2、x1タイプのインスタンスでは実行中にもイメージを作成できますが、データの整合性は保障しません。u2タイプのインスタンスでは停止状態の時のみイメージを作成できます。
 
@@ -18,7 +16,7 @@ Windowsインスタンスのイメージを作成するには、Sysprepを利用
 > 作成されたイメージのサイズはルートブロックストレージの実際の使用量より大きい場合があります。
 
 <a id="modify-image"></a>
-## イメージ修正 { #modify-image }
+## イメージ修正
 
 **Compute > Image** サービスページでイメージを選択した後、**イメージ修正**をクリックしてイメージを修正します。イメージ修正項目は次のとおりです。
 
@@ -43,25 +41,25 @@ Windowsインスタンスのイメージを作成するには、Sysprepを利用
 > **NKS(GPU)**を使用するには対象サービスの**NKS(CPU)**を一緒に選択する必要があります。
 
 <a id="change-delete-protection-settings"></a>
-## 削除保護設定の変更 { #change-delete-protection-settings }
+## 削除保護設定の変更
 
 <a id="deletion-protection-settings"></a>
-### 削除保護設定 { #deletion-protection-settings }
+### 削除保護設定
 **Compute > Image** サービスページでイメージの削除保護アイコンをクリックして有効化するか、イメージを選択した後、**削除保護設定変更 > 削除保護使用 > 確認**をクリックします。
 
 <a id="disable-deletion-protection"></a>
-### 削除保護の解除 { #disable-deletion-protection }
+### 削除保護の解除
 **Compute > Image** サービスページでイメージの削除保護アイコンをクリックして無効化するか、イメージを選択した後、**削除保護設定変更 > 削除保護使用しない > 確認**をクリックします。
 
 <a id="copy-to-another-region"></a>
-## 他のリージョンに複製 { #copy-to-another-region }
+## 他のリージョンに複製
 
 イメージを複製する対象リージョンを選択し、新しいイメージの名前と説明を入力した後、複製します。
 
 **Compute > Image**サービスページでイメージを選択した後、**他のリージョンに複製**をクリックしてイメージを複製します。
 
 <a id="share-with-other-projects"></a>
-## 他のプロジェクトに共有 { #share-with-other-projects }
+## 他のプロジェクトに共有
 
 イメージを共有するプロジェクトを選択して共有します。
 
@@ -71,7 +69,7 @@ Windowsインスタンスのイメージを作成するには、Sysprepを利用
 > 該当機能に対するAPI使用方法は**ユーザーガイド > Compute > Image > APIガイド**で**イメージ共有**項目を参照してください。
 
 <a id="guide-for-initialization-of-linux-machine-id"></a>
-## Linux machine-id初期化ガイド { #guide-for-initialization-of-linux-machine-id }
+## Linux machine-id初期化ガイド
 
 Linuxユーザーイメージを作成して、そのイメージでインスタンスを作成する場合、machine-idが重複して予期しない問題が発生する可能性があります。
 ユーザーイメージを作成する前にmachine-idを初期化して重複を予防できます。
@@ -81,12 +79,12 @@ Linuxユーザーイメージを作成して、そのイメージでインスタ
 	$ sudo ln -s /etc/machine-id /var/lib/dbus/machine-id
 
 <a id="guide-for-windows-sysprep"></a>
-## Windows Sysprepガイド { #guide-for-windows-sysprep }
+## Windows Sysprepガイド
 
 Windowsイメージを作成するには、ハードウェアとユーザーに従属された情報を削除して、インスタンス作成に使用できるようにイメージ初期化作業が必要です。イメージ初期化はMicrosoftからWindows OSを配布するために提供するシステム準備ユーティリティであるSysprepで実行できます。
 
 <a id="if-the-original-instance-image-version-is-20180818-or-later"></a>
-### 原本インスタンスのイメージバージョンが2020. 08. 18. 以降の場合 { #if-the-original-instance-image-version-is-20180818-or-later }
+### 原本インスタンスのイメージバージョンが2020. 08. 18. 以降の場合
 Windowsインスタンスに接続した後、**PowerShell**を管理者権限で実行します。
 ![[図1 Powershell実行]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep1.png)
 
@@ -106,7 +104,7 @@ Sysprepが実行されるとWindowsインスタンスは自動的に停止しま
 Sysprepを利用してWindowsインスタンスを初期化すると、パスワードが空白に変更されてログインできません。イメージ作成機能を利用する時、**イメージに作成されるWindowsパスワードを初期化します。**オプションを選択してWindowsインスタンスのパスワードを自動的に初期化することを推奨します。初期化されたパスワードはインスタンス接続情報で確認します。
 
 <a id="if-the-original-instance-image-version-is-earlier-than-20180818"></a>
-### 原本インスタンスのイメージバージョンが2020. 08. 18. 以前の場合 { #if-the-original-instance-image-version-is-earlier-than-20180818 }
+### 原本インスタンスのイメージバージョンが2020. 08. 18. 以前の場合
 
 まずWindowsインスタンスに接続した後、 **アプリ**で**コマンドプロンプト**を右クリックして**管理者権限で実行**をクリックします。
 ![[図1コマンドプロンプト実行]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/001_170524_800px.PNG)
@@ -123,7 +121,7 @@ Sysprepが実行されるとWindowsインスタンスは自動的に停止しま
 Sysprepを利用してWindowsインスタンスを初期化すると、パスワードが空白に変更されてログインできません。イメージ作成機能を利用する時、**イメージに作成されるWindowsパスワードを初期化します。**オプションを選択してWindowsインスタンスのパスワードを自動的に初期化することを推奨します。初期化されたパスワードはインスタンス接続情報で確認します。
 
 <a id="sysprep-option-details"></a>
-### Sysprepオプション詳細情報 { #sysprep-option-details }
+### Sysprepオプション詳細情報
 
 
 `\generalize`
@@ -147,7 +145,7 @@ NHN Cloudで提供するWindowsイメージの応答ファイルはC:\Program Fi
 
 
 <a id="guide-to-creating-images-from-running-windows-instances"></a>
-## 起動中のWindowsインスタンスからのイメージ作成ガイド { #guide-to-creating-images-from-running-windows-instances }
+## 起動中のWindowsインスタンスからのイメージ作成ガイド
 
 起動中のWindowsインスタンスからイメージを作成する時、原本インスタンスのイメージのバージョンが2019. 05. 28.以前の場合は、下記の先行作業が必要です。
 2019. 05. 28.配布バージョン以降のWindowsイメージの場合は、下記のプロセスは不要です。

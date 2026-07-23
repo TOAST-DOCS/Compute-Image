@@ -1,7 +1,5 @@
-<!-- pre-align:aligned sig=77a16f7da63f -->
-
 <a id="compute-image-api-v2-guide"></a>
-## Compute > Image > API v2ガイド { #compute-image-api-v2-guide }
+## Compute > Image > API v2ガイド
 
 Imageは、API呼び出し時の認証/認可のためにIaaSトークンを使用します。IaaSトークンは、NHN CloudのOpenStackベースのインフラサービス(IaaS)で使用する認証トークンです。IaaSトークンの発行及び使用に関する詳細は、[IaaSトークン](/nhncloud/ja/public-api/iaas-token) を参照してください。
 
@@ -14,10 +12,10 @@ Imageは、API呼び出し時の認証/認可のためにIaaSトークンを使�
 APIレスポンスにガイドに明示されていないフィールドが表示される場合があります。それらのフィールドは、NHN Cloud内部用途で使用され、事前に告知せずに変更する場合があるため使用しないでください。
 
 <a id="image"></a>
-## イメージ { #image }
+## イメージ
 
 <a id="list-images"></a>
-### イメージリスト照会 { #list-images }
+### イメージリスト照会
 
 ```
 GET /v2/images
@@ -120,7 +118,7 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="get-image"></a>
-### イメージ表示 { #get-image }
+### イメージ表示
 
 ```
 GET /v2/images/{imageId}
@@ -202,7 +200,7 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="create-image"></a>
-### イメージ作成 { #create-image }
+### イメージ作成
 
 空のイメージを作成します。 NHN Cloudでイメージを使用するには`イメージ作成`後に`イメージアップロード`APIを利用して実際のファイルをアップロードする必要があります。
 
@@ -313,7 +311,7 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="upload-image"></a>
-### イメージアップロード { #upload-image }
+### イメージアップロード
 
 作成したイメージに実際のイメージファイルをアップロードします。
 
@@ -343,7 +341,7 @@ Content-Type: application/octet-stream
 ---
 
 <a id="download-image"></a>
-### イメージダウンロード { #download-image }
+### イメージダウンロード
 
 指定したイメージのバイナリデータをダウンロードします。
 
@@ -372,7 +370,7 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="modify-image"></a>
-### イメージ修正 { #modify-image }
+### イメージ修正
 
 イメージ修正によりイメージプロパティを変更できます。
 
@@ -446,7 +444,7 @@ Content-Type: application/openstack-images-v2.1-json-patch
 ---
 
 <a id="delete-image"></a>
-### イメージ削除 { #delete-image }
+### イメージ削除
 
 可視性が`public`のイメージは削除できません。
 
@@ -472,10 +470,10 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="image-tag"></a>
-## イメージタグ { #image-tag }
+## イメージタグ
 
 <a id="add-tag"></a>
-### タグを追加する { #add-tag }
+### タグを追加する
 指定したイメージにタグを追加します。
 
 ```
@@ -500,7 +498,7 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="remove-tag"></a>
-### タグを削除する { #remove-tag }
+### タグを削除する
 指定したイメージからタグを削除します。
 
 
@@ -526,7 +524,7 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="image-sharing"></a>
-## イメージ共有 { #image-sharing }
+## イメージ共有
 
 イメージ共有を通して、自分のテナントに属しているイメージを他のテナントに共有できます。次の2段階によりイメージを共有します。
 
@@ -537,7 +535,7 @@ X-Auth-Token: {tokenId}
 
 
 <a id="change-visibility"></a>
-### 可視性の変更 { #change-visibility }
+### 可視性の変更
 
 ```
 PATCH /v2/images/{imageId}
@@ -580,7 +578,7 @@ Content-Type: application/openstack-images-v2.1-json-patch
 ---
 
 <a id="add-member"></a>
-### メンバー追加 { #add-member }
+### メンバー追加
 共有を受けるテナントを、指定したイメージのメンバーに登録します。
 
 ```
@@ -640,7 +638,7 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="list-members"></a>
-### メンバーリスト表示 { #list-members }
+### メンバーリスト表示
 指定したイメージを共有されたテナントリストを照会します。必ず該当イメージが属しているテナントや共有されたテナントのトークンでリクエストします。
 
 ```
@@ -703,7 +701,7 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="get-member-details"></a>
-### メンバー詳細表示 { #get-member-details }
+### メンバー詳細表示
 
 指定したイメージの特定メンバーについての詳細情報を返します。必ず該当イメージが属しているテナントや、共有を受けたテナントのトークンでリクエストします。
 
@@ -753,7 +751,7 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="change-member-status"></a>
-### メンバーの状態変更 { #change-member-status }
+### メンバーの状態変更
 
 共有を受けたテナントで、共有されたイメージを承認します。イメージの共有を承認すると、イメージリスト照会でも該当イメージが照会されます。必ず共有を受けたテナントのトークンでリクエストします。
 
@@ -817,7 +815,7 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="delete-member"></a>
-### メンバーの削除 { #delete-member }
+### メンバーの削除
 
 指定したイメージのメンバーを削除します。共有をキャンセルする時に使用します。必ず指定したイメージが属しているテナントのトークンでリクエストする必要があります。
 
