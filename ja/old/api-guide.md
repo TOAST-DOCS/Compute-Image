@@ -1,9 +1,11 @@
+<a id="compute-image-api-guide"></a>
 ## Compute > Image > APIガイド
 
 APIは現在、韓国リージョンでのみ使用できます。
 
 イメージAPIではイメージのリストを照会するAPIのみ提供します。イメージ作成APIは[インスタンス追加機能API](/Compute/Instance/ja/api-guide/#api_4)を参照してください。
 
+<a id="prerequisites"></a>
 ## 事前準備
 
 イメージAPIを使用するにはアプリケーションキー(Appkey)とトークンが必要です。 [API Endpoint URL](/Compute/Instance/ja/api-guide/#api-endpoint-url)と[トークンAPI](/Compute/Instance/ja/api-guide/#api)を利用してアプリケーションキーとトークンを準備します。アプリケーションキーはAPI Endpoint URLに、トークンはRequest Bodyに含めて使用します。
@@ -12,6 +14,7 @@ APIは現在、韓国リージョンでのみ使用できます。
 
 	GET https://api-compute.cloud.toast.com/compute/v1.0/appkeys/{appkey}/images
 
+<a id="image-status"></a>
 ## イメージ状態
 イメージは次の状態値を持ちます。
 
@@ -25,12 +28,15 @@ APIは現在、韓国リージョンでのみ使用できます。
 | pending_delete | deleted状態と類似、イメージを回復できない状態 |
 | deactivated | イメージデータを使用できない状態 |
 
+<a id="image-api"></a>
 ## イメージAPI
 
+<a id="list-images"></a>
 ### イメージリスト照会
 
 イメージのリスト、詳細情報を照会します。
 
+<a id="list-images-method-url"></a>
 #### Method、 URL
 ```
 GET /v1.0/appkeys/{appkey}/images?limit={limit}&marker={markerId}
@@ -43,9 +49,11 @@ X-Auth-Token: {tokenId}
 | limit | Query | Integer | O | 照会するイメージの数 |
 | markerId | Query | UUID | O | 照会時に基準になるイメージID<br>イメージリストは作成日時順にソートされます。<br>limitとmakerを指定する場合、markerで指定されたイメージからlimitの数を照会します。 |
 
+<a id="list-images-request-body"></a>
 #### Request Body
 このAPIはRequest Bodyが必要ありません。
 
+<a id="list-images-response-body"></a>
 #### Response Body
 ```json
 {
@@ -90,10 +98,12 @@ X-Auth-Token: {tokenId}
 | Image Status | Body | String | イメージの状態 |
 | Updated At | Body | String | イメージがアップデートされた時間。 yyyy-mm-ddTHH:MM:ssZの形式。例) 2017-05-16T02:17:50.166563 |
 
+<a id="delete-images"></a>
 ### イメージの削除
 
 指定したイメージを削除します。ただし、ユーザーが作成したイメージのみ削除できます。
 
+<a id="delete-images-method-url"></a>
 #### Method, URL
 ```
 DELETE /v1.0/appkeys/{appkey}/images?id={imageId}
@@ -105,9 +115,11 @@ X-Auth-Token: {tokenId}
 | imageId | Query | UUID | - | イメージID |
 | tokenId | Header | String | - | トークンID |
 
+<a id="delete-images-request-body"></a>
 #### Request Body
 このAPIはRequest Bodyが不要です。
 
+<a id="delete-images-response-body"></a>
 #### Response Body
 ```json
 {

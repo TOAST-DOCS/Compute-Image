@@ -22,6 +22,7 @@ GET /v2/images
 X-Auth-Token: {tokenId}
 ```
 
+<a id="list-images-request"></a>
 #### 요청
 이 API는 요청 본문을 요구하지 않습니다.
 
@@ -39,6 +40,7 @@ X-Auth-Token: {tokenId}
 | sort_key | Query | String | - | 이미지 목록을 정렬할 때 사용할 속성<br>이미지의 모든 속성을 지정 가능, 기본값은 `created_at`                                                                                             |
 | sort_dir | Query | Enum | - | 이미지 목록 정렬 방향<br>`asc`(오름차순), `desc`(내림차순) 중 하나의 값만 선택 가능, 기본값은 내림차순                                                                                      |
 
+<a id="list-images-response"></a>
 #### 응답
 
 | 이름 | 종류 | 형식 | 설명                                                                                 |
@@ -122,6 +124,7 @@ GET /v2/images/{imageId}
 X-Auth-Token: {tokenId}
 ```
 
+<a id="get-image-request"></a>
 #### 요청
 이 API는 요청 본문을 요구하지 않습니다.
 
@@ -130,6 +133,7 @@ X-Auth-Token: {tokenId}
 | imageId | URL | UUID | O | 조회할 이미지 ID |
 | tokenId | Header | String | O | 토큰 ID|
 
+<a id="get-image-response"></a>
 #### 응답
 
 | 이름 | 종류 | 형식 | 설명 |
@@ -204,6 +208,7 @@ POST /v2/images
 X-Auth-Token: {tokenId}
 ```
 
+<a id="create-image-request"></a>
 #### 요청
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 |---|---|---|---|---|
@@ -237,6 +242,7 @@ X-Auth-Token: {tokenId}
 <p>
 </details>
 
+<a id="create-image-response"></a>
 #### 응답
 | 이름 | 종류 | 형식 | 설명 |
 |---|---|---|---|
@@ -317,6 +323,7 @@ X-Auth-Token: {tokenId}
 Content-Type: application/octet-stream
 ```
 
+<a id="upload-image-request"></a>
 #### 요청
 요청 시 Header의 Content-Type을 application/octet-stream으로 설정해야 합니다.
 
@@ -326,6 +333,7 @@ Content-Type: application/octet-stream
 | tokenId | Header | String | O | 토큰 ID |
 | -       | Body | Binary | O | 업로드할 이미지 파일의 바이너리 데이터 |
 
+<a id="upload-image-response"></a>
 #### 응답
 이 API는 응답 본문을 반환하지 않습니다. 요청이 올바르면 상태 코드 204를 반환합니다.
 
@@ -346,12 +354,14 @@ GET /v2/images/{imageId}/file
 X-Auth-Token: {tokenId}
 ```
 
+<a id="download-image-request"></a>
 #### 요청
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 |---|---|---|---|---|
 | imageId | URL | UUID | O | 이미지 ID |
 | tokenId | Header | String | O | 토큰 ID |
 
+<a id="download-image-response"></a>
 #### 응답
 이미지의 바이너리 데이터가 반환됩니다. 요청이 올바르면 상태 코드 200을 반환합니다.
 
@@ -368,6 +378,7 @@ X-Auth-Token: {tokenId}
 Content-Type: application/openstack-images-v2.1-json-patch
 ```
 
+<a id="modify-image-request"></a>
 #### 요청
 요청 시 Header의 Content-Type을 application/openstack-images-v2.1-json-patch로 설정해야 합니다.
 
@@ -379,6 +390,7 @@ Content-Type: application/openstack-images-v2.1-json-patch
 | path | Body | String | O  | 수정할 속성</br>`/{path}` 형식                                                      |
 | value | Body | String, Integer | -  | 수정할 속성의 값                                                                    |
 
+<a id="modify-image-1"></a>
 #### 수정 가능한 속성
 
 | path | 값 형식 | 설명 |
@@ -434,6 +446,7 @@ Content-Type: application/openstack-images-v2.1-json-patch
 <p>
 </details>
 
+<a id="modify-image-response"></a>
 #### 응답
 
 이미지 보기와 동일한 응답을 반환합니다.
@@ -450,6 +463,7 @@ DELETE /v2/images/{imageId}
 X-Auth-Token: {tokenId}
 ```
 
+<a id="delete-image-request"></a>
 #### 요청
 이 API는 요청 본문을 요구하지 않습니다.
 
@@ -458,6 +472,7 @@ X-Auth-Token: {tokenId}
 | imageId | URL | String | O | 삭제할 이미지 ID |
 | tokenId | Header | String | O | 토큰 ID |
 
+<a id="delete-image-response"></a>
 #### 응답
 이 API는 응답 본문을 반환하지 않습니다.
 
@@ -475,6 +490,7 @@ PUT /v2/images/{imageId}/tags/{tag}
 X-Auth-Token: {tokenId}
 ```
 
+<a id="add-tag-request"></a>
 #### 요청
 이 API는 요청 본문을 요구하지 않습니다.
 
@@ -484,6 +500,7 @@ X-Auth-Token: {tokenId}
 | tag | URL | String | O | 추가할 태그 이름(영문 기준 최대 255자)<br><font color='red'>**(주의) `_`로 시작하는 태그는 사용할 수 없습니다**</font> |
 | tokenId | Header | String | O | 토큰 ID |
 
+<a id="add-tag-response"></a>
 #### 응답
 이 API는 응답 본문을 반환하지 않습니다.
 
@@ -499,6 +516,7 @@ DELETE /v2/images/{imageId}/tags/{tag}
 X-Auth-Token: {tokenId}
 ```
 
+<a id="remove-tag-request"></a>
 #### 요청
 이 API는 요청 본문을 요구하지 않습니다.
 
@@ -508,5 +526,6 @@ X-Auth-Token: {tokenId}
 | tag | URL | String | O | 제거할 태그 이름 |
 | tokenId | Header | String | O | 토큰 ID |
 
+<a id="remove-tag-response"></a>
 #### 응답
 이 API는 응답 본문을 반환하지 않습니다.

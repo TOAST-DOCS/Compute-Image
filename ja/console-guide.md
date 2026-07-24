@@ -8,7 +8,7 @@
 
 Linuxインスタンスのイメージを作成する前にmachine-idを初期化して重複を予防することを推奨します。machine-idの初期化方法については[Linux machine-id初期化ガイド](#guide-for-initialization-of-linux-machine-id)を参照します。
 
-Windowsインスタンスのイメージを作成するには、Sysprepを利用してイメージ作成を準備し、インスタンスを停止することを推奨します。Sysprepの詳細な使用方法は、[Windows Sysprepガイド](#windows-sysprep)を参照してください。
+Windowsインスタンスのイメージを作成するには、Sysprepを利用してイメージ作成を準備し、インスタンスを停止することを推奨します。Sysprepの詳細な使用方法は、[Windows Sysprepガイド](#guide-for-windows-sysprep)を参照してください。
 
 起動中のWindowsインスタンスからイメージを作成する場合、2019. 05.28.配布バージョン以前のイメージで作成したWindowsインスタンスの場合は、正常に動作させるために先行作業が必要です。インスタンスを作成したイメージのWindowsバージョンは、**インスタンス詳細情報**の**イメージ名**で確認できます。詳細は[起動中のWindowsインスタンスからのイメージ作成ガイド](#guide-to-creating-images-from-running-windows-instances)を参照してください。
 

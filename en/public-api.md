@@ -22,6 +22,7 @@ GET /v2/images
 X-Auth-Token: {tokenId}
 ```
 
+<a id="list-images-request"></a>
 #### Request
 This API does not require a request body.
 
@@ -40,6 +41,7 @@ This API does not require a request body.
 | sort_dir | Query | Enum | - | Sorting direction of the image list<br>Select only one of `asc` (ascending order) or `desc` (descending order)                                                                                                        |
 | member_status | Query | Enum | - | For shared images, a list of images are retrieved according to their member status<br>Only one of the following values can be selected: `accepted`, `pending`, `rejected`, or `all`.<br>default is `accepted` |
 
+<a id="list-images-response"></a>
 #### Response
 
 | Name | Type | Format | Description |
@@ -123,6 +125,7 @@ GET /v2/images/{imageId}
 X-Auth-Token: {tokenId}
 ```
 
+<a id="get-image-request"></a>
 #### Request
 This API does not require a request body.
 
@@ -131,6 +134,7 @@ This API does not require a request body.
 | imageId | URL | UUID | O | Image ID to query |
 | tokenId | Header | String | O | Token ID|
 
+<a id="get-image-response"></a>
 #### Response
 
 | Name | Type | Format | Description |
@@ -205,6 +209,7 @@ POST /v2/images
 X-Auth-Token: {tokenId}
 ```
 
+<a id="create-image-request"></a>
 #### Request
 | Name | Type | Format | Required | Description |
 |---|---|---|---|---|
@@ -238,6 +243,7 @@ X-Auth-Token: {tokenId}
 <p>
 </details>
 
+<a id="create-image-response"></a>
 #### Response
 | Name | Type | Format | Description |
 |---|---|---|---|
@@ -318,6 +324,7 @@ X-Auth-Token: {tokenId}
 Content-Type: application/octet-stream
 ```
 
+<a id="upload-image-request"></a>
 #### Request
 For a request, the content type for the header must be set to application/octet-stream.
 
@@ -327,6 +334,7 @@ For a request, the content type for the header must be set to application/octet-
 | tokenId | Header | String | O | Token ID |
 | -       | Body | Binary | O | The binary data of the image file to be uploaded |
 
+<a id="upload-image-response"></a>
 #### Response
 This API does not return request body. When the request is appropriate, return status code 204.
 
@@ -348,12 +356,14 @@ GET /v2/images/{imageId}/file
 X-Auth-Token: {tokenId}
 ```
 
+<a id="download-image-request"></a>
 #### Request
 | Name | Type | Format | Required | Description |
 |---|---|---|---|---|
 | imageId | URL | UUID | O | Image ID |
 | tokenId | Header | String | O | Token ID |
 
+<a id="download-image-response"></a>
 #### Response
 The binary data for the image is returned. For a valid request, return status code 200.
 
@@ -370,6 +380,7 @@ X-Auth-Token: {tokenId}
 Content-Type: application/openstack-images-v2.1-json-patch
 ```
 
+<a id="modify-image-request"></a>
 #### Request
 For a request, the content type for the header must be set to application/openstack-images-v2.1-json-patch.
 
@@ -420,6 +431,12 @@ For a request, the content type for the header must be set to application/openst
 <p>
 </details>
 
+<a id="modify-image-1"></a>
+#### Modifiable Attributes
+
+<!-- TODO: translate body -->
+
+<a id="modify-image-response"></a>
 #### Response
 
 Returns the same response as Get Image.
@@ -436,6 +453,7 @@ DELETE /v2/images/{imageId}
 X-Auth-Token: {tokenId}
 ```
 
+<a id="delete-image-request"></a>
 #### Request
 This API does not require a request body.
 
@@ -444,6 +462,7 @@ This API does not require a request body.
 | imageId | URL | String | O | Image ID to delete |
 | tokenId | Header | String | O | Token ID |
 
+<a id="delete-image-response"></a>
 #### Response
 This API does not return a response body.
 
@@ -461,6 +480,7 @@ PUT /v2/images/{imageId}/tags/{tag}
 X-Auth-Token: {tokenId}
 ```
 
+<a id="add-tag-request"></a>
 #### Request
 This API does not require a request body.
 
@@ -470,6 +490,7 @@ This API does not require a request body.
 | tag | URL | String | O | Name of the tag to add (no more than 255 letters in English)<br><font color='red'>**(Caution) Tags starting with `_` are not allowed**</font> |
 | tokenId | Header | String | O | Token ID |
 
+<a id="add-tag-response"></a>
 #### Response
 This API does not return a response body.
 
@@ -485,6 +506,7 @@ DELETE /v2/images/{imageId}/tags/{tag}
 X-Auth-Token: {tokenId}
 ```
 
+<a id="remove-tag-request"></a>
 #### Request
 This API does not require a request body.
 
@@ -494,6 +516,7 @@ This API does not require a request body.
 | tag | URL | String | O | Name of the tag to remove |
 | tokenId | Header | String | O | Token ID |
 
+<a id="remove-tag-response"></a>
 #### Response
 This API does not return a response body.
 
@@ -519,6 +542,7 @@ X-Auth-Token: {tokenId}
 Content-Type: application/openstack-images-v2.1-json-patch
 ```
 
+<a id="change-visibility-request"></a>
 #### Request
 
 | Name | Type | Format | Required | Description |
@@ -545,6 +569,7 @@ Content-Type: application/openstack-images-v2.1-json-patch
 </p>
 </details>
 
+<a id="change-visibility-response"></a>
 #### Response
 
 Returns the same response as Get Image.
@@ -560,6 +585,7 @@ POST /v2/images/{imageId}/members
 X-Auth-Token: {tokenId}
 ```
 
+<a id="add-member-request"></a>
 #### Request
 
 | Name | Type | Format | Required | Description |
@@ -580,6 +606,7 @@ X-Auth-Token: {tokenId}
 </p>
 </details>
 
+<a id="add-member-response"></a>
 #### Response
 
 | Name | Type | Format | Description |
@@ -618,6 +645,7 @@ GET /v2/images/{imageId}/members
 X-Auth-Token: {tokenId}
 ```
 
+<a id="list-members-request"></a>
 #### Request
 This API does not require a request body.
 
@@ -626,6 +654,7 @@ This API does not require a request body.
 | imageId | URL | UUID | O | Image ID |
 | tokenId | Header | String | O | Token ID |
 
+<a id="list-members-response"></a>
 #### Response
 
 | Name | Type | Format | Description |
@@ -680,6 +709,7 @@ GET /v2/images/{imageId}/members/{memberId}
 X-Auth-Token: {tokenId}
 ```
 
+<a id="get-member-details-request"></a>
 #### Request
 This API does not require a request body.
 
@@ -689,6 +719,7 @@ This API does not require a request body.
 | memberId | URL | String | O | Member ID |
 | tokenId | Header | String | O | Token ID |
 
+<a id="get-member-details-response"></a>
 #### Response
 
 | Name | Type | Format | Description |
@@ -728,6 +759,7 @@ PUT /v2/images/{imageId}/members/{memberId}
 X-Auth-Token: {tokenId}
 ```
 
+<a id="change-member-status-request"></a>
 #### Request
 
 | Name | Type | Format | Required | Description |
@@ -749,6 +781,7 @@ X-Auth-Token: {tokenId}
 </p>
 </details>
 
+<a id="change-member-status-response"></a>
 #### Response
 
 | Name | Type | Format | Description |
@@ -790,6 +823,7 @@ DELETE /v2/images/{imageId}/members/{memberId}
 X-Auth-Token: {tokenId}
 ```
 
+<a id="delete-member-request"></a>
 #### Request
 This API does not require a request body.
 
@@ -799,5 +833,6 @@ This API does not require a request body.
 | memberId | URL | String | O | Member ID |
 | tokenId | Header | String | O | Token ID |
 
+<a id="delete-member-response"></a>
 #### Response
 This API does not return a response body.
