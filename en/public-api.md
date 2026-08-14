@@ -1,5 +1,7 @@
+<!-- pre-align:aligned sig=77a16f7da63f -->
+
 <a id="compute-image-api-v2-guide"></a>
-## Compute > Image > API v2 Guide
+## Compute > Image > API v2 Guide { #compute-image-api-v2-guide }
 
 Image uses IaaS tokens for authentication and authorization when making API calls. The IaaS token is an authentication token used for NHN Cloud's OpenStack-based infrastructure services (IaaS). For more information on issuing and using IaaS tokens, please refer to the [IaaS Token](/nhncloud/en/public-api/iaas-token).
 
@@ -12,10 +14,10 @@ Image API uses the `image` type endpoint. Refer to the `serviceCatalog` in the t
 In API response, you may find fields that are not specified in the guide. These fields are only for the internal use by NHN Cloud and are subject to change without prior notice, so we advise you not to use them.
 
 <a id="image"></a>
-## Image
+## Image { #image }
 
 <a id="list-images"></a>
-### List Images
+### List Images { #list-images }
 
 ```
 GET /v2/images
@@ -118,7 +120,7 @@ This API does not require a request body.
 ---
 
 <a id="get-image"></a>
-### Get Image
+### Get Image { #get-image }
 
 ```
 GET /v2/images/{imageId}
@@ -200,7 +202,7 @@ This API does not require a request body.
 ---
 
 <a id="create-image"></a>
-### Create Image
+### Create Image { #create-image }
 
 Create an empty image. To use the image in NHN Cloud, you must upload the actual file using the `Upload Image` API after `creating an image`.
 
@@ -311,7 +313,7 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="upload-image"></a>
-### Upload Image
+### Upload Image { #upload-image }
 
 Uploads the actual image file to the created image.
 
@@ -341,7 +343,7 @@ This API does not return request body. When the request is appropriate, return s
 ---
 
 <a id="download-image"></a>
-### Download Image
+### Download Image { #download-image }
 
 Downloads the binary data of the specified image.
 
@@ -370,7 +372,7 @@ The binary data for the image is returned. For a valid request, return status co
 ---
 
 <a id="modify-image"></a>
-### Modify Image
+### Modify Image { #modify-image }
 
 Modifies image properties through modification.
 
@@ -444,7 +446,7 @@ Returns the same response as Get Image.
 ---
 
 <a id="delete-image"></a>
-### Delete Image
+### Delete Image { #delete-image }
 
 Images with `public` visibility cannot be deleted.
 
@@ -469,10 +471,10 @@ This API does not return a response body.
 ---
 
 <a id="image-tag"></a>
-## Image Tag
+## Image Tag { #image-tag }
 
 <a id="add-tag"></a>
-### Add Tag
+### Add Tag { #add-tag }
 Adds a tag to the specified image.
 
 ```
@@ -497,7 +499,7 @@ This API does not return a response body.
 ---
 
 <a id="remove-tag"></a>
-### Remove Tag
+### Remove Tag { #remove-tag }
 Removes a tag from the specified image.
 
 
@@ -523,7 +525,7 @@ This API does not return a response body.
 ---
 
 <a id="image-sharing"></a>
-## Image Sharing
+## Image Sharing { #image-sharing }
 
 Image sharing allows you to share images belonging to your tenant with other tenants. You can share your images as follows:
 
@@ -534,7 +536,7 @@ The shared image becomes immediately available to the target tenant, but is not 
 To retrieve shared images from a shared tenant, change the member status to `accepted` in the `shared tenant` or set `member_status` in the query parameter to `all` when retrieving the image list.
 
 <a id="change-visibility"></a>
-### Change Visibility
+### Change Visibility { #change-visibility }
 
 ```
 PATCH /v2/images/{imageId}
@@ -577,7 +579,7 @@ Returns the same response as Get Image.
 ---
 
 <a id="add-member"></a>
-### Add Member
+### Add Member { #add-member }
 Registers the tenant to share the image with as a member of the specified image.
 
 ```
@@ -637,7 +639,7 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="list-members"></a>
-### List Members
+### List Members { #list-members }
 Retrieves the list of tenants that the specified image has been shared with. The request must be made with the token of the tenant to which the image belongs or the target tenant of the image sharing.
 
 ```
@@ -700,7 +702,7 @@ This API does not require a request body.
 ---
 
 <a id="get-member-details"></a>
-### Get Member Details
+### Get Member Details { #get-member-details }
 
 Returns details of a particular member of specified image. The request must be made with the token of the tenant to which the image belongs or the target tenant of the image sharing.
 
@@ -750,7 +752,7 @@ This API does not require a request body.
 ---
 
 <a id="change-member-status"></a>
-### Change Member Status
+### Change Member Status { #change-member-status }
 
 The shared image is approved by the sharing target tenant. If the image sharing is approved, the image can be queried in the image list query. The request must be made with the sharing target tenant's token.
 
@@ -814,7 +816,7 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="delete-member"></a>
-### Delete Member
+### Delete Member { #delete-member }
 
 Deletes a member of the specified image. This is used to cancel sharing. The request must be made with the token of the tenant to which the specified image belongs.
 
