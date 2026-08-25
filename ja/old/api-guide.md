@@ -1,12 +1,14 @@
+<!-- pre-align:aligned sig=9483554734d5 -->
+
 <a id="compute-image-api-guide"></a>
-## Compute > Image > APIガイド
+## Compute > Image > APIガイド { #compute-image-api-guide }
 
 APIは現在、韓国リージョンでのみ使用できます。
 
 イメージAPIではイメージのリストを照会するAPIのみ提供します。イメージ作成APIは[インスタンス追加機能API](/Compute/Instance/ja/api-guide/#api_4)を参照してください。
 
 <a id="prerequisites"></a>
-## 事前準備
+## 事前準備 { #prerequisites }
 
 イメージAPIを使用するにはアプリケーションキー(Appkey)とトークンが必要です。 [API Endpoint URL](/Compute/Instance/ja/api-guide/#api-endpoint-url)と[トークンAPI](/Compute/Instance/ja/api-guide/#api)を利用してアプリケーションキーとトークンを準備します。アプリケーションキーはAPI Endpoint URLに、トークンはRequest Bodyに含めて使用します。
 
@@ -15,7 +17,7 @@ APIは現在、韓国リージョンでのみ使用できます。
 	GET https://api-compute.cloud.toast.com/compute/v1.0/appkeys/{appkey}/images
 
 <a id="image-status"></a>
-## イメージ状態
+## イメージ状態 { #image-status }
 イメージは次の状態値を持ちます。
 
 | 状態 | 説明 |
@@ -29,10 +31,10 @@ APIは現在、韓国リージョンでのみ使用できます。
 | deactivated | イメージデータを使用できない状態 |
 
 <a id="image-api"></a>
-## イメージAPI
+## イメージAPI { #image-api }
 
 <a id="list-images"></a>
-### イメージリスト照会
+### イメージリスト照会 { #list-images }
 
 イメージのリスト、詳細情報を照会します。
 
@@ -99,7 +101,7 @@ X-Auth-Token: {tokenId}
 | Updated At | Body | String | イメージがアップデートされた時間。 yyyy-mm-ddTHH:MM:ssZの形式。例) 2017-05-16T02:17:50.166563 |
 
 <a id="delete-images"></a>
-### イメージの削除
+### イメージの削除 { #delete-images }
 
 指定したイメージを削除します。ただし、ユーザーが作成したイメージのみ削除できます。
 

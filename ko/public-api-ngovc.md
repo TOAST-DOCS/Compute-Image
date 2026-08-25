@@ -1,5 +1,5 @@
 <a id="compute-image-api-v2-guide"></a>
-## Compute > Image > API v2 가이드
+## Compute > Image > API v2 가이드 { #compute-image-api-v2-guide }
 
 API를 사용하려면 API 엔드포인트와 토큰 등이 필요합니다. [API 사용 준비](/Compute/Compute/ko/identity-api-ngovc/)를 참고하여 API 사용에 필요한 정보를 준비합니다.
 
@@ -12,10 +12,10 @@ API를 사용하려면 API 엔드포인트와 토큰 등이 필요합니다. [AP
 API 응답에 가이드에 명시되지 않은 필드가 나타날 수 있습니다. 이런 필드는 NHN Cloud 내부 용도로 사용되며 사전 공지 없이 변경될 수 있으므로 사용하지 않습니다.
 
 <a id="image"></a>
-## 이미지
+## 이미지 { #image }
 
 <a id="list-images"></a>
-### 이미지 목록 조회
+### 이미지 목록 조회 { #list-images }
 
 ```
 GET /v2/images
@@ -117,7 +117,7 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="get-image"></a>
-### 이미지 보기
+### 이미지 보기 { #get-image }
 
 ```
 GET /v2/images/{imageId}
@@ -199,7 +199,7 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="create-image"></a>
-### 이미지 생성
+### 이미지 생성 { #create-image }
 
 ```
 POST /v2/images
@@ -295,7 +295,7 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="upload-image"></a>
-### 이미지 업로드
+### 이미지 업로드 { #upload-image }
 
 지정한 이미지에 실제 이미지 파일을 업로드합니다.
 
@@ -325,7 +325,7 @@ Content-Type: application/octet-stream
 ---
 
 <a id="download-image"></a>
-### 이미지 다운로드
+### 이미지 다운로드 { #download-image }
 
 지정한 이미지의 바이너리 데이터를 다운로드합니다.
 
@@ -354,7 +354,7 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="modify-image"></a>
-### 이미지 수정
+### 이미지 수정 { #modify-image }
 
 이미지 수정을 통해 이미지 속성을 변경할 수 있습니다.
 
@@ -440,7 +440,7 @@ Content-Type: application/openstack-images-v2.1-json-patch
 ---
 
 <a id="delete-image"></a>
-### 이미지 삭제
+### 이미지 삭제 { #delete-image }
 
 가시성이 `public`인 이미지는 삭제할 수 없습니다.
 
@@ -465,10 +465,10 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="image-tag"></a>
-## 이미지 태그
+## 이미지 태그 { #image-tag }
 
 <a id="add-tag"></a>
-### 태그 추가하기
+### 태그 추가하기 { #add-tag }
 지정한 이미지에 태그를 추가합니다.
 
 ```
@@ -493,7 +493,7 @@ X-Auth-Token: {tokenId}
 ---
 
 <a id="remove-tag"></a>
-### 태그 제거하기
+### 태그 제거하기 { #remove-tag }
 지정한 이미지에서 태그를 제거합니다.
 
 
