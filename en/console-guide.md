@@ -102,7 +102,7 @@ ToastSysprep is a command that makes it easy to use Sysprep provided by NHN Clou
 Press **Y** to run a task.
 ![[Figure 3 Proceeding with ToastSysprep]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep3.png)
 
-Once Sysprep is run, the Windows instance is automatically stopped. Confirm that the Windows instance is stopped in the NHN Cloud console, and create a custom Windows image with the [Create Image](./console-guide/#create-image) feature.
+Once Sysprep is run, the Windows instance is automatically stopped. Confirm that the Windows instance is stopped in the NHN Cloud console, and create a custom Windows image with the [Create Image](#create-image) feature.
 
 Once the Windows instance is reset by using Sysprep, the password is changed to blank, so you cannot log in. When using the image creation feature, it is recommended to select the **Reset Windows Password Created by Image** option and automatically reset the password of Windows instance. You can check the reset password from instance access information.
 
@@ -120,7 +120,7 @@ When the Command Prompt window appears, run the following commands:
 
 ![[Figure 2. Running Sysprep]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/002_170524_800px.PNG)
 
-Once Sysprep is run, the Windows instance is automatically stopped. Confirm that the Windows instance is stopped in the NHN Cloud console, and create a custom Windows image with the [Create Image](./console-guide/#create-image) feature.
+Once Sysprep is run, the Windows instance is automatically stopped. Confirm that the Windows instance is stopped in the NHN Cloud console, and create a custom Windows image with the [Create Image](#create-image) feature.
 
 Once the Windows instance is reset by using Sysprep, the password is changed to blank, so you cannot log in. When using the image creation feature, it is recommended to select the **Reset Windows Password Created by Image** option and automatically reset the password of Windows instance. You can check the reset password from instance access information.
 
