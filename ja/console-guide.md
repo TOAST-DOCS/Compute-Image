@@ -101,7 +101,7 @@ ToastSysprepはNHN Cloudで提供するSysprepを簡単に使用できるコマ�
 **Y**キーを押すと作業を進行します。
 ![[図3 ToastSysprep進行]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep3.png)
 
-Sysprepが実行されるとWindowsインスタンスは自動的に停止します。NHN CloudコンソールでWindowsインスタンスの停止を確認し、[イメージ作成](./console-guide/#create-image)機能でユーザーWindowsイメージを作成します。
+Sysprepが実行されるとWindowsインスタンスは自動的に停止します。NHN CloudコンソールでWindowsインスタンスの停止を確認し、[イメージ作成](#create-image)機能でユーザーWindowsイメージを作成します。
 
 Sysprepを利用してWindowsインスタンスを初期化すると、パスワードが空白に変更されてログインできません。イメージ作成機能を利用する時、**イメージに作成されるWindowsパスワードを初期化します。**オプションを選択してWindowsインスタンスのパスワードを自動的に初期化することを推奨します。初期化されたパスワードはインスタンス接続情報で確認します。
 
@@ -118,7 +118,7 @@ Sysprepを利用してWindowsインスタンスを初期化すると、パスワ
 
 ![[図2 Sysprep実行]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/002_170524_800px.PNG)
 
-Sysprepが実行されるとWindowsインスタンスは自動的に停止します。NHN CloudコンソールでWindowsインスタンスの停止を確認して、 [イメージ作成](./console-guide/#create-image)機能でユーザーWindowsイメージを作成します。
+Sysprepが実行されるとWindowsインスタンスは自動的に停止します。NHN CloudコンソールでWindowsインスタンスの停止を確認して、 [イメージ作成](#create-image)機能でユーザーWindowsイメージを作成します。
 
 Sysprepを利用してWindowsインスタンスを初期化すると、パスワードが空白に変更されてログインできません。イメージ作成機能を利用する時、**イメージに作成されるWindowsパスワードを初期化します。**オプションを選択してWindowsインスタンスのパスワードを自動的に初期化することを推奨します。初期化されたパスワードはインスタンス接続情報で確認します。
 
