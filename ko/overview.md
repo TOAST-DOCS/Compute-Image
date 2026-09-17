@@ -1,7 +1,6 @@
 <!-- pre-align:aligned sig=ab849ab21c5b -->
 
 {% set svc_domain = {"public":"toast.com","gov":"gov.toast.com","ncgn":"gncloud.go.kr","ninc":"ninc.go.kr","ngsc":"ngsc.go.kr","ngovc":"ngovc.com","ngoic":"ngoic.com"} %}
-{% set inst = '' if 'public' in build_flags else '-' + build_flags[0] %}
 <a id="compute-image-overview"></a>
 ## Compute > Image > 개요 { #compute-image-overview }
 
@@ -40,7 +39,7 @@ NHN Cloud는 현재 {% if "public" not in build_flags and "gov" not in build_fla
 
 사용자 이미지는 서비스 증설에 유용하게 쓰입니다. 서비스를 증설하기 위해 퍼블릭 이미지로 새로운 인스턴스를 생성하고 서비스를 설치하려면 많은 시간이 걸립니다. 매번 번거로운 설치 작업을 반복하지 않고, 서비스에 사용할 이미지를 미리 사용자 이미지로 만들어서 인스턴스 생성에 사용한다면 서비스 부하 급증에 더욱 빠르게 대처할 수 있습니다.
 
-사용자 이미지는 Image 서비스 또는 Compute 서비스의 **추가 기능**을 이용하여 쉽게 생성할 수 있습니다. 자세한 이미지 생성 방법은 [이미지 콘솔 사용 가이드](/Compute/Image/ko/console-guide/)나 [인스턴스 콘솔 사용 가이드](/Compute/Instance/ko/console-guide$[ inst ]$/)를 참조하세요.
+사용자 이미지는 Image 서비스 또는 Compute 서비스의 **추가 기능**을 이용하여 쉽게 생성할 수 있습니다. 자세한 이미지 생성 방법은 [이미지 콘솔 사용 가이드](/Compute/Image/ko/console-guide/)나 [인스턴스 콘솔 사용 가이드](/Compute/Instance/ko/console-guide/)를 참조하세요.
 
 {% if "public" in build_flags %}
 <a id="shared-images"></a>
