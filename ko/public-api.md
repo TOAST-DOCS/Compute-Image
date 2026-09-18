@@ -1,6 +1,6 @@
 <!-- pre-align:aligned sig=77a16f7da63f -->
 
-{% set f = build_flags[0] %}
+{% set f = (build_flags | select("in", ["public","gov","ncgn","ninc","ngsc","ngovc","ngoic"]) | list | first) %}
 {% set ep_domain = {"ninc":"ninc.go.kr","ngsc":"ngsc.go.kr","ngovc":"ngovc.com","ngoic":"ngoic.com"} %}
 <a id="compute-image-api-v2-guide"></a>
 ## Compute > Image > API v2 가이드 { #compute-image-api-v2-guide }
