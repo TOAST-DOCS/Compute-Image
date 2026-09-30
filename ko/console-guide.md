@@ -100,7 +100,7 @@ ToastSysprep은 NHN Cloud에서 제공하는 Sysprep을 간편하게 사용할 �
 **Y** 키를 눌러 작업을 진행합니다.
 ![[그림 3 ToastSysprep 진행]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/win_sysprep3.png)
 
-Sysprep이 실행되면 Windows 인스턴스는 자동으로 중지됩니다. NHN Cloud 콘솔에서 Windows 인스턴스의 중지를 확인하고, [이미지 생성](./console-guide/#create-image) 기능으로 사용자 Windows 이미지를 생성합니다.
+Sysprep이 실행되면 Windows 인스턴스는 자동으로 중지됩니다. NHN Cloud 콘솔에서 Windows 인스턴스의 중지를 확인하고, [이미지 생성](#create-image) 기능으로 사용자 Windows 이미지를 생성합니다.
 
 Sysprep을 이용하여 Windows 인스턴스를 초기화하면 비밀번호가 공백으로 변경되어 로그인할 수 없습니다. 이미지 생성 기능을 이용할 때, **이미지로 생성되는 Windows 비밀번호를 초기화합니다.** 옵션을 선택해 Windows 인스턴스의 비밀번호를 자동으로 초기화하는 것이 좋습니다. 초기화된 비밀번호는 인스턴스 접속 정보에서 확인합니다.
 
@@ -118,7 +118,7 @@ Sysprep을 이용하여 Windows 인스턴스를 초기화하면 비밀번호가 
 
 ![[그림 2 Sysprep 실행]](http://static.toastoven.net/prod_infrastructure/compute/sysprep/002_170524_800px.PNG)
 
-Sysprep이 실행되면 Windows 인스턴스는 자동으로 중지됩니다. NHN Cloud 콘솔에서 Windows 인스턴스의 중지를 확인하고, [이미지 생성](./console-guide/#create-image) 기능으로 사용자 Windows 이미지를 생성합니다.
+Sysprep이 실행되면 Windows 인스턴스는 자동으로 중지됩니다. NHN Cloud 콘솔에서 Windows 인스턴스의 중지를 확인하고, [이미지 생성](#create-image) 기능으로 사용자 Windows 이미지를 생성합니다.
 
 Sysprep을 이용하여 Windows 인스턴스를 초기화하면 비밀번호가 공백으로 변경되어 로그인할 수 없습니다. 이미지 생성 기능을 이용할 때, **이미지로 생성되는 Windows 비밀번호를 초기화합니다.** 옵션을 선택해 Windows 인스턴스의 비밀번호를 자동으로 초기화하는 것이 좋습니다. 초기화된 비밀번호는 인스턴스 접속 정보에서 확인합니다.
 
