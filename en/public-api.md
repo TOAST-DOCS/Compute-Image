@@ -436,7 +436,58 @@ For a request, the content type for the header must be set to application/openst
 <a id="modify-image-1"></a>
 #### Modifiable Attributes
 
-<!-- TODO: translate body -->
+| path | Value Format | Description |
+|------|---------|------|
+| /name | String | Image name |
+| /description | String | Image description |
+| /os_version | String | OS version information |
+| /max_cpu | String | Maximum number of CPU cores for creating an instance |
+| /min_cpu | String | Minimum number of CPU cores for creating an instance |
+| /min_ram | Integer | Minimum RAM size (MB) for creating an instance |
+| /min_disk | Integer | Minimum disk size (GB) for creating an instance |
+| /nhncloud_allow_image_create | String | Image Creation. `true` / `false` |
+| /nhncloud_allow_download | String | Image Download. `true` / `false` |
+| /nhncloud_allow_user_script | String | User Script. `true` / `false` |
+| /nhncloud_product | String | Applicable Services. `compute`, etc. |
+
+<details><summary>Example</summary>
+<p>
+
+```json
+// Add a property
+[
+    {
+        "op": "add",
+        "path": "/metadata1",
+        "value": "value1"
+    },
+    {
+        "op": "add",
+        "path": "/metadata2",
+        "value": "1"
+    }
+]
+
+// Modify a property value
+[
+    {
+        "op": "replace",
+        "path": "/metadata1",
+        "value": "value2"
+    }
+]
+
+// Delete a property
+[
+    {
+        "op": "remove",
+        "path": "/metadata1"
+    }
+]
+```
+
+<p>
+</details>
 
 <a id="modify-image-response"></a>
 #### Response

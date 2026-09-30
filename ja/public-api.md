@@ -436,7 +436,58 @@ Content-Type: application/openstack-images-v2.1-json-patch
 <a id="modify-image-1"></a>
 #### 修正可能な属性
 
-<!-- TODO: translate body -->
+| path | 値の形式 | 説明 |
+|------|---------|------|
+| /name | String | イメージ名 |
+| /description | String | イメージの説明 |
+| /os_version | String | OSバージョン情報 |
+| /max_cpu | String | インスタンス作成時の最大CPUコア数 |
+| /min_cpu | String | インスタンス作成時の最小CPUコア数 |
+| /min_ram | Integer | インスタンス作成時の最小RAMサイズ (MB) |
+| /min_disk | Integer | インスタンス作成時の最小ディスクサイズ (GB) |
+| /nhncloud_allow_image_create | String | イメージ作成機能使用有無。`true` / `false` |
+| /nhncloud_allow_download | String | イメージダウンロード機能の使用の有無。`true` / `false` |
+| /nhncloud_allow_user_script | String | ユーザースクリプト機能使用有無。`true` / `false` |
+| /nhncloud_product | String | 使用対象サービス。`compute` など |
+
+<details><summary>例</summary>
+<p>
+
+```json
+// 属性の追加
+[
+    {
+        "op": "add",
+        "path": "/metadata1",
+        "value": "value1"
+    },
+    {
+        "op": "add",
+        "path": "/metadata2",
+        "value": "1"
+    }
+]
+
+// 属性値の変更
+[
+    {
+        "op": "replace",
+        "path": "/metadata1",
+        "value": "value2"
+    }
+]
+
+// 属性の削除
+[
+    {
+        "op": "remove",
+        "path": "/metadata1"
+    }
+]
+```
+
+<p>
+</details>
 
 <a id="modify-image-response"></a>
 #### レスポンス
