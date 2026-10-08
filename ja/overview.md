@@ -1,4 +1,8 @@
+<!-- machine_translated: true -->
+
 <!-- pre-align:aligned sig=ab849ab21c5b -->
+
+{% set svc_domain = {"public":"toast.com","gov":"gov.toast.com","ncgn":"gncloud.go.kr","ninc":"ninc.go.kr","ngsc":"ngsc.go.kr","ngovc":"ngovc.com","ngoic":"ngoic.com"} %}
 
 <a id="compute-image-overview"></a>
 ## Compute > Image > 概要 { #compute-image-overview }
@@ -12,11 +16,13 @@ NHN Cloudイメージの特徴は次のとおりです。
 - 仮想ハードウェアで最適に実行されるように設定されています。
 - 基本セキュリティーチェックを完了した状態で提供されるため、セキュリティー上の脅威に対し安全です。
 
-イメージは大きく3つに区分されます。
+イメージは大きく{% if "public" in build_flags %}3{% else %}2{% endif %}種類に分類されます。
 
 * パブリックイメージ
 * プライベートイメージ
+{% if "public" in build_flags %}
 * 共有イメージ
+{% endif %}
 
 **NHN Cloudは個人イメージのアップロードをサポートしません。**
 
@@ -25,7 +31,7 @@ NHN Cloudイメージの特徴は次のとおりです。
 
 NHN Cloudで提供するイメージです。このイメージには仮想ハードウェアを最適に利用するようにオペレーションシステムがインストールされています。またお客様のサービスとアプリケーションで安心して使用できるように基本的なセキュリティー設定がされています。
 
-NHN Cloudは現在Debian、 UbuntuとWindowsを提供しています。詳細な提供オペレーションシステムバージョンは[NHN Cloudサービス紹介](https://toast.com/service/compute/instance)を参照してください。
+NHN Cloudは現在{% if "public" not in build_flags and "gov" not in build_flags %}Rocky Linux、{% endif %}Debian、UbuntuとWindowsを提供しています。詳細な提供オペレーションシステムバージョンは[NHN Cloudサービス紹介](https://$[ svc_domain[(build_flags | select("in", ["public","gov","ncgn","ninc","ngsc","ngovc","ngoic"]) | list | first)] ]$/service/compute/instance)を参照してください。
 
 一部イメージにはアプリケーションをインストールしてあるので、より迅速にサービスを構築できます。今後ユーザーの要望に応じてさまざまなアプリケーションを構築したパブリックイメージを提供する予定です。
 
@@ -38,12 +44,16 @@ NHN Cloudは現在Debian、 UbuntuとWindowsを提供しています。詳細な
 
 プライベートイメージはImageサービスまたはComputeサービスの**追加機能**を利用して簡単に生成できます。詳細なイメージ生成方法は[イメージコンソール使用ガイド](./console-guide/)や[インスタンスコンソール使用ガイド](/Compute/Instance/ja/console-guide/)を参照してください。
 
+{% if "public" in build_flags %}
+
 <a id="shared-images"></a>
 ### 共有イメージ { #shared-images }
 
 他のプロジェクトと共有中のイメージです。ユーザーは、自身が属するプロジェクトのイメージを自身が属する他のプロジェクトと共有するように設定できます。
 
 他のプロジェクトから共有されたイメージは、再共有できません。
+
+{% endif %}
 
 <a id="pricing"></a>
 ### 課金 { #pricing }
