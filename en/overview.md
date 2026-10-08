@@ -36,7 +36,7 @@ User images are images modified by the user based on public images. You can inst
 
 User images are useful for service scale-out. It takes a lot of time to create new instances with a public image and install the service for service scale-out. You can respond to a surge in service load more quickly by creating a user image in advance and using it for instance creation, rather than repeating the cumbersome installation work every time.
 
-User images can be easily created by using **Additional Functions** of the Image service or the Compute service. For details on how to create an image, see the [Image Console User Guide](/Compute/Image/en/console-guide/) or the [Instance Console User Guide](/Compute/Instance/en/console-guide/).
+User images can be easily created by using **Additional Functions** of the Image service or the Compute service. For details on how to create an image, see the [Image Console User Guide](./console-guide/) or the [Instance Console User Guide](/Compute/Instance/en/console-guide/).
 
 <a id="shared-images"></a>
 ### Shared Images { #shared-images }
