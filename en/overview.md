@@ -1,4 +1,8 @@
+<!-- machine_translated: true -->
+
 <!-- pre-align:aligned sig=ab849ab21c5b -->
+
+{% set svc_domain = {"public":"toast.com","gov":"gov.toast.com","ncgn":"gncloud.go.kr","ninc":"ninc.go.kr","ngsc":"ngsc.go.kr","ngovc":"ngovc.com","ngoic":"ngoic.com"} %}
 
 <a id="compute-image-overview"></a>
 ## Compute > Image > Overview { #compute-image-overview }
@@ -12,11 +16,13 @@ The characteristics of NHN Cloud images are as follows.
 - The images are configured to run optimally on virtual hardware.
 - The images are provided with basic security checks completed, so they are safe from security threats.
 
-Images are classified into the following three main categories.
+Images are classified into the following {% if "public" in build_flags %}3{% else %}2{% endif %} main categories.
 
 * Public images
 * User images
+{% if "public" in build_flags %}
 * Shared images
+{% endif %}
 
 **NHN Cloud does not support uploading private images.**
 
@@ -25,7 +31,7 @@ Images are classified into the following three main categories.
 
 Public images are images provided by NHN Cloud. These images have an operating system installed for optimal use of virtual hardware. In addition, basic security settings are in place so that you can use it with confidence in your services and applications.
 
-NHN Cloud currently offers Debian, Ubuntu, and Windows. For more details on operating system versions offered, refer to [NHN Cloud Service Introduction](https://toast.com/service/compute/instance).
+NHN Cloud currently offers {% if "public" not in build_flags and "gov" not in build_flags %}Rocky Linux, {% endif %}Debian, Ubuntu, and Windows. For more details on operating system versions offered, refer to [NHN Cloud Service Introduction](https://$[ svc_domain[(build_flags | select("in", ["public","gov","ncgn","ninc","ngsc","ngovc","ngoic"]) | list | first)] ]$/service/compute/instance).
 
 Some images have applications installed, so you can build services faster. In the future, we plan to provide images in which more applications are installed according to various user needs.
 
@@ -38,12 +44,16 @@ User images are useful for service scale-out. It takes a lot of time to create n
 
 User images can be easily created by using **Additional Functions** of the Image service or the Compute service. For details on how to create an image, see the [Image Console User Guide](./console-guide/) or the [Instance Console User Guide](/Compute/Instance/en/console-guide/).
 
+{% if "public" in build_flags %}
+
 <a id="shared-images"></a>
 ### Shared Images { #shared-images }
 
 Shared images are images that are being shared with other projects. You can set images from your projects to be shared with other projects you belong to.
 
 But, images shared from other projects can't be re-shared.
+
+{% endif %}
 
 <a id="pricing"></a>
 ### Pricing { #pricing }
