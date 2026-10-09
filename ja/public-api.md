@@ -1,15 +1,32 @@
+<!-- machine_translated: true -->
+
 <!-- pre-align:aligned sig=77a16f7da63f -->
+
+{% set f = (build_flags | select("in", ["public","gov","ncgn","ninc","ngsc","ngovc","ngoic"]) | list | first) %}
+{% set ep_domain = {"ninc":"ninc.go.kr","ngsc":"ngsc.go.kr","ngovc":"ngovc.com","ngoic":"ngoic.com"} %}
 
 <a id="compute-image-api-v2-guide"></a>
 ## Compute > Image > API v2ガイド { #compute-image-api-v2-guide }
 
-Imageは、API呼び出し時の認証/認可のためにIaaSトークンを使用します。IaaSトークンは、NHN CloudのOpenStackベースのインフラサービス(IaaS)で使用する認証トークンです。IaaSトークンの発行及び使用に関する詳細は、[IaaSトークン](/nhncloud/ja/public-api/iaas-token) を参照してください。
+{% if "public" in build_flags %}
+ImageはAPI呼び出し時の認証/認可にIaaSトークンを使用します。IaaSトークンは、NHN CloudのOpenStackベースのインフラサービス(IaaS)で使用する認証トークンです。IaaSトークンの発行および使用の詳細については、[IaaSトークン](/nhncloud/ja/public-api/iaas-token)を参照してください。
+{% elif "gov" in build_flags %}
+ImageはAPI呼び出し時の認証/認可にIaaSトークンを使用します。IaaSトークンは、NHN CloudのOpenStackベースのインフラサービス(IaaS)で使用する認証トークンです。IaaSトークンの発行および使用の詳細については、[IaaSトークン](/nhncloud/ja/public-api/iaas-token-gov)を参照してください。
+{% else %}
+APIを使用するには、APIエンドポイントとトークンなどが必要です。[API使用の準備](/Compute/Compute/ja/identity-api/)を参照して、APIの使用に必要な情報を準備します。
+{% endif %}
 
 イメージAPIは、`image`タイプエンドポイントを利用します。正確なエンドポイントはトークン発行レスポンスの`serviceCatalog`を参照します。
 
 | タイプ | リージョン | エンドポイント |
 |---|---|---|
+{% if "public" in build_flags %}
 | image | 韓国(パンギョ)リージョン<br>韓国(ピョンチョン)リージョン<br>韓国(クァンジュ)リージョン<br>日本リージョン | https://kr1-api-image-infrastructure.nhncloudservice.com<br>https://kr2-api-image-infrastructure.nhncloudservice.com<br>https://kr3-api-image-infrastructure.nhncloudservice.com<br>https://jp1-api-image-infrastructure.nhncloudservice.com |
+{% elif "gov" in build_flags %}
+| image | 韓国(パンギョ)リージョン<br>韓国(ピョンチョン)リージョン | https://kr1-api-image-infrastructure.gov-nhncloudservice.com<br>https://kr2-api-image-infrastructure.gov-nhncloudservice.com |
+{% else %}
+| image | 韓国(大邱)リージョン | https://kr4-api-image-infrastructure.$[ ep_domain[f] ]$ |
+{% endif %}
 
 APIレスポンスにガイドに明示されていないフィールドが表示される場合があります。それらのフィールドは、NHN Cloud内部用途で使用され、事前に告知せずに変更する場合があるため使用しないでください。
 
@@ -41,15 +58,26 @@ X-Auth-Token: {tokenId}
 | size_max | Query | Integer | - | 照会するイメージの最大サイズ(Byte)                                                                                                                                           |
 | sort_key | Query | String | - | イメージリストをソートする時に使用するプロパティ<br>イメージのすべてのプロパティを指定可能。基本値は`created_at`                                                                                               |
 | sort_dir | Query | Enum | - | イメージリストのソート方向<br>`asc` (昇順)、`desc` (降順)のうち、1つの値のみ選択可能。基本値は降順                                                                                                   |
+{% if "public" in build_flags %}
 | member_status | Query | Enum | - | 共有されたイメージの場合、メンバーステータスに応じたイメージリストを照会<br>`accepted`, `pending`, `rejected`, `all`のいずれか1つの値のみ選択可能<br>デフォルト値は`accepted` |
+
+{% else %}
+{% endif %}
 
 <a id="list-images-response"></a>
 #### レスポンス
 
+{% if "public" in build_flags %}
 | 名前 | 種類 | 形式 | 説明 |
 |---|---|---|---|
 | images | Body | Array | イメージリストオブジェクト |
+{% else %}
+| 名前 | 種類 | 形式 | 説明 |
+|---|---|---|---|
+| images | Body | Array | イメージリストオブジェクト |
+{% endif %}
 | images.status | Body | String | イメージの状態<br>`queued`、`saving`、`active`、`killed`、`deleted`、`pending_delete`のいずれか1つ。 |
+{% if "public" in build_flags %}
 | images.name | Body | String | イメージの名前 |
 | images.tags | Body | Array | イメージタグリスト |
 | images.container_format | Body | String | イメージコンテナフォーマット |
@@ -72,6 +100,53 @@ X-Auth-Token: {tokenId}
 | schema | Body | URI | イメージリストスキーマのパス |
 | first | Body | URI | イメージリストの最初のページに該当するパス |
 | next| Body | URI | イメージリストの次のページに該当するパス |
+{% elif "gov" in build_flags %}
+| images.name | Body | String | イメージの名前 |
+| images.tags | Body | Array | イメージタグリスト |
+| images.container_format | Body | String | イメージコンテナフォーマット |
+| images.created_at | Body | Datetime | 作成日時 |
+| images.disk_format | Body | String | イメージディスクフォーマット |
+| images.updated_at | Body | Datetime | 修正時刻 |
+| images.min_disk | Body | Integer | イメージ最小ディスク要求量(GB)<br>`min_disk`の値より大きいブロックストレージでのみ使用できます |
+| images.protected | Body | Boolean | イメージ保護有無<br>`protected=true`の場合、修正および削除不可 |
+| images.id | Body | UUID | イメージID |
+| images.min_ram | Body | Integer | イメージ最小メモリ要求量 (MB)<br>`min_disk`の値より大きいインスタンスでのみ使用できます |
+| images.checksum | Body | String | イメージ内容ハッシュ値<br>内部的にイメージの有効性検証のために使用 |
+| images.owner | Body | String | イメージが属するテナントID |
+| images.visibility | Body | Enum | イメージの可視性<br>`public`、`private`、`shared`のいずれか |
+| images.virtual_size | Body | Integer | イメージの仮想サイズ |
+| images.size | Body | Integer | イメージの実際のサイズ (バイト) |
+| images.properties | Body | Object | イメージプロパティオブジェクト<br>イメージごとのユーザー定義プロパティをキーと値のペア形式で記述 |
+| images.self | Body | URI | イメージのパス |
+| images.file | Body | String | イメージファイルのパス |
+| images.schema | Body | URI | イメージスキーマのパス |
+| schema | Body | URI | イメージリストスキーマのパス |
+| first | Body | URI | イメージリストの最初のページに該当するパス |
+| next| Body | URI | イメージリストの次のページに該当するパス |
+{% else %}
+| images.name | Body | String | イメージの名前 |
+| images.tag | Body | String | イメージタグ<br>`_AVAILABLE_` タグを削除するとコンソールには表示されなくなるため、タグを削除しないよう注意してください。 |
+| images.container_format | Body | String | イメージコンテナフォーマット |
+| images.created_at | Body | Datetime | 作成日時 |
+| images.disk_format | Body | String | イメージディスクフォーマット |
+| images.updated_at | Body | Datetime | 修正時刻 |
+| images.min_disk | Body | Integer | イメージ最小ディスク要求量(GB)<br>`min_disk`の値より大きいブロックストレージでのみ使用できます |
+| images.protected | Body | Boolean | イメージ保護有無<br>`protected=true`の場合、修正および削除不可 |
+| images.id | Body | UUID | イメージID |
+| images.min_ram | Body | Integer | イメージ最小メモリ要求量(MB)<br>`min_disk`の値より大きいインスタンスでのみ使用できます |
+| images.checksum | Body | String | イメージ内容ハッシュ値<br>内部的にイメージの有効性検証のために使用 |
+| images.owner | Body | String | イメージが属するテナントID |
+| images.visibility | Body | Enum | イメージの可視性<br>`public`、`private`、`shared`のいずれか |
+| images.virtual_size | Body | Integer | イメージの仮想サイズ |
+| images.size | Body | Integer | イメージの実際のサイズ(バイト) |
+| images.properties | Body | Object | イメージプロパティオブジェクト<br>イメージごとのユーザー定義プロパティをキーと値のペアの形式で記述 |
+| images.self | Body | URI | イメージのパス |
+| images.file | Body | String | イメージファイルのパス |
+| images.schema | Body | URI | イメージスキーマのパス |
+| schema | Body | URI | イメージリストスキーマのパス |
+| first | Body | URI | イメージリストの最初のページに該当するパス |
+| next| Body | URI | イメージリストの次のページに該当するパス |
+{% endif %}
 
 <details><summary>例</summary>
 <p>
@@ -143,7 +218,13 @@ X-Auth-Token: {tokenId}
 |---|---|---|---|
 | status | Body | String | イメージの状態 |
 | name | Body | String | イメージの名前 |
+{% if "public" in build_flags %}
 | tags | Body | String | イメージタグリスト |
+{% elif "gov" in build_flags %}
+| tags | Body | Array | イメージタグリスト |
+{% else %}
+| tag | Body | String | イメージタグ<br>`_AVAILABLE_` タグを削除するとコンソールには表示されなくなるため、タグを削除しないでください |
+{% endif %}
 | container_format | Body | String | イメージコンテナフォーマット |
 | created_at | Body | Datetime | 作成時刻 |
 | disk_format | Body | String | イメージディスクフォーマット |
@@ -204,8 +285,14 @@ X-Auth-Token: {tokenId}
 <a id="create-image"></a>
 ### イメージ作成 { #create-image }
 
-空のイメージを作成します。 NHN Cloudでイメージを使用するには`イメージ作成`後に`イメージアップロード`APIを利用して実際のファイルをアップロードする必要があります。
+{% if "public" in build_flags %}
+空のイメージを作成します。NHN Cloudでイメージを使用するには、`イメージ作成`の後に`イメージをアップロード中`APIを利用して実際のファイルをアップロードする必要があります。
 
+{% elif "gov" in build_flags %}
+空のイメージを作成します。NHN Cloudでイメージを使用するには`イメージ作成`後に`イメージアップロード`APIを利用して実際のファイルをアップロードする必要があります。
+
+{% else %}
+{% endif %}
 ```
 POST /v2/images
 X-Auth-Token: {tokenId}
@@ -216,33 +303,64 @@ X-Auth-Token: {tokenId}
 | 名前 | 種類 | 形式 | 必須 | 説明 |
 |---|---|---|---|---|
 | tokenId | Header | String | O | トークンID |
+{% if "public" in build_flags %}
 | name | Body | String | O | イメージの名前 |
+{% elif "gov" in build_flags %}
+| name | Body | String | O | イメージの名前 |
+{% else %}
+{% endif %}
 | container_format | Body | String | - | イメージコンテナフォーマット |
 | disk_format | Body | String | - | イメージディスクフォーマット |
 | min_disk | Body | Integer | - | イメージ最小ディスク要求量(GB) |
 | min_ram | Body | Integer | - | イメージ最小メモリ要求量(MB) |
 | protected | Body | Boolean | - | イメージ保護有無、trueまたはfalse |
+{% if "public" in build_flags %}
 | tags | Body | Array | - | イメージタグリスト |
 | visibility | Body | String | - | イメージの可視性<br>`private`, `shared`のいずれか |
 | os_type | Body | String | O | OSタイプ<br>`windows`, `linux`のいずれか |
 | os_distro | Body | String | - | OSディストリビューション |
 | os_version | Body | String | - | OSバージョン |
+{% elif "gov" in build_flags %}
+| tags | Body | Array | - | イメージタグリスト |
+| visibility | Body | String | - | イメージの可視性<br>`private`、`shared`のいずれか |
+| os_type | Body | String | O | OSタイプ<br>`windows`、`linux`のいずれか |
+| os_distro | Body | String | - | OSディストリビューション |
+| os_version | Body | String | - | OSバージョン |
+{% else %}
+| tags | Body | Array | - | イメージタグリスト<br>`_AVAILABLE_` タグを削除するとコンソールには表示されなくなるため、タグを削除しないよう注意してください |
+| visibility | Body | String | - | イメージの可視性<br>`public`、`private`、`shared`のいずれか |
+{% endif %}
 
 <details><summary>例</summary>
 <p>
 
 ```json
 {
+{% if "public" in build_flags %}
     "name": "Ubuntu Image",
+{% elif "gov" in build_flags %}
+    "name": "Ubuntu Image",
+{% else %}
+{% endif %}
     "container_format": "bare",
+{% if "public" in build_flags %}
     "disk_format": "qcow2",
     "os_type": "linux",
     "os_distro": "ubuntu",
     "os_version": "Server 22.04 LTS"
+{% elif "gov" in build_flags %}
+    "disk_format": "qcow2",
+    "os_type": "linux",
+    "os_distro": "ubuntu",
+    "os_version": "Server 22.04 LTS"
+{% else %}
+    "disk_format": "raw",
+    "name": "Ubuntu",
+{% endif %}
 }
 ```
 
-</p>
+<p>
 </details>
 
 <a id="create-image-response"></a>
@@ -251,7 +369,13 @@ X-Auth-Token: {tokenId}
 |---|---|---|---|
 | status | Body | String | イメージ状態<br>`queued`, `saving`, `active`, `killed`, `deleted`, `pending_delete`のいずれか |
 | name | Body | String | イメージの名前 |
+{% if "public" in build_flags %}
 | tags | Body | String | イメージタグリスト |
+{% elif "gov" in build_flags %}
+| tags | Body | Array | イメージタグリスト |
+{% else %}
+| tags | Body | String | イメージタグリスト<br>`_AVAILABLE_` タグを削除するとコンソールでは照会されないため、タグを削除しないでください |
+{% endif %}
 | container_format | Body | String | イメージコンテナフォーマット |
 | created_at | Body | Datetime | 作成時刻 |
 | disk_format | Body | String | イメージディスクフォーマット |
@@ -262,16 +386,27 @@ X-Auth-Token: {tokenId}
 | min_ram | Body | Integer | イメージ最小メモリ要求量(MB)<br>`min_disk`の値より大きいインスタンスでのみ使用できる |
 | checksum | Body | String | イメージ内容のハッシュ値<br>内部的にイメージの有効性を検証するために使用 |
 | owner | Body | String | イメージが属しているテナントID |
+{% if "public" in build_flags %}
 | visibility | Body | Enum | イメージの可視性<br>`private`、`shared`のいずれか1つ。 |
+{% else %}
+| visibility | Body | Enum | イメージの可視性<br>`public`、`private`、`shared`のいずれか |
+{% endif %}
 | virtual_size | Body | Integer | イメージの仮想サイズ |
 | size | Body | Integer | イメージの実際のサイズ(Byte) |
 | properties | Body | Object | イメージプロパティオブジェクト<br>イメージごとにユーザー指定プロパティをキーと値のペアで記述 |
 | self | Body | URI | イメージのパス |
 | file | Body | String | イメージファイルのパス |
 | schema | Body | URI | イメージスキーマのパス |
+{% if "public" in build_flags %}
 | os_type | Body | String | OSタイプ<br>`windows`, `linux`のいずれか |
 | os_distro | Body | String | OSディストリビューション |
 | os_version | Body | String | OSバージョン |
+{% elif "gov" in build_flags %}
+| os_type | Body | String | OSタイプ<br>`windows`、`linux`のいずれか |
+| os_distro | Body | String | OSディストリビューション |
+| os_version | Body | String | OSバージョン |
+{% else %}
+{% endif %}
 
 <details><summary>例</summary>
 <p>
@@ -279,12 +414,24 @@ X-Auth-Token: {tokenId}
 ```json
 {
     "status": "queued",
+{% if "public" in build_flags %}
     "name": "Ubuntu Image",
+{% elif "gov" in build_flags %}
+    "name": "Ubuntu Image",
+{% else %}
+    "name": "Ubuntu",
+{% endif %}
     "tags": [],
     "container_format": "bare",
     "created_at": "2015-11-29T22:21:42Z",
     "size": null,
+{% if "public" in build_flags %}
     "disk_format": "qcow2",
+{% elif "gov" in build_flags %}
+    "disk_format": "qcow2",
+{% else %}
+    "disk_format": "raw",
+{% endif %}
     "updated_at": "2015-11-29T22:21:42Z",
     "visibility": "private",
     "locations": [],
@@ -300,14 +447,23 @@ X-Auth-Token: {tokenId}
     "owner": "bab7d5c60cd041a0a36f7c4b6e1dd978",
     "virtual_size": null,
     "min_ram": 0,
+{% if "public" in build_flags %}
     "schema": "/v2/schemas/image",
     "os_type": "linux",
     "os_distro": "ubuntu",
     "os_version": "Server 22.04 LTS"
+{% elif "gov" in build_flags %}
+    "schema": "/v2/schemas/image",
+    "os_type": "linux",
+    "os_distro": "ubuntu",
+    "os_version": "Server 22.04 LTS"
+{% else %}
+    "schema": "/v2/schemas/image"
+{% endif %}
 }
 ```
 
-</p>
+<p>
 </details>
 
 ---
@@ -315,7 +471,13 @@ X-Auth-Token: {tokenId}
 <a id="upload-image"></a>
 ### イメージアップロード { #upload-image }
 
+{% if "public" in build_flags %}
 作成したイメージに実際のイメージファイルをアップロードします。
+{% elif "gov" in build_flags %}
+作成したイメージに実際のイメージファイルをアップロードします。
+{% else %}
+指定したイメージに実際のイメージファイルをアップロードします。
+{% endif %}
 
 > [注意]
 > ユーザーがアップロードしたイメージで作成したインスタンスは正常に動作しない場合があり、それに伴う結果に対する責任はユーザーにあります。
@@ -352,7 +514,12 @@ Content-Type: application/octet-stream
     以下の条件がすべて満たされている場合、イメージのダウンロードが可能です。
     * 基本インフラサービスのADMINまたはMEMBER権限がある場合
     * ダウンロードするイメージのnhncloud_allow_downloadプロパティがtrueの場合
-    
+{% if "public" in build_flags %}
+
+{% elif "gov" in build_flags %}
+{% else %}
+
+{% endif %}
 ```
 GET /v2/images/{imageId}/file
 X-Auth-Token: {tokenId}
@@ -573,6 +740,7 @@ X-Auth-Token: {tokenId}
 <a id="remove-tag-response"></a>
 #### レスポンス
 このAPIはレスポンス本文を返しません。
+{% if "public" in build_flags %}
 
 ---
 
@@ -890,3 +1058,7 @@ X-Auth-Token: {tokenId}
 <a id="delete-member-response"></a>
 #### レスポンス
 このAPIはレスポンス本文を返しません。
+{% elif "gov" in build_flags %}
+
+{% else %}
+{% endif %}
