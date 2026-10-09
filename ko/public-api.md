@@ -17,7 +17,7 @@ API를 사용하려면 API 엔드포인트와 토큰 등이 필요합니다. [AP
 
 | 타입 | 리전 | 엔드포인트 |
 |---|---|---|
-{% if "public" in build_flags %}
+{%- if "public" in build_flags %}
 | image | 한국(판교) 리전<br>한국(평촌) 리전<br>한국(광주) 리전<br>일본 리전 | https://kr1-api-image-infrastructure.nhncloudservice.com<br>https://kr2-api-image-infrastructure.nhncloudservice.com<br>https://kr3-api-image-infrastructure.nhncloudservice.com<br>https://jp1-api-image-infrastructure.nhncloudservice.com |
 {% elif "gov" in build_flags %}
 | image | 한국(판교) 리전<br>한국(평촌) 리전 | https://kr1-api-image-infrastructure.gov-nhncloudservice.com<br>https://kr2-api-image-infrastructure.gov-nhncloudservice.com |
@@ -55,7 +55,7 @@ X-Auth-Token: {tokenId}
 | size_max | Query | Integer | - | 조회할 이미지의 최대 크기(바이트)                                                                                                                                      |
 | sort_key | Query | String | - | 이미지 목록을 정렬할 때 사용할 속성<br>이미지의 모든 속성을 지정 가능, 기본값은 `created_at`                                                                                             |
 | sort_dir | Query | Enum | - | 이미지 목록 정렬 방향<br>`asc`(오름차순), `desc`(내림차순) 중 하나의 값만 선택 가능, 기본값은 내림차순                                                                                      |
-{% if "public" in build_flags %}
+{%- if "public" in build_flags %}
 | member_status | Query | Enum | - | 공유 받은 이미지의 경우 멤버 상태에 따른 이미지 목록을 조회<br>`accepted`, `pending`, `rejected`, `all` 중 하나의 값만 선택 가능<br>기본값은 `accepted` |
 {% else %}
 {% endif %}
@@ -67,13 +67,13 @@ X-Auth-Token: {tokenId}
 | 이름 | 종류 | 형식 | 설명 |
 |---|---|---|---|
 | images | Body | Array | 이미지 목록 객체 |
-{% else %}
+{%- else %}
 | 이름 | 종류 | 형식 | 설명                                                                                 |
 |---|---|---|------------------------------------------------------------------------------------|
 | images | Body | Array | 이미지 목록 객체                                                                          |
-{% endif %}
+{%- endif %}
 | images.status | Body | String | 이미지 상태<br>`queued`, `saving`, `active`, `killed`, `deleted`, `pending_delete` 중 하나 |
-{% if "public" in build_flags %}
+{%- if "public" in build_flags %}
 | images.name | Body | String | 이미지 이름 |
 | images.tags | Body | Array | 이미지 태그 목록 |
 | images.container_format | Body | String | 이미지 컨테이너 포맷 |
@@ -214,13 +214,13 @@ X-Auth-Token: {tokenId}
 |---|---|---|---|
 | status | Body | String | 이미지 상태 |
 | name | Body | String | 이미지 이름 |
-{% if "public" in build_flags %}
+{%- if "public" in build_flags %}
 | tags | Body | String | 이미지 태그 목록 |
-{% elif "gov" in build_flags %}
+{%- elif "gov" in build_flags %}
 | tags | Body | Array | 이미지 태그 목록 |
-{% else %}
+{%- else %}
 | tag | Body | String | 이미지 태그<br>`_AVAILABLE_` 태그를 삭제하면 콘솔에서는 조회되지 않으므로, 태그를 삭제하지 않도록 주의 |
-{% endif %}
+{%- endif %}
 | container_format | Body | String | 이미지 컨테이너 포맷 |
 | created_at | Body | Datetime | 생성 시각 |
 | disk_format | Body | String | 이미지 디스크 포맷 |
@@ -299,18 +299,18 @@ X-Auth-Token: {tokenId}
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 |---|---|---|---|---|
 | tokenId | Header | String | O | 토큰 ID |
-{% if "public" in build_flags %}
+{%- if "public" in build_flags %}
 | name | Body | String | O | 이미지 이름 |
-{% elif "gov" in build_flags %}
+{%- elif "gov" in build_flags %}
 | name | Body | String | O | 이미지 이름 |
-{% else %}
-{% endif %}
+{%- else %}
+{%- endif %}
 | container_format | Body | String | - | 이미지 컨테이너 포맷 |
 | disk_format | Body | String | - | 이미지 디스크 포맷 |
 | min_disk | Body | Integer | - | 이미지 최소 디스크 요구량(GB) |
 | min_ram | Body | Integer | - | 이미지 최소 메모리 요구량(MB) |
 | protected | Body | Boolean | - | 이미지 보호 여부, true 또는 false |
-{% if "public" in build_flags %}
+{%- if "public" in build_flags %}
 | tags | Body | Array | - | 이미지 태그 목록 |
 | visibility | Body | String | - | 이미지 가시성<br>`private`, `shared` 중 하나 |
 | os_type | Body | String | O | 운영체제 타입<br>`windows`, `linux` 중 하나 |
@@ -365,13 +365,13 @@ X-Auth-Token: {tokenId}
 |---|---|---|---|
 | status | Body | String | 이미지 상태<br>`queued`, `saving`, `active`, `killed`, `deleted`, `pending_delete` 중 하나 |
 | name | Body | String | 이미지 이름 |
-{% if "public" in build_flags %}
+{%- if "public" in build_flags %}
 | tags | Body | String | 이미지 태그 목록 |
-{% elif "gov" in build_flags %}
+{%- elif "gov" in build_flags %}
 | tags | Body | Array | 이미지 태그 목록 |
-{% else %}
+{%- else %}
 | tags | Body | String | 이미지 태그 목록<br>`_AVAILABLE_` 태그를 삭제하면 콘솔에서는 조회되지 않으므로, 태그를 삭제하지 않도록 주의 |
-{% endif %}
+{%- endif %}
 | container_format | Body | String | 이미지 컨테이너 포맷 |
 | created_at | Body | Datetime | 생성 시각 |
 | disk_format | Body | String | 이미지 디스크 포맷 |
@@ -382,18 +382,18 @@ X-Auth-Token: {tokenId}
 | min_ram | Body | Integer | 이미지 최소 메모리 요구량(MB)<br>`min_disk` 값보다 큰 인스턴스에서만 사용할 수 있음 |
 | checksum | Body | String | 이미지 내용의 해시값<br>내부적으로 이미지 유효성 검증을 위해 사용 |
 | owner | Body | String | 이미지가 속한 테넌트 ID |
-{% if "public" in build_flags %}
+{%- if "public" in build_flags %}
 | visibility | Body | Enum | 이미지 가시성<br>`private`, `shared` 중 하나 |
-{% else %}
+{%- else %}
 | visibility | Body | Enum | 이미지 가시성<br>`public`, `private`, `shared` 중 하나 |
-{% endif %}
+{%- endif %}
 | virtual_size | Body | Integer | 이미지 가상 크기 |
 | size | Body | Integer | 이미지 실제 크기(바이트) |
 | properties | Body | Object | 이미지 속성 객체<br>이미지별 사용자 지정 속성을 키-값 쌍 형태로 기술 |
 | self | Body | URI | 이미지 경로 |
 | file | Body | String | 이미지 파일 경로 |
 | schema | Body | URI| 이미지 스키마 경로 |
-{% if "public" in build_flags %}
+{%- if "public" in build_flags %}
 | os_type | Body | String | 운영체제 타입<br>`windows`, `linux` 중 하나 |
 | os_distro | Body | String | 운영체제 배포판 |
 | os_version | Body | String | 운영체제 버전 |
