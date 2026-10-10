@@ -20,7 +20,7 @@ Image API uses the `image` type endpoint. Refer to the `serviceCatalog` in the t
 
 | Type | Region | Endpoint |
 |---|---|---|
-{% if "public" in build_flags %}
+{%- if "public" in build_flags %}
 | image | Korea (Pangyo) Region<br>Korea (Pyeongchon) Region<br>Korea (Gwangju) Region<br>Japan Region | https://kr1-api-image-infrastructure.nhncloudservice.com<br>https://kr2-api-image-infrastructure.nhncloudservice.com<br>https://kr3-api-image-infrastructure.nhncloudservice.com<br>https://jp1-api-image-infrastructure.nhncloudservice.com |
 {% elif "gov" in build_flags %}
 | image | Korea (Pangyo) Region<br>Korea (Pyeongchon) Region | https://kr1-api-image-infrastructure.gov-nhncloudservice.com<br>https://kr2-api-image-infrastructure.gov-nhncloudservice.com |
@@ -58,9 +58,8 @@ This API does not require a request body.
 | size_max | Query | Integer | - | Maximum size of image to query (bytes)                                                                                                                                                                                |
 | sort_key | Query | String | - | Attribute to use when sorting the image list<br>All attributes of image can be specified, default is `created_at`                                                                                                     |
 | sort_dir | Query | Enum | - | Sorting direction of the image list<br>Select only one of `asc` (ascending order) or `desc` (descending order)                                                                                                        |
-{% if "public" in build_flags %}
+{%- if "public" in build_flags %}
 | member_status | Query | Enum | - | For shared images, a list of images are retrieved according to their member status<br>Only one of the following values can be selected: `accepted`, `pending`, `rejected`, or `all`.<br>default is `accepted` |
-
 {% else %}
 {% endif %}
 
@@ -71,13 +70,13 @@ This API does not require a request body.
 | Name | Type | Format | Description |
 |---|---|---|---|
 | images | Body | Array | Image list object |
-{% else %}
+{%- else %}
 | Name | Type | Format | Description |
 |---|---|---|---|
 | images | Body | Array | Image list object |
-{% endif %}
+{%- endif %}
 | images.status | Body | String | Image status<br>One of `queued`, `saving`, `active`, `killed`, `deleted`, and `pending_delete` |
-{% if "public" in build_flags %}
+{%- if "public" in build_flags %}
 | images.name | Body | String | Image name |
 | images.tags | Body | Array | Image tag list |
 | images.container_format | Body | String | Image container format |
@@ -218,13 +217,13 @@ This API does not require a request body.
 |---|---|---|---|
 | status | Body | String | Image status |
 | name | Body | String | Image name |
-{% if "public" in build_flags %}
+{%- if "public" in build_flags %}
 | tags | Body | Array | Image tag list |
-{% elif "gov" in build_flags %}
+{%- elif "gov" in build_flags %}
 | tags | Body | Array | Image tag list |
-{% else %}
+{%- else %}
 | tag | Body | String | Image tag<br>If you delete the `_AVAILABLE_` tag, it will not be queried in the console, so be careful not to delete the tag. |
-{% endif %}
+{%- endif %}
 | container_format | Body | String | Image container format |
 | created_at | Body | Datetime | Creation time |
 | disk_format | Body | String | Image disk format |
@@ -303,18 +302,18 @@ X-Auth-Token: {tokenId}
 | Name | Type | Format | Required | Description |
 |---|---|---|---|---|
 | tokenId | Header | String | O | Token ID |
-{% if "public" in build_flags %}
+{%- if "public" in build_flags %}
 | name | Body | String | O | Image name |
-{% elif "gov" in build_flags %}
+{%- elif "gov" in build_flags %}
 | name | Body | String | O | Image name |
-{% else %}
-{% endif %}
+{%- else %}
+{%- endif %}
 | container_format | Body | String | - | Image container format |
 | disk_format | Body | String | - | Image disk format |
 | min_disk | Body | Integer | - | Minimum required disk size of image (GB) |
 | min_ram | Body | Integer | - | Minimum required memory size of image (MB) |
 | protected | Body | Boolean | - | Whether to protect image, true or false |
-{% if "public" in build_flags %}
+{%- if "public" in build_flags %}
 | tags | Body | Array | - | Image tag list |
 | visibility | Body | String | - | Image visibility<br>`private` or `shared` |
 | os_type | Body | String | O | OS type<br>`windows` or `linux` |
@@ -369,13 +368,13 @@ X-Auth-Token: {tokenId}
 |---|---|---|---|
 | status | Body | String | Image status<br>One of `queued`, `saving`, `active`, `killed`, `deleted`, and `pending_delete` |
 | name | Body | String | Image name |
-{% if "public" in build_flags %}
+{%- if "public" in build_flags %}
 | tags | Body | String | Image tag list |
-{% elif "gov" in build_flags %}
+{%- elif "gov" in build_flags %}
 | tags | Body | Array | Image tag list |
-{% else %}
+{%- else %}
 | tags | Body | String | Image tag list<br>If you delete the `_AVAILABLE_` tag, it will not be queried in the console, so be careful not to delete the tag. |
-{% endif %}
+{%- endif %}
 | container_format | Body | String | Image container format |
 | created_at | Body | Datetime | Creation time |
 | disk_format | Body | String | Image disk format |
@@ -386,18 +385,18 @@ X-Auth-Token: {tokenId}
 | min_ram | Body | Integer | Minimum required memory size of image (MB)<br>Available only for instances that are larger than `min_disk` |
 | checksum | Body | String | Hash for image content<br>Used internally for image validation |
 | owner | Body | String | ID of the tenant to which the image belongs |
-{% if "public" in build_flags %}
+{%- if "public" in build_flags %}
 | visibility | Body | Enum | Image visibility<br>`private` or `shared` |
-{% else %}
+{%- else %}
 | visibility | Body | Enum | Image visibility<br>One of `public`, `private`, or `shared` |
-{% endif %}
+{%- endif %}
 | virtual_size | Body | Integer | Virtual size of the image |
 | size | Body | Integer | Real size of the image (bytes) |
 | properties | Body | Object | Image properties object<br>Describes user-specified properties for each image in the key-value pair format |
 | self | Body | URI | Image path |
 | file | Body | String | File path of image |
 | schema | Body | URI| Schema path of image |
-{% if "public" in build_flags %}
+{%- if "public" in build_flags %}
 | os_type | Body | String | OS type<br>`windows` or `linux` |
 | os_distro | Body | String | OS distribution |
 | os_version | Body | String | OS version |
