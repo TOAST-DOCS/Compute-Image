@@ -58,9 +58,8 @@ This API does not require a request body.
 | size_max | Query | Integer | - | Maximum size of image to query (bytes)                                                                                                                                                                                |
 | sort_key | Query | String | - | Attribute to use when sorting the image list<br>All attributes of image can be specified, default is `created_at`                                                                                                     |
 | sort_dir | Query | Enum | - | Sorting direction of the image list<br>Select only one of `asc` (ascending order) or `desc` (descending order)                                                                                                        |
-{% if "public" in build_flags %}
+{%- if "public" in build_flags %}
 | member_status | Query | Enum | - | For shared images, a list of images are retrieved according to their member status<br>Only one of the following values can be selected: `accepted`, `pending`, `rejected`, or `all`.<br>default is `accepted` |
-
 {% else %}
 {% endif %}
 
